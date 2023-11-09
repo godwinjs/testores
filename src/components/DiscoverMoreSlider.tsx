@@ -1,9 +1,10 @@
 import { useEffect, useId } from "react";
+
 import Heading from "./Heading/Heading";
-import img1 from "../images/collections/1.png";
-import img2 from "../images/collections/5.png";
-import img3 from "../images/collections/4.png";
-import img4 from "../images/collections/3.png";
+import img1 from "../../public/images/collections/1.png";
+import img2 from "../../public/images/collections/5.png";
+import img3 from "../../public/images/collections/4.png";
+import img4 from "../../public/images/collections/3.png";
 import CardCategory3, {
   CardCategory3Props,
 } from "./CardCategories/CardCategory3";
@@ -15,24 +16,28 @@ export const CATS_DISCOVER: CardCategory3Props[] = [
     desc: "Shop the latest <br /> from top brands",
     featuredImage: img1,
     color: "bg-yellow-50",
+    alt: 'umbrella'
   },
   {
     name: "Digital gift cards",
     desc: "Give the gift <br /> of choice",
     featuredImage: img2,
     color: "bg-red-50",
+    alt: 'basketball'
   },
   {
     name: "Sale collection",
     desc: "Up to <br /> 80% off retail",
     featuredImage: img3,
     color: "bg-blue-50",
+    alt:'sweater'
   },
   {
     name: "Sale collection",
     desc: "Up to <br /> 80% off retail",
     featuredImage: img4,
     color: "bg-green-50",
+    alt: 'bat'
   },
 ];
 
@@ -67,6 +72,35 @@ const DiscoverMoreSlider = () => {
           perView: 1,
         },
       },
+      type: "slider",
+      startAt: 0,
+      focusAt: "",
+      autoplay: 0,
+      hoverpause: false,
+      keyboard: false,
+      swipeThreshold: 0,
+      dragThreshold: 0,
+      perSwipe: "",
+      touchRatio: 0,
+      touchAngle: 0,
+      animationDuration: 0,
+      rewind: false,
+      rewindDuration: 0,
+      animationTimingFunc: "",
+      waitForTransition: false,
+      throttle: 0,
+      direction: "ltr",
+      peek: "",
+      cloningRatio: 0,
+      classes: {
+        swipeable: "",
+        dragging: "",
+        direction: undefined,
+        type: undefined,
+        slide: undefined,
+        arrow: undefined,
+        nav: undefined
+      }
     };
 
     let slider = new Glide(`.${UNIQUE_CLASS}`, OPTIONS);
@@ -94,6 +128,7 @@ const DiscoverMoreSlider = () => {
                 desc={item.desc}
                 featuredImage={item.featuredImage}
                 color={item.color}
+                alt={item.alt}
               />
             </li>
           ))}
