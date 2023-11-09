@@ -1,3 +1,4 @@
+'use client';
 // Next Ready
 
 import React, { FC, ReactNode } from "react";

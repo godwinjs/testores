@@ -2,7 +2,9 @@
 
 const nextConfig = {}
 
-module.exports = nextConfig
+module.exports = {
+    nextConfig
+}
 
 // module.exports = withImages({
 //     fileExtensions: ["jpg", "jpeg", "png", "gif", 'svg'],

@@ -181,7 +181,6 @@ const ProductCard: FC<ProductCardProps> = ({
               <Image
                 // @ts-ignore
                 src={variant.thumbnail}
-                objectFit="scale-down"
                 alt="variant"
                 className="absolute w-full h-full object-cover"
               />

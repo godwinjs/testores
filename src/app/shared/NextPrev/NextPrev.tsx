@@ -1,3 +1,4 @@
+'use client';
 // Next ok
 
 import React, { FC } from "react";

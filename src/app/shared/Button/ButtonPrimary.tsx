@@ -1,3 +1,5 @@
+'use client';
+
 // Next ok
 
 import Button, { ButtonProps } from "./Button";

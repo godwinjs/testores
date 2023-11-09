@@ -1,3 +1,5 @@
+'use client';
+
 import { Dialog, Transition } from "@headlessui/react";
 import React, { FC, Fragment } from "react";
 // import { useLocation } from "react-router-dom";

@@ -1,3 +1,5 @@
+'use client';
+
 //
 import product1 from "../../../public/images/products/1.png";
 import product2 from "../../../public/images/products/2.png";
