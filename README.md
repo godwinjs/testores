@@ -34,3 +34,9 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+Check out [Next auth](https://next-auth.js.org/configuration/nextjs#in-app-router) for authentication
+Check out [Auth0](https://github.com/auth0/nextjs-auth0#app-router) for authentication
+[fonts](https://github.com/icons8/line-awesome/blob/master/dist/line-awesome/fonts/la-solid-900.woff2)
+[typescript guide](https://refine.devblognext-js-with-typescript#adding-typescript-to-an-existing-project)
+[typescript guide 2](https://blog.logrocket.com/using-next-js-with-typescript/#using-typescript-next-js-app)
