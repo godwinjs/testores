@@ -66,7 +66,7 @@ const SectionHowItWork: FC<SectionHowItWorkProps> = ({
             className="relative flex flex-col items-center max-w-xs mx-auto"
           >
             <div className="mb-4 sm:mb-10 max-w-[140px] mx-auto">
-              <img
+              <Image
                 className="rounded-3xl"
                 src={item.img}
                 alt={item.title}
