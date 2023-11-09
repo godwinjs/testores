@@ -1,6 +1,12 @@
 // import Image from 'next/image'
+import PageHome from '@/containers/PageHome/PageHome'
 
 export default function Home() {
-  return (<h1>Hello, Next.js!</h1>
+  return (
+    <>
+      <div className="bg-white text-base dark:bg-slate-900 text-slate-900 dark:text-slate-200">
+        <PageHome />
+      </div>
+    </>
   )
 }

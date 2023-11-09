@@ -2,10 +2,10 @@
 import { FC } from "react";
 import Image from 'next/image'
 
-import HIW1img from "../../../public/images/HIWorks/HIW1img.png";
-import HIW2img from "../../../public/images/HIWorks/HIW2img.png";
-import HIW3img from "../../../public/images/HIWorks/HIW3img.png";
-import HIW4img from "../../../public/images/HIWorks/HIW4img.png";
+import HIW1img from "../../../public/images/products/1.png";
+import HIW2img from "../../../public/images/products/1.png";
+import HIW3img from "../../../public/images/products/1.png";
+import HIW4img from "../../../public/images/products/1.png";
 import VectorImg from "../../../public/images/HIWorks/VectorHIW.svg";
 import Badge from "../../shared/Badge/Badge";
 
@@ -66,7 +66,7 @@ const SectionHowItWork: FC<SectionHowItWorkProps> = ({
             className="relative flex flex-col items-center max-w-xs mx-auto"
           >
             <div className="mb-4 sm:mb-10 max-w-[140px] mx-auto">
-              <Image
+              <img
                 className="rounded-3xl"
                 src={item.img}
                 alt={item.title}

@@ -1,10 +1,12 @@
+"use client";
+
 import { useEffect, useId } from "react";
 
 import Heading from "./Heading/Heading";
-import img1 from "../../public/images/collections/1.png";
-import img2 from "../../public/images/collections/5.png";
-import img3 from "../../public/images/collections/4.png";
-import img4 from "../../public/images/collections/3.png";
+import img1 from "../../public/images/products/1.png";
+import img2 from "../../public/images/products/1.png";
+import img3 from "../../public/images/products/1.png";
+import img4 from "../../public/images/products/1.png";
 import CardCategory3, {
   CardCategory3Props,
 } from "./CardCategories/CardCategory3";
@@ -46,10 +48,10 @@ const DiscoverMoreSlider = () => {
   const UNIQUE_CLASS = "glidejs" + id.replace(/:/g, "_");
 
   useEffect(() => {
+
     const OPTIONS: Glide.Options = {
       perView: 2.8,
       gap: 32,
-      bound: true,
       breakpoints: {
         1280: {
           gap: 28,
@@ -71,42 +73,13 @@ const DiscoverMoreSlider = () => {
           gap: 20,
           perView: 1,
         },
-      },
-      type: "slider",
-      startAt: 0,
-      focusAt: "",
-      autoplay: 0,
-      hoverpause: false,
-      keyboard: false,
-      swipeThreshold: 0,
-      dragThreshold: 0,
-      perSwipe: "",
-      touchRatio: 0,
-      touchAngle: 0,
-      animationDuration: 0,
-      rewind: false,
-      rewindDuration: 0,
-      animationTimingFunc: "",
-      waitForTransition: false,
-      throttle: 0,
-      direction: "ltr",
-      peek: "",
-      cloningRatio: 0,
-      classes: {
-        swipeable: "",
-        dragging: "",
-        direction: undefined,
-        type: undefined,
-        slide: undefined,
-        arrow: undefined,
-        nav: undefined
       }
     };
 
     let slider = new Glide(`.${UNIQUE_CLASS}`, OPTIONS);
     slider.mount();
     // @ts-ignore
-    return () => slider.destroy();
+    // return () => slider.destroy();
   }, [UNIQUE_CLASS]);
 
   return (

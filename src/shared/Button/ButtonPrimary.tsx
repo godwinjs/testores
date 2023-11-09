@@ -1,6 +1,6 @@
 // Next ok
 
-import Button, { ButtonProps } from "../../shared/Button/Button";
+import Button, { ButtonProps } from "./Button";
 import React from "react";
 
 export interface ButtonPrimaryProps extends ButtonProps {}

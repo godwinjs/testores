@@ -3,9 +3,9 @@
 import React, { FC, useState } from "react";
 import Image from 'next/image'
 
-import imageRightPng from "../../../public/images/hero/hero-right1.png";
-import imageRightPng2 from "../../../public/images/hero/hero-right2.png";
-import imageRightPng3 from "../../../public/images/hero/hero-right3.png";
+import imageRightPng from "../../../public/images/products/1.png";
+import imageRightPng2 from "../../../public/images/products/1.png";
+import imageRightPng3 from "../../../public/images/products/1.png";
 import backgroundLineSvg from "../../../public/images/hero/Moon.svg";
 
 import ButtonPrimary from "../../shared/Button/ButtonPrimary";
