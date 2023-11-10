@@ -80,6 +80,7 @@ const ProductQuickView: FC<ProductQuickViewProps> = ({ className = "" }) => {
             >
               <div className="absolute inset-0.5 rounded-full overflow-hidden z-0">
                 <Image
+                  // @ts-ignore
                   src={variant.thumbnail}
                   alt=""
                   className="absolute w-full h-full object-cover"
