@@ -1,11 +1,12 @@
 // Next Ready
+'use client';
 
 import React, { FC, useState } from "react";
 import Image from 'next/image'
 
-import imageRightPng from "../../../public/images/products/1.png";
-import imageRightPng2 from "../../../public/images/products/1.png";
-import imageRightPng3 from "../../../public/images/products/1.png";
+import imageRightPng from "../../../public/images/hero/hero-right1.png";
+import imageRightPng2 from "../../../public/images/hero/hero-right2.png";
+import imageRightPng3 from "../../../public/images/hero/hero-right3.png";
 import backgroundLineSvg from "../../../public/images/hero/Moon.svg";
 
 import ButtonPrimary from "../../shared/Button/ButtonPrimary";
@@ -168,13 +169,13 @@ const SectionHero2: FC<SectionHero2Props> = ({ className = "" }) => {
 
         <div className="relative container pb-0 pt-14 sm:pt-20 lg:py-44">
           <div
-            className={`relative z-[1] w-full max-w-3xl space-y-8 sm:space-y-14 nc-SectionHero2Item__left`}
+            className={`relative z-[1] w-full max-w-3xl lg:mx-10 space-y-8 sm:space-y-14 nc-SectionHero2Item__left`}
           >
             <div className="space-y-5 sm:space-y-6">
               <span className="nc-SectionHero2Item__subheading block text-base md:text-xl text-slate-700 font-medium">
                 {item.subHeading}
               </span>
-              <h2 className="nc-SectionHero2Item__heading font-semibold text-3xl sm:text-4xl md:text-5xl xl:text-6xl 2xl:text-7xl !leading-[114%] text-slate-900">
+              <h2 className="nc-SectionHero2Item__heading font-semibold text-2xl sm:text-4xl md:text-3xl xl:text-4xl 2xl:text-5xl !leading-[114%] text-slate-900">
                 {item.heading}
               </h2>
             </div>
@@ -205,7 +206,7 @@ const SectionHero2: FC<SectionHero2Props> = ({ className = "" }) => {
               </span>
             </ButtonPrimary>
           </div>
-          <div className="mt-10 lg:mt-0 lg:absolute right-0 bottom-0 top-0 w-full max-w-2xl xl:max-w-3xl 2xl:max-w-4xl">
+          <div className="mt-10 lg:mt-0 lg:absolute right-0 bottom-0 top-0 w-full max-w-2xl lg:mx-12 lg:max-w-2xl xl:max-w-3xl 2xl:max-w-4xl">
             <Image
               className="w-full h-full object-contain object-right-bottom nc-SectionHero2Item__image"
               src={item.image}

@@ -23,7 +23,7 @@ function PageHome() {
   return (
     <div className="nc-PageHome relative overflow-hidden">
       <Helmet>
-        <title>TruthStore || Ecommerce Template</title>
+        <title>TruthStore || best product empire</title>
       </Helmet>
 
       {/* SECTION HERO */}

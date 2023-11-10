@@ -1,4 +1,5 @@
 // Next Ready
+'use client'
 import React, { FC } from "react";
 import Link from "next/link";
 import Image from "next/image";
@@ -83,7 +84,8 @@ const ProductCard: FC<ProductCardProps> = ({
                 <h3 className="text-base font-medium ">{name}</h3>
                 <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
                   <span>
-                    {variants ? variants[variantActive].name : `Natural`}
+                    {/* {variants ? variants[variantActive].name : `Natural`} */}
+                    {`Natural`}
                   </span>
                   <span className="mx-2 border-l border-slate-200 dark:border-slate-700 h-4"></span>
                   <span>{size || "XL"}</span>
