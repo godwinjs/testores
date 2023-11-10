@@ -2,8 +2,6 @@
 
 import React, { ButtonHTMLAttributes, FC } from "react";
 import Link from 'next/link'
-// import { Link, LinkProps } from "react-router-dom";
-// import { LocationStates } from "../../routers/types";
 import twFocusClass from "../../utils/twFocusClass";
 
 export interface ButtonProps {
@@ -16,7 +14,6 @@ export interface ButtonProps {
   disabled?: boolean;
   type?: ButtonHTMLAttributes<HTMLButtonElement>["type"];
   href?: string;
-  // href?: keyof LocationStates;
   targetBlank?: boolean;
   onClick?: () => void;
   children?: React.ReactNode;

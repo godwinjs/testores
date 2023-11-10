@@ -1,10 +1,10 @@
 /** @type {import('next').NextConfig} */
 
-const nextConfig = {}
+const nextConfig = {
 
-module.exports = {
-    nextConfig
-}
+}//all exports go in here
+
+module.exports = nextConfig
 
 // module.exports = withImages({
 //     fileExtensions: ["jpg", "jpeg", "png", "gif", 'svg'],

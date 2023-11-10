@@ -35,6 +35,9 @@
   --c-neutral-800: 31,41,55;
   --c-neutral-900: 17,24,39
 }
+body{
+  font-size: 10px;
+}
 
 @font-face {
   font-family: Poppins;

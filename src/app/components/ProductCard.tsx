@@ -80,15 +80,14 @@ const ProductCard: FC<ProductCardProps> = ({
         <div className="ml-4 flex flex-1 flex-col">
           <div>
             <div className="flex justify-between ">
-              <div suppressHydrationWarning>
+              <div>
                 <h3 className="text-base font-medium ">{name}</h3>
                 <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
-                  <span suppressHydrationWarning>
-                    {/* {variants ? variants[variantActive].name : `Natural`} */}
-                    {`Natural`}
+                  <span>
+                    {variants ? variants[variantActive].name : `Natural`}
                   </span>
                   <span className="mx-2 border-l border-slate-200 dark:border-slate-700 h-4"></span>
-                  <span>{size || "XL"}</span>
+                  <span>{size+'..' || "XL"}</span>
                 </p>
               </div>
               <Prices price={price} className="mt-0.5" />

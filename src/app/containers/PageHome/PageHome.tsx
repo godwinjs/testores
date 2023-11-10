@@ -2,14 +2,14 @@
 
 // import React from "react";
 import SectionHowItWork from "../../components/SectionHowItWork/SectionHowItWork";
-// import BackgroundSection from "../../components/BackgroundSection/BackgroundSection";
+import BackgroundSection from "../../components/BackgroundSection/BackgroundSection";
 import SectionPromo1 from "../../components/SectionPromo1";
 import { Helmet } from "react-helmet";
 import SectionHero2 from "../../components/SectionHero/SectionHero2";
 // import SectionSliderLargeProduct from "../../components/SectionSliderLargeProduct";
 import SectionSliderProductCard from "../../components/SectionSliderProductCard";
 import DiscoverMoreSlider from "../../components/DiscoverMoreSlider";
-// import SectionGridMoreExplore from "../../components/SectionGridMoreExplore/SectionGridMoreExplore";
+import SectionGridMoreExplore from "../../components/SectionGridMoreExplore/SectionGridMoreExplore";
 // import SectionPromo2 from "../../components/SectionPromo2";
 // import SectionSliderCategories from "../../components/SectionSliderCategories/SectionSliderCategories";
 // import SectionGridFeatureItems from "./SectionGridFeatureItems";
@@ -55,8 +55,8 @@ function PageHome() {
 
         {/* SECTION */}
         <div className="relative py-24 lg:py-32">
-          {/* <BackgroundSection /> */}
-          {/* <SectionGridMoreExplore /> */}
+          <BackgroundSection />
+          <SectionGridMoreExplore />
         </div>
 
         {/* <SectionSliderProductCard
