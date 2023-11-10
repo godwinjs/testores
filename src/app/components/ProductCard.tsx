@@ -179,6 +179,8 @@ const ProductCard: FC<ProductCardProps> = ({
           >
             <div className="absolute inset-0.5 rounded-full overflow-hidden z-0">
               <Image
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                // @ts-ignore
                 src={variant.thumbnail}
                 objectFit="scale-down"
                 alt="variant"
