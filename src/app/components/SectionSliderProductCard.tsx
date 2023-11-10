@@ -28,7 +28,6 @@ const SectionSliderProductCard: FC<SectionSliderProductCardProps> = ({
   const sliderRef = useRef(null);
   const id = useId();
   const UNIQUE_CLASS = "glidejs" + id.replace(/:/g, "_");
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   useEffect(() => {
     if (!sliderRef.current) {

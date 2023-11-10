@@ -42,3 +42,4 @@ Check out [Auth0](https://github.com/auth0/nextjs-auth0#app-router) for authenti
 [typescript guide 2](https://blog.logrocket.com/using-next-js-with-typescript/#using-typescript-next-js-app)
 
 [fix hydration error](https://nextjs.org/docs/messages/react-hydration-error)
+[](https://www.typescriptlang.org/docs/handbook/declaration-files/do-s-and-don-ts.html)
