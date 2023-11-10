@@ -3,11 +3,11 @@
 import { useEffect, useId } from "react";
 
 import Heading from "./Heading/Heading";
-import img1 from "../../public/images/collections/1.png";
-import img2 from "../../public/images/collections/2.png";
-import img3 from "../../public/images/collections/3.png";
-import img4 from "../../public/images/collections/4.png";
-import CardCategory3, {
+import img1 from "../../../public/images/collections/1.png";
+import img2 from "../../../public/images/collections/2.png";
+import img3 from "../../../public/images/collections/3.png";
+import img4 from "../../../public/images/collections/4.png";
+import CardCategory3, { 
   CardCategory3Props,
 } from "./CardCategories/CardCategory3";
 import Glide from "@glidejs/glide";

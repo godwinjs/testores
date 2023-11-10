@@ -12,9 +12,6 @@ import Image from "next/image"
 
 import IconDiscount from "../components/IconDiscount";
 import Prices from "../components/Prices";
-import detail1JPG from "../../public/images/products/1.png";
-import detail2JPG from "../../public/images/products/1.png";
-import detail3JPG from "../../public/images/products/1.png";
 import NotifyAddTocart from "./NotifyAddToCart";
 import AccordionInfo from "../containers/ProductDetailPage/AccordionInfo";
 import BagIcon from "../components/BagIcon";
@@ -22,6 +19,11 @@ import NcInputNumber from "../components/NcInputNumber";
 import { PRODUCTS } from "../data/data";
 import ButtonPrimary from "../shared/Button/ButtonPrimary";
 import LikeButton from "../components/LikeButton";
+
+
+import detail1JPG from "../../../public/images/products/1.png";
+import detail2JPG from "../../../public/images/products/1.png";
+import detail3JPG from "../../../public/images/products/1.png";
 
 export interface ProductQuickViewProps {
   className?: string;

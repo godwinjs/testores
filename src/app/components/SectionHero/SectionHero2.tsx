@@ -4,10 +4,10 @@
 import React, { FC, useState } from "react";
 import Image from 'next/image'
 
-import imageRightPng from "../../../public/images/hero/hero-right1.png";
-import imageRightPng2 from "../../../public/images/hero/hero-right2.png";
-import imageRightPng3 from "../../../public/images/hero/hero-right3.png";
-import backgroundLineSvg from "../../../public/images/hero/Moon.svg";
+import imageRightPng from "../../../../public/images/hero/hero-right1.png";
+import imageRightPng2 from "../../../../public/images/hero/hero-right2.png";
+import imageRightPng3 from "../../../../public/images/hero/hero-right3.png";
+import backgroundLineSvg from "../../../../public/images/hero/Moon.svg";
 
 import ButtonPrimary from "../../shared/Button/ButtonPrimary";
 import Next from "../../shared/NextPrev/Next";
@@ -160,7 +160,7 @@ const SectionHero2: FC<SectionHero2Props> = ({ className = "" }) => {
         {/* BG */}
         <div className="absolute inset-0 bg-[#E3FFE6]">
           {/* <div className="absolute inset-0 bg-[#F7F0EA]"> */}
-          <img
+          <Image
             className="absolute w-full h-full object-contain"
             src={backgroundLineSvg}
             alt="hero"
@@ -210,6 +210,7 @@ const SectionHero2: FC<SectionHero2Props> = ({ className = "" }) => {
             <Image
               className="w-full h-full object-contain object-right-bottom nc-SectionHero2Item__image"
               src={item.image}
+              priority={true}
               alt={item.heading}
             />
           </div>

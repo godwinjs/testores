@@ -80,10 +80,10 @@ const ProductCard: FC<ProductCardProps> = ({
         <div className="ml-4 flex flex-1 flex-col">
           <div>
             <div className="flex justify-between ">
-              <div>
+              <div suppressHydrationWarning>
                 <h3 className="text-base font-medium ">{name}</h3>
                 <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
-                  <span>
+                  <span suppressHydrationWarning>
                     {/* {variants ? variants[variantActive].name : `Natural`} */}
                     {`Natural`}
                   </span>
@@ -170,7 +170,7 @@ const ProductCard: FC<ProductCardProps> = ({
           <div
             key={index}
             onClick={() => setVariantActive(index)}
-            className={`relative w-11 h-6 rounded-full overflow-hidden z-10 border cursor-pointer ${
+            className={`relative w-11 h-6 bg-emerald-500 rounded-full overflow-hidden z-10 border cursor-pointer ${
               variantActive === index
                 ? "border-black dark:border-slate-300"
                 : "border-transparent"
@@ -180,6 +180,7 @@ const ProductCard: FC<ProductCardProps> = ({
             <div className="absolute inset-0.5 rounded-full overflow-hidden z-0">
               <Image
                 src={variant.thumbnail}
+                objectFit="scale-down"
                 alt="variant"
                 className="absolute w-full h-full object-cover"
               />
@@ -250,7 +251,7 @@ const ProductCard: FC<ProductCardProps> = ({
             <div className="flex aspect-w-11 aspect-h-12 w-full h-0">
               <Image
                 src={image}
-                className="object-cover w-full h-full drop-shadow-xl"
+                className="object-scale-down w-full h-full drop-shadow-xl "
                 alt=''
               />
             </div>

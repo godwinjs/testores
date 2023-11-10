@@ -5,7 +5,7 @@ import Image from 'next/image'
 import Link from "next/link";
 
 import ButtonSecondary from "../../shared/Button/ButtonSecondary";
-import { CATS_DISCOVER } from "../../components/DiscoverMoreSlider";
+import { CATS_DISCOVER } from "../DiscoverMoreSlider";
 
 export interface CardCategory3Props {
   className?: string;
@@ -36,7 +36,7 @@ const CardCategory3: FC<CardCategory3Props> = ({
         <div className="absolute inset-5 sm:inset-8">
           <Image
             src={featuredImage}
-            className="absolute right-0 w-1/2 max-w-[260px] h-full object-contain drop-shadow-xl"
+            className="absolute right-0 w-1/2 max-w-[260px] h-full object-scale-down drop-shadow-xl"
             alt={alt}
           />
         </div>

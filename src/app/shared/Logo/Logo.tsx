@@ -3,8 +3,8 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image"
 
-import logoImg from "../../../public/images/logo/ecom.png";
-import logoLightImg from "../../../public/images/logo/ecom.png";
+import logoImg from "../../../../public/images/logo/ecom.png";
+import logoLightImg from "../../../../public/images/logo/ecom.png";
 
 export interface LogoProps {
   img?: string;

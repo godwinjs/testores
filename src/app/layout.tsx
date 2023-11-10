@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 import './globals.css'
 import './line-awesome.css'
 import "rc-slider/assets/index.css";
+
 import Provider from "@/app/redux/provider";
 
 // const inter = Inter({ subsets: ['latin'] })

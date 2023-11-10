@@ -1,7 +1,7 @@
 import { Transition } from "@headlessui/react";
 import Image from 'next/image'
 
-import Prices from "../components/Prices";
+import Prices from "./Prices";
 import { PRODUCTS } from "../data/data";
 import React, { FC } from "react";
 import imgs from '../../public/images/products/1.png'

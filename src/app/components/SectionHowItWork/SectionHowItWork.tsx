@@ -2,11 +2,11 @@
 import { FC } from "react";
 import Image from 'next/image'
 
-import HIW1img from "../../../public/images/products/1.png";
-import HIW2img from "../../../public/images/products/1.png";
-import HIW3img from "../../../public/images/products/1.png";
-import HIW4img from "../../../public/images/products/1.png";
-import VectorImg from "../../../public/images/HIWorks/VectorHIW.svg";
+import HIW1img from "../../../../public/images/HIWorks/HIW1img.png";
+import HIW2img from "../../../../public/images/HIWorks/HIW2img.png";
+import HIW3img from "../../../../public/images/HIWorks/HIW3img.png";
+import HIW4img from "../../../../public/images/HIWorks/HIW4img.png";
+import VectorImg from "../../../../public/images/HIWorks/VectorHIW.svg";
 import Badge from "../../shared/Badge/Badge";
 
 export interface SectionHowItWorkProps {
@@ -55,9 +55,10 @@ const SectionHowItWork: FC<SectionHowItWorkProps> = ({
       data-nc-id="SectionHowItWork"
     >
       <div className="relative grid sm:grid-cols-2 lg:grid-cols-4 gap-10 sm:gap-16 xl:gap-20">
-        <img
+        <Image
           className="hidden md:block absolute inset-x-0 top-5"
           src={VectorImg}
+          
           alt="vector"
         />
         {data.map((item: typeof DEMO_DATA[number], index: number) => (

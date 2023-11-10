@@ -1,18 +1,18 @@
 import { productImgs } from "../contains/fakedata";
-import productVariantImg2 from "../../public/images/products/variants/v2.jpg";
-import productVariantImg3 from "../../public/images/products/variants/v3.jpg";
-import productVariantImg4 from "../../public/images/products/variants/v4.jpg";
-import productVariantImg5 from "../../public/images/products/variants/v5.jpg";
-import productVariantImg6 from "../../public/images/products/variants/v6.jpg";
+import productVariantImg2 from "../../../public/images/products/variants/v2.jpg";
+import productVariantImg3 from "../../../public/images/products/variants/v3.jpg";
+import productVariantImg4 from "../../../public/images/products/variants/v4.jpg";
+import productVariantImg5 from "../../../public/images/products/variants/v5.jpg";
+import productVariantImg6 from "../../../public/images/products/variants/v6.jpg";
 //
-import productSport1 from "../../public/images/products/sport/sport-1.png";
-import productSport2 from "../../public/images/products/sport/sport-2.png";
-import productSport3 from "../../public/images/products/sport/sport-3.png";
-import productSport4 from "../../public/images/products/sport/sport-4.png";
-import productSport5 from "../../public/images/products/sport/sport-5.png";
-import productSport6 from "../../public/images/products/sport/sport-6.png";
-import productSport7 from "../../public/images/products/sport/sport-7.png";
-import productSport8 from "../../public/images/products/sport/sport-8.png";
+import productSport1 from "../../../public/images/products/sport/sport-1.png";
+import productSport2 from "../../../public/images/products/sport/sport-2.png";
+import productSport3 from "../../../public/images/products/sport/sport-3.png";
+import productSport4 from "../../../public/images/products/sport/sport-4.png";
+import productSport5 from "../../../public/images/products/sport/sport-5.png";
+import productSport6 from "../../../public/images/products/sport/sport-6.png";
+import productSport7 from "../../../public/images/products/sport/sport-7.png";
+import productSport8 from "../../../public/images/products/sport/sport-8.png";
 
 //
 
