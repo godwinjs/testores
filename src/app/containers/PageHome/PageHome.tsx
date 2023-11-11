@@ -59,10 +59,10 @@ function PageHome() {
           <SectionGridMoreExplore />
         </div>
 
-        {/* <SectionSliderProductCard
+        <SectionSliderProductCard
           heading="Best Sellers"
-          subHeading="Best selling of the month"
-        /> */}
+          subHeading="Best sellers of the month"
+        />
 
         {/*  */}
         {/* <SectionPromo2 /> */}

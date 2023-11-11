@@ -13,7 +13,7 @@ export default function Home() {
   const dispatch = useDispatch()
 
   return (
-    <>
+    <main>
       <div className="bg-white text-base dark:bg-slate-900 text-slate-900 dark:text-slate-200">
         <PageHome /> 
         <div>
@@ -35,6 +35,6 @@ export default function Home() {
           </button>
         </div>
       </div>
-    </>
+    </main>
   )
 }
