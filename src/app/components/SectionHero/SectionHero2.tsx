@@ -163,6 +163,7 @@ const SectionHero2: FC<SectionHero2Props> = ({ className = "" }) => {
           <Image
             className="absolute w-full h-full object-contain"
             src={backgroundLineSvg}
+            priority
             alt="hero"
           />
         </div>
