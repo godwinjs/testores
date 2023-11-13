@@ -85,6 +85,7 @@ const ProductCard: FC<ProductCardProps> = ({
                 <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
                   <span>
                     {`Natural`}
+                    {/* {variants ? variants[variantActive].name : `Natural`} */}
                   </span>
                   <span className="mx-2 border-l border-slate-200 dark:border-slate-700 h-4"></span>
                   <span>{size+'..' || "XL"}</span>
@@ -282,8 +283,7 @@ const ProductCard: FC<ProductCardProps> = ({
             <div className="flex items-center mb-0.5">
               <StarIcon className="w-5 h-5 pb-[1px] text-amber-400" />
               <span className="text-sm ml-1 text-slate-500 dark:text-slate-400">
-                {(Math.random() * 1 + 4).toFixed(1) + ' seprt. ' +
-                Math.floor(Math.random() * 70 + 20) + 'reviews'}
+                {1 + 4 * 70 + 20 + 'reviews'}
               </span>
             </div>
           </div>

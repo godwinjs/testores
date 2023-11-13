@@ -44,7 +44,7 @@ const CardCategory4: FC<CardCategory4Props> = ({
 
               </div>
             <span className="text-xs text-slate-700 dark:text-neutral-300 font-medium">
-              {Math.floor(Math.random() * 200 + 125)} products
+              {200 + 125} products
             </span>
           </div>
 
