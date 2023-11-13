@@ -13,7 +13,7 @@ import SectionGridMoreExplore from "../../components/SectionGridMoreExplore/Sect
 import SectionPromo2 from "../../components/SectionPromo2";
 import SectionSliderCategories from "../../components/SectionSliderCategories/SectionSliderCategories";
 // import SectionGridFeatureItems from "./SectionGridFeatureItems";
-// import SectionPromo3 from "../../components/SectionPromo3";
+import SectionPromo3 from "../../components/SectionPromo3";
 // import SectionClientSay from "../../components/SectionClientSay/SectionClientSay";
 // import SectionMagazine5 from "../../containers/BlogPage/SectionMagazine5";
 import Heading from "../../components/Heading/Heading";
@@ -74,7 +74,7 @@ function PageHome() {
         <SectionSliderCategories />
 
         {/* SECTION */}
-        {/* <SectionPromo3 /> */}
+        <SectionPromo3 />
 
         {/* SECTION */}
         {/* <SectionGridFeatureItems /> */}
