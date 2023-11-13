@@ -6,7 +6,7 @@ import BackgroundSection from "../../components/BackgroundSection/BackgroundSect
 import SectionPromo1 from "../../components/SectionPromo1";
 import { Helmet } from "react-helmet";
 import SectionHero2 from "../../components/SectionHero/SectionHero2";
-// import SectionSliderLargeProduct from "../../components/SectionSliderLargeProduct";
+import SectionSliderLargeProduct from "../../components/SectionSliderLargeProduct";
 import SectionSliderProductCard from "../../components/SectionSliderProductCard";
 import DiscoverMoreSlider from "../../components/DiscoverMoreSlider";
 import SectionGridMoreExplore from "../../components/SectionGridMoreExplore/SectionGridMoreExplore";
@@ -68,7 +68,7 @@ function PageHome() {
         <SectionPromo2 />
 
         {/* SECTION 3 */}
-        {/* <SectionSliderLargeProduct cardStyle="style2" /> */}
+        <SectionSliderLargeProduct cardStyle="style2" />
 
         {/*  */}
         {/* <SectionSliderCategories /> */}
