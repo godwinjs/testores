@@ -9,7 +9,7 @@ import imgType from '../../../../public/images/collections/1.png'
 export interface CardCategory6Props {
   className?: string;
   featuredImage?: string | typeof imgType;
-  bgSVG?: string;
+  bgSVG?: string | typeof explore1Svg;
   name: string;
   desc: string;
   color?: string;

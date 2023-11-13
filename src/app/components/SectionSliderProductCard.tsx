@@ -79,13 +79,13 @@ const SectionSliderProductCard: FC<SectionSliderProductCardProps> = ({
           {heading || `New Arrivals`}
         </Heading>
         <div className="glide__track" data-glide-el="track">
-          <ul className="glide__slides">
+          <div className="table glide__slides">
             {data.map((item, index) => (
-              <li key={index} className={`glide__slide ${itemClassName}`} suppressHydrationWarning>
+              <div key={index} className={`table row glide__slide ${itemClassName}`}>
                 <ProductCard data={item} />
-              </li>
+              </div>
             ))}
-          </ul>
+          </div>
         </div>
       </div>
     </div>

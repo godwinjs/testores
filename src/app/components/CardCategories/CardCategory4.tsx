@@ -10,7 +10,7 @@ import imgType from '../../../../public/images/collections/1.png';
 export interface CardCategory4Props {
   className?: string;
   featuredImage?: string | typeof imgType;
-  bgSVG?: string;
+  bgSVG?: string | typeof explore1Svg;
   name: string;
   desc: string;
   color?: string;
@@ -31,7 +31,7 @@ const CardCategory4: FC<CardCategory4Props> = ({
     >
       <div>
         <div className="absolute bottom-0 right-0 max-w-[280px] opacity-80">
-          <img src={bgSVG} alt="svg background" />
+          <Image src={bgSVG} alt="svg background" />
         </div>
 
         <div className="absolute inset-5 sm:inset-8 flex flex-col justify-between">

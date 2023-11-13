@@ -22,7 +22,7 @@ import { PRODUCTS, SPORT_PRODUCTS } from "../../data/data";
 
 function PageHome() {
   return (
-    <div className="nc-PageHome relative overflow-hidden" suppressHydrationWarning>
+    <div className="nc-PageHome relative overflow-hidden">
       <Helmet>
         <title>TruthStore || best product empire</title>
       </Helmet>

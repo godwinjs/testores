@@ -46,7 +46,7 @@ export const DEMO_MORE_EXPLORE_DATA = [
   {
     id: 1,
     name: "Backpack",
-    desc: "Manufacturar",
+    desc: "Manufacturer",
     image: explore1Png,
     svgBg: explore1Svg,
     color: "bg-indigo-50",
@@ -54,7 +54,7 @@ export const DEMO_MORE_EXPLORE_DATA = [
   {
     id: 2,
     name: "Shoes",
-    desc: "Manufacturar",
+    desc: "Manufacturer",
     image: explore2Png,
     svgBg: explore2Svg,
     color: "bg-slate-100/80",
@@ -62,7 +62,7 @@ export const DEMO_MORE_EXPLORE_DATA = [
   {
     id: 3,
     name: "Recycled Blanket",
-    desc: "Manufacturar",
+    desc: "Manufacturer",
     image: explore3Png,
     svgBg: explore3Svg,
     color: "bg-violet-50",
@@ -70,7 +70,7 @@ export const DEMO_MORE_EXPLORE_DATA = [
   {
     id: 4,
     name: "Cycling Shorts",
-    desc: "Manufacturar",
+    desc: "Manufacturer",
     image: explore9Png,
     svgBg: explore9Svg,
     color: "bg-orange-50",
@@ -78,7 +78,7 @@ export const DEMO_MORE_EXPLORE_DATA = [
   {
     id: 5,
     name: "Cycling Jersey",
-    desc: "Manufacturar",
+    desc: "Manufacturer",
     image: explore5Png,
     svgBg: explore5Svg,
     color: "bg-blue-50",
@@ -86,7 +86,7 @@ export const DEMO_MORE_EXPLORE_DATA = [
   {
     id: 6,
     name: "Car Coat",
-    desc: "Manufacturar",
+    desc: "Manufacturer",
     image: explore6Png,
     svgBg: explore6Svg,
     color: "bg-orange-50",
@@ -94,7 +94,7 @@ export const DEMO_MORE_EXPLORE_DATA = [
   {
     id: 7,
     name: "Sunglasses",
-    desc: "Manufacturar",
+    desc: "Manufacturer",
     image: explore7Png,
     svgBg: explore7Svg,
     color: "bg-stone-100",
@@ -102,7 +102,7 @@ export const DEMO_MORE_EXPLORE_DATA = [
   {
     id: 8,
     name: "kid hats",
-    desc: "Manufacturar",
+    desc: "Manufacturer",
     image: explore8Png,
     svgBg: explore8Svg,
     color: "bg-blue-50",
@@ -110,7 +110,7 @@ export const DEMO_MORE_EXPLORE_DATA = [
   {
     id: 9,
     name: "Wool Jacket",
-    desc: "Manufacturar",
+    desc: "Manufacturer",
     image: explore4Png,
     svgBg: explore4Svg,
     color: "bg-slate-100/80",
