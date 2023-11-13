@@ -55,6 +55,7 @@ const SectionPromo3: FC<SectionPromo3Props> = ({ className = "lg:pt-10" }) => {
           </ul>
           <form className="mt-10 relative max-w-sm">
             <Input
+              displayName="custom input"
               required
               aria-required
               placeholder="Enter your email"
