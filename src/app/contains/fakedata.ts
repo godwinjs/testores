@@ -1,4 +1,3 @@
-'use client';
 
 //
 import product1 from "../../../public/images/products/1.png";
@@ -25,16 +24,16 @@ import product21 from "../../../public/images/products/21.png";
 import product22 from "../../../public/images/products/22.png";
 import product23 from "../../../public/images/products/23.png";
 import product24 from "../../../public/images/products/24.png";
-// import avatar1 from "../images/avatars/Image-1.png";
-// import avatar2 from "../images/avatars/Image-2.png";
-// import avatar3 from "../images/avatars/Image-3.png";
-// import avatar4 from "../images/avatars/Image-4.png";
-// import avatar5 from "../images/avatars/Image-5.png";
-// import avatar6 from "../images/avatars/Image-6.png";
-// import avatar7 from "../images/avatars/Image-7.png";
-// import avatar8 from "../images/avatars/Image-8.png";
-// import avatar9 from "../images/avatars/Image-9.png";
-// import avatar10 from "../images/avatars/Image-10.png";
+import avatar1 from "../../../public/images/avatars/image-1.png";
+import avatar2 from "../../../public/images/avatars/image-2.png";
+import avatar3 from "../../../public/images/avatars/image-3.png";
+import avatar4 from "../../../public/images/avatars/image-4.png";
+import avatar5 from "../../../public/images/avatars/image-5.png";
+import avatar6 from "../../../public/images/avatars/image-6.png";
+import avatar7 from "../../../public/images/avatars/image-7.png";
+import avatar8 from "../../../public/images/avatars/image-8.png";
+import avatar9 from "../../../public/images/avatars/image-9.png";
+import avatar10 from "../../../public/images/avatars/image-10.png";
 
 //
 export const productImgs = [
@@ -96,18 +95,18 @@ export const nftsAbstracts = [
   "https://images.unsplash.com/photo-1625527575307-616f0bb84ad2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDEyfHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60",
 ];
 
-// export const avatarImgs = [
-//   avatar1,
-//   avatar2,
-//   avatar3,
-//   avatar4,
-//   avatar5,
-//   avatar6,
-//   avatar7,
-//   avatar8,
-//   avatar9,
-//   avatar10,
-// ];
+export const avatarImgs = [
+  avatar1,
+  avatar2,
+  avatar3,
+  avatar4,
+  avatar5,
+  avatar6,
+  avatar7,
+  avatar8,
+  avatar9,
+  avatar10,
+];
 
 export const personNames = [
   "Martin Luthor",
@@ -148,25 +147,25 @@ export const tagNames = [
 ];
 
 export const featuredImgs = [
-  "https://images.pexels.com/photos/10343244/pexels-photo-10343244.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load",
-  "https://images.pexels.com/photos/5843990/pexels-photo-5843990.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load",
-  "https://images.pexels.com/photos/10343245/pexels-photo-10343245.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load",
-  "https://images.pexels.com/photos/3579484/pexels-photo-3579484.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load",
-  "https://images.pexels.com/photos/7655908/pexels-photo-7655908.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load",
-  "https://images.pexels.com/photos/13270364/pexels-photo-13270364.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load",
-  "https://images.pexels.com/photos/12699167/pexels-photo-12699167.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load",
+  "https://images.pexels.com/photos/10343244/pexels-photo-10343244.jpeg?auto=compress&cs=tinysrgb&lazy=load",
+  "https://images.pexels.com/photos/5843990/pexels-photo-5843990.jpeg?auto=compress&cs=tinysrgb&lazy=load",
+  "https://images.pexels.com/photos/10343245/pexels-photo-10343245.jpeg?auto=compress&cs=tinysrgb&lazy=load",
+  "https://images.pexels.com/photos/3579484/pexels-photo-3579484.jpeg?auto=compress&cs=tinysrgb&lazy=load",
+  "https://images.pexels.com/photos/7655908/pexels-photo-7655908.jpeg?auto=compress&cs=tinysrgb&lazy=load",
+  "https://images.pexels.com/photos/13270364/pexels-photo-13270364.jpeg?auto=compress&cs=tinysrgb&lazy=load",
+  "https://images.pexels.com/photos/12699167/pexels-photo-12699167.jpeg?auto=compress&cs=tinysrgb&lazy=load",
 ];
 
 export const imgHigtQualitys = [
-  "https://images.pexels.com/photos/6168061/pexels-photo-6168061.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
-  "https://images.pexels.com/photos/5913391/pexels-photo-5913391.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
-  "https://images.pexels.com/photos/5913170/pexels-photo-5913170.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
-  "https://images.pexels.com/photos/4617820/pexels-photo-4617820.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
-  "https://images.pexels.com/photos/6136086/pexels-photo-6136086.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
-  "https://images.pexels.com/photos/4443477/pexels-photo-4443477.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
-  "https://images.pexels.com/photos/4273989/pexels-photo-4273989.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
-  "https://images.pexels.com/photos/4806731/pexels-photo-4806731.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
-  "https://images.pexels.com/photos/5499131/pexels-photo-5499131.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+  "https://images.pexels.com/photos/6168061/pexels-photo-6168061.jpeg?auto=compress&cs=tinysrgb&dpr=2",
+  "https://images.pexels.com/photos/5913391/pexels-photo-5913391.jpeg?auto=compress&cs=tinysrgb&dpr=2",
+  "https://images.pexels.com/photos/5913170/pexels-photo-5913170.jpeg?auto=compress&cs=tinysrgb&dpr=2",
+  "https://images.pexels.com/photos/4617820/pexels-photo-4617820.jpeg?auto=compress&cs=tinysrgb&dpr=2",
+  "https://images.pexels.com/photos/6136086/pexels-photo-6136086.jpeg?auto=compress&cs=tinysrgb&dpr=2",
+  "https://images.pexels.com/photos/4443477/pexels-photo-4443477.jpeg?auto=compress&cs=tinysrgb&dpr=2",
+  "https://images.pexels.com/photos/4273989/pexels-photo-4273989.jpeg?auto=compress&cs=tinysrgb&dpr=2",
+  "https://images.pexels.com/photos/4806731/pexels-photo-4806731.jpeg?auto=compress&cs=tinysrgb&dpr=2",
+  "https://images.pexels.com/photos/5499131/pexels-photo-5499131.jpeg?auto=compress&cs=tinysrgb&dpr=2",
 ];
 
 const aTitles = [
@@ -186,31 +185,31 @@ const aTitles = [
 ];
 
 function _getTitleRd() {
-  return aTitles[Math.floor(Math.random() * aTitles.length)];
+  return aTitles[0];
 }
 function _getPersonNameRd() {
-  return personNames[Math.floor(Math.random() * personNames.length)];
+  return personNames[0];
 }
 
 function _getImgRd() {
-  return featuredImgs[Math.floor(Math.random() * featuredImgs.length)];
+  return featuredImgs[1];
 }
 
 function _getImgHightQualityRd() {
-  return imgHigtQualitys[Math.floor(Math.random() * imgHigtQualitys.length)];
+  return imgHigtQualitys[0];
 }
 
 function _getTagNameRd() {
-  return tagNames[Math.floor(Math.random() * tagNames.length)];
+  return tagNames[1];
 }
-// function _getAvatarRd() {
-//   return avatarImgs[Math.floor(Math.random() * avatarImgs.length)];
-// }
+function _getAvatarRd() {
+  return avatarImgs[2];
+}
 
 export {
   _getImgRd,
   _getTagNameRd,
-  // _getAvatarRd,
+  _getAvatarRd,
   _getImgHightQualityRd,
   _getTitleRd,
   _getPersonNameRd,
