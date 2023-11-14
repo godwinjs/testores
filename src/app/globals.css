@@ -39,36 +39,6 @@ body{
   font-size: 10px;
 }
 
-/* @font-face {
-  font-family: Poppins;
-  font-weight: 300;
-  src: url(/public/fonts/media/Poppins-Light.ttf)
-}
-
-@font-face {
-  font-family: Poppins;
-  font-weight: 400;
-  src: url(/public/fonts/media/Poppins-Regular.ttf)
-}
-
-@font-face {
-  font-family: Poppins;
-  font-weight: 500;
-  src: url(/public/fonts/media/Poppins-Medium.ttf)
-}
-
-@font-face {
-  font-family: Poppins;
-  font-weight: 600;
-  src: url(/public/fonts/media/Poppins-SemiBold.ttf)
-}
-
-@font-face {
-  font-family: Poppins;
-  font-weight: 700;
-  src: url(/public/fonts/media/Poppins-Bold.ttf)
-} */
-
 html body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -15086,24 +15056,24 @@ select {
 
 @font-face {
   font-display: auto;
-  font-family: Line Awesome Brands;
+  font-family: var(--font-la), Line Awesome Brands;
   font-style: normal;
   font-weight: 400;
-  src: url(/public/fonts/media/la-brands-400.eot);
-  src: url(/public/fonts/media/la-brands-400.eot?#iefix) format("embedded-opentype"),url(/public/fonts/media/la-brands-400.woff2) format("woff2"),url(/public/fonts/media/la-brands-400.woff) format("woff"),url(/public/fonts/media/la-brands-400.ttf) format("truetype"),url(/public/fonts/media/la-brands-400.svg#lineawesome) format("svg")
+  src: url("./fonts/la-brands-400.eot");
+  src: url("./fonts/la-brands-400.eot?#iefix") format("embedded-opentype"), url("./fonts/la-brands-400.svg#lineawesome") format("svg")
 }
 
 .lab {
-  font-family: Line Awesome Brands
+  font-family: var(--font-la), Line Awesome Brands
 }
 
 @font-face {
   font-display: auto;
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-style: normal;
   font-weight: 400;
-  src: url(/public/fonts/media/la-regular-400.eot);
-  src: url(/public/fonts/media/la-regular-400.eot?#iefix) format("embedded-opentype"),url(/public/fonts/media/la-regular-400.woff2) format("woff2"),url(/public/fonts/media/la-regular-400.woff) format("woff"),url(/public/fonts/media/la-regular-400.ttf) format("truetype"),url(/public/fonts/media/la-regular-400.svg#lineawesome) format("svg")
+  src: url("./fonts/la-regular-400.eot");
+  src: url("./fonts/la-regular-400.eot?#iefix") format("embedded-opentype"),url("./fonts/la-regular-400.svg#lineawesome") format("svg")
 }
 
 .lar {
@@ -15112,15 +15082,15 @@ select {
 
 @font-face {
   font-display: auto;
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-style: normal;
   font-weight: 900;
-  src: url(/public/fonts/media/la-solid-900.eot);
-  src: url(/public/fonts/media/la-solid-900.eot?#iefix) format("embedded-opentype"),url(/public/fonts/media/la-solid-900.woff2) format("woff2"),url(/public/fonts/media/la-solid-900.woff) format("woff"),url(/public/fonts/media/la-solid-900.ttf) format("truetype"),url(/public/fonts/media/la-solid-900.svg#lineawesome) format("svg")
+  src: url("./fonts/la-solid-900.eot");
+  src: url("./fonts/la-solid-900.eot?#iefix") format("embedded-opentype"),url("./fonts/la-solid-900.svg#lineawesome") format("svg")
 }
 
 .la,.lar,.las {
-  font-family: Line Awesome Free
+  font-family: var(--font-la), Line Awesome Free
 }
 
 .la,.las {
@@ -15132,12 +15102,12 @@ select {
 }
 
 .la.la-meetup {
-  font-family: Line Awesome Brands;
+  font-family: var(--font-la), Line Awesome Brands;
   font-weight: 400
 }
 
 .la.la-star-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -15154,7 +15124,7 @@ select {
 }
 
 .la.la-trash-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -15163,7 +15133,7 @@ select {
 }
 
 .la.la-file-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -15172,7 +15142,7 @@ select {
 }
 
 .la.la-clock-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -15181,7 +15151,7 @@ select {
 }
 
 .la.la-arrow-circle-o-down {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -15190,7 +15160,7 @@ select {
 }
 
 .la.la-arrow-circle-o-up {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -15199,7 +15169,7 @@ select {
 }
 
 .la.la-play-circle-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -15216,7 +15186,7 @@ select {
 }
 
 .la.la-list-alt {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -15229,7 +15199,7 @@ select {
 }
 
 .la.la-picture-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -15238,7 +15208,7 @@ select {
 }
 
 .la.la-photo {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -15247,7 +15217,7 @@ select {
 }
 
 .la.la-image {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -15264,7 +15234,7 @@ select {
 }
 
 .la.la-pencil-square-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -15273,7 +15243,7 @@ select {
 }
 
 .la.la-share-square-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -15282,7 +15252,7 @@ select {
 }
 
 .la.la-check-square-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -15295,7 +15265,7 @@ select {
 }
 
 .la.la-times-circle-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -15304,7 +15274,7 @@ select {
 }
 
 .la.la-check-circle-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -15317,7 +15287,7 @@ select {
 }
 
 .la.la-eye,.la.la-eye-slash {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -15338,7 +15308,7 @@ select {
 }
 
 .la.la-bar-chart {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -15347,7 +15317,7 @@ select {
 }
 
 .la.la-bar-chart-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -15356,7 +15326,7 @@ select {
 }
 
 .la.la-facebook-square,.la.la-twitter-square {
-  font-family: Line Awesome Brands;
+  font-family: var(--font-la), Line Awesome Brands;
   font-weight: 400
 }
 
@@ -15365,7 +15335,7 @@ select {
 }
 
 .la.la-thumbs-o-up {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -15374,7 +15344,7 @@ select {
 }
 
 .la.la-thumbs-o-down {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -15383,7 +15353,7 @@ select {
 }
 
 .la.la-heart-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -15396,7 +15366,7 @@ select {
 }
 
 .la.la-linkedin-square {
-  font-family: Line Awesome Brands;
+  font-family: var(--font-la), Line Awesome Brands;
   font-weight: 400
 }
 
@@ -15417,12 +15387,12 @@ select {
 }
 
 .la.la-github-square {
-  font-family: Line Awesome Brands;
+  font-family: var(--font-la), Line Awesome Brands;
   font-weight: 400
 }
 
 .la.la-lemon-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -15431,7 +15401,7 @@ select {
 }
 
 .la.la-square-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -15440,7 +15410,7 @@ select {
 }
 
 .la.la-bookmark-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -15449,7 +15419,7 @@ select {
 }
 
 .la.la-facebook,.la.la-twitter {
-  font-family: Line Awesome Brands;
+  font-family: var(--font-la), Line Awesome Brands;
   font-weight: 400
 }
 
@@ -15458,7 +15428,7 @@ select {
 }
 
 .la.la-facebook-f {
-  font-family: Line Awesome Brands;
+  font-family: var(--font-la), Line Awesome Brands;
   font-weight: 400
 }
 
@@ -15467,12 +15437,12 @@ select {
 }
 
 .la.la-github {
-  font-family: Line Awesome Brands;
+  font-family: var(--font-la), Line Awesome Brands;
   font-weight: 400
 }
 
 .la.la-credit-card {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -15481,7 +15451,7 @@ select {
 }
 
 .la.la-hdd-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -15490,7 +15460,7 @@ select {
 }
 
 .la.la-hand-o-right {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -15499,7 +15469,7 @@ select {
 }
 
 .la.la-hand-o-left {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -15508,7 +15478,7 @@ select {
 }
 
 .la.la-hand-o-up {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -15517,7 +15487,7 @@ select {
 }
 
 .la.la-hand-o-down {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -15542,7 +15512,7 @@ select {
 }
 
 .la.la-files-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -15551,7 +15521,7 @@ select {
 }
 
 .la.la-floppy-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -15564,7 +15534,7 @@ select {
 }
 
 .la.la-google-plus,.la.la-google-plus-square,.la.la-pinterest,.la.la-pinterest-square {
-  font-family: Line Awesome Brands;
+  font-family: var(--font-la), Line Awesome Brands;
   font-weight: 400
 }
 
@@ -15573,7 +15543,7 @@ select {
 }
 
 .la.la-money {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -15594,7 +15564,7 @@ select {
 }
 
 .la.la-linkedin {
-  font-family: Line Awesome Brands;
+  font-family: var(--font-la), Line Awesome Brands;
   font-weight: 400
 }
 
@@ -15615,7 +15585,7 @@ select {
 }
 
 .la.la-comment-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -15624,7 +15594,7 @@ select {
 }
 
 .la.la-comments-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -15637,7 +15607,7 @@ select {
 }
 
 .la.la-clipboard,.la.la-paste {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -15646,7 +15616,7 @@ select {
 }
 
 .la.la-lightbulb-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -15667,7 +15637,7 @@ select {
 }
 
 .la.la-bell-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -15680,7 +15650,7 @@ select {
 }
 
 .la.la-file-text-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -15689,7 +15659,7 @@ select {
 }
 
 .la.la-building-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -15698,7 +15668,7 @@ select {
 }
 
 .la.la-hospital-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -15715,7 +15685,7 @@ select {
 }
 
 .la.la-circle-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -15728,12 +15698,12 @@ select {
 }
 
 .la.la-github-alt {
-  font-family: Line Awesome Brands;
+  font-family: var(--font-la), Line Awesome Brands;
   font-weight: 400
 }
 
 .la.la-folder-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -15742,7 +15712,7 @@ select {
 }
 
 .la.la-folder-open-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -15751,7 +15721,7 @@ select {
 }
 
 .la.la-smile-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -15760,7 +15730,7 @@ select {
 }
 
 .la.la-frown-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -15769,7 +15739,7 @@ select {
 }
 
 .la.la-meh-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -15778,7 +15748,7 @@ select {
 }
 
 .la.la-keyboard-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -15787,7 +15757,7 @@ select {
 }
 
 .la.la-flag-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -15800,7 +15770,7 @@ select {
 }
 
 .la.la-star-half-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -15809,7 +15779,7 @@ select {
 }
 
 .la.la-star-half-empty {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -15818,7 +15788,7 @@ select {
 }
 
 .la.la-star-half-full {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -15839,7 +15809,7 @@ select {
 }
 
 .la.la-calendar-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -15848,7 +15818,7 @@ select {
 }
 
 .la.la-css3,.la.la-html5,.la.la-maxcdn {
-  font-family: Line Awesome Brands;
+  font-family: var(--font-la), Line Awesome Brands;
   font-weight: 400
 }
 
@@ -15857,7 +15827,7 @@ select {
 }
 
 .la.la-minus-square-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -15882,12 +15852,12 @@ select {
 }
 
 .la.la-compass {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
 .la.la-caret-square-o-down {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -15896,7 +15866,7 @@ select {
 }
 
 .la.la-toggle-down {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -15905,7 +15875,7 @@ select {
 }
 
 .la.la-caret-square-o-up {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -15914,7 +15884,7 @@ select {
 }
 
 .la.la-toggle-up {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -15923,7 +15893,7 @@ select {
 }
 
 .la.la-caret-square-o-right {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -15932,7 +15902,7 @@ select {
 }
 
 .la.la-toggle-right {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -15969,7 +15939,7 @@ select {
 }
 
 .la.la-bitcoin,.la.la-btc {
-  font-family: Line Awesome Brands;
+  font-family: var(--font-la), Line Awesome Brands;
   font-weight: 400
 }
 
@@ -16006,7 +15976,7 @@ select {
 }
 
 .la.la-xing,.la.la-xing-square,.la.la-youtube,.la.la-youtube-play,.la.la-youtube-square {
-  font-family: Line Awesome Brands;
+  font-family: var(--font-la), Line Awesome Brands;
   font-weight: 400
 }
 
@@ -16015,7 +15985,7 @@ select {
 }
 
 .la.la-adn,.la.la-bitbucket,.la.la-bitbucket-square,.la.la-dropbox,.la.la-flickr,.la.la-instagram,.la.la-stack-overflow {
-  font-family: Line Awesome Brands;
+  font-family: var(--font-la), Line Awesome Brands;
   font-weight: 400
 }
 
@@ -16024,7 +15994,7 @@ select {
 }
 
 .la.la-tumblr,.la.la-tumblr-square {
-  font-family: Line Awesome Brands;
+  font-family: var(--font-la), Line Awesome Brands;
   font-weight: 400
 }
 
@@ -16045,7 +16015,7 @@ select {
 }
 
 .la.la-android,.la.la-apple,.la.la-dribbble,.la.la-foursquare,.la.la-gittip,.la.la-gratipay,.la.la-linux,.la.la-skype,.la.la-trello,.la.la-windows {
-  font-family: Line Awesome Brands;
+  font-family: var(--font-la), Line Awesome Brands;
   font-weight: 400
 }
 
@@ -16054,7 +16024,7 @@ select {
 }
 
 .la.la-sun-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -16063,7 +16033,7 @@ select {
 }
 
 .la.la-moon-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -16072,12 +16042,12 @@ select {
 }
 
 .la.la-pagelines,.la.la-renren,.la.la-stack-exchange,.la.la-vk,.la.la-weibo {
-  font-family: Line Awesome Brands;
+  font-family: var(--font-la), Line Awesome Brands;
   font-weight: 400
 }
 
 .la.la-arrow-circle-o-right {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -16086,7 +16056,7 @@ select {
 }
 
 .la.la-arrow-circle-o-left {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -16095,7 +16065,7 @@ select {
 }
 
 .la.la-caret-square-o-left {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -16104,7 +16074,7 @@ select {
 }
 
 .la.la-toggle-left {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -16113,7 +16083,7 @@ select {
 }
 
 .la.la-dot-circle-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -16122,7 +16092,7 @@ select {
 }
 
 .la.la-vimeo-square {
-  font-family: Line Awesome Brands;
+  font-family: var(--font-la), Line Awesome Brands;
   font-weight: 400
 }
 
@@ -16131,7 +16101,7 @@ select {
 }
 
 .la.la-plus-square-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -16140,7 +16110,7 @@ select {
 }
 
 .la.la-openid,.la.la-slack,.la.la-wordpress {
-  font-family: Line Awesome Brands;
+  font-family: var(--font-la), Line Awesome Brands;
   font-weight: 400
 }
 
@@ -16153,7 +16123,7 @@ select {
 }
 
 .la.la-delicious,.la.la-digg,.la.la-drupal,.la.la-google,.la.la-joomla,.la.la-pied-piper-alt,.la.la-pied-piper-pp,.la.la-reddit,.la.la-reddit-square,.la.la-stumbleupon,.la.la-stumbleupon-circle,.la.la-yahoo {
-  font-family: Line Awesome Brands;
+  font-family: var(--font-la), Line Awesome Brands;
   font-weight: 400
 }
 
@@ -16162,7 +16132,7 @@ select {
 }
 
 .la.la-behance,.la.la-behance-square,.la.la-steam,.la.la-steam-square {
-  font-family: Line Awesome Brands;
+  font-family: var(--font-la), Line Awesome Brands;
   font-weight: 400
 }
 
@@ -16175,7 +16145,7 @@ select {
 }
 
 .la.la-envelope-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -16184,12 +16154,12 @@ select {
 }
 
 .la.la-deviantart,.la.la-soundcloud {
-  font-family: Line Awesome Brands;
+  font-family: var(--font-la), Line Awesome Brands;
   font-weight: 400
 }
 
 .la.la-file-pdf-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -16198,7 +16168,7 @@ select {
 }
 
 .la.la-file-word-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -16207,7 +16177,7 @@ select {
 }
 
 .la.la-file-excel-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -16216,7 +16186,7 @@ select {
 }
 
 .la.la-file-powerpoint-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -16225,7 +16195,7 @@ select {
 }
 
 .la.la-file-image-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -16234,7 +16204,7 @@ select {
 }
 
 .la.la-file-photo-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -16243,7 +16213,7 @@ select {
 }
 
 .la.la-file-picture-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -16252,7 +16222,7 @@ select {
 }
 
 .la.la-file-archive-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -16261,7 +16231,7 @@ select {
 }
 
 .la.la-file-zip-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -16270,7 +16240,7 @@ select {
 }
 
 .la.la-file-audio-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -16279,7 +16249,7 @@ select {
 }
 
 .la.la-file-sound-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -16288,7 +16258,7 @@ select {
 }
 
 .la.la-file-video-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -16297,7 +16267,7 @@ select {
 }
 
 .la.la-file-movie-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -16306,7 +16276,7 @@ select {
 }
 
 .la.la-file-code-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -16315,12 +16285,12 @@ select {
 }
 
 .la.la-codepen,.la.la-jsfiddle,.la.la-vine {
-  font-family: Line Awesome Brands;
+  font-family: var(--font-la), Line Awesome Brands;
   font-weight: 400
 }
 
 .la.la-life-bouy,.la.la-life-ring {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -16329,7 +16299,7 @@ select {
 }
 
 .la.la-life-buoy {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -16338,7 +16308,7 @@ select {
 }
 
 .la.la-life-saver {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -16347,7 +16317,7 @@ select {
 }
 
 .la.la-support {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -16360,7 +16330,7 @@ select {
 }
 
 .la.la-ra,.la.la-rebel {
-  font-family: Line Awesome Brands;
+  font-family: var(--font-la), Line Awesome Brands;
   font-weight: 400
 }
 
@@ -16369,7 +16339,7 @@ select {
 }
 
 .la.la-resistance {
-  font-family: Line Awesome Brands;
+  font-family: var(--font-la), Line Awesome Brands;
   font-weight: 400
 }
 
@@ -16378,7 +16348,7 @@ select {
 }
 
 .la.la-empire,.la.la-ge {
-  font-family: Line Awesome Brands;
+  font-family: var(--font-la), Line Awesome Brands;
   font-weight: 400
 }
 
@@ -16387,7 +16357,7 @@ select {
 }
 
 .la.la-git,.la.la-git-square,.la.la-hacker-news,.la.la-y-combinator-square {
-  font-family: Line Awesome Brands;
+  font-family: var(--font-la), Line Awesome Brands;
   font-weight: 400
 }
 
@@ -16396,7 +16366,7 @@ select {
 }
 
 .la.la-yc-square {
-  font-family: Line Awesome Brands;
+  font-family: var(--font-la), Line Awesome Brands;
   font-weight: 400
 }
 
@@ -16405,7 +16375,7 @@ select {
 }
 
 .la.la-qq,.la.la-tencent-weibo,.la.la-wechat,.la.la-weixin {
-  font-family: Line Awesome Brands;
+  font-family: var(--font-la), Line Awesome Brands;
   font-weight: 400
 }
 
@@ -16418,7 +16388,7 @@ select {
 }
 
 .la.la-paper-plane-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -16427,7 +16397,7 @@ select {
 }
 
 .la.la-send-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -16436,7 +16406,7 @@ select {
 }
 
 .la.la-circle-thin {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -16453,7 +16423,7 @@ select {
 }
 
 .la.la-futbol-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -16462,7 +16432,7 @@ select {
 }
 
 .la.la-soccer-ball-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -16471,12 +16441,12 @@ select {
 }
 
 .la.la-slideshare,.la.la-twitch,.la.la-yelp {
-  font-family: Line Awesome Brands;
+  font-family: var(--font-la), Line Awesome Brands;
   font-weight: 400
 }
 
 .la.la-newspaper-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -16485,12 +16455,12 @@ select {
 }
 
 .la.la-cc-amex,.la.la-cc-discover,.la.la-cc-mastercard,.la.la-cc-paypal,.la.la-cc-stripe,.la.la-cc-visa,.la.la-google-wallet,.la.la-paypal {
-  font-family: Line Awesome Brands;
+  font-family: var(--font-la), Line Awesome Brands;
   font-weight: 400
 }
 
 .la.la-bell-slash-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -16503,7 +16473,7 @@ select {
 }
 
 .la.la-copyright {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -16524,12 +16494,12 @@ select {
 }
 
 .la.la-angellist,.la.la-ioxhost,.la.la-lastfm,.la.la-lastfm-square {
-  font-family: Line Awesome Brands;
+  font-family: var(--font-la), Line Awesome Brands;
   font-weight: 400
 }
 
 .la.la-cc {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -16542,7 +16512,7 @@ select {
 }
 
 .la.la-meanpath {
-  font-family: Line Awesome Brands;
+  font-family: var(--font-la), Line Awesome Brands;
   font-weight: 400
 }
 
@@ -16551,12 +16521,12 @@ select {
 }
 
 .la.la-buysellads,.la.la-connectdevelop,.la.la-dashcube,.la.la-forumbee,.la.la-leanpub,.la.la-sellsy,.la.la-shirtsinbulk,.la.la-simplybuilt,.la.la-skyatlas {
-  font-family: Line Awesome Brands;
+  font-family: var(--font-la), Line Awesome Brands;
   font-weight: 400
 }
 
 .la.la-diamond {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -16569,7 +16539,7 @@ select {
 }
 
 .la.la-facebook-official {
-  font-family: Line Awesome Brands;
+  font-family: var(--font-la), Line Awesome Brands;
   font-weight: 400
 }
 
@@ -16578,7 +16548,7 @@ select {
 }
 
 .la.la-pinterest-p,.la.la-whatsapp {
-  font-family: Line Awesome Brands;
+  font-family: var(--font-la), Line Awesome Brands;
   font-weight: 400
 }
 
@@ -16587,7 +16557,7 @@ select {
 }
 
 .la.la-medium,.la.la-viacoin,.la.la-y-combinator,.la.la-yc {
-  font-family: Line Awesome Brands;
+  font-family: var(--font-la), Line Awesome Brands;
   font-weight: 400
 }
 
@@ -16596,7 +16566,7 @@ select {
 }
 
 .la.la-expeditedssl,.la.la-opencart,.la.la-optin-monster {
-  font-family: Line Awesome Brands;
+  font-family: var(--font-la), Line Awesome Brands;
   font-weight: 400
 }
 
@@ -16621,7 +16591,7 @@ select {
 }
 
 .la.la-object-group,.la.la-object-ungroup,.la.la-sticky-note-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -16630,12 +16600,12 @@ select {
 }
 
 .la.la-cc-diners-club,.la.la-cc-jcb {
-  font-family: Line Awesome Brands;
+  font-family: var(--font-la), Line Awesome Brands;
   font-weight: 400
 }
 
 .la.la-clone,.la.la-hourglass-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -16656,7 +16626,7 @@ select {
 }
 
 .la.la-hand-rock-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -16665,7 +16635,7 @@ select {
 }
 
 .la.la-hand-grab-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -16674,7 +16644,7 @@ select {
 }
 
 .la.la-hand-paper-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -16683,7 +16653,7 @@ select {
 }
 
 .la.la-hand-stop-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -16692,7 +16662,7 @@ select {
 }
 
 .la.la-hand-scissors-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -16701,7 +16671,7 @@ select {
 }
 
 .la.la-hand-lizard-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -16710,7 +16680,7 @@ select {
 }
 
 .la.la-hand-spock-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -16719,7 +16689,7 @@ select {
 }
 
 .la.la-hand-pointer-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -16728,7 +16698,7 @@ select {
 }
 
 .la.la-hand-peace-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -16737,12 +16707,12 @@ select {
 }
 
 .la.la-registered {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
 .la.la-chrome,.la.la-creative-commons,.la.la-firefox,.la.la-get-pocket,.la.la-gg,.la.la-gg-circle,.la.la-internet-explorer,.la.la-odnoklassniki,.la.la-odnoklassniki-square,.la.la-opera,.la.la-safari,.la.la-tripadvisor,.la.la-wikipedia-w {
-  font-family: Line Awesome Brands;
+  font-family: var(--font-la), Line Awesome Brands;
   font-weight: 400
 }
 
@@ -16751,12 +16721,12 @@ select {
 }
 
 .la.la-500px,.la.la-amazon,.la.la-contao {
-  font-family: Line Awesome Brands;
+  font-family: var(--font-la), Line Awesome Brands;
   font-weight: 400
 }
 
 .la.la-calendar-plus-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -16765,7 +16735,7 @@ select {
 }
 
 .la.la-calendar-minus-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -16774,7 +16744,7 @@ select {
 }
 
 .la.la-calendar-times-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -16783,7 +16753,7 @@ select {
 }
 
 .la.la-calendar-check-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -16792,7 +16762,7 @@ select {
 }
 
 .la.la-map-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -16805,7 +16775,7 @@ select {
 }
 
 .la.la-commenting-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -16814,7 +16784,7 @@ select {
 }
 
 .la.la-houzz,.la.la-vimeo {
-  font-family: Line Awesome Brands;
+  font-family: var(--font-la), Line Awesome Brands;
   font-weight: 400
 }
 
@@ -16823,7 +16793,7 @@ select {
 }
 
 .la.la-black-tie,.la.la-edge,.la.la-fonticons,.la.la-reddit-alien {
-  font-family: Line Awesome Brands;
+  font-family: var(--font-la), Line Awesome Brands;
   font-weight: 400
 }
 
@@ -16832,12 +16802,12 @@ select {
 }
 
 .la.la-codiepie,.la.la-fort-awesome,.la.la-mixcloud,.la.la-modx,.la.la-product-hunt,.la.la-scribd,.la.la-usb {
-  font-family: Line Awesome Brands;
+  font-family: var(--font-la), Line Awesome Brands;
   font-weight: 400
 }
 
 .la.la-pause-circle-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -16846,7 +16816,7 @@ select {
 }
 
 .la.la-stop-circle-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -16855,7 +16825,7 @@ select {
 }
 
 .la.la-bluetooth,.la.la-bluetooth-b,.la.la-envira,.la.la-gitlab,.la.la-wheelchair-alt,.la.la-wpbeginner,.la.la-wpforms {
-  font-family: Line Awesome Brands;
+  font-family: var(--font-la), Line Awesome Brands;
   font-weight: 400
 }
 
@@ -16864,7 +16834,7 @@ select {
 }
 
 .la.la-question-circle-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -16885,7 +16855,7 @@ select {
 }
 
 .la.la-glide,.la.la-glide-g {
-  font-family: Line Awesome Brands;
+  font-family: var(--font-la), Line Awesome Brands;
   font-weight: 400
 }
 
@@ -16894,7 +16864,7 @@ select {
 }
 
 .la.la-first-order,.la.la-google-plus-official,.la.la-pied-piper,.la.la-snapchat,.la.la-snapchat-ghost,.la.la-snapchat-square,.la.la-themeisle,.la.la-viadeo,.la.la-viadeo-square,.la.la-yoast {
-  font-family: Line Awesome Brands;
+  font-family: var(--font-la), Line Awesome Brands;
   font-weight: 400
 }
 
@@ -16903,7 +16873,7 @@ select {
 }
 
 .la.la-google-plus-circle {
-  font-family: Line Awesome Brands;
+  font-family: var(--font-la), Line Awesome Brands;
   font-weight: 400
 }
 
@@ -16912,7 +16882,7 @@ select {
 }
 
 .la.la-fa,.la.la-font-awesome {
-  font-family: Line Awesome Brands;
+  font-family: var(--font-la), Line Awesome Brands;
   font-weight: 400
 }
 
@@ -16921,7 +16891,7 @@ select {
 }
 
 .la.la-handshake-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -16930,7 +16900,7 @@ select {
 }
 
 .la.la-envelope-open-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -16939,12 +16909,12 @@ select {
 }
 
 .la.la-linode {
-  font-family: Line Awesome Brands;
+  font-family: var(--font-la), Line Awesome Brands;
   font-weight: 400
 }
 
 .la.la-address-book-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -16957,7 +16927,7 @@ select {
 }
 
 .la.la-address-card-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -16966,7 +16936,7 @@ select {
 }
 
 .la.la-vcard-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -16975,7 +16945,7 @@ select {
 }
 
 .la.la-user-circle-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -16984,7 +16954,7 @@ select {
 }
 
 .la.la-user-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -16993,7 +16963,7 @@ select {
 }
 
 .la.la-id-badge {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -17002,7 +16972,7 @@ select {
 }
 
 .la.la-id-card-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -17011,7 +16981,7 @@ select {
 }
 
 .la.la-drivers-license-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -17020,7 +16990,7 @@ select {
 }
 
 .la.la-free-code-camp,.la.la-quora,.la.la-telegram {
-  font-family: Line Awesome Brands;
+  font-family: var(--font-la), Line Awesome Brands;
   font-weight: 400
 }
 
@@ -17049,7 +17019,7 @@ select {
 }
 
 .la.la-window-maximize,.la.la-window-restore {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -17058,7 +17028,7 @@ select {
 }
 
 .la.la-window-close-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -17067,7 +17037,7 @@ select {
 }
 
 .la.la-times-rectangle-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -17076,7 +17046,7 @@ select {
 }
 
 .la.la-bandcamp,.la.la-eercast,.la.la-etsy,.la.la-grav,.la.la-imdb,.la.la-ravelry {
-  font-family: Line Awesome Brands;
+  font-family: var(--font-la), Line Awesome Brands;
   font-weight: 400
 }
 
@@ -17085,7 +17055,7 @@ select {
 }
 
 .la.la-snowflake-o {
-  font-family: Line Awesome Free;
+  font-family: var(--font-la), Line Awesome Free;
   font-weight: 400
 }
 
@@ -17094,7 +17064,7 @@ select {
 }
 
 .la.la-spotify,.la.la-superpowers,.la.la-wpexplorer {
-  font-family: Line Awesome Brands;
+  font-family: var(--font-la), Line Awesome Brands;
   font-weight: 400
 }
 
