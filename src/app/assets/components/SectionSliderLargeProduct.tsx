@@ -61,7 +61,7 @@ const SectionSliderLargeProduct: FC<SectionSliderLargeProductProps> = ({
   return (
     <div className={`nc-SectionSliderLargeProduct ${className}`}>
       <div className={`${UNIQUE_CLASS} flow-root`}>
-        <Heading isCenter={false} hasNextPrev>
+        <Heading   isCenter={false} hasNextPrev>
           Chosen by our experts
         </Heading>
         <div className="glide__track" data-glide-el="track">

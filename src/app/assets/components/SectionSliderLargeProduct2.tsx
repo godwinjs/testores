@@ -105,7 +105,7 @@ const SectionSliderLargeProduct2: FC<SectionSliderLargeProduct2Props> = ({
     <div className={`nc-SectionSliderLargeProduct2 ${className}`}>
       <Heading
         className="mb-12 lg:mb-14 text-neutral-900 dark:text-neutral-50"
-        fontClass="text-3xl md:text-4xl 2xl:text-5xl font-semibold"
+        fontClass="text-3xl lg:text-sm md:text-4xl 2xl:text-5xl font-semibold"
         isCenter
         desc=""
       >

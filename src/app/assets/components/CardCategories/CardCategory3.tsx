@@ -14,7 +14,7 @@ export interface CardCategory3Props {
   name?: string;
   desc?: string;
   color?: string;
-  alt: string
+  alt: string;
 }
 
 const CardCategory3: FC<CardCategory3Props> = ({

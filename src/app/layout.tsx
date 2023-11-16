@@ -2,13 +2,15 @@ import type { Metadata } from 'next'
 // import localFont from 'next/font/local'
 import { Poppins } from 'next/font/google';
 import localFont from "next/font/local";
-
-import './globals.css'
-import './line-awesome.css'
 import "rc-slider/assets/index.css";
+
+import './style/globals.css'
+// import './style/target.css'
+import './style/line-awesome.css'
 
 import Providers from "@/app/redux/provider";
 // import fontPath from "@/app/fonts"
+import Header from '@/app/assets/containers/SiteHeader';
 
 const poppins = Poppins({
   weight: ['300','400','500','600', '700'],
@@ -77,8 +79,9 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={poppins.className}>
+    <html lang="en" className={`${poppins.className} text-sm `}>
       <body>
+        <Header />
         <Providers>
           {children}
         </Providers>

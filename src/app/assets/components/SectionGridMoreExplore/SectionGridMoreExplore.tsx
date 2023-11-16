@@ -120,7 +120,7 @@ export const DEMO_MORE_EXPLORE_DATA = [
 const SectionGridMoreExplore: FC<SectionGridMoreExploreProps> = ({
   className = "",
   boxCard = "box4",
-  gridClassName = "grid-cols-1 md:grid-cols-2 xl:grid-cols-3",
+  gridClassName = "grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3",
   data = DEMO_MORE_EXPLORE_DATA.filter((_, i) => i < 6),
 }) => {
   const [tabActive, setTabActive] = React.useState("Man");
