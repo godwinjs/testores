@@ -2,6 +2,7 @@
 
 // import Image from 'next/image'
 import '@/app/style/nc.css'
+import './style/line-awesome.css'
 
 import PageHome from '@/app/assets/containers/PageHome/PageHome'
 
