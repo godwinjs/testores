@@ -1,10 +1,13 @@
 'use client';
 
 // import Image from 'next/image'
+import '@/app/style/nc.css'
 
 import PageHome from '@/app/assets/containers/PageHome/PageHome'
 
 export default function Home() {
+  
+// console.log(styles)
 
   return (
     <main>

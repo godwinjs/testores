@@ -4,9 +4,10 @@ import { Poppins } from 'next/font/google';
 import localFont from "next/font/local";
 import "rc-slider/assets/index.css";
 
-import './style/globals.css'
+import '@/app/style/layout.css'
+// import './style/globals.css'
 // import './style/target.css'
-import './style/line-awesome.css'
+// import './style/line-awesome.css'
 
 import Providers from "@/app/redux/provider";
 // import fontPath from "@/app/fonts"
@@ -81,8 +82,8 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${poppins.className} text-sm `}>
       <body>
-        <Header />
         <Providers>
+          <Header />
           {children}
         </Providers>
       </body>
