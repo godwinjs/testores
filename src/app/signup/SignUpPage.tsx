@@ -70,6 +70,17 @@ const SignUpPage: FC<PageSignUpProps> = ({ className = "" }) => {
           </div>
           {/* FORM */}
           <form className="grid grid-cols-1 gap-6" action="#" method="post">
+          <label className="block">
+              <span className="text-neutral-800 dark:text-neutral-200">
+                Full Name
+              </span>
+              <Input
+                type="text"
+                placeholder="Enter your full name..."
+                className="mt-1"
+                displayName="signup2 input"
+              />
+            </label>
             <label className="block">
               <span className="text-neutral-800 dark:text-neutral-200">
                 Email address
