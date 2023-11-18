@@ -96,8 +96,8 @@ const SignUpPage: FC<PageSignUpProps> = ({ className = "" }) => {
           {/* ==== */}
           <span className="block text-center text-neutral-700 dark:text-neutral-300">
             Already have an account? {` `}
-            <Link className="text-green-600" href="/signin">
-              Sign in
+            <Link className="text-green-600" href="/login">
+              Log In
             </Link>
           </span>
         </div>
