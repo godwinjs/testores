@@ -1,5 +1,6 @@
 'use client'
 import React, { FC } from "react";
+import Image from 'next/image'
 
 import { SocialType } from "../SocialsShare/SocialsShare";
 import facebook from "@/images/socials/facebook.svg";
@@ -39,7 +40,7 @@ const SocialsList: FC<SocialsListProps> = ({
           rel="noopener noreferrer"
           title={item.name}
         >
-          <img src={item.icon} alt="" />
+          <Image src={item.icon} alt="" />
         </a>
       ))}
     </nav>
