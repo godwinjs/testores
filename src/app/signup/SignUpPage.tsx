@@ -10,7 +10,7 @@ import googleSvg from "@/images/socials/_Google.svg";
 import Input from "@/app/assets/shared/Input/Input";
 import ButtonPrimary from "@/app/assets/shared/Button/ButtonPrimary";
 
-export interface PageLoginProps {
+export interface PageSignUpProps {
   className?: string;
 }
 
@@ -32,26 +32,26 @@ const loginSocials = [
   },
 ];
 
-const PageLogin: FC<PageLoginProps> = ({ className = "" }) => {
+const SignUpPage: FC<PageSignUpProps> = ({ className = "" }) => {
   return (
-    <div className={`nc-PageLogin ${className}`} data-nc-id="PageLogin">
+    <div className={`nc-PageSignUp  ${className}`} data-nc-id="PageSignUp">
       <Helmet>
-        <title>Signin || TruthStore Commerce</title>
+        <title>Sign up || TruthStore Commerce</title>
       </Helmet>
       <div className="container mb-24 lg:mb-32">
         <h2 className="my-20 flex items-center text-3xl leading-[115%] md:text-5xl md:leading-[115%] font-semibold text-neutral-900 dark:text-neutral-100 justify-center">
-          Sign In
+          Sign Up
         </h2>
-        <div className="max-w-md mx-auto space-y-6">
+        <div className="max-w-md mx-auto space-y-6 ">
           <div className="grid gap-3">
             {loginSocials.map((item, index) => (
               <a
                 key={index}
                 href={item.href}
-                className="flex w-full rounded-lg bg-primary-50 dark:bg-neutral-800 px-4 py-3 transform transition-transform sm:px-6 hover:translate-y-[-2px]"
+                className=" flex w-full rounded-lg bg-primary-50 dark:bg-neutral-800 px-4 py-3 transform transition-transform sm:px-6 hover:translate-y-[-2px]"
               >
                 <Image
-                  className="flex-shrink-0 w-md !min-w-0 !min-h-0 max-w-[100%] h-[auto]"
+                  className="flex-shrink-0 min-w-0 min-h-0 max-w-[100%] h-[auto]"
                   src={item.icon}
                   alt={item.name}
                 />
@@ -78,26 +78,26 @@ const PageLogin: FC<PageLoginProps> = ({ className = "" }) => {
                 type="email"
                 placeholder="example@example.com"
                 className="mt-1"
-                displayName="signin input1"
+                displayName="signup input"
               />
             </label>
             <label className="block">
               <span className="flex justify-between items-center text-neutral-800 dark:text-neutral-200">
                 Password
-                <Link href="/forgot-pass" className="text-sm text-green-600">
-                  Forgot password?
-                </Link>
               </span>
-              <Input type="password" displayName="signin input2" className="mt-1" />
+              <Input 
+                displayName="signup input2"
+                type="password" 
+                className="mt-1" />
             </label>
             <ButtonPrimary type="submit">Continue</ButtonPrimary>
           </form>
 
           {/* ==== */}
           <span className="block text-center text-neutral-700 dark:text-neutral-300">
-            New user? {` `}
-            <Link className="text-green-600" href="/signup">
-              Create an account
+            Already have an account? {` `}
+            <Link className="text-green-600" href="/signin">
+              Sign in
             </Link>
           </span>
         </div>
@@ -106,4 +106,4 @@ const PageLogin: FC<PageLoginProps> = ({ className = "" }) => {
   );
 };
 
-export default PageLogin;
+export default SignUpPage;

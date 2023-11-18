@@ -55,6 +55,7 @@ export interface NavProps {
     strict?: boolean;
     target?: string;
     rel?: string;
+    prefetch?: boolean;
     // innerRef?: any;
 }
  
