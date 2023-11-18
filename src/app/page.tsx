@@ -1,7 +1,7 @@
 'use client';
 
 // import Image from 'next/image'
-import './style/line-awesome.css'
+// import './style/line-awesome.css'
 
 import PageHome from '@/app/assets/containers/PageHome/PageHome'
 

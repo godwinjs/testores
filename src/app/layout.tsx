@@ -7,7 +7,7 @@ import "rc-slider/assets/index.css";
 import '@/app/style/layout.css'
 import './style/nc.css'
 // import './style/target.css'
-// import './style/line-awesome.css'
+import './style/line-awesome.css'
 
 import Providers from "@/app/redux/provider";
 // import fontPath from "@/app/fonts"
