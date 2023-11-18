@@ -79,6 +79,7 @@ const SignUpPage: FC<PageSignUpProps> = ({ className = "" }) => {
                 placeholder="Enter your full name..."
                 className="mt-1"
                 displayName="signup2 input"
+                required
               />
             </label>
             <label className="block">
@@ -90,6 +91,7 @@ const SignUpPage: FC<PageSignUpProps> = ({ className = "" }) => {
                 placeholder="example@example.com"
                 className="mt-1"
                 displayName="signup input"
+                required
               />
             </label>
             <label className="block">
@@ -99,7 +101,9 @@ const SignUpPage: FC<PageSignUpProps> = ({ className = "" }) => {
               <Input 
                 displayName="signup input2"
                 type="password" 
-                className="mt-1" />
+                className="mt-1"
+                required
+                 />
             </label>
             <ButtonPrimary type="submit">Continue</ButtonPrimary>
           </form>

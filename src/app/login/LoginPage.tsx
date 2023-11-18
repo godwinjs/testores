@@ -79,6 +79,7 @@ const LoginPage: FC<PageLoginProps> = ({ className = "" }) => {
                 placeholder="example@example.com"
                 className="mt-1"
                 displayName="signin input1"
+                required
               />
             </label>
             <label className="block">
@@ -88,7 +89,7 @@ const LoginPage: FC<PageLoginProps> = ({ className = "" }) => {
                   Forgot password?
                 </Link>
               </span>
-              <Input type="password" displayName="signin input2" className="mt-1" />
+              <Input type="password" displayName="signin input2" className="mt-1" required />
             </label>
             <ButtonPrimary type="submit">Continue</ButtonPrimary>
           </form>
