@@ -5,7 +5,7 @@ import localFont from "next/font/local";
 import "rc-slider/assets/index.css";
 
 import '@/app/style/layout.css'
-// import './style/globals.css'
+import './style/nc.css'
 // import './style/target.css'
 // import './style/line-awesome.css'
 
