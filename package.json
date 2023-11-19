@@ -28,6 +28,7 @@
     "redux-logger": "^3.0.6"
   },
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
     "@types/glidejs__glide": "^3.6.4",
     "@types/node": "^20",
     "@types/react": "^18",

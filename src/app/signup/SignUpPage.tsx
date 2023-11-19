@@ -1,8 +1,9 @@
 'use client'
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import { Helmet } from "react-helmet";
 import Link from "next/link";
 import Image from 'next/image';
+import { useRouter } from "next/navigation";
 
 import facebookSvg from "@/images/socials/_Facebook.svg";
 import twitterSvg from "@/images/socials/_Twitter.svg";
@@ -33,6 +34,57 @@ const loginSocials = [
 ];
 
 const SignUpPage: FC<PageSignUpProps> = ({ className = "" }) => {
+  const [ error, setError ] = useState("");
+  const router = useRouter();
+
+  const isValidEmail = (email: string) => {
+
+    const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0+9]+\.[A-Z]{2,}$/i;
+    return emailRegex.test(email);
+  }
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+  
+    const fullName = e.target[0].value;
+    const email = e.target[1].value;
+    const password = e.target[2].value;
+  
+    if(!isValidEmail(email)){
+      setError("Email is invalid")
+      return;
+    }
+    if(!password || password.length < 8){
+      setError("Password is invalid")
+      return;
+    }
+  
+    try {
+      const res = await fetch("/api/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+  
+        },
+        body: JSON.stringify({
+          fullName: fullName,
+          email: email,
+          password: password
+        })
+      })
+  
+      if(res.status === 400){
+        setError("This email is already registered.")
+      }
+      if(res.status === 200){
+        setError("")
+        router.push("/account");
+      }
+    }catch (err){
+      setError("Error, try again later");
+      console.log(err)
+    }
+  }
+
   return (
     <div className={`nc-PageSignUp  ${className}`} data-nc-id="PageSignUp">
       <Helmet>
@@ -69,7 +121,7 @@ const SignUpPage: FC<PageSignUpProps> = ({ className = "" }) => {
             <div className="absolute left-0 w-full top-1/2 transform -translate-y-1/2 border border-neutral-100 dark:border-neutral-800"></div>
           </div>
           {/* FORM */}
-          <form className="grid grid-cols-1 gap-6" action="#" method="post">
+          <form className="grid grid-cols-1 gap-6" onSubmit={handleSubmit}>
           <label className="block">
               <span className="text-neutral-800 dark:text-neutral-200">
                 Full Name
@@ -106,6 +158,7 @@ const SignUpPage: FC<PageSignUpProps> = ({ className = "" }) => {
                  />
             </label>
             <ButtonPrimary type="submit">Continue</ButtonPrimary>
+            <p className="text-red-600 text-[16px] mb-4">{error && error}</p>
           </form>
 
           {/* ==== */}
