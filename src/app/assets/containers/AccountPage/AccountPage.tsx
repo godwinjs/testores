@@ -140,7 +140,7 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
               {/* ---- */}
               <div>
                 <Label>About you</Label>
-                <Textarea className="mt-1.5" defaultValue="..." />
+                <Textarea className="mt-1.5" displayName="acctPage ta" defaultValue="..." />
               </div>
               <div className="pt-2">
                 <ButtonPrimary>Update account</ButtonPrimary>

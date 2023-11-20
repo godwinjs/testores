@@ -1,7 +1,10 @@
+'use client'
 import React, { TextareaHTMLAttributes } from "react";
 
 export interface TextareaProps
-  extends TextareaHTMLAttributes<HTMLTextAreaElement> {}
+  extends TextareaHTMLAttributes<HTMLTextAreaElement> {
+    displayName?: string
+  }
 
 const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
   ({ className = "", children, rows = 4, ...args }, ref) => {
