@@ -1,8 +1,8 @@
 import bcrypt from "bcryptjs";
 import { NextResponse } from "next/server";
 
-import User from "@/db/models/User";
-import connect from "@/db/utils/connect";
+import User from "@/app/db/models/User";
+import connect from "@/app/db/utils/connect";
 
 export const POST = async (request: any) => {
     const { fullName, email, password } = await request.json();
@@ -12,7 +12,7 @@ export const POST = async (request: any) => {
     const hashedPassword = await bcrypt.hash(password, 5);
     // const existingUser: any = 
     const existingUser: any = await User.findOne({email: email});
-    
+
     if(!(existingUser === null)){
         return new NextResponse(`User with email: ${email} already exist.`, {status: 400})
     }

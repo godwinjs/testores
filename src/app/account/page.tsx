@@ -1,39 +1,20 @@
 'use client'
-import { RootState } from "../redux/store";
-import { useSelector, useDispatch } from "react-redux";
-import { increment, decrement, increamentByAmount } from "../redux/features/counter/counterSlice";
+// import { RootState } from "../redux/store";
+// import { useSelector, useDispatch } from "react-redux";
+// import { increment, decrement, increamentByAmount } from "../redux/features/counter/counterSlice";
+import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
+
+import AccountPage from "@/app/assets/containers/AccountPage/AccountPage";
 
 export default function Account() {
-    const count = useSelector((state: RootState) => state.counter.value);
-    const dispatch = useDispatch();
+    // const count = useSelector((state: RootState) => state.counter.value);
+    // const dispatch = useDispatch();
+    const session = getServerSession();
 
-    return(
-        <div>
-            <h1>Product Detail Page</h1>
+    if(!session){
+        redirect('/login')
+    }
 
-          <div className="text-center mt-4">Count: {count}</div>
-
-          <div className="flex flex-row justify-around my-3">
-            <button
-                className="py-2 px-4 bg-slate-400"
-                onClick={() => dispatch(increment())}
-            >
-                Increase by one
-            </button>
-            <button
-                className="py-2 px-4  bg-slate-400"
-                onClick={() => dispatch(decrement())}
-            >
-                Decrease by one
-            </button>
-            <button
-                className="py-2 px-4  bg-slate-400"
-                onClick={() => dispatch(increamentByAmount(2))}
-            >
-                Increase by 2
-            </button>
-          </div>
-
-        </div>
-    )
+    return <AccountPage />
 }

@@ -1,8 +1,10 @@
 'use client'
-import React, { FC } from "react";
+import React, { FC, useState, useEffect } from "react";
 import { Helmet } from "react-helmet";
 import Link from "next/link";
 import Image from 'next/image';
+import { useRouter } from "next/navigation";
+import { signIn, useSession } from "next-auth/react";
 
 import facebookSvg from "@/images/socials/_Facebook.svg";
 import twitterSvg from "@/images/socials/_Twitter.svg";
@@ -33,6 +35,53 @@ const loginSocials = [
 ];
 
 const LoginPage: FC<PageLoginProps> = ({ className = "" }) => {
+    const [ error, setError ] = useState("");
+    const router = useRouter();
+    const session = useSession();
+
+    useEffect(() => {
+        if(session?.status == "authenticated"){
+            router.replace("/account")
+        }
+    }, [session, router])
+  
+    const isValidEmail = (email: string) => {
+  
+      const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0+9]+\.[A-Z]{2,}$/i;
+      return emailRegex.test(email);
+    }
+
+    const handleSubmit = async (e: any) => {
+      e.preventDefault();
+    
+      const email = e.target[0].value;
+      const password = e.target[1].value;
+    
+      if(!isValidEmail(email)){
+        setError("Email is invalid")
+        return;
+      }
+      if(!password || password.length < 8){
+        setError("Password is invalid")
+        return;
+      }
+
+        //   
+        const res = await signIn("credentials", {
+            redirect: false,
+            email,
+            password
+        });
+
+        if(res?.error){
+            setError("Invalid Email or password");
+            if(res?.url) router.replace('/account')
+        }else{
+            setError("")
+        }
+
+    }
+
   return (
     <div className={`nc-PageLogin ${className}`} data-nc-id="PageLogin">
       <Helmet>
@@ -69,7 +118,7 @@ const LoginPage: FC<PageLoginProps> = ({ className = "" }) => {
             <div className="absolute left-0 w-full top-1/2 transform -translate-y-1/2 border border-neutral-100 dark:border-neutral-800"></div>
           </div>
           {/* FORM */}
-          <form className="grid grid-cols-1 gap-6" action="#" method="post">
+          <form className="grid grid-cols-1 gap-6" onSubmit={handleSubmit}>
             <label className="block">
               <span className="text-neutral-800 dark:text-neutral-200">
                 Email address
@@ -91,6 +140,7 @@ const LoginPage: FC<PageLoginProps> = ({ className = "" }) => {
               </span>
               <Input type="password" displayName="signin input2" className="mt-1" required />
             </label>
+            <p className="text-red-600 text-[16px] mb-4">{error && error}</p>
             <ButtonPrimary type="submit">Continue</ButtonPrimary>
           </form>
 

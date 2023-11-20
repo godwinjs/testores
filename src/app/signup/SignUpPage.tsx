@@ -76,8 +76,9 @@ const SignUpPage: FC<PageSignUpProps> = ({ className = "" }) => {
         setError("This email is already registered.")
       }
       if(res.status === 200){
+        // route to confirm email then login. for now it's login
         setError("")
-        router.push("/account");
+        router.push("/login");
       }
     }catch (err){
       setError("Error, try again later");
@@ -157,8 +158,8 @@ const SignUpPage: FC<PageSignUpProps> = ({ className = "" }) => {
                 required
                  />
             </label>
-            <ButtonPrimary type="submit">Continue</ButtonPrimary>
             <p className="text-red-600 text-[16px] mb-4">{error && error}</p>
+            <ButtonPrimary type="submit">Continue</ButtonPrimary>
           </form>
 
           {/* ==== */}

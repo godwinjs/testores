@@ -3,15 +3,18 @@ import type { Metadata } from 'next'
 import { Poppins } from 'next/font/google';
 import localFont from "next/font/local";
 import "rc-slider/assets/index.css";
+import { getServerSession } from "next-auth";
 
-import '@/app/style/layout.css'
-import './style/nc.css'
+import SessionProvider from "@/app/db/utils/SessionProvider";
+import '@/app/style/layout.css';
+import './style/nc.css';
 // import './style/target.css'
 import './style/line-awesome.css'
 
 import Providers from "@/app/redux/provider";
 // import fontPath from "@/app/fonts"
 import Header from '@/app/assets/containers/SiteHeader';
+
 
 const poppins = Poppins({
   weight: ['300','400','500','600', '700'],
@@ -74,18 +77,22 @@ export const metadata: Metadata = {
   description: 'TruthStore WebApp by create next app',
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+  const session = await getServerSession();
+  // 
   return (
     <html lang="en" className={`${poppins.className} text-sm `}>
       <body>
-        <Providers>
-          <Header />
-          {children}
-        </Providers>
+        <SessionProvider session={session}>
+          <Providers>
+              <Header />
+              {children}
+          </Providers>
+        </SessionProvider>
       </body>
     </html>
   )
