@@ -1,5 +1,5 @@
 import NextAuth from "next-auth";
-import { Account, User as AuthUser } from "next-auth";
+// import { Account, User as AuthUser } from "next-auth";
 import GithubProvider from "next-auth/providers/github";
 import CredentialProvider from "next-auth/providers/credentials";
 import bcrypt from 'bcryptjs';
@@ -7,7 +7,7 @@ import bcrypt from 'bcryptjs';
 import User from '@/app/db/models/User';
 import connect from "@/app/db/utils/connect";
 
-export const authOptions = {
+const authOptions = {
     // 
     providers: [
         CredentialProvider({
@@ -48,6 +48,5 @@ export const authOptions = {
     ],
 }
 
-export const handler = NextAuth(authOptions);
+const handler = NextAuth(authOptions);
 export {handler as GET, handler as POST}
-export default NextAuth(authOptions);
