@@ -7,10 +7,10 @@ import ButtonPrimary from "@/app/assets/shared/Button/ButtonPrimary";
 import Input from "@/app/assets/shared/Input/Input";
 import Select from "@/app/assets/shared/Select/Select";
 import Textarea from "@/app/assets/shared/TextArea/TextArea";
-import CommonLayout from "./CommonLayout";
 import { avatarImgs } from "@/app/assets/contains/fakedata";
+import CommonLayout from "./CommonLayout";
 
-export interface AccountPageProps {
+export interface AccountPageProps { 
   className?: string;
 }
 
