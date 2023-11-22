@@ -18,3 +18,19 @@ export default function Account() {
 
     return <AccountPage />
 }
+// import { getServerSession } from "next-auth/next"
+// import { authOptions } from "@/app/api/auth/[...nextauth]"
+
+// export default async (req: any, res: any ) => {
+//     const session = await getServerSession(authOptions)
+
+//     if(session){
+//         res.send(
+//             content: "this is a protected content. You can access i because you are signed in"
+//         )
+//     }else{
+//         res.send(
+//             content: "you must be logged in to view this content"
+//         )
+//     }
+// }

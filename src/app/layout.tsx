@@ -5,7 +5,7 @@ import localFont from "next/font/local";
 import "rc-slider/assets/index.css";
 import { getServerSession } from "next-auth";
 
-import SessionProvider from "@/app/db/utils/SessionProvider";
+import AuthProvider from "@/app/db/utils/SessionProvider";
 import '@/app/style/layout.css';
 import './style/nc.css';
 // import './style/target.css'
@@ -87,12 +87,12 @@ export default async function RootLayout({
   return (
     <html lang="en" className={`${poppins.className} text-sm `}>
       <body>
-        <SessionProvider session={session}>
+        <AuthProvider session={session}>
           <Providers>
               <Header />
               {children}
           </Providers>
-        </SessionProvider>
+        </AuthProvider>
       </body>
     </html>
   )
