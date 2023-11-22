@@ -1,4 +1,5 @@
 import NextAuth, { NextAuthOptions } from "next-auth";
+// import type { NextAuthConfig } from "next-auth"
 // import { getServerSession } from "next-auth/next";
 // import { Account, User as AuthUser } from "next-auth";
 import GithubProvider from "next-auth/providers/github";
@@ -9,7 +10,7 @@ import User from '@/app/db/models/User';
 import connect from "@/app/db/utils/connect";
 
 
-const authOptions: NextAuthOptions = {
+export const authOptions: NextAuthOptions = {
     providers: [
         CredentialProvider({
             id: "credentials",
@@ -48,6 +49,7 @@ const authOptions: NextAuthOptions = {
     // ...more providers
     ],
 }
+// } satisfies ;
 
-const handler = NextAuth(authOptions);
+const {handler, auth, signIn, signOut } = NextAuth(authOptions);
 export {handler as GET, handler as POST}
