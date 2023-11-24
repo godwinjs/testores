@@ -10,7 +10,7 @@ import ChangePassword from "@/app/assets/containers/AccountPage/AccountPass";
 import AccountPage from "@/app/assets/containers/AccountPage/AccountPage";
 
 
-export default function({params}: { params: {url: string} }) {
+export default function AccountPages({params}: { params: {url: string} }) {
     const { data: session } = useSession()
 
     if(!session){

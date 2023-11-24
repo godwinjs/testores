@@ -17,7 +17,7 @@ export default function Account() {
         // redux
             dispatch(setCredentials(session.user))
         }
-    }, [session])
+    }, [session, dispatch])
 
     if(!session){
         redirect('/login')
