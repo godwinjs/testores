@@ -5,10 +5,6 @@ import Link from "next/link";
 import Image from 'next/image';
 import { useRouter } from "next/navigation";
 import { signIn, useSession } from "next-auth/react";
-import { useSelector, useDispatch } from "react-redux";
-
-import { RootState } from "@/app/redux/store";
-import { setCredentials, logout } from "@/app/redux/features/auth/authSlice";
 
 import facebookSvg from "@/images/socials/_Facebook.svg";
 import twitterSvg from "@/images/socials/_Twitter.svg";
@@ -43,14 +39,10 @@ const LoginPage: FC<PageLoginProps> = ({ className = "" }) => {
     const [ error, setError ] = useState("");
     const router = useRouter();
     const session = useSession();
-    // const userInfo = useSelector((state: RootState) => state.auth.userInfo)
-    const dispatch = useDispatch();
 
     useEffect(() => {
         if(session?.status == "authenticated"){
             router.replace("/account")
-            // redux
-            dispatch(setCredentials(session.data))
         }
     }, [session, router])
   

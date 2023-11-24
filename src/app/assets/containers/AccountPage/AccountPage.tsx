@@ -2,7 +2,9 @@
 import { FC } from "react";
 import { Helmet } from "react-helmet";
 import Image from "next/image";
-import { useSession } from "next-auth/react";
+import { useSelector } from "react-redux";
+
+import { RootState } from "@/app/redux/store";
 
 import Label from "@/app/assets/components/Label/Label";
 import ButtonPrimary from "@/app/assets/shared/Button/ButtonPrimary";
@@ -17,7 +19,9 @@ export interface AccountPageProps {
 }
 
 const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
-  const { data: session } = useSession();
+  const user: any = useSelector((state: RootState) => state.auth.userInfo);
+
+  
 
   return (
     <div className={`nc-AccountPage ${className}`} data-nc-id="AccountPage">
@@ -67,7 +71,7 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
             <div className="flex-grow mt-10 md:mt-0 md:pl-16 max-w-3xl space-y-6">
               <div>
                 <Label>Full name</Label>
-                <Input displayName="FName input" className="mt-1.5" defaultValue="Enrico Cole" />
+                <Input displayName="FName input" className="mt-1.5" defaultValue={`${user?.fullName}`} />
               </div>
 
               {/* ---- */}
@@ -81,7 +85,7 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
                   </span>
                   <Input
                     className="!rounded-l-none"
-                    placeholder={`${session?.user.email}`}
+                    placeholder={`${user?.email}`}
                     displayName="Email Input"
                   />
                 </div>

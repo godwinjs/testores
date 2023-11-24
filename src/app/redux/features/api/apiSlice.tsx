@@ -1,14 +1,14 @@
-'use client';
+// 'use client';
 
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+// import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query";
 
-const baseQuery = fetchBaseQuery({
-  baseUrl: "http://localhost:3000/",
-  credentials: "include",
-});
+// const baseQuery = fetchBaseQuery({
+//   baseUrl: "http://localhost:3000/",
+//   credentials: "include",
+// });
 
-export const apiSlice = createApi({
-  baseQuery,
-  tagTypes: ["User"],
-  endpoints: (builder) => ({}),
-});
+// export const apiSlice = createApi({
+//   baseQuery,
+//   tagTypes: ["User"],
+//   endpoints: (builder) => ({}),
+// });
