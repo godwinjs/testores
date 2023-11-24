@@ -125,9 +125,9 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
               <div>
                 <Label>Gender</Label>
                 <Select className="mt-1.5">
+                  <option value="Other">Other</option>
                   <option value="Male">Male</option>
                   <option value="Female">Female</option>
-                  <option value="Other">Other</option>
                 </Select>
               </div>
 
