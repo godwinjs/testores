@@ -1,6 +1,8 @@
+"use client";
 import { FC } from "react";
 import { Helmet } from "react-helmet";
 import Image from "next/image";
+import { useSession } from "next-auth/react";
 
 import Label from "@/app/assets/components/Label/Label";
 import ButtonPrimary from "@/app/assets/shared/Button/ButtonPrimary";
@@ -15,6 +17,8 @@ export interface AccountPageProps {
 }
 
 const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
+  const { data: session } = useSession();
+
   return (
     <div className={`nc-AccountPage ${className}`} data-nc-id="AccountPage">
       <Helmet>
@@ -77,7 +81,7 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
                   </span>
                   <Input
                     className="!rounded-l-none"
-                    placeholder="example@email.com"
+                    placeholder={`${session?.user.email}`}
                     displayName="Email Input"
                   />
                 </div>

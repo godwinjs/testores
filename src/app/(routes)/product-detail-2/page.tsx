@@ -1,7 +1,7 @@
 'use client'
-import { RootState } from "../redux/store";
+import { RootState } from "@/app/redux/store";
 import { useSelector, useDispatch } from "react-redux";
-import { increment, decrement, increamentByAmount } from "../redux/features/counter/counterSlice";
+import { increment, decrement, increamentByAmount } from "@/app/redux/features/counter/counterSlice";
 
 export default function Product_detail_2() {
     const count = useSelector((state: RootState) => state.counter.value);

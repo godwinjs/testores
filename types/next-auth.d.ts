@@ -11,7 +11,6 @@ declare module "next-auth" {
 declare module "next-auth/react" {
     export interface Session {
         user: {
-            expires: string;
         } & DefaultSession["user"]
     }
 }

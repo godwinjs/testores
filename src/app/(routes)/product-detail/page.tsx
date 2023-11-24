@@ -1,15 +1,16 @@
 'use client'
-import { RootState } from "../redux/store";
+import { RootState } from "@/app/redux/store";
 import { useSelector, useDispatch } from "react-redux";
-import { increment, decrement, increamentByAmount } from "../redux/features/counter/counterSlice";
+import { increment, decrement, increamentByAmount } from "@/app/redux/features/counter/counterSlice";
 
-export default function Single_blog() {
+export default function Product_detail() {
     const count = useSelector((state: RootState) => state.counter.value);
     const dispatch = useDispatch();
 
     return(
         <div>
-            <h1 className="text-center"> Single Blog Page</h1>
+            <h1>Product Detail Page</h1>
+
           <div className="text-center mt-4">Count: {count}</div>
 
           <div className="flex flex-row justify-around my-3">

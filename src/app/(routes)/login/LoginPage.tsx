@@ -5,12 +5,17 @@ import Link from "next/link";
 import Image from 'next/image';
 import { useRouter } from "next/navigation";
 import { signIn, useSession } from "next-auth/react";
+import { useSelector, useDispatch } from "react-redux";
+
+import { RootState } from "@/app/redux/store";
+import { setCredentials, logout } from "@/app/redux/features/auth/authSlice";
 
 import facebookSvg from "@/images/socials/_Facebook.svg";
 import twitterSvg from "@/images/socials/_Twitter.svg";
 import googleSvg from "@/images/socials/_Google.svg";
 import Input from "@/app/assets/shared/Input/Input";
 import ButtonPrimary from "@/app/assets/shared/Button/ButtonPrimary";
+
 
 export interface PageLoginProps {
   className?: string;
@@ -38,10 +43,14 @@ const LoginPage: FC<PageLoginProps> = ({ className = "" }) => {
     const [ error, setError ] = useState("");
     const router = useRouter();
     const session = useSession();
+    // const userInfo = useSelector((state: RootState) => state.auth.userInfo)
+    const dispatch = useDispatch();
 
     useEffect(() => {
         if(session?.status == "authenticated"){
             router.replace("/account")
+            // redux
+            dispatch(setCredentials(session.data))
         }
     }, [session, router])
   
@@ -78,6 +87,7 @@ const LoginPage: FC<PageLoginProps> = ({ className = "" }) => {
             if(res?.url) router.replace('/account')
         }else{
             setError("")
+
         }
 
     }

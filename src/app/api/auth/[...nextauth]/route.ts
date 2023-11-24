@@ -26,7 +26,6 @@ const authOptions: NextAuthOptions = {
                     const user: any = await User.findOne({email: email});
                     
                     if(user) {
-                        console.log(user)
                         const isPasswordCorrect = await bcrypt.compare(
                             password,
                             user.password
@@ -47,6 +46,30 @@ const authOptions: NextAuthOptions = {
     }),
     // ...more providers
     ],
+    callbacks: {
+        async jwt({ token, account }) {
+          // Persist the OAuth access_token to the token right after signin
+          if (account) {
+            token.accessToken = account.access_token
+          }
+          return token
+        },
+        async session({ session, token, user}: any) {
+            session.accessToken = token.accessToken;
+            
+            try {
+                const user: any = await User.findOne({email: session.user.email});
+
+                session.user.fullName = user.fullName;
+                session.user.joined = user.createdAt;
+                session.user.lastUpdate = user.updatedAt;
+            } catch (err: any){
+                throw new Error(err);
+            }
+            
+            return session
+        }
+    }
 }
 
 const handler = NextAuth(authOptions);
