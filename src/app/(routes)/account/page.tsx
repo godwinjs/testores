@@ -1,19 +1,22 @@
 'use client'
 
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useSession } from "next-auth/react"
 import { redirect } from "next/navigation";
 
 import { setCredentials } from "@/app/redux/features/auth/authSlice";
+import { RootState } from "@/app/redux/store";
+
 import AccountPage from "@/app/assets/containers/AccountPage/AccountPage";
 
 export default function Account() {
     const dispatch = useDispatch();
-    const { data: session } = useSession()
+    const { data: session } = useSession();
+    const user = useSelector((state: RootState) => state.auth.userInfo )
 
     useEffect(() => {
-        if(session){
+        if(session && ( user === null)){
         // redux
             dispatch(setCredentials(session.user))
         }

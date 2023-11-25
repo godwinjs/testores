@@ -20,9 +20,9 @@ export const POST = async (request: any) => {
     const newUser = new User({
         fullName: fullName,
         email: email,
-        password: hashedPassword
+        password: hashedPassword,
     })
-
+ 
     try {
         // console.log([fullName, email, hashedPassword])
         await newUser.save();

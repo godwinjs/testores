@@ -21,8 +21,6 @@ export interface AccountPageProps {
 const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
   const user: any = useSelector((state: RootState) => state.auth.userInfo);
 
-  
-
   return (
     <div className={`nc-AccountPage ${className}`} data-nc-id="AccountPage">
       <Helmet>
@@ -71,7 +69,7 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
             <div className="flex-grow mt-10 md:mt-0 md:pl-16 max-w-3xl space-y-6">
               <div>
                 <Label>Full name</Label>
-                <Input displayName="FName input" className="mt-1.5" defaultValue={`${user?.fullName}`} />
+                <Input displayName="FName input" className="mt-1.5" placeholder={`${user?.fullName}`} />
               </div>
 
               {/* ---- */}
@@ -101,7 +99,7 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
                   <Input
                     className="!rounded-l-none"
                     type="date"
-                    defaultValue="1990-07-22"
+                    defaultValue="1996-03-08"
                     displayName="DOB input"
                   />
                 </div>
@@ -115,7 +113,7 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
                   </span>
                   <Input
                     className="!rounded-l-none"
-                    defaultValue="New york, USA"
+                    defaultValue="GRA Ikeja Lagos, Nigeria"
                     displayName="Address Input"
                   />
                 </div>
@@ -140,7 +138,7 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
                   </span>
                   <Input
                     className="!rounded-l-none"
-                    defaultValue="003 888 232"
+                    placeholder="080...."
                     displayName="Phone input"
                   />
                 </div>

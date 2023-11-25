@@ -18,7 +18,28 @@ const userSchema = new Schema(
             type: String,
             unique: true,
             required: false
+        },
+        dob: {
+            type: String,
+            unique: false,
+            required: false
+        },
+        address: {
+            type: String,
+            unique: false,
+            required: false
+        },
+        phone: {
+            type: String,
+            unique: true,
+            required: false
+        },
+        gender: {
+            type: String,
+            unique: false,
+            required: false
         }
+
     },
     { timestamps: true }
 )
