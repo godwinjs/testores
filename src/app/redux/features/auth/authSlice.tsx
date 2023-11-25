@@ -1,20 +1,31 @@
 'use client';
 
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
+type initialStateType = {
+  userInfo: userInfoType | null;
+}
+type userInfoType = {
+  name?: String | null | undefined;
+  image?: String | null | undefined;
+  email?: String | null | undefined;
+  fullName?: String;
+  joined?: String;
+  lastUpdate?: String
+}
 const initialState = {
   userInfo: null,
-};
+} as initialStateType;
 
 const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    setCredentials: (state, action) => {
+    setCredentials: (state, action: PayloadAction<userInfoType>) => {
       state.userInfo = action.payload;
       // localStorage.setItem("userInfo", JSON.stringify(action.payload));
     },
-    logout: (state, action) => {
+    logout: (state: initialStateType) => {
       state.userInfo = null;
     },
   },

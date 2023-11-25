@@ -14,7 +14,7 @@ import SwitchDarkMode2 from "@/app/assets/shared/SwitchDarkMode/SwitchDarkMode2"
 
 export default function AvatarDropdown() {
   const { data: session }: any = useSession();
-  const authState = useSelector((state: RootState) => state.auth)
+  const authState: any = useSelector((state: RootState) => state.auth)
   const dispatch = useDispatch();
 
   // console.log(session)
