@@ -1,8 +1,9 @@
 "use client";
-import { FC } from "react";
+import { FC, useState } from "react";
 import { Helmet } from "react-helmet";
 import Image from "next/image";
 import { useSelector } from "react-redux";
+import { useRouter } from "next/navigation";
 
 import { RootState } from "@/app/redux/store";
 
@@ -20,6 +21,57 @@ export interface AccountPageProps {
 
 const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
   const user: any = useSelector((state: RootState) => state.auth.userInfo);
+  const [ error, setError ] = useState("");
+  const router = useRouter();
+
+  const isValidEmail = (email: string) => {
+
+    const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0+9]+\.[A-Z]{2,}$/i;
+    return emailRegex.test(email);
+  }
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+  
+    const fullName = e.target[0].value;
+    const email = e.target[1].value;
+    const password = e.target[2].value;
+  
+    if(!isValidEmail(email)){
+      setError("Email is invalid")
+      return;
+    }
+    if(!password || password.length < 8){
+      setError("Password is invalid")
+      return;
+    }
+  
+    try {
+      const res = await fetch("/api/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+  
+        },
+        body: JSON.stringify({
+          fullName: fullName,
+          email: email,
+          password: password
+        })
+      })
+  
+      if(res.status === 400){
+        setError("This email is already registered.")
+      }
+      if(res.status === 200){
+        // route to confirm email then login. for now it's login
+        setError("")
+        router.push("/login");
+      }
+    }catch (err){
+      setError("Error, try again later");
+      console.log(err)
+    }
+  }
 
   return (
     <div className={`nc-AccountPage ${className}`} data-nc-id="AccountPage">

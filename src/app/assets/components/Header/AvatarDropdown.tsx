@@ -2,7 +2,11 @@
 import { Popover, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 import Link from "next/link";
-import { signOut, useSession } from "next-auth/react"
+import { signOut, useSession } from "next-auth/react";
+import { useDispatch, useSelector } from "react-redux";
+
+import { logout } from "@/app/redux/features/auth/authSlice";
+import { RootState } from "@/app/redux/store";
 
 import { avatarImgs } from "@/app/assets/contains/fakedata";
 import Avatar from "@/app/assets/shared/Avatar/Avatar";
@@ -10,6 +14,8 @@ import SwitchDarkMode2 from "@/app/assets/shared/SwitchDarkMode/SwitchDarkMode2"
 
 export default function AvatarDropdown() {
   const { data: session }: any = useSession();
+  const authState = useSelector((state: RootState) => state.auth)
+  const dispatch = useDispatch();
 
   // console.log(session)
 
@@ -292,7 +298,7 @@ export default function AvatarDropdown() {
                       <Link
                         href={"#"}
                         className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
-                        onClick={() => { signOut(); close()}}
+                        onClick={() => { dispatch(logout(authState)); close(); signOut();}}
                       >
                         <div className="flex items-center justify-center flex-shrink-0 text-neutral-500 dark:text-neutral-300">
                           <svg
