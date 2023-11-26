@@ -201,7 +201,7 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
                 <Textarea className="mt-1.5" defaultValue="..." />
               </div>
               <div className="pt-2">
-                <ButtonPrimary>Update account</ButtonPrimary>
+                <ButtonPrimary onClick={() => handleSubmit}>Update account</ButtonPrimary>
               </div>
             </div>
           </div>

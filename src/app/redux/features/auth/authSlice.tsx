@@ -6,12 +6,13 @@ type initialStateType = {
   userInfo: userInfoType | null;
 }
 type userInfoType = {
-  name?: String | null | undefined;
-  image?: String | null | undefined;
-  email?: String | null | undefined;
+  name?: String | null;
+  image?: String | null;
+  email?: String | null;
   fullName?: String;
   joined?: String;
-  lastUpdate?: String
+  lastUpdate?: String;
+  isAdmin?: boolean;
 }
 const initialState = {
   userInfo: null,
