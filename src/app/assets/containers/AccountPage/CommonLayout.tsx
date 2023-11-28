@@ -21,7 +21,7 @@ const CommonLayout: FC<CommonLayoutProps> = ({ children }) => {
               <span className="text-slate-900 dark:text-slate-200 font-semibold">
               {session? session.user.fullName : "user's not logged in properly"}
               </span>{" "}
-                {session? session.user.email : "user's not logged in properly"} · Los Angeles, CA
+                {session? session.user.email : "user's not logged in properly"} · Logos, Nigeria
             </span>
           </div>
           <hr className="mt-10 border-slate-200 dark:border-slate-700"></hr>
