@@ -14,6 +14,7 @@ import Select from "@/app/assets/shared/Select/Select";
 import Textarea from "@/app/assets/shared/TextArea/TextArea";
 import { avatarImgs } from "@/app/assets/contains/fakedata";
 import CommonLayout from "./CommonLayout";
+import axios from "axios";
 
 export interface AccountPageProps { 
   className?: string;
@@ -44,21 +45,31 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
     const fullName = fNameRef.current?.value;
     const email = emailRef.current?.value;
   
-    if(!isValidEmail(email)){
-      setError("Email is invalid")
-      return;
-    }
+    // if(!isValidEmail(email)){
+    //   setError("Email is invalid")
+    //   return;
+    // }
 
-    console.log([
-      file,
-      fNameRef.current?.value,
-      emailRef.current?.value,
-      dobRef.current?.value,
-      adrsRef.current?.value,
-      gender,
-      phnRef.current?.value, 
-      bioRef.current?.value, 
-    ])
+    // fullName: fNameRef.current?.value,
+    // email: emailRef,
+    // dob: dobRef,
+    // address: adrsRef,
+    // phone: phnRef,
+    // gender: gender
+
+    try{
+      axios.post('/api/account/update', {
+        fullName: fNameRef.current?.value,
+        email: emailRef.current?.value,
+        dob: dobRef.current?.value,
+        address: adrsRef.current?.value,
+        phone: phnRef.current?.value,
+        gender: gender,
+        id: user.id
+      })
+    }catch (err) {
+      console.log(err)
+    }
   
     // try {
     //   const res = await fetch("/api/register", {
@@ -146,7 +157,7 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
             <div className="flex-grow mt-10 md:mt-0 md:pl-16 max-w-3xl space-y-6">
               <div>
                 <Label>Full name</Label>
-                <Input displayName="FName input" className="mt-1.5" placeholder={`${user?.fullName}`} ref={fNameRef} />
+                <Input displayName="FName input" className="mt-1.5" defaultValue={`${user?.fullName}`} ref={fNameRef} />
               </div>
 
               {/* ---- */}
@@ -160,7 +171,7 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
                   </span>
                   <Input
                     className="!rounded-l-none"
-                    placeholder={`${user?.email}`}
+                    defaultValue={`${user?.email}`}
                     displayName="Email Input"
                     ref={emailRef}
                   />
@@ -218,7 +229,7 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
                   </span>
                   <Input
                     className="!rounded-l-none"
-                    placeholder="080...."
+                    defaultValue="08103023419"
                     displayName="Phone input"
                     ref={phnRef}
                   />

@@ -44,4 +44,11 @@ const userSchema = new Schema(
     { timestamps: true }
 )
 
+userSchema.methods.speak = function speak() {
+    const greeting = this.fullName
+      ? 'Hello name is ' + this.fullName
+      : 'I don\'t have a name';
+    console.log(greeting);
+  };
+
 export default mongoose.models.User || mongoose.model("User", userSchema);

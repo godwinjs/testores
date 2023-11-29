@@ -1,6 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { getServerSession } from "next-auth/next";
 
+// jox8fs1y
+
 type accountDataType = {
     name?: String | null;
     image?: String | null;

@@ -21,7 +21,7 @@ export default function Account() {
             dispatch(setCredentials(session.user))
         }
         if(session === null){
-            dispatch(logout());
+            // dispatch(logout());
         }
     }, [session, dispatch])
 

@@ -58,15 +58,15 @@ const authOptions: NextAuthOptions = {
             session.accessToken = token.accessToken;
             
             try {
-                const user: any = await User.findOne({email: session.user.email});
+                user = await User.findOne({email: session.user.email});
 
                 session.user.fullName = user.fullName;
                 session.user.joined = user.createdAt;
                 session.user.lastUpdate = user.updatedAt;
+                session.user.id = user.id;
             } catch (err: any){
                 throw new Error(err);
             }
-            console.log(token)
             
             return session
         }

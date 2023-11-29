@@ -11,7 +11,7 @@ export const POST = async (request: any) => {
     
     const hashedPassword = await bcrypt.hash(password, 5);
     // const existingUser: any = 
-    const existingUser: any = await User.findOne({email: email});
+    const existingUser: any = await User.findOne({email: email}); ///^fluff/ -> that begins with "fluff" and returns the result
 
     if(!(existingUser === null)){
         return new NextResponse(`User with email: ${email} already exist.`, {status: 400})
@@ -21,6 +21,10 @@ export const POST = async (request: any) => {
         fullName: fullName,
         email: email,
         password: hashedPassword,
+        dob: '',
+        address: '',
+        phone: '',
+        gender: ''
     })
  
     try {
