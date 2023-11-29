@@ -1,5 +1,5 @@
 "use client";
-import { FC, useState } from "react";
+import { FC, useState, useRef } from "react";
 import { Helmet } from "react-helmet";
 import Image from "next/image";
 import { useSelector } from "react-redux";
@@ -22,55 +22,79 @@ export interface AccountPageProps {
 const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
   const user: any = useSelector((state: RootState) => state.auth.userInfo);
   const [ error, setError ] = useState("");
+  const [ gender, setGender ] = useState("");
+  const [ file, setFile ] = useState("");
   const router = useRouter();
+
+  const fNameRef: any = useRef(null);
+  const emailRef: any = useRef(null);
+  const dobRef: any = useRef(null);
+  const adrsRef: any = useRef(null);
+  const phnRef: any = useRef(null);
+  const bioRef: any = useRef(null);
 
   const isValidEmail = (email: string) => {
 
     const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0+9]+\.[A-Z]{2,}$/i;
     return emailRegex.test(email);
   }
-  const handleSubmit = async (e: any) => {
-    e.preventDefault();
+  const updateSubmit = async () => {
+    // e.preventDefault();
   
-    const fullName = e.target[0].value;
-    const email = e.target[1].value;
-    const password = e.target[2].value;
+    const fullName = fNameRef.current?.value;
+    const email = emailRef.current?.value;
   
     if(!isValidEmail(email)){
       setError("Email is invalid")
       return;
     }
-    if(!password || password.length < 8){
-      setError("Password is invalid")
-      return;
-    }
+
+    console.log([
+      file,
+      fNameRef.current?.value,
+      emailRef.current?.value,
+      dobRef.current?.value,
+      adrsRef.current?.value,
+      gender,
+      phnRef.current?.value, 
+      bioRef.current?.value, 
+    ])
   
-    try {
-      const res = await fetch("/api/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+    // try {
+    //   const res = await fetch("/api/register", {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-Type": "application/json",
   
-        },
-        body: JSON.stringify({
-          fullName: fullName,
-          email: email,
-          password: password
-        })
-      })
+    //     },
+    //     body: JSON.stringify({
+    //       fullName: fullName,
+    //       email: email,
+    //       password: password
+    //     })
+    //   })
   
-      if(res.status === 400){
-        setError("This email is already registered.")
-      }
-      if(res.status === 200){
-        // route to confirm email then login. for now it's login
-        setError("")
-        router.push("/login");
-      }
-    }catch (err){
-      setError("Error, try again later");
-      console.log(err)
-    }
+    //   if(res.status === 400){
+    //     setError("This email is already registered.")
+    //   }
+    //   if(res.status === 200){
+    //     // route to confirm email then login. for now it's login
+    //     setError("")
+    //     router.push("/login");
+    //   }
+    // }catch (err){
+    //   setError("Error, try again later");
+    //   console.log(err)
+    // }
+  }
+
+  const handleGenderChange = (e: any) => {
+      let {value} = e.target;
+      setGender(value)
+  }
+  const handleImageChange = (e: any) => {
+    console.log(e.target.files[0])
+    setFile(URL.createObjectURL(e.target.files[0]))
   }
 
   return (
@@ -115,13 +139,14 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
                 <input
                   type="file"
                   className="absolute inset-0 opacity-0 cursor-pointer"
+                  onChange={handleImageChange}
                 />
               </div>
             </div>
             <div className="flex-grow mt-10 md:mt-0 md:pl-16 max-w-3xl space-y-6">
               <div>
                 <Label>Full name</Label>
-                <Input displayName="FName input" className="mt-1.5" placeholder={`${user?.fullName}`} />
+                <Input displayName="FName input" className="mt-1.5" placeholder={`${user?.fullName}`} ref={fNameRef} />
               </div>
 
               {/* ---- */}
@@ -137,6 +162,7 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
                     className="!rounded-l-none"
                     placeholder={`${user?.email}`}
                     displayName="Email Input"
+                    ref={emailRef}
                   />
                 </div>
               </div>
@@ -153,6 +179,7 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
                     type="date"
                     defaultValue="1996-03-08"
                     displayName="DOB input"
+                    ref={dobRef}
                   />
                 </div>
               </div>
@@ -167,6 +194,7 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
                     className="!rounded-l-none"
                     defaultValue="GRA Ikeja Lagos, Nigeria"
                     displayName="Address Input"
+                    ref={adrsRef}
                   />
                 </div>
               </div>
@@ -174,7 +202,7 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
               {/* ---- */}
               <div>
                 <Label>Gender</Label>
-                <Select className="mt-1.5">
+                <Select className="mt-1.5" onChange={handleGenderChange}>
                   <option value="Other">Other</option>
                   <option value="Male">Male</option>
                   <option value="Female">Female</option>
@@ -192,16 +220,17 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
                     className="!rounded-l-none"
                     placeholder="080...."
                     displayName="Phone input"
+                    ref={phnRef}
                   />
                 </div>
               </div>
               {/* ---- */}
               <div>
                 <Label>About you</Label>
-                <Textarea className="mt-1.5" defaultValue="..." />
+                <Textarea className="mt-1.5" defaultValue="..." ref={bioRef} />
               </div>
               <div className="pt-2">
-                <ButtonPrimary onClick={() => handleSubmit}>Update account</ButtonPrimary>
+                <ButtonPrimary onClick={updateSubmit}>Update account</ButtonPrimary>
               </div>
             </div>
           </div>

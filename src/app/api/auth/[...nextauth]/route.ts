@@ -66,6 +66,7 @@ const authOptions: NextAuthOptions = {
             } catch (err: any){
                 throw new Error(err);
             }
+            console.log(token)
             
             return session
         }

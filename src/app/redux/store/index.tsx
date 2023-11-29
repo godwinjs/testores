@@ -15,7 +15,8 @@ import storage from "redux-persist/lib/storage";
 
 import authReducer from "../features/auth/authSlice";
 // import { apiSlice } from "../features/api/apiSlice";
-import counterReducer from "../features/counter/counterSlice"
+import counterReducer from "../features/counter/counterSlice";
+import accountReducer from "../features/account/accountSlice";
 
 const isDev = process.env.NODE_ENV === "development"
 const middlewareLogger: any = !!isDev ? logger : [];
@@ -28,6 +29,7 @@ const persistConfig = {
 
 const allReducers = {
   auth: authReducer,
+  account: accountReducer,
   // [apiSlice.reducerPath]: apiSlice.reducer,
   counter: counterReducer
 };
