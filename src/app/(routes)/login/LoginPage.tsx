@@ -5,6 +5,9 @@ import Link from "next/link";
 import Image from 'next/image';
 import { useRouter } from "next/navigation";
 import { signIn, useSession } from "next-auth/react";
+import { useDispatch } from "react-redux";
+
+import { setCredentials } from "@/app/redux/features/auth/authSlice";
 
 import facebookSvg from "@/images/socials/_Facebook.svg";
 import twitterSvg from "@/images/socials/_Twitter.svg";
@@ -39,9 +42,11 @@ const LoginPage: FC<PageLoginProps> = ({ className = "" }) => {
     const [ error, setError ] = useState("");
     const router = useRouter();
     const session = useSession();
+    const dispatch = useDispatch();
 
     useEffect(() => {
         if(session?.status == "authenticated"){
+          dispatch(setCredentials(session.data.user));
             router.replace("/account")
         }
     }, [session, router])
@@ -76,7 +81,9 @@ const LoginPage: FC<PageLoginProps> = ({ className = "" }) => {
 
         if(res?.error){
             setError("Invalid Email or password");
-            if(res?.url) router.replace('/account')
+            if(res?.url){
+              router.replace('/account')
+            } 
         }else{
             setError("")
 

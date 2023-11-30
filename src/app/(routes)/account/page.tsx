@@ -5,28 +5,21 @@ import { useDispatch, useSelector } from "react-redux";
 import { useSession } from "next-auth/react"
 import { redirect } from "next/navigation";
 
-import { setCredentials, logout } from "@/app/redux/features/auth/authSlice";
-import { RootState, AppDispatch } from "@/app/redux/store";
+import { setCredentials } from "@/app/redux/features/auth/authSlice";
+import { RootState } from "@/app/redux/store";
 
 import AccountPage from "@/app/assets/containers/AccountPage/AccountPage";
 
 export default function Account() {
-    const dispatch: AppDispatch = useDispatch();
     const { data: session } = useSession();
     const user = useSelector((state: RootState) => state.auth.userInfo )
 
-    useEffect(() => {
-        if(session && ( user === null)){
-        // redux
-            dispatch(setCredentials(session.user))
-        }
-        if(session === null){
-            // dispatch(logout());
-        }
-    }, [session, dispatch])
 
     if(!session){
         redirect('/login')
+    }
+    if(user === null){
+        return;
     }
 
     return <AccountPage />

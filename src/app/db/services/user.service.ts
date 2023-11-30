@@ -8,5 +8,5 @@ export const findByEmail = async (email: string) => {
 export const updateUser = async (email: string, data: any ) => {
     // console.log([email, data])
     // return email;
-    return await User.findOneAndUpdate({email: email}, data)
+    await User.findOneAndUpdate({email: email}, data);
 }

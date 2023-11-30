@@ -64,6 +64,10 @@ const authOptions: NextAuthOptions = {
                 session.user.joined = user.createdAt;
                 session.user.lastUpdate = user.updatedAt;
                 session.user.id = user.id;
+                session.user.dob = user.dob;
+                session.user.phone = user.phone;
+                session.user.gender = user.gender;
+                session.user.address = user.address;
             } catch (err: any){
                 throw new Error(err);
             }

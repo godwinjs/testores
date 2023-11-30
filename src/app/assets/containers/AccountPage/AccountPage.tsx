@@ -1,5 +1,5 @@
 "use client";
-import { FC, useState, useRef } from "react";
+import { FC, useState, useRef, useEffect } from "react";
 import { Helmet } from "react-helmet";
 import Image from "next/image";
 import { useSelector } from "react-redux";
@@ -50,13 +50,6 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
     //   return;
     // }
 
-    // fullName: fNameRef.current?.value,
-    // email: emailRef,
-    // dob: dobRef,
-    // address: adrsRef,
-    // phone: phnRef,
-    // gender: gender
-
     try{
       axios.post('/api/account/update', {
         fullName: fNameRef.current?.value,
@@ -66,7 +59,7 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
         phone: phnRef.current?.value,
         gender: gender,
         id: user.id
-      })
+      }).then((res) => console.log(res))
     }catch (err) {
       console.log(err)
     }
@@ -188,7 +181,7 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
                   <Input
                     className="!rounded-l-none"
                     type="date"
-                    defaultValue="1996-03-08"
+                    defaultValue={user?.dob}
                     displayName="DOB input"
                     ref={dobRef}
                   />
@@ -203,7 +196,7 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
                   </span>
                   <Input
                     className="!rounded-l-none"
-                    defaultValue="GRA Ikeja Lagos, Nigeria"
+                    defaultValue={user ? user.address : 'Nigeria'}
                     displayName="Address Input"
                     ref={adrsRef}
                   />
@@ -213,7 +206,7 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
               {/* ---- */}
               <div>
                 <Label>Gender</Label>
-                <Select className="mt-1.5" onChange={handleGenderChange}>
+                <Select className="mt-1.5" defaultValue={user?.gender} onChange={handleGenderChange}>
                   <option value="Other">Other</option>
                   <option value="Male">Male</option>
                   <option value="Female">Female</option>
@@ -229,7 +222,7 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
                   </span>
                   <Input
                     className="!rounded-l-none"
-                    defaultValue="08103023419"
+                    defaultValue={user?.phone}
                     displayName="Phone input"
                     ref={phnRef}
                   />
@@ -238,7 +231,7 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
               {/* ---- */}
               <div>
                 <Label>About you</Label>
-                <Textarea className="mt-1.5" defaultValue="..." ref={bioRef} />
+                <Textarea className="mt-1.5" defaultValue={user?.phone} ref={bioRef} />
               </div>
               <div className="pt-2">
                 <ButtonPrimary onClick={updateSubmit}>Update account</ButtonPrimary>
