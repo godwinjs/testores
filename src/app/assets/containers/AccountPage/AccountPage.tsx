@@ -2,10 +2,12 @@
 import { FC, useState, useRef, useEffect } from "react";
 import { Helmet } from "react-helmet";
 import Image from "next/image";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
+import axios from "axios";
 
 import { RootState } from "@/app/redux/store";
+import { setCredentials } from "@/app/redux/features/auth/authSlice";
 
 import Label from "@/app/assets/components/Label/Label";
 import ButtonPrimary from "@/app/assets/shared/Button/ButtonPrimary";
@@ -14,7 +16,6 @@ import Select from "@/app/assets/shared/Select/Select";
 import Textarea from "@/app/assets/shared/TextArea/TextArea";
 import { avatarImgs } from "@/app/assets/contains/fakedata";
 import CommonLayout from "./CommonLayout";
-import axios from "axios";
 
 export interface AccountPageProps { 
   className?: string;
@@ -26,6 +27,7 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
   const [ gender, setGender ] = useState("");
   const [ file, setFile ] = useState("");
   const router = useRouter();
+  const dispatch = useDispatch();
 
   const fNameRef: any = useRef(null);
   const emailRef: any = useRef(null);
@@ -59,7 +61,9 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
         phone: phnRef.current?.value,
         gender: gender,
         id: user.id
-      }).then((res) => console.log(res))
+      }).then((res) => {
+        dispatch(setCredentials(res.data.data))
+      })
     }catch (err) {
       console.log(err)
     }

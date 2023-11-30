@@ -38,6 +38,16 @@ const userSchema = new Schema(
             type: String,
             unique: false,
             required: false
+        },
+        userType: {
+            type: String,
+            unique: false,
+            required: false
+        },
+        about: {
+            type: String,
+            unique: false,
+            required: false
         }
 
     },

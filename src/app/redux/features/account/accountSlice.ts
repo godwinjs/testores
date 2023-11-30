@@ -10,7 +10,9 @@ type accountDataType = {
     fullName?: String;
     joined?: String;
     lastUpdate?: String;
-    isAdmin?: boolean;
+    userType?: string;
+    gender?: string;
+    dob?: string;
   }
 
 interface initialStateType {
@@ -26,7 +28,6 @@ const accountSlice = createSlice({
     name: 'account',
     initialState: initialState,
     reducers: {
-
     },
     extraReducers: builder => {
         builder.addCase(sessionAsync.fulfilled, (state, action) => {
