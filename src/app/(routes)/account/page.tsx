@@ -1,6 +1,5 @@
 'use client'
 
-import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useSession } from "next-auth/react"
 import { redirect } from "next/navigation";

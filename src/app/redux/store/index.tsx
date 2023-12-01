@@ -17,6 +17,7 @@ import authReducer from "../features/auth/authSlice";
 // import { apiSlice } from "../features/api/apiSlice";
 import counterReducer from "../features/counter/counterSlice";
 import accountReducer from "../features/account/accountSlice";
+import productReducer from "../features/product/productSlice";
 
 const isDev = process.env.NODE_ENV === "development"
 const middlewareLogger: any = !!isDev ? logger : [];
@@ -30,6 +31,7 @@ const persistConfig = {
 const allReducers = {
   auth: authReducer,
   account: accountReducer,
+  products: productReducer,
   // [apiSlice.reducerPath]: apiSlice.reducer,
   counter: counterReducer
 };

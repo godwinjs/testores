@@ -64,6 +64,7 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
       }).then((res) => {
         dispatch(setCredentials(res.data.data))
       })
+
     }catch (err) {
       console.log(err)
     }

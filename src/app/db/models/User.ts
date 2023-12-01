@@ -39,7 +39,7 @@ const userSchema = new Schema(
             unique: false,
             required: false
         },
-        userType: {
+        roles: {
             type: String,
             unique: false,
             required: false
