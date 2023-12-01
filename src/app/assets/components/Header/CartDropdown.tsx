@@ -151,7 +151,7 @@ export default function CartDropdown() {
                           Shipping and taxes calculated at checkout.
                         </span>
                       </span>
-                      <span className="">$ { addArray(cartProducts.map((i: any) => i.price))}</span>
+                      <span className="">$ {cartProducts ? addArray(cartProducts.map((i: any) => i.price) ) : 0.00}</span>
                     </p>
                     <div className="flex space-x-2 mt-5">
                       <ButtonSecondary
