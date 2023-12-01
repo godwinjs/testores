@@ -23,6 +23,18 @@ export interface ProductVariant {
   color?: string;
   featuredImage: string | typeof productSport1;
 }
+export interface ProductCart {
+  id: number;
+  name: string;
+  price: number;
+  image: string | typeof productSport1;
+  description: string;
+  variants?: ProductVariant;
+  variantType?: "color" | "image";
+  size?: string;
+  status?: "New in" | "limited edition" | "Sold Out" | "50% Discount";
+}
+
 export interface Product {
   id: number;
   name: string;
@@ -215,6 +227,25 @@ export const PRODUCTS: Product[] = [
     status: "limited edition",
   },
 ];
+
+export const ProductImgs: any = {
+  'productImgs[16]': productImgs[16],
+  'productImgs[1]': productImgs[1],
+  'productImgs[15]': productImgs[15],
+  'productImgs[3]': productImgs[3],
+  'productImgs[4]': productImgs[4],
+  'productImgs[5]': productImgs[5],
+  'productImgs[8]': productImgs[8],
+  'productImgs[7]': productImgs[7],
+  'productImgs[2]': productImgs[2]
+}
+export const ProductVarThumb: any = {
+  'productVariantImg2': productVariantImg2,
+  'productVariantImg3': productVariantImg3,
+  'productVariantImg4': productVariantImg4,
+  'productVariantImg5': productVariantImg5,
+  'productVariantImg6': productVariantImg6,
+}
 
 export const SPORT_PRODUCTS: Product[] = [
   {

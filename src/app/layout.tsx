@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 import { Poppins } from 'next/font/google';
 import localFont from "next/font/local";
 import "rc-slider/assets/index.css";
+import { Toaster } from 'react-hot-toast';
 import { getServerSession } from "next-auth/next";
 
 import AuthProvider from "@/app/db/utils/SessionProvider";
@@ -90,6 +91,7 @@ export default async function RootLayout({
         <AuthProvider session={session}>
           <Providers>
               <Header />
+              <Toaster />
               {children}
           </Providers>
         </AuthProvider>

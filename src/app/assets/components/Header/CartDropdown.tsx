@@ -4,20 +4,26 @@ import { Fragment } from "react";
 import { Popover, Transition } from "@headlessui/react";
 import Link from "next/link";
 import Image from "next/image";
+import { useSelector } from "react-redux";
 
+import { RootState } from "@/app/redux/store";
+
+import { addArray } from "../../utils/calc";
 import Prices from "@/app/assets/components/Prices";
-import { Product, PRODUCTS } from "@/app/assets/data/data";
+import { Product, PRODUCTS, ProductImgs } from "@/app/assets/data/data";
 import ButtonPrimary from "@/app/assets/shared/Button/ButtonPrimary";
 import ButtonSecondary from "@/app/assets/shared/Button/ButtonSecondary";
 
 export default function CartDropdown() {
+  const cartProducts: any = useSelector((state: RootState) => state.account.cart);
+
   const renderProduct = (item: Product, index: number, close: () => void) => {
-    const { name, price, image } = item;
+    const { name, price, image } : any = item;
     return (
       <div key={index} className="flex py-5 last:pb-0">
         <div className="relative h-24 w-20 flex-shrink-0 overflow-hidden rounded-xl bg-slate-100">
           <Image
-            src={image}
+            src={ProductImgs[image]}
             alt={name}
             className="h-full w-full object-contain object-center"
           />
@@ -132,9 +138,9 @@ export default function CartDropdown() {
                   <div className="max-h-[60vh] p-5 overflow-y-auto hiddenScrollbar">
                     <h3 className="text-xl font-semibold">Shopping cart</h3>
                     <div className="divide-y divide-slate-100 dark:divide-slate-700">
-                      {[PRODUCTS[0], PRODUCTS[1], PRODUCTS[2]].map(
-                        (item, index) => renderProduct(item, index, close)
-                      )}
+                      {cartProducts ? cartProducts.map(
+                        (item: any, index: number) => renderProduct(item, index, close)
+                      ) : 'null'}
                     </div>
                   </div>
                   <div className="bg-neutral-50 dark:bg-slate-900 p-5">
@@ -145,7 +151,7 @@ export default function CartDropdown() {
                           Shipping and taxes calculated at checkout.
                         </span>
                       </span>
-                      <span className="">$299.00</span>
+                      <span className="">$ { addArray(cartProducts.map((i: any) => i.price))}</span>
                     </p>
                     <div className="flex space-x-2 mt-5">
                       <ButtonSecondary

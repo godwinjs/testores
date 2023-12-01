@@ -4,13 +4,19 @@ import { NoSymbolIcon, CheckIcon } from "@heroicons/react/24/outline";
 import { Helmet } from "react-helmet";
 import Link from "next/link";
 import Image from "next/image";
+import { useSelector } from "react-redux";
 
+import { RootState } from "@/app/redux/store";
+
+import { addArray } from "../../utils/calc";
 import NcInputNumber from "@/app/assets/components/NcInputNumber";
 import Prices from "@/app/assets/components/Prices";
-import { Product, PRODUCTS } from "@/app/assets/data/data";
+import { Product, ProductImgs } from "@/app/assets/data/data";
 import ButtonPrimary from "@/app/assets/shared/Button/ButtonPrimary";
 
 const CartPage = () => {
+  const cartProducts: any = useSelector((state: RootState) => state.account.cart);
+
   const renderStatusSoldout = () => {
     return (
       <div className="rounded-full flex items-center justify-center px-2.5 py-1.5 text-xs text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">
@@ -30,7 +36,7 @@ const CartPage = () => {
   };
 
   const renderProduct = (item: Product, index: number) => {
-    const { image, price, name } = item;
+    const { image, price, name } : any = item;
 
     return (
       <div
@@ -39,7 +45,7 @@ const CartPage = () => {
       >
         <div className="relative h-36 w-24 sm:w-32 flex-shrink-0 overflow-hidden rounded-xl bg-slate-100">
           <Image
-            src={image}
+            src={ProductImgs[image]}
             alt={name}
             className="h-full w-full object-contain object-center"
           />
@@ -187,7 +193,7 @@ const CartPage = () => {
   return (
     <div className="nc-CartPage">
       <Helmet>
-        <title>Shopping Cart || Ciseco Ecommerce Template</title>
+        <title>Shopping Cart || TruthStore Ecommerce</title>
       </Helmet>
 
       <main className="container py-16 lg:pb-28 lg:pt-20 ">
@@ -212,13 +218,7 @@ const CartPage = () => {
 
         <div className="flex flex-col lg:flex-row">
           <div className="w-full lg:w-[60%] xl:w-[55%] divide-y divide-slate-200 dark:divide-slate-700 ">
-            {[
-              PRODUCTS[0],
-              PRODUCTS[1],
-              PRODUCTS[2],
-              PRODUCTS[3],
-              PRODUCTS[4],
-            ].map(renderProduct)}
+            {cartProducts ? cartProducts.map(renderProduct) : "Opps! not products here yet. No worries, Add Some Products to your cart" }
           </div>
           <div className="border-t lg:border-t-0 lg:border-l border-slate-200 dark:border-slate-700 my-10 lg:my-0 lg:mx-10 xl:mx-16 2xl:mx-20 flex-shrink-0"></div>
           <div className="flex-1">
@@ -228,7 +228,7 @@ const CartPage = () => {
                 <div className="flex justify-between pb-4">
                   <span>Subtotal</span>
                   <span className="font-semibold text-slate-900 dark:text-slate-200">
-                    $249.00
+                  $ { addArray(cartProducts.map((i: any) => i.price))}
                   </span>
                 </div>
                 <div className="flex justify-between py-4">

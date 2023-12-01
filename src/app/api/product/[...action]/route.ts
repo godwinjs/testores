@@ -74,7 +74,7 @@ export const GET = async (req: NextRequest, { params }: { params: { action: [str
     const data = [
         {
             id: 1,
-            name: "Rey Nylon Backpack",
+            name: "Rey Nylon Backpack Yo!",
             description: "Brown cockroach wings",
             price: 74,
             image: 'productImgs[16]',

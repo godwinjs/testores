@@ -1,5 +1,6 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { getServerSession } from "next-auth/next";
+import type { ProductCart } from "@/app/assets/data/data";
 
 // jox8fs1y
 
@@ -17,10 +18,12 @@ type accountDataType = {
 
 interface initialStateType {
     accountData: accountDataType | null;
+    cart: ProductCart[] | null;
 }
 
 const initialState = {
-    accountData: null
+    accountData: null,
+    cart: null
 } as initialStateType;
 
 
@@ -28,6 +31,19 @@ const accountSlice = createSlice({
     name: 'account',
     initialState: initialState,
     reducers: {
+        addToCart: (state, action: PayloadAction<ProductCart>) => {
+            let product = action.payload;
+            if(!state.cart){
+                state.cart = [product]
+            }else{
+                state.cart.push(action.payload)
+                
+                // return {
+                //     ...state,
+                //     cart: [ ...state.cart, action.payload]
+                // }
+            }
+        }
     },
     extraReducers: builder => {
         builder.addCase(sessionAsync.fulfilled, (state, action) => {
@@ -46,3 +62,4 @@ export const sessionAsync = createAsyncThunk(
 )
 
 export default accountSlice.reducer;
+export const { addToCart } = accountSlice.actions

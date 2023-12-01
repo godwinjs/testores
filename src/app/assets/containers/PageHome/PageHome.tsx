@@ -5,6 +5,10 @@ import SectionHowItWork from "@/app/assets/components/SectionHowItWork/SectionHo
 import BackgroundSection from "@/app/assets/components/BackgroundSection/BackgroundSection";
 import SectionPromo1 from "@/app/assets/components/SectionPromo1";
 import { Helmet } from "react-helmet";
+import { useSelector } from "react-redux";
+
+import { RootState } from "@/app/redux/store";
+
 import SectionHero2 from "@/app/assets/components/SectionHero/SectionHero2";
 import SectionSliderLargeProduct from "@/app/assets/components/SectionSliderLargeProduct";
 import SectionSliderProductCard from "@/app/assets/components/SectionSliderProductCard";
@@ -21,6 +25,8 @@ import ButtonSecondary from "@/app/assets/shared/Button/ButtonSecondary";
 import { PRODUCTS, SPORT_PRODUCTS } from "@/app/assets/data/data";
 
 function PageHome() {
+  const products: any = useSelector((state: RootState) => state.products.products)
+
   return (
     <div className="nc-PageHome relative overflow-hidden">
       <Helmet>
@@ -37,13 +43,13 @@ function PageHome() {
       <div className="container relative space-y-24 my-24 lg:space-y-32 lg:my-32">
         {/* SECTION */}
         <SectionSliderProductCard
-          data={[
-            PRODUCTS[4],
+          data={products ? [
+            products[0],
             SPORT_PRODUCTS[5],
-            PRODUCTS[7],
+            products[7],
             SPORT_PRODUCTS[1],
-            PRODUCTS[6],
-          ]}
+            products[6],
+          ] : undefined}
         />
 
         <div className="py-24 lg:py-32 border-t border-b border-slate-200 dark:border-slate-700">

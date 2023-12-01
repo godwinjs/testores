@@ -7,10 +7,15 @@ import { ArrowsPointingOutIcon } from "@heroicons/react/24/outline";
 import { StarIcon } from "@heroicons/react/24/solid";
 import { Transition } from "@headlessui/react";
 import toast from "react-hot-toast";
+import { useSelector, useDispatch } from "react-redux";
+import { useRouter } from "next/navigation"
+
+import { RootState } from "@/app/redux/store";
+import { addToCart } from "@/app/redux/features/account/accountSlice";
 
 import LikeButton from "./LikeButton";
 import Prices from "./Prices";
-import { Product, PRODUCTS } from "../data/data";
+import { Product, PRODUCTS, ProductImgs, ProductVarThumb } from "../data/data";
 import ButtonPrimary from "../shared/Button/ButtonPrimary";
 import ButtonSecondary from "../shared/Button/ButtonSecondary";
 import BagIcon from "./BagIcon";
@@ -28,7 +33,11 @@ const ProductCard: FC<ProductCardProps> = ({
   data = PRODUCTS[0],
   isLiked,
 }) => {
+  const dispatch = useDispatch();
+  const router = useRouter();
+  const products: any = useSelector((state: RootState) => state.products.products)
   const {
+    id,
     name,
     price,
     description,
@@ -42,6 +51,17 @@ const ProductCard: FC<ProductCardProps> = ({
   const [showModalQuickView, setShowModalQuickView] = React.useState(false);
 
   const notifyAddTocart = ({ size }: { size?: string }) => {
+    dispatch(addToCart({
+      id,
+      name,
+      price,
+      description,
+      size,
+      variants: variants?.[variantActive],
+      variantType,
+      status,
+      image,
+    }));
     toast.custom(
       (t) => (
         <Transition
@@ -67,11 +87,13 @@ const ProductCard: FC<ProductCardProps> = ({
   };
 
   const renderProductCartOnNotify = ({ size }: { size?: string }) => {
+
     return (
       <div className="flex ">
         <div className="h-24 w-20 flex-shrink-0 overflow-hidden rounded-xl bg-slate-100">
           <Image
-            src={image}
+          // @ts-ignore
+            src={(products && (typeof image === "string")) ? ProductImgs[image] : image}
             alt={name}
             className="h-full w-full object-cover object-center"
           />
@@ -84,8 +106,8 @@ const ProductCard: FC<ProductCardProps> = ({
                 <h3 className="text-base font-medium ">{name}</h3>
                 <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
                   <span>
-                    {`Natural`}
-                    {/* {variants ? variants[variantActive].name : `Natural`} */}
+                    {/* {`Natural`} */}
+                    {variants ? variants[variantActive].name : `Natural`}
                   </span>
                   <span className="mx-2 border-l border-slate-200 dark:border-slate-700 h-4"></span>
                   <span>{size+'..' || "XL"}</span>
@@ -101,6 +123,7 @@ const ProductCard: FC<ProductCardProps> = ({
               <button
                 type="button"
                 className="font-medium text-primary-6000 dark:text-primary-500 "
+                onClick={() => router.push('/cart')}
               >
                 View cart
               </button>
@@ -180,7 +203,7 @@ const ProductCard: FC<ProductCardProps> = ({
             <div className="absolute inset-0.5 rounded-full overflow-hidden z-0">
               <Image
                 // @ts-ignore
-                src={variant.thumbnail}
+                src={(products && (typeof image === "string")) ? ProductVarThumb[variant.thumbnail] : variant.thumbnail}
                 alt="variant"
                 className="absolute w-full h-full object-cover"
               />
@@ -250,7 +273,8 @@ const ProductCard: FC<ProductCardProps> = ({
           <Link href={"/product-detail"} className="block">
             <div className="flex aspect-w-11 aspect-h-12 w-full h-0">
               <Image
-                src={image}
+              //@ts-ignore
+                src={(products && (typeof image === "string")) ? ProductImgs[image] : image}
                 className="object-scale-down w-full h-full drop-shadow-xl "
                 alt=''
               />
