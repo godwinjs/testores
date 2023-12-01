@@ -228,7 +228,7 @@ const CartPage = () => {
                 <div className="flex justify-between pb-4">
                   <span>Subtotal</span>
                   <span className="font-semibold text-slate-900 dark:text-slate-200">
-                  $ { addArray(cartProducts.map((i: any) => i.price))}
+                  $ {cartProducts ? addArray(cartProducts.map((i: any) => i.price) ) : 0.00}
                   </span>
                 </div>
                 <div className="flex justify-between py-4">
