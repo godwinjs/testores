@@ -19,7 +19,7 @@ import counterReducer from "../features/counter/counterSlice";
 import accountReducer from "../features/account/accountSlice";
 import productReducer from "../features/product/productSlice";
 
-const isDev = process.env.NODE_ENV === "development"
+const isDev = process.env.NEXT_PUBLIC_NODE_ENV === "development"
 const middlewareLogger: any = !!isDev ? logger : [];
 
 const persistConfig = {
