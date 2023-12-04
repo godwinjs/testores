@@ -24,6 +24,8 @@ export interface AccountPageProps {
 
 const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
   const user: any = useSelector((state: RootState) => state.auth.userInfo);
+  const account: any = useSelector((state: RootState) => state.account.accountData);
+  const [image, setImage] = useState(null);
   const [ error, setError ] = useState("");
   const [ gender, setGender ] = useState("");
   const router = useRouter();
@@ -68,33 +70,6 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
     }catch (err) {
       console.log(err)
     }
-  
-    // try {
-    //   const res = await fetch("/api/register", {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-  
-    //     },
-    //     body: JSON.stringify({
-    //       fullName: fullName,
-    //       email: email,
-    //       password: password
-    //     })
-    //   })
-  
-    //   if(res.status === 400){
-    //     setError("This email is already registered.")
-    //   }
-    //   if(res.status === 200){
-    //     // route to confirm email then login. for now it's login
-    //     setError("")
-    //     router.push("/login");
-    //   }
-    // }catch (err){
-    //   setError("Error, try again later");
-    //   console.log(err)
-    // }
   }
 
   const handleGenderChange = (e: any) => {
@@ -102,24 +77,48 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
       setGender(value)
   }
   const handleImageChange = async (e: any) => {
-    const toBase64 = (file: any) => new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = reject;
-    });
+
     console.log(e.target.files[0])
-    const imageFile = await toBase64(e.target.files[0]);
 
+    // dispatch(uploadImage())
+
+  }
+  const imageUpload = async () => {
     dispatch(setImageData({
-      image: JSON.stringify(imageFile),
-      url: undefined,
+      ...account.imageData,
       loading: true,
-      preview: null
     }))
+  
+    const data = new FormData();
+    image && data.append("file", image);
+    process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET && data.append(
+      "upload_preset",
+      process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET
+    );
+    process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME && data.append("cloud_name", process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME);
+    data.append("folder", "Cloudinary-React");
 
-    dispatch(uploadImage())
+    try {
+      const response = await fetch(
+        `https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUDINARY_CLOUD_NAME}/image/upload`,
+        {
+          method: "POST",
+          body: data,
+        }
+      );
+      const res = await response.json();
 
+      dispatch(setImageData({
+        ...account.imageData,
+        url: res.public_id,
+        loading: false,
+      }))
+    }catch (err) {
+      dispatch(setImageData({
+        ...account.imageData,
+        loading: false,
+      }))
+    }
   }
 
   return (
