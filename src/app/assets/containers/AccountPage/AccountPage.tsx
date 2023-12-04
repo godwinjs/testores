@@ -6,8 +6,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 
-import { RootState } from "@/app/redux/store";
+import { AppDispatch, RootState } from "@/app/redux/store";
 import { setCredentials } from "@/app/redux/features/auth/authSlice";
+import { uploadImage, setImageData } from "@/app/redux/features/account/accountSlice";
 
 import Label from "@/app/assets/components/Label/Label";
 import ButtonPrimary from "@/app/assets/shared/Button/ButtonPrimary";
@@ -25,9 +26,8 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
   const user: any = useSelector((state: RootState) => state.auth.userInfo);
   const [ error, setError ] = useState("");
   const [ gender, setGender ] = useState("");
-  const [ file, setFile ] = useState("");
   const router = useRouter();
-  const dispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
 
   const fNameRef: any = useRef(null);
   const emailRef: any = useRef(null);
@@ -101,9 +101,25 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
       let {value} = e.target;
       setGender(value)
   }
-  const handleImageChange = (e: any) => {
+  const handleImageChange = async (e: any) => {
+    const toBase64 = (file: any) => new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = reject;
+    });
     console.log(e.target.files[0])
-    setFile(URL.createObjectURL(e.target.files[0]))
+    const imageFile = await toBase64(e.target.files[0]);
+
+    dispatch(setImageData({
+      image: JSON.stringify(imageFile),
+      url: undefined,
+      loading: true,
+      preview: null
+    }))
+
+    dispatch(uploadImage())
+
   }
 
   return (

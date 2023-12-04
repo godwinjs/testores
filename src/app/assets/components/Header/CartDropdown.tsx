@@ -140,7 +140,7 @@ export default function CartDropdown() {
                     <div className="divide-y divide-slate-100 dark:divide-slate-700">
                       {cartProducts ? cartProducts.map(
                         (item: any, index: number) => renderProduct(item, index, close)
-                      ) : 'null'}
+                      ) : 'Empty cart, Browse products and add them to cart'}
                     </div>
                   </div>
                   <div className="bg-neutral-50 dark:bg-slate-900 p-5">
