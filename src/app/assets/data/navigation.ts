@@ -27,7 +27,7 @@ const MEGAMENU_DEMO: NavItemType[] = [
       { id: ncNanoId(), href: "/accessories/vr", name: "VR Headset" },
       { id: ncNanoId(), href: "/accessories/headphones", name: "Headphones" },
       { id: ncNanoId(), href: "/accessories/clamps", name: "Clamps" },
-      { id: ncNanoId(), href: "/accessories/gc", name: "graphics Cards" },
+      { id: ncNanoId(), href: "/accessories/gcards", name: "graphics Cards" },
     ],
   },
   {
@@ -116,12 +116,7 @@ const OTHER_PAGE_CHILD: NavItemType[] = [
   {
     id: ncNanoId(),
     href: "/",
-    name: "Home Demo 1",
-  },
-  {
-    id: ncNanoId(),
-    href: "/home2",
-    name: "Home Demo 2",
+    name: "Home Page",
   },
   {
     id: ncNanoId(),
@@ -133,12 +128,7 @@ const OTHER_PAGE_CHILD: NavItemType[] = [
         id: ncNanoId(),
         href: "/page-collection",
         name: "Category page 1",
-      },
-      {
-        id: ncNanoId(),
-        href: "/page-collection-2",
-        name: "Category page 2",
-      },
+      }
     ],
   },
   {
@@ -151,11 +141,6 @@ const OTHER_PAGE_CHILD: NavItemType[] = [
         id: ncNanoId(),
         href: "/product-detail",
         name: "Product detail 1",
-      },
-      {
-        id: ncNanoId(),
-        href: "/product-detail-2",
-        name: "Product detail 2",
       },
     ],
   },
@@ -243,12 +228,12 @@ export const NAVIGATION_DEMO_2: NavItemType[] = [
   {
     id: ncNanoId(),
     href: "/#",
-    name: "Women",
+    name: "Repairs",
   },
   {
     id: ncNanoId(),
     href: "/#",
-    name: "Beauty",
+    name: "SuperDeals",
   },
 
   {
