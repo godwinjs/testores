@@ -1,15 +1,15 @@
 "use client";
 import { FC, useLayoutEffect } from "react";
 import MainNav2Logged from "./MainNav2Logged";
-import axios from "axios";
-import { useDispatch } from "react-redux";
+// import axios from "axios";
+// import { useDispatch } from "react-redux";
 
-import { setProducts } from "@/app/redux/features/product/productSlice";
+// import { setProducts } from "@/app/redux/features/product/productSlice";
 
 export interface HeaderLoggedProps {} 
 
 const HeaderLogged: FC<HeaderLoggedProps> = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   useLayoutEffect(() => {
     function makeApiCall() {

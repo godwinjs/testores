@@ -15,6 +15,7 @@ import './style/line-awesome.css'
 import Providers from "@/app/redux/provider";
 // import fontPath from "@/app/fonts"
 import Header from '@/app/assets/containers/SiteHeader';
+import Footer from '@/app/assets/shared/Footer/Footer';
 
 
 const poppins = Poppins({
@@ -93,6 +94,7 @@ export default async function RootLayout({
               <Header />
               <Toaster />
               {children}
+              <Footer />
           </Providers>
         </AuthProvider>
       </body>

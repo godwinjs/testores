@@ -1,10 +1,13 @@
 "use client";
 import { FC, useState, useRef, useEffect } from "react";
 import { Helmet } from "react-helmet";
+import {AdvancedImage} from '@cloudinary/react';
+import {Cloudinary} from "@cloudinary/url-gen";
 import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+
 
 import { AppDispatch, RootState } from "@/app/redux/store";
 import { setCredentials } from "@/app/redux/features/auth/authSlice";
@@ -26,11 +29,19 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
   const user: any = useSelector((state: RootState) => state.auth.userInfo);
   const account: any = useSelector((state: RootState) => state.account.accountData);
   const [image, setImage] = useState(null);
+  const [preview, setPreview]: any = useState(null);
   const [ error, setError ] = useState("");
   const [ gender, setGender ] = useState("");
   const router = useRouter();
   const dispatch: AppDispatch = useDispatch();
-
+  const cld = new Cloudinary({
+    cloud: {
+      cloudName: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME
+    }
+  });
+  const ProfilePicture = cld.image(account.imageData.url); 
+  const _blankPics = cld.image('demo')
+ 
   const fNameRef: any = useRef(null);
   const emailRef: any = useRef(null);
   const dobRef: any = useRef(null);
@@ -55,6 +66,8 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
     // }
 
     try{
+      await imageUpload();
+
       axios.post('/api/account/update', {
         fullName: fNameRef.current?.value,
         email: emailRef.current?.value,
@@ -77,10 +90,14 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
       setGender(value)
   }
   const handleImageChange = async (e: any) => {
+    const file = e.target.files[0];
+    setImage(file);
 
-    console.log(e.target.files[0])
-
-    // dispatch(uploadImage())
+    const reader = new FileReader();
+    reader.readAsDataURL(file);//base64 
+    reader.onload = () => {
+      setPreview(reader.result);
+    };
 
   }
   const imageUpload = async () => {
@@ -100,14 +117,14 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
 
     try {
       const response = await fetch(
-        `https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUDINARY_CLOUD_NAME}/image/upload`,
+        `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`,
         {
           method: "POST",
           body: data,
         }
       );
       const res = await response.json();
-
+      
       dispatch(setImageData({
         ...account.imageData,
         url: res.public_id,
@@ -120,6 +137,10 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
       }))
     }
   }
+  const handleResetClick = () => {
+    setPreview(null);
+    setImage(null);
+  };
 
   return (
     <div className={`nc-AccountPage ${className}`} data-nc-id="AccountPage">
@@ -135,13 +156,18 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
           <div className="flex flex-col md:flex-row">
             <div className="flex-shrink-0 flex items-start">
               {/* AVATAR */}
-              <div className="relative rounded-full overflow-hidden flex">
-                <Image
-                  src={avatarImgs[2]}
+              <div className="group relative rounded-full overflow-hidden flex">
+                {account.imageData.loading || !account.imageData.url ? <AdvancedImage
+                alt=""
+                cldImg={_blankPics}
+                className="w-32 h-32 rounded-full object-cover z-0"
+              /> : ( account.imageData.url && (<AdvancedImage
                   alt=""
+                  cldImg={ProfilePicture}
                   className="w-32 h-32 rounded-full object-cover z-0"
-                />
-                <div className=" absolute inset-0 bg-black bg-opacity-60 flex flex-col items-center justify-center text-neutral-50 cursor-pointer">
+                />))}
+                
+                <div className="group-hover:visible lg:invisible absolute inset-0 bg-black bg-opacity-60 flex flex-col items-center justify-center text-neutral-50 cursor-pointer">
                   <svg
                     width="30"
                     height="30"
@@ -158,11 +184,11 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
                     />
                   </svg>
 
-                  <span className="mt-1 text-xs">Change Image</span>
+                  <span className="mt-1 text-xs">{!account.imageData.url ? 'Upload Image' : 'Change Image'}</span>
                 </div>
                 <input
                   type="file"
-                  className="absolute inset-0 opacity-0 cursor-pointer"
+                  className="group-hover:visible lg:invisible absolute inset-0 opacity-0 cursor-pointer"
                   onChange={handleImageChange}
                 />
               </div>

@@ -40,16 +40,10 @@ function PageHome() {
         <DiscoverMoreSlider />
       </div>
 
-      <div className="container relative space-y-24 my-24 lg:space-y-32 lg:my-32">
+      <div className="container relative space-y-24 mt-24 lg:space-y-32 lg:mt-32">
         {/* SECTION */}
         <SectionSliderProductCard
-          data={products ? [
-            products[0],
-            SPORT_PRODUCTS[5],
-            products[7],
-            SPORT_PRODUCTS[1],
-            products[6],
-          ] : undefined}
+          data={products ? products.map((i:any) => i) : [SPORT_PRODUCTS[5], SPORT_PRODUCTS[1]]}
         />
 
         <div className="py-24 lg:py-32 border-t border-b border-slate-200 dark:border-slate-700">
@@ -85,7 +79,7 @@ function PageHome() {
         {/* SECTION */}
         <SectionGridFeatureItems />
 
-        <div className="relative py-24 lg:py-32">
+        <div className="relative mb-0 py-24 lg:py-32">
           <BackgroundSection />
           <div>
             <Heading rightDescText="From the TruthStore blog">
@@ -97,9 +91,6 @@ function PageHome() {
             </div>
           </div>
         </div>
-
-        {/*  */}
-        {/* <SectionClientSay /> */}
       </div>
     </div>
   );
