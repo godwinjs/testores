@@ -39,8 +39,7 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
       cloudName: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME
     }
   });
-  const ProfilePicture = cld.image(account.imageData.url); 
-  const _blankPics = cld.image('demo')
+  const ProfilePicture = cld.image(account.imageData?.url);
  
   const fNameRef: any = useRef(null);
   const emailRef: any = useRef(null);
@@ -157,15 +156,12 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
             <div className="flex-shrink-0 flex items-start">
               {/* AVATAR */}
               <div className="group relative rounded-full overflow-hidden flex">
-                {account.imageData ? (account.imageData?.loading || !account.imageData?.url ? <AdvancedImage
-                alt=""
-                cldImg={_blankPics}
-                className="w-32 h-32 rounded-full object-cover z-0"
-              /> : ( account.imageData?.url && (<AdvancedImage
+                {account.imageData?.loading || !account.imageData?.url ? <div
+                className="w-32 h-32 bg-black rounded-full object-cover z-0"></div> : ( account.imageData?.url && (<AdvancedImage
                   alt=""
                   cldImg={ProfilePicture}
                   className="w-32 h-32 rounded-full object-cover z-0"
-                />)) ): null}
+                />))}
                 
                 <div className="group-hover:visible lg:invisible absolute inset-0 bg-black bg-opacity-60 flex flex-col items-center justify-center text-neutral-50 cursor-pointer">
                   <svg
@@ -184,7 +180,7 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
                     />
                   </svg>
 
-                  <span className="mt-1 text-xs">{!account.imageData.url ? 'Upload Image' : 'Change Image'}</span>
+                  <span className="mt-1 text-xs">{!account.imageData?.url ? 'Upload Image' : 'Change Image'}</span>
                 </div>
                 <input
                   type="file"

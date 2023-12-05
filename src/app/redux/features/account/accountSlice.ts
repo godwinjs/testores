@@ -19,7 +19,7 @@ type accountDataType = {
     roles?: string;
     gender?: string;
     dob?: string;
-    imageData?: imageData;
+    imageData: imageData | null;
   }
 
 interface initialStateType {
@@ -53,7 +53,7 @@ const accountSlice = createSlice({
         setImageData: (state, action: PayloadAction<imageData>) => {
             state.accountData = {
                 ...state.accountData,
-                imageData: action.payload
+                imageData: null
             }
         },
     },
