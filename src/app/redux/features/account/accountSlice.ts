@@ -51,10 +51,11 @@ const accountSlice = createSlice({
             }
         },
         setImageData: (state, action: PayloadAction<imageData>) => {
-            state.accountData = {
-                ...state.accountData,
-                imageData: null
-            }
+            state.accountData = null
+            // {
+            //     ...state.accountData,
+            //     imageData: action.payload
+            // }
         },
     },
     extraReducers: builder => {
