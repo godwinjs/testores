@@ -191,11 +191,11 @@ const NavMobile: React.FC<NavMobileProps> = ({
       <ul className="flex flex-col py-6 px-2 space-y-1">
         {data.map(_renderItem)}
       </ul>
-      <div className="flex items-center justify-between py-6 px-5 space-x-2">
+      {/* <div className="flex items-center justify-between py-6 px-5 space-x-2">
         <ButtonPrimary href={"/sign"} className="!px-10">
           Admin Settings
         </ButtonPrimary>
-      </div>
+      </div> */}
     </div>
   );
 };

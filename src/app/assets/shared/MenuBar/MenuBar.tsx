@@ -4,7 +4,7 @@ import { Transition, Dialog } from "@headlessui/react";
 
 import NavMobile from "../Navigation/NavMobile";
 
-export interface MenuBarProps {}
+export interface MenuBarProps {} 
 const MenuBar: React.FC<MenuBarProps> = () => {
   const [isVisable, setIsVisable] = useState(false);
 

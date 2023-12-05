@@ -33,7 +33,7 @@ const MEGAMENU_DEMO: NavItemType[] = [
   {
     id: ncNanoId(),
     href: "/#",
-    name: "Shops",
+    name: "Stores",
     children: [
       { id: ncNanoId(), href: "#", name: "Monitors" },
       { id: ncNanoId(), href: "#", name: "Desks & Chairs" },
