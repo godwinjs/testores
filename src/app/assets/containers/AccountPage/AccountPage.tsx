@@ -157,11 +157,11 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
             <div className="flex-shrink-0 flex items-start">
               {/* AVATAR */}
               <div className="group relative rounded-full overflow-hidden flex">
-                {account.imageData ? (account.imageData.loading || !account.imageData.url ? <AdvancedImage
+                {account.imageData ? (account.imageData?.loading || !account.imageData?.url ? <AdvancedImage
                 alt=""
                 cldImg={_blankPics}
                 className="w-32 h-32 rounded-full object-cover z-0"
-              /> : ( account.imageData.url && (<AdvancedImage
+              /> : ( account.imageData?.url && (<AdvancedImage
                   alt=""
                   cldImg={ProfilePicture}
                   className="w-32 h-32 rounded-full object-cover z-0"
