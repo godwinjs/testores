@@ -87,10 +87,10 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
   const handleGenderChange = (e: any) => {
       let {value} = e.target;
       setGender(value)
-      dispatch(setImageData({
-        ...account.imageData,
-        loading: true,
-      }))
+      // dispatch(setImageData({
+      //   ...account.imageData,
+      //   loading: true,
+      // }))
   }
   const handleImageChange = async (e: any) => {
     const file = e.target.files[0];
