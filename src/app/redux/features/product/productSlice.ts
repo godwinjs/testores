@@ -1,8 +1,14 @@
 import type { Product } from "@/app/assets/data/data";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-interface initialStateType {
+interface productType {
+    id?: String;
     products: Product[] | null;
+    createdAt?: String;
+    updatedAt?: String;
+}
+interface initialStateType {
+    products: productType[] | null;
 }
 
 const initialState = {
@@ -15,7 +21,11 @@ const productSlice = createSlice({
     initialState: initialState,
     reducers: {
         setProducts: (state, action) => {
-            state.products = action.payload
+            if(!state.products){
+                state.products = [action.payload]
+            }else{
+                state.products.push(action.payload)
+            }
         }
     }
 })

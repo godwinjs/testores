@@ -6,7 +6,6 @@ import type { ProductCart } from "@/app/assets/data/data";
 type imageData = {
     url?: string;
     loading: boolean;
-    preview?: null
 }
 
 type accountDataType = {

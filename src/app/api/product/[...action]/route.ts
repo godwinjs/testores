@@ -5,7 +5,7 @@ import { saveProducts, getProducts } from "@/app/db/services/products.service";
 
 export const GET = async (req: NextRequest, { params }: { params: { action: [string] }}) => {
     // const data = await req.json();
-    const route = params.action[0];
+    const route: string = params.action[0];
     const DEMO_VARIANTS = [
         {
           id: 1,
@@ -184,7 +184,16 @@ export const GET = async (req: NextRequest, { params }: { params: { action: [str
     ];
 
     // await saveProducts(data);
-    const products = await getProducts();
+    let products
+    switch(route){
+      case 'set':
+        products = await getProducts();
+        return NextResponse.json({message: "Done", data: products}, { status: 200});
+      case 'get':
+        products = await getProducts();
+        return NextResponse.json({message: "Done", data: products}, { status: 200});
+      default:
+        return NextResponse.json({message: "Done", data: 'api route not found and is denied.'}, { status: 404})
+    }
 
-    return NextResponse.json({message: "Done", data: products}, { status: 200})
 }

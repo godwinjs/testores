@@ -24,7 +24,10 @@ export const POST = async (request: any) => {
         dob: '',
         address: '',
         phone: '',
-        gender: ''
+        gender: '',
+        image: '',
+        roles: '',
+        about: '',
     })
  
     try {

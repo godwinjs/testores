@@ -44,6 +44,11 @@ const userSchema = new Schema(
             unique: false,
             required: false
         },
+        image: {
+            type: String,
+            unique: false,
+            required: false
+        },
         about: {
             type: String,
             unique: false,

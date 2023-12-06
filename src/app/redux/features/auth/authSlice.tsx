@@ -12,7 +12,7 @@ type userInfoType = {
   fullName?: String;
   joined?: String;
   lastUpdate?: String;
-  isAdmin?: boolean;
+  roles?: String;
 }
 const initialState = {
   userInfo: null,

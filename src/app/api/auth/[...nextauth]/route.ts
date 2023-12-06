@@ -35,7 +35,7 @@ const authOptions: NextAuthOptions = {
                         }
                     }
 
-                } catch (err: any){
+                } catch (err: any){ 
                     throw new Error(err);
                 }
             }
@@ -68,8 +68,9 @@ const authOptions: NextAuthOptions = {
                 session.user.phone = user.phone;
                 session.user.gender = user.gender;
                 session.user.address = user.address;
+                session.user.image = user.image
             } catch (err: any){
-                throw new Error(err);
+                throw new Error(err); 
             }
             
             return session

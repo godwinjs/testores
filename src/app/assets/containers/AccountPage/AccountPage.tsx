@@ -27,7 +27,7 @@ export interface AccountPageProps {
 
 const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
   const user: any = useSelector((state: RootState) => state.auth.userInfo);
-  const account: any = useSelector((state: RootState) => state.account.accountData);
+  const account: any = useSelector((state: RootState) => state.account.accountData); 
   const [image, setImage] = useState(null);
   const [preview, setPreview]: any = useState(null);
   const [ error, setError ] = useState("");
@@ -41,12 +41,12 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
   });
   const ProfilePicture = cld.image(account && (account.imageData?.url));
  
-  const fNameRef: any = useRef(null);
-  const emailRef: any = useRef(null);
-  const dobRef: any = useRef(null);
-  const adrsRef: any = useRef(null);
-  const phnRef: any = useRef(null);
-  const bioRef: any = useRef(null);
+  const fNameRef: any = useRef(null),
+        emailRef: any = useRef(null),
+        dobRef: any = useRef(null),
+        adrsRef: any = useRef(null),
+        phnRef: any = useRef(null),
+        aboutRef: any = useRef(null);
 
   const isValidEmail = (email: string) => {
 
@@ -55,9 +55,7 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
   }
   const updateSubmit = async () => {
     // e.preventDefault();
-  
-    const fullName = fNameRef.current?.value;
-    const email = emailRef.current?.value;
+     const cldUrl = await imageUpload();
   
     // if(!isValidEmail(email)){
     //   setError("Email is invalid")
@@ -65,19 +63,20 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
     // }
 
     try{
-      await imageUpload();
-
-      axios.post('/api/account/update', {
+      if((typeof cldUrl) === 'string'){
+        axios.post('/api/account/update', {
         fullName: fNameRef.current?.value,
         email: emailRef.current?.value,
         dob: dobRef.current?.value,
         address: adrsRef.current?.value,
         phone: phnRef.current?.value,
         gender: gender,
-        id: user.id
+        id: user.id,
+        image: cldUrl,
+        about: aboutRef.current?.value
       }).then((res) => {
         dispatch(setCredentials(res.data.data))
-      })
+      })}
 
     }catch (err) {
       console.log(err)
@@ -105,9 +104,12 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
   }
   const imageUpload = async () => {
     dispatch(setImageData({
-      ...account.imageData,
+      url: undefined,
       loading: true,
     }))
+    if(user?.image){
+      // delete image from cloudnary then proceed
+    }
   
     const data = new FormData();
     image && data.append("file", image);
@@ -129,13 +131,13 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
       const res = await response.json();
       
       dispatch(setImageData({
-        ...account.imageData,
         url: res.public_id,
         loading: false,
       }))
+      return res.public_id;
     }catch (err) {
       dispatch(setImageData({
-        ...account.imageData,
+        url: undefined,
         loading: false,
       }))
     }
@@ -160,12 +162,11 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
             <div className="flex-shrink-0 flex items-start">
               {/* AVATAR */}
               <div className="group relative rounded-full overflow-hidden flex">
-                {account ? (account.imageData?.loading || !account.imageData?.url) ? <div
-                className="w-32 h-32 bg-black rounded-full object-cover z-0"></div> : ( account.imageData?.url && (<AdvancedImage
+                {(account && !preview) ? ( (account.imageData?.loading || !account.imageData?.url ) ? <div className="w-32 h-32 bg-black rounded-full object-cover z-0"></div> : (account.imageData?.url && <AdvancedImage
                   alt=""
                   cldImg={ProfilePicture}
                   className="w-32 h-32 rounded-full object-cover z-0"
-                />)) : (preview ? <img src={preview} alt="preview" className="w-32 h-32 rounded-full object-cover z-0" /> : <div className="w-32 h-32 bg-black rounded-full object-cover z-0"></div>)}
+                />) ) : (preview ? <img src={preview} alt="preview" className="w-32 h-32 rounded-full object-cover z-0" /> : <div className="w-32 h-32 bg-black rounded-full object-cover z-0"></div>)}
                 
                 <div className="group-hover:visible lg:invisible absolute inset-0 bg-black bg-opacity-60 flex flex-col items-center justify-center text-neutral-50 cursor-pointer">
                   <svg
@@ -277,7 +278,7 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
               {/* ---- */}
               <div>
                 <Label>About you</Label>
-                <Textarea className="mt-1.5" defaultValue={user?.phone} ref={bioRef} />
+                <Textarea className="mt-1.5" defaultValue={user?.about} ref={aboutRef} />
               </div>
               <div className="pt-2">
                 <ButtonPrimary onClick={updateSubmit}>Update account</ButtonPrimary>

@@ -10,6 +10,7 @@ export const POST = async (req: NextRequest, { params }: { params: { accountRout
 
     await updateUser(data.email, data);
     const user = await findByEmail(data.email);
+    console.log(user)
 
     return NextResponse.json({message: "Done", data: user}, { status: 200})
 }
