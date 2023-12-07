@@ -43,18 +43,18 @@ const authOptions: NextAuthOptions = {
         GoogleProvider({
         clientId: process.env.GOOGLE_CLIENT_ID || '',
         clientSecret: process.env.GOOGLE_CLIENT_SECRET || '',
-        authorization: {
-            params: {
-              prompt: "consent",
-              access_type: "offline",
-              response_type: "code"
-            }
-        }
+        // authorization: {
+        //     params: {
+        //       prompt: "consent",
+        //       access_type: "offline",
+        //       response_type: "code"
+        //     }
+        // }
         }),
     ],
     callbacks: {
         async signIn({user, account, profile, email, credentials }: any): Promise<boolean> {
-            console.log({user: user, account: account, profile: profile, email: email, credentials: credentials})
+            // console.log({user: user, account: account, profile: profile, email: email, credentials: credentials})
             if(account?.provider == "credentials"){
                 return true;
             }
@@ -105,7 +105,7 @@ const authOptions: NextAuthOptions = {
             
             try {
                 user = await User.findOne({email: session.user.email});
-                
+
                 session.user.fullName = user.fullName;
                 session.user.joined = user.createdAt;
                 session.user.lastUpdate = user.updatedAt;

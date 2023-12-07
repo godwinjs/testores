@@ -22,8 +22,8 @@ const HeaderLogged: FC<HeaderLoggedProps> = () => {
   useEffect(() => {
     
     if(session?.status == "authenticated"){// && pathname === '/account'
+      router.replace("/account");
       dispatch(setCredentials(session.data.user));
-        router.replace("/account")
     }
     function makeApiCall() {
       console.log(('welcome...'))

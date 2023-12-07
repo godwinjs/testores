@@ -46,7 +46,7 @@ const LoginPage: FC<PageLoginProps> = ({ className = "" }) => {
     const router = useRouter();
     // const session = useSession();
     const { data: session, status: sessionStatus } = useSession();
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
 
     useEffect(() => {
         if(sessionStatus == "authenticated"){
