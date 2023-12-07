@@ -21,7 +21,7 @@ const HeaderLogged: FC<HeaderLoggedProps> = () => {
 
   useEffect(() => {
     
-    if(session?.status == "authenticated"){
+    if(session?.status == "authenticated"){// && pathname === '/account'
       dispatch(setCredentials(session.data.user));
         router.replace("/account")
     }
