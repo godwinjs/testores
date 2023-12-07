@@ -1,5 +1,5 @@
 "use client";
-import { FC, useEffect } from "react";
+import { FC, useEffect, useLayoutEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import axios from "axios";
@@ -24,6 +24,9 @@ const HeaderLogged: FC<HeaderLoggedProps> = () => {
     if(session?.status == "authenticated"){// && pathname === '/account'
       router.replace("/account");
       dispatch(setCredentials(session.data.user));
+    }
+    if(session?.status == "unauthenticated"){
+      router.replace("/login");
     }
     function makeApiCall() {
       console.log(('welcome...'))
@@ -50,6 +53,12 @@ const HeaderLogged: FC<HeaderLoggedProps> = () => {
      window.removeEventListener('focus', makeApiCall)
    }
   }, [session, router ])
+
+  useLayoutEffect(() => {
+    if(session?.status == "authenticated"){
+      dispatch(setCredentials(session.data.user));
+    }
+  }, [session])
 
   return (
     <div className="nc-HeaderLogged sticky top-0 w-full z-40 ">
