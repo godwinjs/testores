@@ -25,31 +25,39 @@ const loginSocials = [
     name: "Continue with Facebook",
     href: "#",
     icon: facebookSvg,
+    provider: 'facebook'
   },
   {
     name: "Continue with Twitter",
     href: "#",
     icon: twitterSvg,
+    provider: 'twitter'
   },
   {
     name: "Continue with Google",
     href: "#",
     icon: googleSvg,
+    provider: 'google'
   },
 ];
 
 const LoginPage: FC<PageLoginProps> = ({ className = "" }) => {
     const [ error, setError ] = useState("");
     const router = useRouter();
-    const session = useSession();
+    // const session = useSession();
+    const { data: session, status: sessionStatus } = useSession();
     const dispatch = useDispatch();
 
     useEffect(() => {
-        if(session?.status == "authenticated"){
-          dispatch(setCredentials(session.data.user));
-            router.replace("/account")
+        if(sessionStatus == "authenticated"){
+          // dispatch(setCredentials(session.user));
+            router.replace("/account");
         }
-    }, [session, router])
+        // if(session?.status == "authenticated"){
+        //   dispatch(setCredentials(session.data.user));
+        //     router.replace("/account")
+        // }
+    }, [sessionStatus, router])
   
     const isValidEmail = (email: string) => {
   
@@ -90,9 +98,13 @@ const LoginPage: FC<PageLoginProps> = ({ className = "" }) => {
         }
 
     }
+  
+  if(sessionStatus === 'loading'){
+    return <h1>Loading...</h1>
+  }
 
   return (
-    <div className={`nc-PageLogin ${className}`} data-nc-id="PageLogin">
+    sessionStatus !== "authenticated" && <div className={`nc-PageLogin ${className}`} data-nc-id="PageLogin">
       <Helmet>
         <title>Log In || TruthStore Commerce</title>
       </Helmet>
@@ -106,6 +118,17 @@ const LoginPage: FC<PageLoginProps> = ({ className = "" }) => {
               <a
                 key={index}
                 href={item.href}
+                onClick={async () => {
+                  const res = await signIn(`${item.provider}`,{
+                  redirect: false
+                  })
+                  if(res?.error){
+                    setError("Couldn't login user");
+                    if(res?.url){
+                      router.replace('/account')
+                    } 
+                }
+                }}
                 className="flex w-full rounded-lg bg-primary-50 dark:bg-neutral-800 px-4 py-3 transform transition-transform sm:px-6 hover:translate-y-[-2px]"
               >
                 <Image

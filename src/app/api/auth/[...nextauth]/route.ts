@@ -1,7 +1,7 @@
 import NextAuth, { NextAuthOptions } from "next-auth";
 // import { getServerSession } from "next-auth/next";
-// import { Account, User as AuthUser } from "next-auth";
-import GithubProvider from "next-auth/providers/github";
+import { Account, User as AuthUser } from "next-auth";
+import GoogleProvider from "next-auth/providers/google"
 import CredentialProvider from "next-auth/providers/credentials";
 import bcrypt from 'bcryptjs';
 
@@ -40,13 +40,59 @@ const authOptions: NextAuthOptions = {
                 }
             }
         }),
-        GithubProvider({
-        clientId: process.env.GITHUB_ID ?? "",
-        clientSecret: process.env.GITHUB_SECRET ?? "",
-    }),
-    // ...more providers
+        GoogleProvider({
+        clientId: process.env.GOOGLE_CLIENT_ID || '',
+        clientSecret: process.env.GOOGLE_CLIENT_SECRET || '',
+        authorization: {
+            params: {
+              prompt: "consent",
+              access_type: "offline",
+              response_type: "code"
+            }
+        }
+        }),
     ],
     callbacks: {
+        async signIn({user, account, profile, email, credentials }: any): Promise<boolean> {
+            console.log({user: user, account: account, profile: profile, email: email, credentials: credentials})
+            if(account?.provider == "credentials"){
+                return true;
+            }
+            //http://localhost:3000/api/auth/signin?callbackUrl=http%3A%2F%2Flocalhost%3A3000%2Flogin this  really LOL :)
+            if(account?.provider == "google"){
+                // profile.email_verified: boolean = true //.given_name//.family_name
+                // profile.locale: string = 'en'
+                await connect();
+                const existingUser: any = await User.findOne({email: user.email});
+        
+                if(!(existingUser === null)){
+                    console.log("User Exists")
+                    return true;
+                }
+                const newUser = new User({
+                    fullName: profile.name,
+                    email: user.email,
+                    password: '',
+                    dob: '',
+                    address: '',
+                    phone: '',
+                    gender: '',
+                    image: profile.picture,
+                    roles: '',
+                    about: '',
+                })
+                try{
+                    await newUser.save();
+                    return true;
+    
+                }catch(err){
+                    console.log("Error saving user", err)
+                    return false;
+                }
+
+            }
+            return true;
+        },
         async jwt({ token, account }) {
           // Persist the OAuth access_token to the token right after signin
           if (account) {
@@ -59,7 +105,7 @@ const authOptions: NextAuthOptions = {
             
             try {
                 user = await User.findOne({email: session.user.email});
-
+                
                 session.user.fullName = user.fullName;
                 session.user.joined = user.createdAt;
                 session.user.lastUpdate = user.updatedAt;
@@ -74,7 +120,7 @@ const authOptions: NextAuthOptions = {
             }
             
             return session
-        }
+        },
     }
 }
 
