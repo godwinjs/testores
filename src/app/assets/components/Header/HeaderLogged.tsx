@@ -23,7 +23,11 @@ const HeaderLogged: FC<HeaderLoggedProps> = () => {
     
     if(session?.status == "authenticated"){// && pathname === '/account'
       router.replace("/account");
-      dispatch(setCredentials(session.data.user));
+      
+      axios.post('/api/login/getUser', { email: session.data.user.email}).then((res) => {
+        const userData = res.data.data;
+        dispatch(setCredentials(userData));
+      })
     }
     if(session?.status == "unauthenticated"){
       router.replace("/login");
