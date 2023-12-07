@@ -1,5 +1,5 @@
 "use client";
-import { FC, useEffect, useLayoutEffect } from "react";
+import { FC, useLayoutEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import axios from "axios";
@@ -19,7 +19,7 @@ const HeaderLogged: FC<HeaderLoggedProps> = () => {
   const router = useRouter();
   const session = useSession();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     
     if(session?.status == "authenticated"){// && pathname === '/account'
       router.replace("/account");
@@ -52,12 +52,6 @@ const HeaderLogged: FC<HeaderLoggedProps> = () => {
    return () => { 
      window.removeEventListener('focus', makeApiCall)
    }
-  }, [session, router ])
-
-  useLayoutEffect(() => {
-    if(session?.status == "authenticated"){
-      dispatch(setCredentials(session.data.user));
-    }
   }, [session])
 
   return (
