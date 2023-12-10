@@ -16,5 +16,4 @@ export const POST = async (req: NextRequest, { params }: { params: { action: [st
       default:
         return NextResponse.json({message: "Done", data: 'api route not found and is denied.'}, { status: 404})
     }
-
 }

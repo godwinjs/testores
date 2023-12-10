@@ -21,8 +21,9 @@ const HeaderLogged: FC<HeaderLoggedProps> = () => {
 
   useLayoutEffect(() => {
     
-    if(session?.status == "authenticated"){// && pathname === '/account'
-      router.replace("/account");
+    if(session?.status == "authenticated"){
+      // && pathname === '/account'
+      // router.replace("/account");
       
       axios.post('/api/login/getUser', { email: session.data.user.email}).then((res) => {
         const userData = res.data.data;
@@ -30,7 +31,7 @@ const HeaderLogged: FC<HeaderLoggedProps> = () => {
       })
     }
     if(session?.status == "unauthenticated"){
-      router.replace("/login");
+      // router.replace("/login");
     }
     function makeApiCall() {
       console.log(('welcome...'))
