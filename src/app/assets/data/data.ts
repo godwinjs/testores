@@ -41,6 +41,10 @@ export interface Product {
   price: number;
   image: string | typeof productSport1;
   description: string;
+  thumbnail?: {
+    url: string,
+    public_id: string
+  };
   category: string;
   tags: string[];
   link: "/product-detail/";

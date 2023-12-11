@@ -4,11 +4,13 @@ import React, { FC } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowsPointingOutIcon } from "@heroicons/react/24/outline";
-import { StarIcon } from "@heroicons/react/24/solid";
+import { StarIcon } from "@heroicons/react/20/solid";
 import { Transition } from "@headlessui/react";
 import toast from "react-hot-toast";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/navigation"
+import {AdvancedImage} from '@cloudinary/react';
+import {Cloudinary} from "@cloudinary/url-gen";
 
 import { RootState } from "@/app/redux/store";
 import { addToCart } from "@/app/redux/features/account/accountSlice";
@@ -46,9 +48,18 @@ const ProductCard: FC<ProductCardProps> = ({
     variantType,
     status,
     image,
+    thumbnail
   } = data;
   const [variantActive, setVariantActive] = React.useState(0);
   const [showModalQuickView, setShowModalQuickView] = React.useState(false);
+
+  // 
+  const cld = new Cloudinary({
+    cloud: {
+      cloudName: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME
+    }
+  });
+  const cldImage = cld.image(thumbnail && (thumbnail?.public_id));
 
   const notifyAddTocart = ({ size }: { size?: string }) => {
     dispatch(addToCart({
@@ -91,12 +102,13 @@ const ProductCard: FC<ProductCardProps> = ({
     return (
       <div className="flex ">
         <div className="h-24 w-20 flex-shrink-0 overflow-hidden rounded-xl bg-slate-100">
+          {thumbnail ? <AdvancedImage alt="" cldImg={cldImage} className="h-full w-full object-cover object-center" /> :
           <Image
           // @ts-ignore
             src={(products && (typeof image === "string")) ? ProductImgs[image] : image}
             alt={name}
             className="h-full w-full object-cover object-center"
-          />
+          />}
         </div>
 
         <div className="ml-4 flex flex-1 flex-col">
@@ -272,12 +284,12 @@ const ProductCard: FC<ProductCardProps> = ({
         <div className="relative flex-shrink-0 bg-slate-50 dark:bg-slate-300 rounded-3xl overflow-hidden z-1 group">
           <Link href={"/product-detail"} className="block">
             <div className="flex aspect-w-11 aspect-h-12 w-full h-0">
-              <Image
+              {thumbnail ? <AdvancedImage alt="" cldImg={cldImage} className="h-full w-full object-cover object-center" /> : <Image
               //@ts-ignore
                 src={(products && (typeof image === "string")) ? ProductImgs[image] : image}
                 className="object-scale-down w-full h-full drop-shadow-xl "
                 alt=''
-              />
+              />}
             </div>
           </Link>
 

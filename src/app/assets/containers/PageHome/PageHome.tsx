@@ -8,6 +8,7 @@ import { Helmet } from "react-helmet";
 import { useSelector } from "react-redux";
 
 import { RootState } from "@/app/redux/store";
+import { useDisplayProductsQuery } from "@/app/redux/features/product/productApi";
 
 import SectionHero2 from "@/app/assets/components/SectionHero/SectionHero2";
 import SectionSliderLargeProduct from "@/app/assets/components/SectionSliderLargeProduct";
@@ -26,6 +27,11 @@ import { PRODUCTS, SPORT_PRODUCTS } from "@/app/assets/data/data";
 
 function PageHome() {
   const products: any = useSelector((state: RootState) => state.products.products)
+  const { data: productData, isLoading } = useDisplayProductsQuery({
+    page: 0,
+    limit: 0,
+  });
+  const productsAdmin = productData?.data || [];
 
   return (
     <div className="nc-PageHome relative overflow-hidden">
@@ -43,7 +49,7 @@ function PageHome() {
       <div className="container relative space-y-24 mt-24 lg:space-y-32 lg:mt-32">
         {/* SECTION */}
         <SectionSliderProductCard
-          data={products ? products[0].products.map((i:any) => i) : [SPORT_PRODUCTS[5], SPORT_PRODUCTS[1]]}
+          data={products ? [ ...productsAdmin.slice(0, 5), ...products[0].products.map((i:any) => i),] : []}
         />
 
         <div className="py-24 lg:py-32 border-t border-b border-slate-200 dark:border-slate-700">

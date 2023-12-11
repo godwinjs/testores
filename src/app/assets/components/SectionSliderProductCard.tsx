@@ -2,10 +2,13 @@
 
 import React, { FC, useEffect, useId, useRef } from "react";
 import Glide from "@glidejs/glide";
+import {AdvancedImage} from '@cloudinary/react';
+import {Cloudinary} from "@cloudinary/url-gen";
 
 import Heading from "./Heading/Heading";
 import ProductCard from "./ProductCard";
-import { Product, PRODUCTS } from "@/app/assets/data/data";
+// import { Product, PRODUCTS } from "@/app/assets/data/data";
+import { Product } from "@/app/assets/data/data";
 
 export interface SectionSliderProductCardProps {
   className?: string;
@@ -24,7 +27,8 @@ const SectionSliderProductCard: FC<SectionSliderProductCardProps> = ({
   headingClassName,
   heading,
   subHeading = "Game Consoles & TVs",
-  data = PRODUCTS.filter((_, i) => i < 8 && i > 2),
+  data,
+  // data = PRODUCTS.filter((_, i) => i < 8 && i > 2),
 }) => {
   const sliderRef = useRef(null);
   const id = useId();
@@ -81,7 +85,7 @@ const SectionSliderProductCard: FC<SectionSliderProductCardProps> = ({
         </Heading>
         <div className="glide__track" data-glide-el="track">
           <div className="glide__slides">
-            {data.map((item, index) => (
+            {data && data.map((item, index) => (
               <div key={index} className={`glide__slide ${itemClassName}`}>
                 <ProductCard data={item} />
               </div>

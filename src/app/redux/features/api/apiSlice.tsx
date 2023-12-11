@@ -1,14 +1,20 @@
-// 'use client';
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-// import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query";
+export const apiSlice = createApi({
+  reducerPath: "api",
+  baseQuery: fetchBaseQuery({
+    baseUrl: process.env.NEXT_PUBLIC_ADMIN_APP_BASE_URL,
+  }),
+  tagTypes: [
+    "Photo",
+    "User",
+    "Brand",
+    "Category",
+    "Product",
+    "Store",
+    "Subcategory",
+  ],
+  endpoints: () => ({}),
+});
 
-// const baseQuery = fetchBaseQuery({
-//   baseUrl: "http://localhost:3000/",
-//   credentials: "include",
-// });
-
-// export const apiSlice = createApi({
-//   baseQuery,
-//   tagTypes: ["User"],
-//   endpoints: (builder) => ({}),
-// });
+export default apiSlice;
