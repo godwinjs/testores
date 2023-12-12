@@ -49,7 +49,7 @@ function PageHome() {
       <div className="container relative space-y-24 mt-24 lg:space-y-32 lg:mt-32">
         {/* SECTION */}
         <SectionSliderProductCard
-          data={products ? [ ...productsAdmin.slice(0, 5), ...products[0].products.map((i:any) => i),] : []}
+          data={products ? [ ...productsAdmin.slice(0, 5), ...products[0].products.map((i:any) => i),] : [SPORT_PRODUCTS[5], SPORT_PRODUCTS[1]]}
         />
 
         <div className="py-24 lg:py-32 border-t border-b border-slate-200 dark:border-slate-700">
