@@ -1,6 +1,6 @@
 "use client";
 
-// import React from "react";
+import { useEffect, useRef } from "react";
 import SectionHowItWork from "@/app/assets/components/SectionHowItWork/SectionHowItWork";
 import BackgroundSection from "@/app/assets/components/BackgroundSection/BackgroundSection";
 import SectionPromo1 from "@/app/assets/components/SectionPromo1";
@@ -27,11 +27,16 @@ import { PRODUCTS, SPORT_PRODUCTS } from "@/app/assets/data/data";
 
 function PageHome() {
   const products: any = useSelector((state: RootState) => state.products.products)
-  const { data: productData, isLoading } = useDisplayProductsQuery({
+  const { data: productData, refetch } = useDisplayProductsQuery({
     page: 0,
     limit: 0,
   });
   const productsAdmin = productData?.data || [];
+
+  // const isUnmounting = useRef(null);
+  useEffect(() => {
+    // refetch()
+  }, [])
 
   return (
     <div className="nc-PageHome relative overflow-hidden">
@@ -48,7 +53,7 @@ function PageHome() {
 
       <div className="container relative space-y-24 mt-24 lg:space-y-32 lg:mt-32">
         {/* SECTION */}
-        <SectionSliderProductCard
+        <SectionSliderProductCard 
           data={products ? [ ...productsAdmin.slice(0, 5), ...products[0].products.map((i:any) => i),] : [SPORT_PRODUCTS[5], SPORT_PRODUCTS[1]]}
         />
 

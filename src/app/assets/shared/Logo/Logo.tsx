@@ -40,6 +40,7 @@ const Logo: React.FC<LogoProps> = ({
       )}
       {imgLight && (
         <Image
+        priority
           className="hidden max-h-28 dark:block"
           src={imgLight}
           alt="Logo-Light"

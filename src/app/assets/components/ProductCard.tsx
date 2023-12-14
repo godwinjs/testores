@@ -59,7 +59,7 @@ const ProductCard: FC<ProductCardProps> = ({
       cloudName: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME
     }
   });
-  const cldImage = cld.image(thumbnail && (thumbnail?.public_id));
+  const cldImage = cld.image(thumbnail && (thumbnail?.public_id + '.png'));
 
   const notifyAddTocart = ({ size }: { size?: string }) => {
     dispatch(addToCart({
@@ -102,7 +102,7 @@ const ProductCard: FC<ProductCardProps> = ({
     return (
       <div className="flex ">
         <div className="h-24 w-20 flex-shrink-0 overflow-hidden rounded-xl bg-slate-100">
-          {thumbnail ? <AdvancedImage alt="" cldImg={cldImage} className="h-full w-full object-cover object-center" /> :
+          {thumbnail ? <AdvancedImage alt="" cldImg={cldImage} className="h-full w-full object-contain object-center" /> :
           <Image
           // @ts-ignore
             src={(products && (typeof image === "string")) ? ProductImgs[image] : image}
@@ -284,7 +284,7 @@ const ProductCard: FC<ProductCardProps> = ({
         <div className="relative flex-shrink-0 bg-slate-50 dark:bg-slate-300 rounded-3xl overflow-hidden z-1 group">
           <Link href={"/product-detail"} className="block">
             <div className="flex aspect-w-11 aspect-h-12 w-full h-0">
-              {thumbnail ? <AdvancedImage alt="" cldImg={cldImage} className="h-full w-full object-cover object-center" /> : <Image
+              {thumbnail ? <AdvancedImage alt="" cldImg={cldImage} className="h-full w-full object-contain object-center" /> : <Image
               //@ts-ignore
                 src={(products && (typeof image === "string")) ? ProductImgs[image] : image}
                 className="object-scale-down w-full h-full drop-shadow-xl "

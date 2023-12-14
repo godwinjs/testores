@@ -19,6 +19,7 @@ const productApi = apiSlice.injectEndpoints({
         method: "GET",
       }),
       providesTags: ["Product"],
+      // keepUnusedDataFor: 5,
     }),
 
     // get product
@@ -49,6 +50,7 @@ const productApi = apiSlice.injectEndpoints({
       invalidatesTags: ["Product"],
     }),
   }),
+  overrideExisting: module.hot?.status() === "apply"
 });
 
 export const {
