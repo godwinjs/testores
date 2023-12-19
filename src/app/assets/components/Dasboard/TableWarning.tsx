@@ -1,7 +1,7 @@
 import React from "react";
 import { useRouter } from "next/navigation";
 
-const TableWarning = ({ title }) => {
+const TableWarning = ({ title }: {title: String}) => {
   const router = useRouter();
 
   return (
