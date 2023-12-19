@@ -47,7 +47,7 @@ export interface Thumbnail {
 }
 
 export interface Product {
-  _id?: String;
+  _id: String;
   title: string;
   description: string;
   thumbnail: Thumbnail;
