@@ -1,4 +1,6 @@
-import React, { FC, useState } from "react";
+"use client"
+
+import React, { FC, useState, useEffect } from "react";
 import {
   NoSymbolIcon,
   ClockIcon,
@@ -45,6 +47,7 @@ const ProductDetailPage2: FC<ProductDetailPage2Props> = ({
 }) => {
   const { data: displayProduct, isLoading: displayingProducts } = useDisplayProductQuery(pid);
   const {
+    _id,
     title,
     description,
     price,
@@ -59,6 +62,10 @@ const ProductDetailPage2: FC<ProductDetailPage2Props> = ({
     status
   } = displayProduct?.data || data;
   const sizes = allOfSizes;
+
+  useEffect(() => {
+    setShowUi(true)
+  }, [_id])
   
   const LIST_IMAGES_DEMO = cloudImage([ ...gallery]);
   const cloudThumbnail = cloudImage([thumbnail]);
@@ -66,6 +73,7 @@ const ProductDetailPage2: FC<ProductDetailPage2Props> = ({
   const [variantActive, setVariantActive] = React.useState(0);
   const [sizeSelected, setSizeSelected] = React.useState(sizes ? sizes[0] : "");
   const [qualitySelected, setQualitySelected] = React.useState(1);
+  const [showUi, setShowUi ] = useState(false)
 
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenModalViewAllReviews, setIsOpenModalViewAllReviews] =
@@ -361,16 +369,14 @@ const ProductDetailPage2: FC<ProductDetailPage2Props> = ({
         {/* <div className="w-14 border-b border-neutral-200 dark:border-neutral-700"></div> */}
         <div className="prose prose-sm sm:prose dark:prose-invert sm:max-w-4xl">
           <p>
-            {description.split(".").splice(0, 2).join(".")}
+            {description.split("\n").splice(0, 1)[0]}
           </p>
-          <p>
-            {description.split(".").splice(2, 4).join(".")}
-          </p>
+          {description.split("\n").splice(1, 2)[0] !== "null" ? <p>{description.split("\n").splice(1, 2)[0]}</p> : null}
           <ul>
-            <li>{description.split(".").splice(4, 5).join(".")}</li>
-            <li>{description.split(".").splice(5, 6).join(".")}</li>
-            <li>{description.split(".").splice(6, 7).join(".")}</li>
-            <li>{description.split(".").splice(7, 8).join(".")}</li>
+            {description.split("\n").splice(2).map((li: string, i: number) => {
+              
+              return <li key={i}>{description.split("\n").splice(2 + i, 3 + i)[0]}</li>;
+            })}
           </ul>
         </div>
         {/* ---------- 6 ----------  */}
@@ -433,7 +439,7 @@ const ProductDetailPage2: FC<ProductDetailPage2Props> = ({
   };
 
   return (
-    <div
+     (showUi && _id !== "fakeprd65808ab22bbbbb97daa4bdd5" ? <div
       className={`ListingDetailPage nc-ProductDetailPage2 ${className}`}
       data-nc-id="ProductDetailPage2"
     >
@@ -575,7 +581,7 @@ const ProductDetailPage2: FC<ProductDetailPage2Props> = ({
         show={isOpenModalViewAllReviews}
         onCloseModalViewAllReviews={() => setIsOpenModalViewAllReviews(false)}
       />
-    </div>
+    </div> : <div>Loading...</div>)
   );
 };
 

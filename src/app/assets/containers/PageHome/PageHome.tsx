@@ -35,7 +35,7 @@ function PageHome() {
 
   // const isUnmounting = useRef(null);
   useEffect(() => {
-    refetch()
+    // refetch()
   }, [])
 
   return (

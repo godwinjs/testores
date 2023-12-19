@@ -36,6 +36,7 @@ export interface ProductQuickViewProps {
 const ProductQuickView: FC<ProductQuickViewProps> = ({ className = "", product }) => {
   const { sizes, variants, status, allOfSizes, gallery, _id, price, thumbnail } = product;
   const LIST_IMAGES_DEMO = cloudImage([ thumbnail as Thumbnail , ...gallery as Thumbnail[]]);
+  const thumbnailImage = cloudImage([thumbnail])[0];
 
   const [variantActive, setVariantActive] = React.useState(0);
   const [sizeSelected, setSizeSelected] = React.useState(sizes ? sizes[0] : "");
@@ -45,7 +46,7 @@ const ProductQuickView: FC<ProductQuickViewProps> = ({ className = "", product }
     toast.custom(
       (t) => (
         <NotifyAddTocart
-          productImage={LIST_IMAGES_DEMO && LIST_IMAGES_DEMO[0]}
+          productImage={thumbnailImage}
           qualitySelected={qualitySelected}
           show={t.visible}
           sizeSelected={sizeSelected}
@@ -306,8 +307,8 @@ const ProductQuickView: FC<ProductQuickViewProps> = ({ className = "", product }
           {/* HEADING */}
           <div className="relative">
             <div className="aspect-w-16 aspect-h-16">
-              {LIST_IMAGES_DEMO && <AdvancedImage
-                cldImg={LIST_IMAGES_DEMO[0]}
+              {<AdvancedImage
+                cldImg={thumbnailImage}
                 className="w-full rounded-xl object-scale-down"
                 alt="product detail 1"
               />}

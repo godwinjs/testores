@@ -87,7 +87,6 @@ const SectionSliderProductCard: FC<SectionSliderProductCardProps> = ({
     // @ts-ignore
     return () => slider.destroy();
   }, [sliderRef, UNIQUE_CLASS]);
-
   return (
     <div className={`nc-SectionSliderProductCard ${className}`}>
       <div className={`${UNIQUE_CLASS} flow-root`} ref={sliderRef}>
@@ -101,11 +100,11 @@ const SectionSliderProductCard: FC<SectionSliderProductCardProps> = ({
         </Heading>
         <div className="glide__track" data-glide-el="track">
           <div className="glide__slides">
-            {data ? data.map((item, index) => (
-              <div key={index} className={`glide__slide ${itemClassName}`}>
+            {data ? data.map((item, index) => {
+              return <div key={index} className={`glide__slide ${itemClassName}`}>
                 <ProductCard data={ { ...item, sizes: item.allOfSizes } } />
               </div>
-            )) : <DataWarning title="products" />}
+            }) : <DataWarning title="products" />}
           </div>
         </div>
       </div>
