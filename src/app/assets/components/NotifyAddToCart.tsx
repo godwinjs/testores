@@ -1,19 +1,21 @@
 'use client';
 
 import { Transition } from "@headlessui/react";
-import Image from 'next/image'
+
+import React, { FC } from "react";
+import { AdvancedImage } from "@cloudinary/react";
+import { CloudinaryImage } from "@cloudinary/url-gen/index";
 
 import Prices from "./Prices";
-import { PRODUCTS } from "../data/data";
-import React, { FC } from "react";
-import imgs from '@/images/products/1.png'
+import { Product } from "../data/data";
 
 interface Props {
   show: boolean;
-  productImage: string | typeof imgs;
+  productImage?: CloudinaryImage;
   variantActive: number;
   sizeSelected: string;
   qualitySelected: number;
+  product: Product | null;
 }
 
 const NotifyAddTocart: FC<Props> = ({
@@ -22,25 +24,26 @@ const NotifyAddTocart: FC<Props> = ({
   variantActive,
   qualitySelected,
   sizeSelected,
+  product = null
 }) => {
-  const { name, price, variants } = PRODUCTS[0];
+  const { title, price, variants } = product || {};
 
   const renderProductCartOnNotify = () => {
     return (
       <div className="flex ">
         <div className="h-24 w-20 flex-shrink-0 overflow-hidden rounded-xl bg-slate-100">
-          <Image
-            src={productImage}
-            alt={name}
+          {productImage && <AdvancedImage
+            cldImg={productImage}
+            alt={title}
             className="h-full w-full object-contain object-center"
-          />
+          />}
         </div>
 
         <div className="ml-4 flex flex-1 flex-col">
           <div>
             <div className="flex justify-between ">
               <div>
-                <h3 className="text-base font-medium ">{name}</h3>
+                <h3 className="text-base font-medium ">{title}</h3>
                 <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
                   <span>
                     {variants ? variants[variantActive].name : `Natural`}

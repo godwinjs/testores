@@ -23,7 +23,6 @@ import SectionPromo3 from "@/app/assets/components/SectionPromo3";
 import SectionMagazine5 from "@/app/assets/containers/BlogPage/SectionMagazine5";
 import Heading from "@/app/assets/components/Heading/Heading";
 import ButtonSecondary from "@/app/assets/shared/Button/ButtonSecondary";
-import { PRODUCTS, SPORT_PRODUCTS } from "@/app/assets/data/data";
 
 function PageHome() {
   const products: any = useSelector((state: RootState) => state.products.products)
@@ -32,11 +31,11 @@ function PageHome() {
     limit: 0,
   });
   const productsAdmin = productData?.data || [];
-  console.log(productsAdmin)
+  // console.log(products)
 
   // const isUnmounting = useRef(null);
   useEffect(() => {
-    refetch()
+    // refetch()
   }, [])
 
   return (
@@ -55,7 +54,7 @@ function PageHome() {
       <div className="container relative space-y-24 mt-24 lg:space-y-32 lg:mt-32">
         {/* SECTION */}
         <SectionSliderProductCard 
-          data={productData ? [ ...productsAdmin.slice(0, 5)/*, ...products[0].products.map((i:any) => i),*/] : [SPORT_PRODUCTS[5], SPORT_PRODUCTS[1]]}
+          data={productData ? [ ...productsAdmin.slice(0, 5)] : undefined }
         />
 
         <div className="py-24 lg:py-32 border-t border-b border-slate-200 dark:border-slate-700">
@@ -74,6 +73,7 @@ function PageHome() {
         <SectionSliderProductCard
           heading="Best Sellers"
           subHeading="Best sellers of the month"
+          data={productData ? [ ...productsAdmin.slice(0, 5)] : undefined }
         />
 
         {/*  */}
@@ -89,7 +89,7 @@ function PageHome() {
         <SectionPromo3 />
 
         {/* SECTION */}
-        <SectionGridFeatureItems />
+        <SectionGridFeatureItems data={null} />
 
         <div className="relative mb-0 py-24 lg:py-32">
           <BackgroundSection />

@@ -27,7 +27,7 @@ const HeaderFilterSection: FC<HeaderFilterSectionProps> = ({
           className="sm:space-x-2"
           containerClassName="relative flex w-full overflow-x-auto text-sm md:text-base hiddenScrollbar"
         >
-          {["All items", "Women", "Mans", "Kids", "jewels"].map(
+          {["All items", "Women", "Men", "Kids", "jewels"].map(
             (item, index) => (
               <NavItem
                 key={index}

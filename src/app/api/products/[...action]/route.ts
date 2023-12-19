@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { type NextRequest } from 'next/server';
 
 import { saveProducts, getProducts } from "@/app/db/services/products.service";
+import connect from "@/app/db/utils/connect";
 
 export const GET = async (req: NextRequest, { params }: { params: { action: [string] }}) => {
     // const data = await req.json();
@@ -187,9 +188,11 @@ export const GET = async (req: NextRequest, { params }: { params: { action: [str
     let products
     switch(route){
       case 'set':
+        await connect();
         products = await getProducts();
         return NextResponse.json({message: "Done", data: products}, { status: 200});
       case 'get':
+        await connect();
         products = await getProducts();
         return NextResponse.json({message: "Done", data: products}, { status: 200});
       default:

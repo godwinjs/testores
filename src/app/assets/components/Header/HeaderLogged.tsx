@@ -3,7 +3,7 @@ import { FC, useLayoutEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux"; 
 
 import { setProducts } from "@/app/redux/features/product/productSlice";
 import { setCredentials } from "@/app/redux/features/auth/authSlice";
@@ -41,7 +41,7 @@ const HeaderLogged: FC<HeaderLoggedProps> = () => {
       // }
       if(product) return;
 
-      axios.get('/api/product/get').then((res) => {
+      axios.get('/api/products/get').then((res) => {
         const obj = res.data.data[0]
         const products = {
           id: obj._id, 
@@ -49,6 +49,7 @@ const HeaderLogged: FC<HeaderLoggedProps> = () => {
           createdAt: obj.createdAt,
           updatedAt: obj.updatedAt
         }
+        console.log(products)
         dispatch(setProducts(products))
       })
    }

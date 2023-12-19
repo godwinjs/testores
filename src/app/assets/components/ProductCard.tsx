@@ -17,12 +17,13 @@ import { addToCart } from "@/app/redux/features/account/accountSlice";
 
 import LikeButton from "./LikeButton";
 import Prices from "./Prices";
-import { Product, PRODUCTS, ProductImgs, ProductVarThumb } from "../data/data";
+import { Product, PRODUCTS, ProductVariant } from "../data/data";
 import ButtonPrimary from "../shared/Button/ButtonPrimary";
 import ButtonSecondary from "../shared/Button/ButtonSecondary";
 import BagIcon from "./BagIcon";
 import ModalQuickView from "./ModalQuickView";
 import ProductStatus from "./ProductStatus";
+import { cloudImage } from "../utils/cloudImage";
 
 export interface ProductCardProps {
   className?: string;
@@ -37,21 +38,23 @@ const ProductCard: FC<ProductCardProps> = ({
 }) => {
   const dispatch = useDispatch();
   const router = useRouter();
-  const products: any = useSelector((state: RootState) => state.products.products)
+  const products: any = useSelector((state: RootState) => state.products.products);
   const {
-    id,
-    name,
+    _id,
+    title,
     price,
     description,
-    sizes,
+    allOfSizes,
     variants,
     variantType,
     status,
-    image,
-    thumbnail
+    thumbnail,
+    sizes
   } = data;
+
   const [variantActive, setVariantActive] = React.useState(0);
   const [showModalQuickView, setShowModalQuickView] = React.useState(false);
+  const [quickViewId, setQuickViewId] = React.useState('');
 
   // 
   const cld = new Cloudinary({
@@ -62,17 +65,17 @@ const ProductCard: FC<ProductCardProps> = ({
   const cldImage = cld.image(thumbnail && (thumbnail?.public_id + '.png'));
 
   const notifyAddTocart = ({ size }: { size?: string }) => {
-    dispatch(addToCart({
-      id,
-      name,
-      price,
-      description,
-      size,
-      variants: variants?.[variantActive],
-      variantType,
-      status,
-      image,
-    }));
+    // dispatch(addToCart({
+    //   _id,
+    //   name,
+    //   price,
+    //   description,
+    //   size,
+    //   variants: variants?.[variantActive],
+    //   variantType,
+    //   status,
+    //   image,
+    // }));
     toast.custom(
       (t) => (
         <Transition
@@ -102,20 +105,14 @@ const ProductCard: FC<ProductCardProps> = ({
     return (
       <div className="flex ">
         <div className="h-24 w-20 flex-shrink-0 overflow-hidden rounded-xl bg-slate-100">
-          {thumbnail ? <AdvancedImage alt="" cldImg={cldImage} className="h-full w-full object-contain object-center" /> :
-          <Image
-          // @ts-ignore
-            src={(products && (typeof image === "string")) ? ProductImgs[image] : image}
-            alt={name}
-            className="h-full w-full object-cover object-center"
-          />}
+          {<AdvancedImage alt={title} cldImg={cldImage} className="h-full w-full object-contain object-center" />}
         </div>
 
         <div className="ml-4 flex flex-1 flex-col">
           <div>
             <div className="flex justify-between ">
               <div>
-                <h3 className="text-base font-medium ">{name}</h3>
+                <h3 className="text-base font-medium ">{title}</h3>
                 <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
                   <span>
                     {/* {`Natural`} */}
@@ -179,7 +176,7 @@ const ProductCard: FC<ProductCardProps> = ({
     if (variantType === "color") {
       return (
         <div className="flex space-x-1">
-          {variants.map((variant, index) => (
+          {variants.map((variant: ProductVariant, index: number) => (
             <div
               key={index}
               onClick={() => setVariantActive(index)}
@@ -201,7 +198,7 @@ const ProductCard: FC<ProductCardProps> = ({
 
     return (
       <div className="flex ">
-        {variants.map((variant, index) => (
+        {variants.map((variant: ProductVariant, index: number) => (
           <div
             key={index}
             onClick={() => setVariantActive(index)}
@@ -213,10 +210,10 @@ const ProductCard: FC<ProductCardProps> = ({
             title={variant.name}
           >
             <div className="absolute inset-0.5 rounded-full overflow-hidden z-0">
-              <Image
+              <AdvancedImage
                 // @ts-ignore
-                src={(products && (typeof image === "string")) ? ProductVarThumb[variant.thumbnail] : variant.thumbnail}
-                alt="variant"
+                cldImg={cloudImage([variant.thumbnail])[0]}
+                alt={variant.name + "image"}
                 className="absolute w-full h-full object-cover"
               />
             </div>
@@ -242,7 +239,7 @@ const ProductCard: FC<ProductCardProps> = ({
           className="ml-1.5 bg-white hover:!bg-gray-100 hover:text-slate-900 transition-colors shadow-lg"
           fontSize="text-xs"
           sizeClass="py-2 px-4"
-          onClick={() => setShowModalQuickView(true)}
+          onClick={() => {  setShowModalQuickView(true); }}
         >
           <ArrowsPointingOutIcon className="w-3.5 h-3.5" />
           <span className="ml-1">Quick view</span>
@@ -258,7 +255,7 @@ const ProductCard: FC<ProductCardProps> = ({
 
     return (
       <div className="absolute bottom-0 inset-x-1 space-x-1.5 flex justify-center opacity-0 invisible group-hover:bottom-4 group-hover:opacity-100 group-hover:visible transition-all">
-        {sizes.map((size, index) => {
+        {sizes.map((size: string, index: number) => {
           return (
             <div
               key={index}
@@ -272,24 +269,18 @@ const ProductCard: FC<ProductCardProps> = ({
       </div>
     );
   };
-
   return (
     <>
-      <div
+      { data && <div
         className={`nc-ProductCard relative flex flex-col bg-transparent ${className}`}
         data-nc-id="ProductCard"
       >
-        <Link href={"/product-detail"} className="absolute inset-0"></Link>
+        <Link href={`/product-detail/${_id}`} className="absolute inset-0"></Link>
 
         <div className="relative flex-shrink-0 bg-slate-50 dark:bg-slate-300 rounded-3xl overflow-hidden z-1 group">
-          <Link href={"/product-detail"} className="block">
+          <Link href={`/product-detail/${_id}`} className="block">
             <div className="flex aspect-w-11 aspect-h-12 w-full h-0">
-              {thumbnail ? <AdvancedImage alt="" cldImg={cldImage} className="h-full w-full object-contain object-center" /> : <Image
-              //@ts-ignore
-                src={(products && (typeof image === "string")) ? ProductImgs[image] : image}
-                className="object-scale-down w-full h-full drop-shadow-xl "
-                alt=''
-              />}
+              {<AdvancedImage alt="" cldImg={cldImage} className="h-full w-full object-scale-down object-center" />}
             </div>
           </Link>
 
@@ -297,7 +288,7 @@ const ProductCard: FC<ProductCardProps> = ({
 
           <LikeButton liked={isLiked} className="absolute top-3 right-3 z-10" />
 
-          {sizes ? renderSizeList() : renderGroupButtons()}
+          {(sizes?.length > 0) ? renderSizeList() : renderGroupButtons()}
         </div>
 
         <div className="space-y-4 px-2.5 pt-5 pb-2.5">
@@ -307,10 +298,11 @@ const ProductCard: FC<ProductCardProps> = ({
             <h2
               className={`nc-ProductCard__title text-base font-semibold transition-colors`}
             >
-              {name}
+              {title}
             </h2>
             <p className={`text-sm text-slate-500 dark:text-slate-400 mt-1 `}>
-              {description}
+              {`${description.split(" ").splice(0, 10).join(" ")} ${description.split(" ").length > 3 ? '...' : ''}`}
+              
             </p>
           </div>
 
@@ -324,13 +316,14 @@ const ProductCard: FC<ProductCardProps> = ({
             </div>
           </div>
         </div>
-      </div>
+      </div>}
 
       {/* QUICKVIEW */}
-      <ModalQuickView
+       <ModalQuickView
         show={showModalQuickView}
+        data={data}
         onCloseModalQuickView={() => setShowModalQuickView(false)}
-      />
+      /> 
     </>
   );
 };

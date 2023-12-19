@@ -4,23 +4,32 @@ import { FC } from "react";
 import HeaderFilterSection from "@/app/assets/components/HeaderFilterSection";
 import ProductCard from "@/app/assets/components/ProductCard";
 import ButtonPrimary from "@/app/assets/shared/Button/ButtonPrimary";
-import { Product, PRODUCTS } from "@/app/assets/data/data";
+import { Product } from "@/app/assets/data/data";
+
+import { useDisplayProductsQuery } from "@/app/redux/features/product/productApi";
 
 //
 export interface SectionGridFeatureItemsProps {
-  data?: Product[];
+  data: Product[] | null;
 }
 
 const SectionGridFeatureItems: FC<SectionGridFeatureItemsProps> = ({
-  data = PRODUCTS,
+  data = null,
 }) => {
+  const { data: productData, refetch } = useDisplayProductsQuery({
+    page: 0,
+    limit: 0,
+  });
+  const productsAdmin = productData?.data || [];
+  data = productsAdmin;
+
   return (
     <div className="nc-SectionGridFeatureItems relative">
       <HeaderFilterSection />
       <div
         className={`grid gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 `}
       >
-        {data.map((item, index) => (
+        {data && data.map((item, index) => (
           <ProductCard data={item} key={index} />
         ))}
       </div>

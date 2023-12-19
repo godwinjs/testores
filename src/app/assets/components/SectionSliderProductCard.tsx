@@ -9,6 +9,22 @@ import Heading from "./Heading/Heading";
 import ProductCard from "./ProductCard";
 // import { Product, PRODUCTS } from "@/app/assets/data/data";
 import { Product } from "@/app/assets/data/data";
+import DataWarning from "@/app/assets/components/Dasboard/DataWarning";
+
+export interface ProductVariant {
+  id: number;
+  name: string;
+  thumbnail?: {
+    url: string,
+    public_id: string
+  };
+  color?: string;
+  featuredImage: {
+    url: string,
+    public_id: string
+  };
+}
+// "New in" | "limited edition" | "Sold Out" | "50% Discount";
 
 export interface SectionSliderProductCardProps {
   className?: string;
@@ -85,11 +101,11 @@ const SectionSliderProductCard: FC<SectionSliderProductCardProps> = ({
         </Heading>
         <div className="glide__track" data-glide-el="track">
           <div className="glide__slides">
-            {data && data.map((item, index) => (
+            {data ? data.map((item, index) => (
               <div key={index} className={`glide__slide ${itemClassName}`}>
-                <ProductCard data={item} />
+                <ProductCard data={ { ...item, sizes: item.allOfSizes } } />
               </div>
-            ))}
+            )) : <DataWarning title="products" />}
           </div>
         </div>
       </div>

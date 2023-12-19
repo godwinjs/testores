@@ -10,7 +10,8 @@ import {
   SparklesIcon,
 } from "@heroicons/react/24/outline";
 import Image from "next/image"
-
+import {AdvancedImage} from '@cloudinary/react';
+import { cloudImage } from "../utils/cloudImage";
 
 import IconDiscount from "./IconDiscount";
 import Prices from "./Prices";
@@ -18,7 +19,7 @@ import NotifyAddTocart from "./NotifyAddToCart";
 import AccordionInfo from "@/app/assets/containers/ProductDetailPage/AccordionInfo";
 import BagIcon from "./BagIcon";
 import NcInputNumber from "./NcInputNumber";
-import { PRODUCTS } from "@/app/assets/data/data";
+import { Product, Thumbnail } from "@/app/assets/data/data";
 import ButtonPrimary from "@/app/assets/shared/Button/ButtonPrimary";
 import LikeButton from "./LikeButton";
 
@@ -29,11 +30,12 @@ import detail3JPG from "@/images/products/1.png";
 
 export interface ProductQuickViewProps {
   className?: string;
+  product: Product;
 }
 
-const ProductQuickView: FC<ProductQuickViewProps> = ({ className = "" }) => {
-  const { sizes, variants, status, allOfSizes } = PRODUCTS[0];
-  const LIST_IMAGES_DEMO = [detail1JPG, detail2JPG, detail3JPG];
+const ProductQuickView: FC<ProductQuickViewProps> = ({ className = "", product }) => {
+  const { sizes, variants, status, allOfSizes, gallery, _id, price, thumbnail } = product;
+  const LIST_IMAGES_DEMO = cloudImage([ thumbnail as Thumbnail , ...gallery as Thumbnail[]]);
 
   const [variantActive, setVariantActive] = React.useState(0);
   const [sizeSelected, setSizeSelected] = React.useState(sizes ? sizes[0] : "");
@@ -43,11 +45,12 @@ const ProductQuickView: FC<ProductQuickViewProps> = ({ className = "" }) => {
     toast.custom(
       (t) => (
         <NotifyAddTocart
-          productImage={LIST_IMAGES_DEMO[0]}
+          productImage={LIST_IMAGES_DEMO && LIST_IMAGES_DEMO[0]}
           qualitySelected={qualitySelected}
           show={t.visible}
           sizeSelected={sizeSelected}
           variantActive={variantActive}
+          product={product}
         />
       ),
       { position: "top-right", id: "nc-product-notify", duration: 3000 }
@@ -81,9 +84,9 @@ const ProductQuickView: FC<ProductQuickViewProps> = ({ className = "" }) => {
               }`}
             >
               <div className="absolute inset-0.5 rounded-full overflow-hidden z-0">
-                <Image
+                <AdvancedImage
                   // @ts-ignore
-                  src={variant.thumbnail}
+                  cldImg={cloudImage([variant.thumbnail])[0]}
                   alt=""
                   className="absolute w-full h-full object-cover"
                 />
@@ -172,6 +175,14 @@ const ProductQuickView: FC<ProductQuickViewProps> = ({ className = "" }) => {
         </div>
       );
     }
+    if (status.split(" ")[1] === "Discount") {
+      return (
+        <div className={CLASSES}>
+          <IconDiscount className="w-3.5 h-3.5" />
+          <span className="ml-1 leading-none">{status}</span>
+        </div>
+      );
+    }
     if (status === "Sold Out") {
       return (
         <div className={CLASSES}>
@@ -204,14 +215,14 @@ const ProductQuickView: FC<ProductQuickViewProps> = ({ className = "" }) => {
             {/* <div className="flex text-xl font-semibold">$112.00</div> */}
             <Prices
               contentClass="py-1 px-2 md:py-1.5 md:px-3 text-lg font-semibold"
-              price={112}
+              price={price}
             />
 
             <div className="h-6 border-l border-slate-300 dark:border-slate-700"></div>
 
             <div className="flex items-center">
               <Link
-                href="/product-detail"
+                href={"/product-detail/"+_id}
                 className="flex items-center text-sm font-medium"
               >
                 <StarIcon className="w-5 h-5 pb-[1px] text-yellow-400" />
@@ -295,11 +306,11 @@ const ProductQuickView: FC<ProductQuickViewProps> = ({ className = "" }) => {
           {/* HEADING */}
           <div className="relative">
             <div className="aspect-w-16 aspect-h-16">
-              <Image
-                src={LIST_IMAGES_DEMO[0]}
-                className="w-full rounded-xl object-cover"
+              {LIST_IMAGES_DEMO && <AdvancedImage
+                cldImg={LIST_IMAGES_DEMO[0]}
+                className="w-full rounded-xl object-scale-down"
                 alt="product detail 1"
-              />
+              />}
             </div>
 
             {/* STATUS */}
@@ -308,12 +319,15 @@ const ProductQuickView: FC<ProductQuickViewProps> = ({ className = "" }) => {
             <LikeButton className="absolute right-3 top-3 " />
           </div>
           <div className="hidden lg:grid grid-cols-2 gap-3 mt-3 sm:gap-6 sm:mt-6 xl:gap-5 xl:mt-5">
-            {[LIST_IMAGES_DEMO[1], LIST_IMAGES_DEMO[2]].map((item, index) => {
+            {LIST_IMAGES_DEMO && LIST_IMAGES_DEMO.map((item, index) => {
+              if(index === 0) {
+                return;
+              }
               return (
                 <div key={index} className="aspect-w-3 aspect-h-4">
-                  <Image
-                    src={item}
-                    className="w-full rounded-xl object-cover"
+                  <AdvancedImage
+                    cldImg={item}
+                    className="w-full rounded-xl object-scale-down"
                     alt="product detail 1"
                   />
                 </div>

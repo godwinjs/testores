@@ -6,14 +6,17 @@ import React, { FC, Fragment } from "react";
 import ButtonClose from "../shared/ButtonClose/ButtonClose";
 import ProductQuickView from "./ProductQuickView";
 // import ProductQuickView2 from "./ProductQuickView2";
+import { Product } from "@/app/assets/data/data"
 
 export interface ModalQuickViewProps {
   show: boolean;
+  data: Product;
   onCloseModalQuickView: () => void;
 }
 
 const ModalQuickView: FC<ModalQuickViewProps> = ({
   show,
+  data,
   onCloseModalQuickView,
 }) => {
   // const location = useLocation();
@@ -66,7 +69,7 @@ const ModalQuickView: FC<ModalQuickViewProps> = ({
                   ) : (
                     <ProductQuickView />
                   )} */}
-                  <ProductQuickView />
+                  <ProductQuickView product={data} />
                 </div>
               </div>
             </div>
