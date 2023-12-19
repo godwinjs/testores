@@ -12,7 +12,7 @@ import { useDisplayProductQuery } from "@/app/redux/features/product/productApi"
 
 import ButtonPrimary from "@/app/assets/shared/Button/ButtonPrimary";
 import ButtonSecondary from "@/app/assets/shared/Button/ButtonSecondary";
-import NcImage from "@/app/assets/shared/NcImage/NcImage";
+// import NcImage from "@/app/assets/shared/NcImage/NcImage";
 import LikeSaveBtns from "./LikeSaveBtns";
 import ModalPhotos from "./ModalPhotos";
 import ReviewItem from "@/app/assets/components/ReviewItem";

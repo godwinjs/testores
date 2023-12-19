@@ -83,7 +83,8 @@ const NcImage: FC<NcImageProps> = ({
       ref={_containerRef}
     >
       {__src && imageLoaded ? (
-        <NextImage src={__src} width={0} layout="fill" className={className} alt={alt} {...args} />
+        //@ts-ignore
+        <NextImage src={__src} width={undefined} layout="fill" className={className} alt={alt} {...args} />
       ) : (
         renderLoadingPlaceholder()
       )}
