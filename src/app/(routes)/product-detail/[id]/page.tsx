@@ -6,7 +6,7 @@ import ProductDetailPage2 from "@/app/assets/containers/ProductDetailPage/Produc
 import { PRODUCTS } from "@/app/assets/data/data";
 
 
-export default function Product_detail({params} : {props: any; params: { id: string}}) {
+export default function Product_detail({params} : {params: { id: string}}) {
     // const count = useSelector((state: RootState) => state.counter.value);
     // const dispatch = useDispatch();
 
