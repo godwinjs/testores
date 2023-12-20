@@ -61,6 +61,8 @@ const ProductDetailPage2: FC<ProductDetailPage2Props> = ({
     allOfSizes,
     status
   } = displayProduct?.data || data;
+  //when error
+  if(!displayProduct?.acknowledgement) console.log({[displayProduct?.message]: displayProduct?.description});
   const sizes = allOfSizes;
 
   useEffect(() => {

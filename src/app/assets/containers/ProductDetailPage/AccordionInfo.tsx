@@ -8,42 +8,50 @@ const DEMO_DATA = [
   {
     name: "Description",
     content:
-      "Fashion is a form of self-expression and autonomy at a particular period and place and in a specific context, of clothing, footwear, lifestyle, accessories, makeup, hairstyle, and body posture.",
+      "Gaming is playing an electronic video game, which is often done on a dedicated gaming console, PC or smartphone. People who often play video games are called gamers.",
   },
   {
-    name: "Fabric + Care",
+    name: "Box Includes",
     content: `<ul class="list-disc list-inside leading-7">
-    <li>Made from a sheer Belgian power micromesh.</li>
-    <li>
-    74% Polyamide (Nylon) 26% Elastane (Spandex)
-    </li>
-    <li>
-    Adjustable hook & eye closure and straps
-    </li>
-    <li>
-    Hand wash in cold water, dry flat
-    </li>
+      <li>Xbox Series X console.</li>
+      <li>Wireless controller.</li>
+      <li>Two AA batteries.</li>
+      <li>Ultra High Speed HDMI cable.</li>
+      <li>Power cord.</li>
+      <li>Quick-start guide.</li>
   </ul>`,
   },
 
   {
-    name: "How it Fits",
-    content:
-      "Use this as a guide. Preference is a huge factor — if you're near the top of a size range and/or prefer more coverage, you may want to size up.",
+    name: "Setting up the console",
+    content:  `<ul class="list-disc list-inside leading-7">
+    <li>Connect the power cable into the power cable port on the console (marked by a single raised dot).</li>
+    <li>Plug the power cable into a power outlet.</li>
+    <li>Connect the HDMI cable into the HDMI port on the console (marked by a single raised dash).</li>
+    <li>Connect the other end of the HDMI cable into your TV.</li>
+    <li>Press the Xbox button  on the front of the console to power up the system.</li>
+  </ul>`
   },
   {
     name: "FAQ",
     content: `
-    <ul class="list-disc list-inside leading-7">
-    <li>All full-priced, unworn items, with tags attached and in their original packaging are eligible for return or exchange within 30 days of placing your order.</li>
+    <ul class="leading-7">
     <li>
-    Please note, packs must be returned in full. We do not accept partial returns of packs.
+      <h3 class="font-bold">Can I play Xbox 360 games on other Xbox consoles?</h3>
+      <p>Yes, the Xbox One family of consoles and the Xbox Series X|S are backward compatible with Xbox 360 games. You can even send game invites and start parties the way you would on Xbox 360.</p>
     </li>
     <li>
-    Want to know our full returns policies? Here you go.
+      <h3 class="font-bold">What's required to get Insider previews?</h3>
+      <p>Every preview in the Xbox Insider Program has its own requirements. To view those requirements:
+      Launch the Xbox Insider Hub. Go to Previews, and then select the preview that you want. Read the eligibility requirements on the Info tab of the Insider content details page.</p>
     </li>
     <li>
-    Want more info about shipping, materials or care instructions? Here!
+      <h3 class="font-bold">How do I find my Xbox product manual?</h3>
+      <p>If you’re looking for your Xbox product manual and can’t find a physical copy, select Learn more to find manuals for all major Xbox products in the languages of every country and region in which we sell Xbox products.</p>
+    </li>
+    <li>
+      <h3 class="font-bold">What happens when an account or device has been banned?</h3>
+      <p>If your account or device has received an Xbox enforcement action, what you can do on the Xbox network depends on the type of enforcement action that you’ve received.</p>
     </li>
   </ul>
     `,

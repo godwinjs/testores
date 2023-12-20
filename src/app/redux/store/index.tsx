@@ -1,6 +1,8 @@
 'use client';
 
 import { configureStore } from "@reduxjs/toolkit";
+// import { setupListeners } from "@reduxjs/toolkit/query";
+
 import logger from "redux-logger"
 import {
   persistStore,
@@ -49,6 +51,8 @@ export const store = configureStore({
     }).concat(apiSlice.middleware, middlewareLogger),
     devTools: true,
 });
+
+// setupListeners(store.dispatch)
 
 export let persistor = persistStore(store);
 

@@ -19,7 +19,8 @@ const productApi = apiSlice.injectEndpoints({
         method: "GET",
       }),
       providesTags: ["Product"],
-      // keepUnusedDataFor: 5,
+      refetchOnReconnect: true,
+      // keepUnusedDataFor: 1,
     }),
 
     // get product
@@ -29,6 +30,13 @@ const productApi = apiSlice.injectEndpoints({
         method: "GET",
       }),
       providesTags: ["Product"],
+      refetchOnReconnect: true,
+      keepUnusedDataFor: 1,
+      retries: 3, // Set the number of retry attempts
+      retryOnUnmountOrReconnect: true
+      // async onQueryStarted(_, {dispatch, queryFulfilled}){
+      //   dispatch(apiSlice.internalActions.onOnline(refetchOnReconnect))
+      // }
     }),
 
     // update product
@@ -49,8 +57,9 @@ const productApi = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["Product"],
     }),
+
   }),
-  overrideExisting: module.hot?.status() === "apply"
+  overrideExisting: module.hot?.status() === "apply",
 });
 
 export const {
