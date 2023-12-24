@@ -54,7 +54,6 @@ const ProductCard: FC<ProductCardProps> = ({
 
   const [variantActive, setVariantActive] = React.useState(0);
   const [showModalQuickView, setShowModalQuickView] = React.useState(false);
-  const [quickViewId, setQuickViewId] = React.useState('');
 
   // 
   const cld = new Cloudinary({
