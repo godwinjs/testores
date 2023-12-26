@@ -9,6 +9,12 @@ const nextConfig = {
             port: '',
             pathname: '/photos/**',
           },
+          {
+            protocol: 'https',
+            hostname: 'images.unsplash.com',
+            port: '',
+            pathname: '/**'
+          }
         ],
       },
 }//all exports go in here

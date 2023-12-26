@@ -32,6 +32,7 @@ const CardCategory1: FC<CardCategory1Props> = ({
           size === "large" ? "w-20 h-20" : "w-12 h-12"
         } rounded-lg mr-4 overflow-hidden`}>
           <Image
+            height={0} width={0}
             src={featuredImage || _getImgRd()}
             alt=""
           />
