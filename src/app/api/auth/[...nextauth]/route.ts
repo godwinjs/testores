@@ -20,7 +20,7 @@ const authOptions: NextAuthOptions = {
             },
             async authorize(credentials: any) {
                 await connect();
-                const {email, password } = credentials;
+                const { email, password } = credentials;
 
                 try {
                     const user: any = await User.findOne({email: email});
@@ -43,17 +43,18 @@ const authOptions: NextAuthOptions = {
         GoogleProvider({
         clientId: process.env.GOOGLE_CLIENT_ID || '',
         clientSecret: process.env.GOOGLE_CLIENT_SECRET || '',
-        // authorization: {
-        //     params: {
-        //       prompt: "consent",
-        //       access_type: "offline",
-        //       response_type: "code"
-        //     }
-        // }
+        authorization: {
+            params: {
+              prompt: "consent",
+              access_type: "offline",
+              response_type: "code"
+            }
+        }
         }),
     ],
     callbacks: {
         async signIn({user, account, profile, email, credentials }: any): Promise<boolean> {
+            await connect();
             // console.log({user: user, account: account, profile: profile, email: email, credentials: credentials})
             if(account?.provider == "credentials"){
                 return true;
@@ -62,12 +63,11 @@ const authOptions: NextAuthOptions = {
             if(account?.provider == "google"){
                 // profile.email_verified: boolean = true //.given_name//.family_name
                 // profile.locale: string = 'en'
-                await connect();
                 const existingUser: any = await User.findOne({email: user.email});
         
                 if(!(existingUser === null)){
                     console.log("User Exists")
-                    return true;
+                    return true;//
                 }
                 const newUser = new User({
                     fullName: profile.name,

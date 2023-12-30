@@ -91,8 +91,8 @@ export default async function RootLayout({
       <body>
         <AuthProvider session={session}>
           <Providers>
-              <Header />
               <Toaster />
+              <Header />
               {children}
               <Footer />
           </Providers>

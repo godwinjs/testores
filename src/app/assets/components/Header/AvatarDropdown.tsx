@@ -66,16 +66,15 @@ export default function AvatarDropdown() {
                 <div className="overflow-hidden rounded-3xl shadow-lg ring-1 ring-black ring-opacity-5">
                   <div className="relative grid grid-cols-1 gap-6 bg-white dark:bg-neutral-800 py-7 px-6">
                   { !session ? null : (
-                    <div className="flex items-center space-x-3">
+                    <><div className="flex items-center space-x-3">
                       <Avatar imgUrl={avatarImgs[7]} sizeClass="w-12 h-12" />
                       <div className="flex-grow">
                         <h4 className="font-semibold">{session.user?.fullName}</h4>
                         <p className="text-xs mt-0.5">{session.user?.email}</p>
                       </div>
                     </div>
+                    <div className="w-full border-b border-neutral-200 dark:border-neutral-700"></div></>
                   ) }
-
-                    <div className="w-full border-b border-neutral-200 dark:border-neutral-700" />
 
                     {/* ------------------ 1 --------------------- */}
                     <Link

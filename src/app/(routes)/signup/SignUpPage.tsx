@@ -4,6 +4,7 @@ import { Helmet } from "react-helmet";
 import Link from "next/link";
 import Image from 'next/image';
 import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
 
 import facebookSvg from "@/images/socials/_Facebook.svg";
 import twitterSvg from "@/images/socials/_Twitter.svg";
@@ -20,16 +21,19 @@ const loginSocials = [
     name: "Continue with Facebook",
     href: "#",
     icon: facebookSvg,
+    provider: 'facebook'
   },
   {
     name: "Continue with Twitter",
     href: "#",
     icon: twitterSvg,
+    provider: 'twitter'
   },
   {
     name: "Continue with Google",
     href: "#",
     icon: googleSvg,
+    provider: 'google'
   },
 ];
 
@@ -100,7 +104,17 @@ const SignUpPage: FC<PageSignUpProps> = ({ className = "" }) => {
             {loginSocials.map((item, index) => (
               <a
                 key={index}
-                href={item.href}
+                onClick={async () => {
+                  const res = await signIn(`${item.provider}`,{
+                  redirect: false
+                  })
+                  if(res?.error){
+                    setError("Couldn't login user");
+                    if(res?.url){
+                      router.replace('/account')
+                    } 
+                }
+                }}
                 className=" flex w-full rounded-lg bg-primary-50 dark:bg-neutral-800 px-4 py-3 transform transition-transform sm:px-6 hover:translate-y-[-2px]"
               >
                 <Image

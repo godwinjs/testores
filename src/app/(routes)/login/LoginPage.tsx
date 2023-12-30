@@ -12,7 +12,7 @@ import { setCredentials } from "@/app/redux/features/auth/authSlice";
 import facebookSvg from "@/images/socials/_Facebook.svg";
 import twitterSvg from "@/images/socials/_Twitter.svg";
 import googleSvg from "@/images/socials/_Google.svg";
-import Input from "@/app/assets/shared/Input/Input";
+import Input from "@/app/assets/shared/Input/Input"; 
 import ButtonPrimary from "@/app/assets/shared/Button/ButtonPrimary";
 
 

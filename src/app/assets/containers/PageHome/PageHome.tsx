@@ -41,7 +41,7 @@ function PageHome() {
   return (
     <div className="nc-PageHome relative overflow-hidden">
       <Helmet>
-        <title>TruthStore || best product empire</title>
+        <title>TruthStore || best product plug</title>
       </Helmet>
 
       {/* SECTION HERO */}
