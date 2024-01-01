@@ -101,7 +101,7 @@ const SectionSliderProductCard: FC<SectionSliderProductCardProps> = ({
         <div className="glide__track" data-glide-el="track">
           <div className="glide__slides">
             {data ? data.map((item, index) => {
-              return <div displayName={`card div ${index}`} key={item._id} className={`glide__slide ${itemClassName}`}>
+              return <div key={index + 1} className={`glide__slide ${itemClassName}`}>
                 <ProductCard data={ { ...item, sizes: item.allOfSizes } } />
               </div>
             }) : <DataWarning title="products" />}
