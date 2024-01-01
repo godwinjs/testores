@@ -5,6 +5,8 @@ import localFont from "next/font/local";
 import "rc-slider/assets/index.css";
 import { Toaster } from 'react-hot-toast';
 import { getServerSession } from "next-auth/next";
+import { Suspense } from 'react';
+import { NavigationEvents } from '@/app/assets/components/NavigationEvents';
 
 import AuthProvider from "@/app/db/utils/SessionProvider";
 import '@/app/style/layout.css';
@@ -92,6 +94,9 @@ export default async function RootLayout({
         <AuthProvider session={session}>
           <Providers>
               <Toaster />
+              <Suspense fallback={null}>
+                <NavigationEvents />
+              </Suspense>
               <Header />
               {children}
               <Footer />

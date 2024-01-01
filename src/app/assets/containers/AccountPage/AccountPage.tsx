@@ -31,6 +31,7 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
   const [image, setImage] = useState(null);
   const [preview, setPreview]: any = useState(null);
   const [ error, setError ] = useState("");
+  const [disabled, setDisabled ] = useState(true);
   const [ gender, setGender ] = useState("");
   const router = useRouter();
   const dispatch: AppDispatch = useDispatch();
@@ -76,6 +77,7 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
         about: aboutRef.current?.value
       }).then((res) => {
         dispatch(setCredentials(res.data.data))
+        setDisabled(true);
       })}
 
     }catch (err) {
@@ -83,8 +85,37 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
     }
   }
 
+  const handleTextChange = (e: any) => {
+    const { fullName, email, dob, address, phone, about } = user;
+    let text = e.target.value;
+    if(text.slice(-1) === " ") return;
+    switch(e.target.name){
+      case "Fname":
+        if(fullName !== text) setDisabled(false);
+        break;
+      case "email":
+        if (email !== text ) setDisabled(false);
+        break;
+      case "address":
+        if (address  !== text ) setDisabled(false);
+        break;
+      case "dob":
+        if (dob  !== text) setDisabled(false);
+        break;
+      case "phone":
+        if (phone  !== text) setDisabled(false);
+        break;
+      case "about":
+        if (about  !== text) setDisabled(false);
+        break;
+      default:
+        setDisabled(true);
+        break;
+    }
+  }
   const handleGenderChange = (e: any) => {
       let {value} = e.target;
+      setDisabled(false);
       setGender(value)
       // dispatch(setImageData({
       //   ...account.imageData,
@@ -92,6 +123,7 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
       // }))
   }
   const handleImageChange = async (e: any) => {
+    setDisabled(false);
     const file = e.target.files[0];
     setImage(file);
 
@@ -197,7 +229,7 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
             <div className="flex-grow mt-10 md:mt-0 md:pl-16 max-w-3xl space-y-6">
               <div>
                 <Label>Full name</Label>
-                <Input displayName="FName input" className="mt-1.5" defaultValue={`${user?.fullName}`} ref={fNameRef} />
+                <Input name="Fname" displayName="FName input" onChange={handleTextChange} className="mt-1.5" defaultValue={`${user?.fullName}`} ref={fNameRef} />
               </div>
 
               {/* ---- */}
@@ -210,6 +242,7 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
                     <i className="text-2xl las la-envelope"></i>
                   </span>
                   <Input
+                    name="email"
                     className="!rounded-l-none"
                     defaultValue={`${user?.email}`}
                     displayName="Email Input"
@@ -281,7 +314,7 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
                 <Textarea className="mt-1.5" defaultValue={user?.about} ref={aboutRef} />
               </div>
               <div className="pt-2">
-                <ButtonPrimary onClick={updateSubmit}>Update account</ButtonPrimary>
+                <ButtonPrimary disabled={disabled} onClick={updateSubmit}>Update account</ButtonPrimary>
               </div>
             </div>
           </div>
