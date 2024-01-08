@@ -18,6 +18,7 @@ import Prev from "@/app/assets/shared/NextPrev/Prev";
 
 interface Hero2DataType {
   image: string | typeof imageRightPng;
+  cloudImage?: string;
   heading: string;
   subHeading: string;
   btnText: string;
@@ -25,34 +26,56 @@ interface Hero2DataType {
 }
 export interface SectionHero2Props {
   className?: string;
+  data: Hero2DataType[];
 }
-
-const DATA: Hero2DataType[] = [
-  {
-    image: imageRightPng2,
-    heading: "Exclusive collection for everyone",
-    subHeading: "In this season, find the best 🔥",
-    btnText: "Explore now",
-    btnLink: "/",
-  },
-  {
-    image: imageRightPng3,
-    heading: "Exclusive collection for everyone",
-    subHeading: "In this season, find the best 🔥",
-    btnText: "Explore now",
-    btnLink: "/",
-  },
-  {
-    image: imageRightPng,
-    heading: "Exclusive collection for everyone",
-    subHeading: "In this season, find the best 🔥",
-    btnText: "Explore now",
-    btnLink: "/",
-  },
-];
+const Images = {
+  "imageRightPng2": imageRightPng2,
+  "imageRightPng3": imageRightPng3,
+  "imageRightPng": imageRightPng
+}
 let TIME_OUT: NodeJS.Timeout | null = null;
 
-const SectionHero2: FC<SectionHero2Props> = ({ className = "" }) => {
+const SectionHero2: FC<SectionHero2Props> = ({ className = "", data }) => {
+  const DATA: Hero2DataType[] = [
+    {
+      image: data[0].cloudImage ? data[0].cloudImage : Images["imageRightPng2"],
+      heading: data[0].heading,
+      subHeading: data[0].subHeading,
+      btnText: data[0].btnText,
+      btnLink: data[0].btnLink,
+    },
+    {
+      image: data[1].cloudImage ? data[1].cloudImage : Images["imageRightPng3"],
+      heading: data[1].heading,
+      subHeading: data[1].subHeading,
+      btnText: data[1].btnText,
+      btnLink: data[1].btnLink,
+    },
+    {
+      image: data[2].cloudImage ? data[2].cloudImage : Images["imageRightPng"],
+      heading: data[2].heading,
+      subHeading: data[2].subHeading,
+      btnText: data[2].btnText,
+      btnLink: data[2].btnLink,
+    },
+  ];
+
+  if(data.length > 3){
+    data.map((item: any, i: number) => {
+      if(i > 2){
+        DATA.push({
+          image: item.cloudImage,
+          heading: item.heading,
+          subHeading: item.subHeading,
+          btnText: item.btnText,
+          btnLink: item.btnLink,
+        })
+      }
+      console.log('exists')
+    })
+  }
+  console.log(data[0].cloudImage)
+
   // =================
   const [indexActive, setIndexActive] = useState(0);
   const [isRunning, toggleIsRunning] = useBoolean(true);
@@ -213,6 +236,8 @@ const SectionHero2: FC<SectionHero2Props> = ({ className = "" }) => {
               src={item.image}
               priority={true}
               alt={item.heading}
+              layout="fill"
+              objectFit="scale-down"
             />
           </div>
         </div>

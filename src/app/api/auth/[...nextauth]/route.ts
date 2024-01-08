@@ -20,6 +20,7 @@ const authOptions: NextAuthOptions = {
             },
             async authorize(credentials: any) {
                 await connect();
+
                 const { email, password } = credentials;
 
                 try {
@@ -54,6 +55,7 @@ const authOptions: NextAuthOptions = {
     ],
     callbacks: {
         async signIn({user, account, profile, email, credentials }: any): Promise<boolean> {
+            
             await connect();
             // console.log({user: user, account: account, profile: profile, email: email, credentials: credentials})
             if(account?.provider == "credentials"){

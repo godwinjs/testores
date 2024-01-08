@@ -1,0 +1,36 @@
+{
+    "main": {
+        "title": "TruthStore || best product plug",
+        "header": [
+            {
+                "staticImage": "imageRightPng2",
+                "cloudImage": "https://res.cloudinary.com/dra6cw2ff/image/upload/v1702919022/6e8848d3255ab92b-1702919021899-ps5slim1-removebg-preview.png.png",
+                "heading": "Exclusive collection for everyone",
+                "subHeading": "In this season, find the best 🔥",
+                "btnText": "Explore now",
+                "btnLink": "/"
+              },
+              {
+                "staticImage": "imageRightPng3",
+                "heading": "Exclusive collection for everyone",
+                "subHeading": "In this season, find the best 🔥",
+                "btnText": "Explore now",
+                "btnLink": "/"
+              },
+              {
+                "staticImage": "imageRightPng",
+                "heading": "Exclusive collection for everyone",
+                "subHeading": "In this season, find the best 🔥",
+                "btnText": "Explore now",
+                "btnLink": "/"
+              },
+              {
+                "cloudImage": "https://res.cloudinary.com/dra6cw2ff/image/upload/v1702325194/truthstore-tst/aa3dd45e31ca15d1-1702325193380-14.png.png",
+                "heading": "Exclusive collection for everyone",
+                "subHeading": "In this season, find the best 🔥",
+                "btnText": "Explore now",
+                "btnLink": "/"
+              }
+        ]
+    }
+}

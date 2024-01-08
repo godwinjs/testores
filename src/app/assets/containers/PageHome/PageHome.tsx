@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useState } from "react";
 import SectionHowItWork from "@/app/assets/components/SectionHowItWork/SectionHowItWork";
 import BackgroundSection from "@/app/assets/components/BackgroundSection/BackgroundSection";
 import SectionPromo1 from "@/app/assets/components/SectionPromo1";
@@ -25,6 +25,7 @@ import Heading from "@/app/assets/components/Heading/Heading";
 import ButtonSecondary from "@/app/assets/shared/Button/ButtonSecondary";
 
 function PageHome() {
+  const [pageData, setPageData] : any = useState(null);
   const products: any = useSelector((state: RootState) => state.products.products)
   const { data: productData, refetch } = useDisplayProductsQuery({
     page: 0,
@@ -36,16 +37,25 @@ function PageHome() {
   // const isUnmounting = useRef(null);
   useEffect(() => {
     // refetch()
+      const getPageData = async () => {
+    
+        const res = await fetch('/pages/home.json')
+        const data  = await res.json();
+        setPageData(data)
+      }
+      getPageData();
   }, [])
+  
+  console.log(pageData)
 
   return (
-    <div className="nc-PageHome relative overflow-hidden">
+    pageData && <div className="nc-PageHome relative overflow-hidden">
       <Helmet>
-        <title>TruthStore || best product plug</title>
+        <title>{pageData.main.title}</title>
       </Helmet>
 
       {/* SECTION HERO */}
-      <SectionHero2 />
+      <SectionHero2 data={pageData.main.header} />
 
       <div className="mt-24 lg:mt-32">
         <DiscoverMoreSlider />
