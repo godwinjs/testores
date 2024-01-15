@@ -25,10 +25,10 @@ const HeaderLogged: FC<HeaderLoggedProps> = () => {
       // && pathname === '/account'
       // router.replace("/account");
       
-      axios.post('/api/login/getUser', { email: session.data.user.email}).then((res) => {
-        const userData = res.data.data;
-        dispatch(setCredentials(userData));
-      })
+      // axios.post('/api/login/getUser', { email: session.data.user.email}).then((res) => {
+      //   const userData = res.data.data;
+      //   dispatch(setCredentials(userData));
+      // })
     }
     if(session?.status == "unauthenticated"){
       // router.replace("/login");
@@ -41,17 +41,17 @@ const HeaderLogged: FC<HeaderLoggedProps> = () => {
       // }
       if(product) return;
 
-      axios.get('/api/products/get').then((res) => {
-        const obj = res.data.data[0]
-        const products = {
-          id: obj._id, 
-          products: obj.products,
-          createdAt: obj.createdAt,
-          updatedAt: obj.updatedAt
-        }
-        console.log(products)
-        dispatch(setProducts(products))
-      })
+      // axios.get('/api/products/get').then((res) => {
+      //   const obj = res.data.data[0]
+      //   const products = {
+      //     id: obj._id, 
+      //     products: obj.products,
+      //     createdAt: obj.createdAt,
+      //     updatedAt: obj.updatedAt
+      //   }
+      //   console.log(products)
+      //   dispatch(setProducts(products))
+      // })
    }
    window.addEventListener('focus', makeApiCall)
    

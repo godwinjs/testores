@@ -14,7 +14,7 @@ import backgroundLineSvg from "@/images/hero/Moon.svg";
 import ButtonPrimary from "@/app/assets/shared/Button/ButtonPrimary";
 import Next from "@/app/assets/shared/NextPrev/Next";
 import Prev from "@/app/assets/shared/NextPrev/Prev";
-
+ 
 
 interface Hero2DataType {
   image: string | typeof imageRightPng;
@@ -71,10 +71,8 @@ const SectionHero2: FC<SectionHero2Props> = ({ className = "", data }) => {
           btnLink: item.btnLink,
         })
       }
-      console.log('exists')
     })
   }
-  console.log(data[0].cloudImage)
 
   // =================
   const [indexActive, setIndexActive] = useState(0);
