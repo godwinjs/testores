@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 let url = (process.env.NODE_ENV !== "development") ? process.env.NEXT_PUBLIC_TS_SERVER_URL : process.env.NEXT_PUBLIC_SERVER_APP_BASE_URL;
-console.log('from apiSlice.tsx:4 url', url)
+console.log('apiSlice.tsx:4 url', url)
 
 export const apiSlice = createApi({
   reducerPath: "api",
