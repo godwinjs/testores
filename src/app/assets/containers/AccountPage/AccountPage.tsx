@@ -1,6 +1,5 @@
 "use client";
 import { FC, useState, useRef, useEffect } from "react";
-import { Helmet } from "react-helmet";
 import {AdvancedImage} from '@cloudinary/react';
 import {Cloudinary} from "@cloudinary/url-gen";
 import Image from "next/image";
@@ -181,9 +180,6 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
 
   return (
     <div className={`nc-AccountPage ${className}`} data-nc-id="AccountPage">
-      <Helmet>
-        <title>Account || TruthStore Commerce</title>
-      </Helmet>
       <CommonLayout>
         <div className="space-y-10 sm:space-y-12">
           {/* HEADING */}

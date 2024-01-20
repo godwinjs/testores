@@ -1,10 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo, useCallback } from "react";
 import SectionHowItWork from "@/app/assets/components/SectionHowItWork/SectionHowItWork";
 import BackgroundSection from "@/app/assets/components/BackgroundSection/BackgroundSection";
 import SectionPromo1 from "@/app/assets/components/SectionPromo1";
-import { Helmet } from "react-helmet";
 import { useSelector } from "react-redux";
 
 import { RootState } from "@/app/redux/store";
@@ -36,23 +35,20 @@ function PageHome() {
 
   // const isUnmounting = useRef(null);
   useEffect(() => {
+    document.title = pageData?.main.title;
     // refetch()
-      const getPageData = async () => {
-    
-        const res = await fetch('/pages/home.json')
-        const data  = await res.json();
-        setPageData(data)
-      }
-      getPageData();
-  }, [])
-  
-  console.log(pageData)
+  }, [pageData])
+
+  const getPageData = useCallback(async () => {
+    const res = await fetch('/pages/home.json')
+    const data  = await res.json();
+    setPageData(data)
+  }, [setPageData])
+
+  useMemo(() => getPageData(), [getPageData]);
 
   return (
     pageData && <div className="nc-PageHome relative overflow-hidden">
-      <Helmet>
-        <title>{pageData.main.title}</title>
-      </Helmet>
 
       {/* SECTION HERO */}
       <SectionHero2 data={pageData.main.header} />
