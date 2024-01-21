@@ -2,11 +2,11 @@
 
 // import Image from 'next/image'
 // import './style/line-awesome.css'
+import { useEffect } from 'react';
 
-import PageHome from '@/app/assets/containers/PageHome/PageHome'
+import PageHome from '@/app/assets/containers/PageHome/PageHome';
 
 export default function Home() {
-  
 // console.log(styles)
 
   return (

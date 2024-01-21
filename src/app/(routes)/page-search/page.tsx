@@ -1,6 +1,8 @@
 'use client'
 import { RootState } from "@/app/redux/store";
 import { useSelector, useDispatch } from "react-redux";
+
+import PageCollection2 from "@/app/assets/containers/PageCollection2";
 import { increment, decrement, increamentByAmount } from "@/app/redux/features/counter/counterSlice";
 
 export default function Search_page() {
@@ -9,8 +11,7 @@ export default function Search_page() {
 
     return(
         <div>
-            <h1>Search Page</h1>
-
+            <PageCollection2 />
           <div className="text-center mt-4">Count: {count}</div>
 
           <div className="flex flex-row justify-around my-3">

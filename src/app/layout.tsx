@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import type { Metadata } from 'next';
 // import localFont from 'next/font/local'
 import { Poppins } from 'next/font/google';
 import localFont from "next/font/local";
@@ -6,8 +6,9 @@ import "rc-slider/assets/index.css";
 import { Toaster } from 'react-hot-toast';
 import { getServerSession } from "next-auth/next";
 import { Suspense } from 'react';
-import { NavigationEvents } from '@/app/assets/components/NavigationEvents';
+// import { useRouter } from 'next/router';
 
+import { NavigationEvents } from '@/app/assets/components/NavigationEvents';
 import AuthProvider from "@/app/db/utils/SessionProvider";
 import '@/app/style/layout.css';
 import './style/nc.css';
@@ -18,6 +19,7 @@ import Providers from "@/app/redux/provider";
 // import fontPath from "@/app/fonts"
 import Header from '@/app/assets/containers/SiteHeader';
 import Footer from '@/app/assets/shared/Footer/Footer';
+// import Loading from './loading';
 
 
 const poppins = Poppins({
@@ -87,6 +89,7 @@ export default async function RootLayout({
   children: React.ReactNode
 }) {
   const session = await getServerSession();
+  
   // 
   return (
     <html lang="en" className={`${poppins.className} text-sm `}>
@@ -94,12 +97,13 @@ export default async function RootLayout({
         <AuthProvider session={session}>
           <Providers>
               <Toaster />
-              <Suspense fallback={null}>
-                <NavigationEvents />
-              </Suspense>
-              <Header />
-              {children}
-              <Footer />
+              {/* <Suspense fallback={<p>Loading........</p>}> */}
+                <NavigationEvents>
+                  <><Header />
+                  {children}
+                  <Footer /></>
+                </NavigationEvents>
+              {/* </Suspense> */}
           </Providers>
         </AuthProvider>
       </body>
