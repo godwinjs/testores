@@ -14,7 +14,7 @@ import googleSvg from "@/images/socials/_Google.svg";
 import Input from "@/app/assets/shared/Input/Input"; 
 import ButtonPrimary from "@/app/assets/shared/Button/ButtonPrimary";
 import Loading from "@/app/loading";
-import setPageTitle from "@/app/assets/hooks/SetPageTitle";
+import SetPageTitle from "@/app/assets/hooks/SetPageTitle";
 
 
 export interface PageLoginProps {
@@ -45,7 +45,7 @@ const loginSocials = [
 const LoginPage: FC<PageLoginProps> = ({ className = "" }) => {
     const [ error, setError ] = useState("");
     const router = useRouter();
-    setPageTitle({title: "Log In || TruthStore Commerce"})
+    SetPageTitle({title: "Log In || TruthStore Commerce"})
     // const session = useSession();
     const { data: session, status: sessionStatus } = useSession();
     // const dispatch = useDispatch();
