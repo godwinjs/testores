@@ -61,16 +61,69 @@ const DEMO_DATA = [
 interface Props {
   panelClassName?: string;
   data?: typeof DEMO_DATA;
+  data2?: any
+}
+
+
+function parseArrayToData(arr: {name: string, content: string[]}[]) {
+  let DATA = [];
+  let cnt = 0;
+  for (let i = 0; i < arr.length; i++){
+    let item = arr[i];
+
+    if(item.content.length === 1){
+      DATA.push({name: item.name, content: item.content[0]})
+    }
+    if(item.content.length > 1 && item.name !== "FAQ"){
+      DATA.push({name: item.name, content: `${item.content.map(li => `<li>${li}</li>`)}`})
+    }
+
+    if(item.name === "FAQ"){
+      let faqs = `<ul class="leading-7">
+                    ${item.content.map((ques, idx) => {
+                      if(ques.includes("?")){
+                        return `<li><h3>${ques}</h3><p>${item.content[idx+1]}</p></li>`
+                      }
+                    } )}
+                  </ul>`;
+        console.log(faqs)
+        DATA.push({name: item.name, content: faqs})
+    }
+  }
+  return DATA;
 }
 
 const AccordionInfo: FC<Props> = ({
   panelClassName = "p-4 pt-3 last:pb-0 text-slate-600 text-sm dark:text-slate-300 leading-6",
   data = DEMO_DATA,
+  data2
 }) => {
+
+  // add text data into readable array list
+  let Real_Data: any = [], obj: {name: string, content: string[]} = { name: '', content: []}, cnt = 0;
+
+  data2.split("\n").map((item: string, i: number) => {
+    if(item !== ""){
+      if(item.includes("#")){
+        // push = true
+        obj.name =  item.split("#")[1];
+        Real_Data[cnt] = { name: item.split("#")[1], content: []}
+        cnt= cnt+1;
+        // only run at loop end
+        if(cnt === (data2.split("#").length - 1)/2){
+          // console.log(Real_Data)
+        }
+      }else {
+        Real_Data[cnt-1] = { ...Real_Data[cnt-1], content: [ ...Real_Data[cnt-1].content, item] }
+      }
+
+    }
+  })
+
   return (
     <div className="w-full rounded-2xl space-y-2.5">
       {/* ============ */}
-      {data.map((item, index) => {
+      {parseArrayToData(Real_Data).map((item, index) => {
         return (
           <Disclosure key={index} defaultOpen={index < 2}>
             {({ open }) => (

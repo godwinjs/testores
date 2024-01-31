@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useMemo, useCallback } from "react";
+import { useEffect, useState, useMemo, useCallback, Suspense } from "react";
 import SectionHowItWork from "@/app/assets/components/SectionHowItWork/SectionHowItWork";
 import BackgroundSection from "@/app/assets/components/BackgroundSection/BackgroundSection";
 import SectionPromo1 from "@/app/assets/components/SectionPromo1";
@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/app/redux/store";
 import { useDisplayProductsQuery } from "@/app/redux/features/product/productApi";
 
+import Loading from "./loading"
 import SectionHero2 from "@/app/assets/components/SectionHero/SectionHero2";
 import SectionSliderLargeProduct from "@/app/assets/components/SectionSliderLargeProduct";
 import SectionSliderProductCard from "@/app/assets/components/SectionSliderProductCard";
@@ -26,7 +27,7 @@ import ButtonSecondary from "@/app/assets/shared/Button/ButtonSecondary";
 function PageHome() {
   const [pageData, setPageData] : any = useState(null);
   const products: any = useSelector((state: RootState) => state.products.products)
-  const { data: productData, refetch } = useDisplayProductsQuery({
+  const { data: productData, refetch, isLoading: displayingProducts } = useDisplayProductsQuery({
     page: 0,
     limit: 0,
   });
@@ -36,7 +37,7 @@ function PageHome() {
   // const isUnmounting = useRef(null);
   useEffect(() => {
     document.title = pageData?.main.title;
-    // refetch()
+      refetch()
   }, [pageData])
 
   const getPageData = useCallback(async () => {
@@ -48,7 +49,7 @@ function PageHome() {
   useMemo(() => getPageData(), [getPageData]);
 
   return (
-    pageData && <div className="nc-PageHome relative overflow-hidden">
+    pageData && <Suspense fallback={<Loading />}><div className="nc-PageHome relative overflow-hidden">
 
       {/* SECTION HERO */}
       <SectionHero2 data={pageData.main.header} />
@@ -59,13 +60,13 @@ function PageHome() {
 
       <div className="container relative space-y-24 mt-24 lg:space-y-32 lg:mt-32">
         {/* SECTION */}
-        <SectionSliderProductCard 
+        {displayingProducts ? <Loading /> : <SectionSliderProductCard 
           data={productData ? [ ...productsAdmin.slice(0, 5)] : undefined }
-        />
+        />}
 
         <div className="py-24 lg:py-32 border-t border-b border-slate-200 dark:border-slate-700">
           <SectionHowItWork />
-        </div>
+        </div> 
 
         {/* SECTION */}
         <SectionPromo1 />
@@ -111,6 +112,7 @@ function PageHome() {
         </div>
       </div>
     </div>
+    </Suspense>
   );
 }
 

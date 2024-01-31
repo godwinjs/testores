@@ -33,6 +33,7 @@ import ModalViewAllReviews from "./ModalViewAllReviews";
 import NotifyAddTocart from "@/app/assets/components/NotifyAddToCart";
 import { cloudImage } from "../../utils/cloudImage";
 import { AdvancedImage } from "@cloudinary/react";
+import Loading from "@/app/loading";
 
 export interface ProductDetailPage2Props {
   className?: string;
@@ -50,6 +51,7 @@ const ProductDetailPage2: FC<ProductDetailPage2Props> = ({
     _id,
     title,
     description,
+    details,
     price,
     store,
     subcategory,
@@ -359,7 +361,7 @@ const ProductDetailPage2: FC<ProductDetailPage2Props> = ({
         {/*  */}
         <div className="w-14 border-b border-neutral-200 dark:border-neutral-700"></div>
         {/*  */}
-        <AccordionInfo panelClassName="p-4 pt-3.5 text-slate-600 text-base dark:text-slate-300 leading-7" />
+        <AccordionInfo data2={details} panelClassName="p-4 pt-3.5 text-slate-600 text-base dark:text-slate-300 leading-7" />
       </div>
     );
   };
@@ -367,7 +369,7 @@ const ProductDetailPage2: FC<ProductDetailPage2Props> = ({
   const renderSection2 = () => {
     return (
       <div className="listingSection__wrap !border-b-0 !pb-0">
-        <h2 className="text-2xl font-semibold">Product details</h2>
+        <h2 className="text-2xl font-semibold">Product Description</h2>
         {/* <div className="w-14 border-b border-neutral-200 dark:border-neutral-700"></div> */}
         <div className="prose prose-sm sm:prose dark:prose-invert sm:max-w-4xl">
           <p>
@@ -583,7 +585,7 @@ const ProductDetailPage2: FC<ProductDetailPage2Props> = ({
         show={isOpenModalViewAllReviews}
         onCloseModalViewAllReviews={() => setIsOpenModalViewAllReviews(false)}
       />
-    </div> : <div>Loading...</div>)
+    </div> : <Loading />)
   );
 };
 

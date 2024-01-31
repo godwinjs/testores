@@ -184,7 +184,7 @@ const SectionHero2: FC<SectionHero2Props> = ({ className = "", data }) => {
           <Image
             className="absolute w-full h-full object-contain"
             src={backgroundLineSvg}
-            priority
+            priority={true}
             alt="hero"
           />
         </div>
@@ -234,8 +234,9 @@ const SectionHero2: FC<SectionHero2Props> = ({ className = "", data }) => {
               src={item.image}
               priority={true}
               alt={item.heading}
-              layout="fill"
-              objectFit="scale-down"
+              width={100}
+              height={100}
+              sizes="xs" 
             />
           </div>
         </div>

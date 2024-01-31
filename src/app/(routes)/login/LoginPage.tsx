@@ -1,6 +1,5 @@
 'use client'
 import React, { FC, useState, useEffect } from "react";
-import { Helmet } from "react-helmet";
 import Link from "next/link";
 import Image from 'next/image';
 import { useRouter } from "next/navigation";
@@ -14,6 +13,8 @@ import twitterSvg from "@/images/socials/_Twitter.svg";
 import googleSvg from "@/images/socials/_Google.svg";
 import Input from "@/app/assets/shared/Input/Input"; 
 import ButtonPrimary from "@/app/assets/shared/Button/ButtonPrimary";
+import Loading from "@/app/loading";
+import setPageTitle from "@/app/assets/hooks/setPageTitle";
 
 
 export interface PageLoginProps {
@@ -44,6 +45,7 @@ const loginSocials = [
 const LoginPage: FC<PageLoginProps> = ({ className = "" }) => {
     const [ error, setError ] = useState("");
     const router = useRouter();
+    setPageTitle({title: "Log In || TruthStore Commerce"})
     // const session = useSession();
     const { data: session, status: sessionStatus } = useSession();
     // const dispatch = useDispatch();
@@ -100,14 +102,11 @@ const LoginPage: FC<PageLoginProps> = ({ className = "" }) => {
     }
   
   if(sessionStatus === 'loading'){
-    return <h1>Loading...</h1>
+    return <Loading />
   }
 
   return (
     sessionStatus !== "authenticated" && <div className={`nc-PageLogin ${className}`} data-nc-id="PageLogin">
-      <Helmet>
-        <title>Log In || TruthStore Commerce</title>
-      </Helmet>
       <div className="container mb-24 lg:mb-32">
         <h2 className="my-20 flex items-center text-3xl leading-[115%] md:text-5xl md:leading-[115%] font-semibold text-neutral-900 dark:text-neutral-100 justify-center">
           Log In
