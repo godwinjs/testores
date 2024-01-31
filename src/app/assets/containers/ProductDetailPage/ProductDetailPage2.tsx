@@ -301,7 +301,7 @@ const ProductDetailPage2: FC<ProductDetailPage2Props> = ({
             <div className="space-y-2.5">
               <div className="flex justify-between text-slate-600 dark:text-slate-300">
                 <span className="flex">
-                  <span>{`$${price.toFixed(2)}`}</span>
+                  <span>&#8358; {`${price.toFixed(2)}`}</span>
                   <span className="mx-2">x</span>
                   <span>{`${qualitySelected} `}</span>
                 </span>
