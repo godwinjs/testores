@@ -23,6 +23,7 @@ import SectionPromo3 from "@/app/assets/components/SectionPromo3";
 import SectionMagazine5 from "@/app/assets/containers/BlogPage/SectionMagazine5";
 import Heading from "@/app/assets/components/Heading/Heading";
 import ButtonSecondary from "@/app/assets/shared/Button/ButtonSecondary";
+import SetPageTitle from "../../hooks/SetPageTitle";
 
 function PageHome() {
   const [pageData, setPageData] : any = useState(null);
@@ -33,12 +34,15 @@ function PageHome() {
   });
   const productsAdmin = productData?.data || [];
   // console.log(products)
+  SetPageTitle({title: pageData?.main.title})
 
   // const isUnmounting = useRef(null);
   useEffect(() => {
-    document.title = pageData?.main.title;
       refetch()
   }, [pageData])
+
+  
+  // const [pageData, setPageData] : any = useState(null);
 
   const getPageData = useCallback(async () => {
     const res = await fetch('/pages/home.json')

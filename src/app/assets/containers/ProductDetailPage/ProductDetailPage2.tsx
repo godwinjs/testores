@@ -253,7 +253,7 @@ const ProductDetailPage2: FC<ProductDetailPage2Props> = ({
             {/* ---------- 1 HEADING ----------  */}
             <div className="flex items-center justify-between space-x-5">
               <div className="flex text-2xl font-semibold">
-                ${price.toFixed(2)}
+              &#8358; {price.toFixed(2)}
               </div>
 
               <a
@@ -301,22 +301,22 @@ const ProductDetailPage2: FC<ProductDetailPage2Props> = ({
             <div className="space-y-2.5">
               <div className="flex justify-between text-slate-600 dark:text-slate-300">
                 <span className="flex">
-                  <span>{`$${price.toFixed(2)}  `}</span>
+                  <span>{`$${price.toFixed(2)}`}</span>
                   <span className="mx-2">x</span>
                   <span>{`${qualitySelected} `}</span>
                 </span>
 
-                <span>{`$${(price * qualitySelected).toFixed(2)}`}</span>
+                <span>&#8358; {`${(price * qualitySelected).toFixed(2)}`}</span>
               </div>
               <div className="flex justify-between text-slate-600 dark:text-slate-300">
                 <span>Tax estimate</span>
-                <span>$0</span>
+                <span>&#8358; 0</span>
               </div>
             </div>
             <div className="border-b border-slate-200 dark:border-slate-700"></div>
             <div className="flex justify-between font-semibold">
               <span>Total</span>
-              <span>{`$${(price * qualitySelected).toFixed(2)}`}</span>
+              <span>&#8358; {`${(price * qualitySelected).toFixed(2)}`}</span>
             </div>
           </div>
         </div>
