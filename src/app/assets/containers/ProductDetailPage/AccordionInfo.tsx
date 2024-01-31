@@ -75,19 +75,25 @@ function parseArrayToData(arr: {name: string, content: string[]}[]) {
       DATA.push({name: item.name, content: item.content[0]})
     }
     if(item.content.length > 1 && item.name !== "FAQ"){
-      DATA.push({name: item.name, content: `${item.content.map(li => `<li>${li}</li>`)}`})
+      let list: string[] = [];
+      item.content.map(li => list.push('<li>' + li + '</li>'))
+      DATA.push({name: item.name, content: list.join("") })
     }
 
     if(item.name === "FAQ"){
+      let list: string[] = [];
+
+      item.content.map((ques, idx) => {
+        if(ques.includes("?")){
+          return list.push(`<li><h3 class="font-bold">${ques}</h3><p>${item.content[idx+1]}</p></li>`)
+        }
+      } );
+
       let faqs = `<ul class="leading-7">
-                    ${item.content.map((ques, idx) => {
-                      if(ques.includes("?")){
-                        return `<li><h3>${ques}</h3><p>${item.content[idx+1]}</p></li>`
-                      }
-                    } )}
+                    ${list.join("")}
                   </ul>`;
-        console.log(faqs)
-        DATA.push({name: item.name, content: faqs})
+      console.log(faqs)
+      DATA.push({name: item.name, content: faqs})
     }
   }
   return DATA;
