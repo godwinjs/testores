@@ -49,12 +49,12 @@ function PageHome() {
   useMemo(() => getPageData(), [getPageData]);
 
   return (
-    pageData && <Suspense fallback={<Loading />}><div className="nc-PageHome relative overflow-hidden">
+    pageData && <div className="nc-PageHome relative overflow-hidden">
 
       {/* SECTION HERO */}
       <SectionHero2 data={pageData.main.header} />
 
-      <div className="mt-24 lg:mt-32">
+      <div className="mt-24 lg:mt-32"> 
         <DiscoverMoreSlider />
       </div>
 
@@ -112,8 +112,7 @@ function PageHome() {
         </div>
       </div>
     </div>
-    </Suspense>
   );
 }
-
+// &#8358;
 export default PageHome;

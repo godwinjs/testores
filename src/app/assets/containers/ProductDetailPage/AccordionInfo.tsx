@@ -108,7 +108,7 @@ const AccordionInfo: FC<Props> = ({
   // add text data into readable array list
   let Real_Data: any = [], obj: {name: string, content: string[]} = { name: '', content: []}, cnt = 0;
 
-  data2.split("\n").map((item: string, i: number) => {
+  data2.split("#").length > 2 && data2.split("\n").map((item: string, i: number) => {
     if(item !== ""){
       if(item.includes("#")){
         // push = true
@@ -129,7 +129,7 @@ const AccordionInfo: FC<Props> = ({
   return (
     <div className="w-full rounded-2xl space-y-2.5">
       {/* ============ */}
-      {parseArrayToData(Real_Data).map((item, index) => {
+      {data2.split("#").length > 2 ? parseArrayToData(Real_Data).map((item, index) => {
         return (
           <Disclosure key={index} defaultOpen={index < 2}>
             {({ open }) => (
@@ -151,7 +151,7 @@ const AccordionInfo: FC<Props> = ({
             )}
           </Disclosure>
         );
-      })}
+      }) : null}
 
       {/* ============ */}
     </div>

@@ -48,7 +48,7 @@ export const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PURGE, REGISTER, PERSIST]
       }
-    }).concat(apiSlice.middleware, /*middlewareLogger*/),
+    }).concat(apiSlice.middleware, middlewareLogger),
     devTools: true,
 });
 
