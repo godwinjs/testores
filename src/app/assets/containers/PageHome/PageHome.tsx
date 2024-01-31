@@ -9,6 +9,12 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/app/redux/store";
 import { useDisplayProductsQuery } from "@/app/redux/features/product/productApi";
 
+//above 200k
+//24/7 customer service, always active
+//
+//60 days return period
+//
+
 import Loading from "./loading"
 import SectionHero2 from "@/app/assets/components/SectionHero/SectionHero2";
 import SectionSliderLargeProduct from "@/app/assets/components/SectionSliderLargeProduct";
