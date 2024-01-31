@@ -14,7 +14,7 @@ import googleSvg from "@/images/socials/_Google.svg";
 import Input from "@/app/assets/shared/Input/Input"; 
 import ButtonPrimary from "@/app/assets/shared/Button/ButtonPrimary";
 import Loading from "@/app/loading";
-import setPageTitle from "@/app/assets/hooks/setPageTitle";
+import setPageTitle from "@/app/assets/hooks/SetPageTitle";
 
 
 export interface PageLoginProps {

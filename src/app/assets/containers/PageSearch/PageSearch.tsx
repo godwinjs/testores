@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import { Helmet } from "react-helmet";
 
 import { useDisplayProductsQuery } from "@/app/redux/features/product/productApi";
-import setPageTitle from "@/app/assets/hooks/setPageTitle";
+import SetPageTitle from "@/app/assets/hooks/SetPageTitle";
 
 import Pagination from "@/app/assets/shared/Pagination/Pagination";
 import ButtonPrimary from "@/app/assets/shared/Button/ButtonPrimary";
@@ -18,7 +18,7 @@ export interface PageSearchProps {
 }
 
 const PageSearch: FC<PageSearchProps> = ({ className = "" }) => {
-  setPageTitle({title: "Search || TruthStore Ecommerce Template"});
+  SetPageTitle({title: "Search || TruthStore Ecommerce Template"});
   
   const { data: productData, refetch } = useDisplayProductsQuery({
     page: 0,
