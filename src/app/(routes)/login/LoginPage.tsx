@@ -45,9 +45,9 @@ const loginSocials = [
 const LoginPage: FC<PageLoginProps> = ({ className = "" }) => {
     const [ error, setError ] = useState("");
     const router = useRouter();
+    const { data: session, status: sessionStatus } = useSession();
     SetPageTitle({title: "Log In || TruthStore Commerce"})
     // const session = useSession();
-    const { data: session, status: sessionStatus } = useSession();
     // const dispatch = useDispatch();
 
     useEffect(() => {

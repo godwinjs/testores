@@ -45,7 +45,7 @@ function PageHome() {
   // const isUnmounting = useRef(null);
   useEffect(() => {
       refetch()
-  }, [pageData])
+  }, [pageData, productData])
 
   
   // const [pageData, setPageData] : any = useState(null);
