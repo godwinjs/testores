@@ -14,7 +14,7 @@ import {Cloudinary} from "@cloudinary/url-gen";
 
 import { RootState } from "@/app/redux/store";
 import { addToCart } from "@/app/redux/features/account/accountSlice";
-
+ 
 import LikeButton from "./LikeButton";
 import Prices from "./Prices";
 import { Product, PRODUCTS, ProductVariant } from "../data/data";
@@ -64,17 +64,14 @@ const ProductCard: FC<ProductCardProps> = ({
   const cldImage = cld.image(thumbnail && (thumbnail?.public_id + '.png'));
 
   const notifyAddTocart = ({ size }: { size?: string }) => {
-    // dispatch(addToCart({
-    //   _id,
-    //   name,
-    //   price,
-    //   description,
-    //   size,
-    //   variants: variants?.[variantActive],
-    //   variantType,
-    //   status,
-    //   image,
-    // }));
+    dispatch(addToCart({
+      _id,
+      title,
+      price,
+      description,
+      status,
+      image: thumbnail.url,
+    }));
     toast.custom(
       (t) => (
         <Transition

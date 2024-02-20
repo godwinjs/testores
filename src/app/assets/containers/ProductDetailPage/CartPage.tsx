@@ -1,21 +1,36 @@
 "use client";
 
+import React from "react";
 import { NoSymbolIcon, CheckIcon } from "@heroicons/react/24/outline";
 import { Helmet } from "react-helmet";
 import Link from "next/link";
 import Image from "next/image";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 import { RootState } from "@/app/redux/store";
+import { removeFromCart } from "@/app/redux/features/account/accountSlice";
 
+import SetPageTitle from "../../hooks/SetPageTitle";
 import { addArray } from "../../utils/calc";
 import NcInputNumber from "@/app/assets/components/NcInputNumber";
 import Prices from "@/app/assets/components/Prices";
-import { Product, ProductImgs } from "@/app/assets/data/data";
+import { Product, ProductCart } from "@/app/assets/data/data";
 import ButtonPrimary from "@/app/assets/shared/Button/ButtonPrimary";
 
 const CartPage = () => {
+
+  const [ qtyVal, setQtyVal ] = React.useState(1)
   const cartProducts: any = useSelector((state: RootState) => state.account.cart);
+  const dispatch = useDispatch()
+
+  SetPageTitle({ title: "Shopping Cart || TruthStore Ecommerce"})
+
+  React.useEffect(() => {
+  }, [qtyVal])
+
+  const handleQtyChange = (e: any) => {
+    setQtyVal(e.target.value)
+  }
 
   const renderStatusSoldout = () => {
     return (
@@ -26,17 +41,21 @@ const CartPage = () => {
     );
   };
 
-  const renderStatusInstock = () => {
+  const renderStatusInstock = (status: string) => {
     return (
       <div className="rounded-full flex items-center justify-center px-2.5 py-1.5 text-xs text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">
         <CheckIcon className="w-3.5 h-3.5" />
-        <span className="ml-1 leading-none">In Stock</span>
+        <span className="ml-1 leading-none">{status || "In Stock"}</span>
       </div>
     );
   };
 
-  const renderProduct = (item: Product, index: number) => {
-    const { image, price, name } : any = item;
+  const renderProduct = (item: ProductCart, index: number) => {
+    const { image, price, name, _id, status } : any = item;
+    const quantity = [];
+    for(let i = 1; i <= 100; i++){
+      quantity.push(i)
+    }
 
     return (
       <div
@@ -45,11 +64,13 @@ const CartPage = () => {
       >
         <div className="relative h-36 w-24 sm:w-32 flex-shrink-0 overflow-hidden rounded-xl bg-slate-100">
           <Image
-            src={ProductImgs[image]}
+            src={image}
             alt={name}
             className="h-full w-full object-contain object-center"
+            width={100}
+            height={100}
           />
-          <Link href="/product-detail" className="absolute inset-0"></Link>
+          <Link href={`/product-detail/${_id}`} className="absolute inset-0"></Link>
         </div>
 
         <div className="ml-3 sm:ml-6 flex flex-1 flex-col">
@@ -103,7 +124,7 @@ const CartPage = () => {
                       />
                     </svg>
 
-                    <span>{`Black`}</span>
+                    <span>{`color`}</span>
                   </div>
                   <span className="mx-4 border-l border-slate-200 dark:border-slate-700 "></span>
                   <div className="flex items-center space-x-1.5">
@@ -138,7 +159,7 @@ const CartPage = () => {
                       />
                     </svg>
 
-                    <span>{`2XL`}</span>
+                    <span>{`size`}</span>
                   </div>
                 </div>
 
@@ -146,15 +167,13 @@ const CartPage = () => {
                   <select
                     name="qty"
                     id="qty"
+                    defaultValue={qtyVal}
+                    onChange={(e) => handleQtyChange(e)}
                     className="form-select text-sm rounded-md py-1 border-slate-200 dark:border-slate-700 relative z-10 dark:bg-slate-800 "
                   >
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
+                    {quantity.map((item, idx) => {
+                      return <option key={idx} value={idx + 1}>{item}</option>
+                    })}
                   </select>
                   <Prices
                     contentClass="py-1 px-2 md:py-1.5 md:px-2.5 text-sm font-medium h-full"
@@ -164,7 +183,7 @@ const CartPage = () => {
               </div>
 
               <div className="hidden sm:block text-center relative">
-                <NcInputNumber className="relative z-10" />
+                <NcInputNumber id="nc_select" className="relative z-10" />
               </div>
 
               <div className="hidden flex-1 sm:flex justify-end">
@@ -174,16 +193,16 @@ const CartPage = () => {
           </div>
 
           <div className="flex mt-auto pt-4 items-end justify-between text-sm">
-            {Math.random() > 0.6
-              ? renderStatusSoldout()
-              : renderStatusInstock()}
+            {status
+              ? renderStatusInstock(status)
+              : renderStatusSoldout()}
 
-            <a
-              href="##"
-              className="relative z-10 flex items-center mt-3 font-medium text-primary-6000 hover:text-primary-500 text-sm "
+            <div
+              onClick={() => { dispatch(removeFromCart(index))}}
+              className="relative z-10 flex items-center mt-3 font-medium text-primary-6000 hover:text-primary-500 text-sm cursor-pointer"
             >
               <span>Remove</span>
-            </a>
+            </div>
           </div>
         </div>
       </div>
@@ -192,9 +211,6 @@ const CartPage = () => {
 
   return (
     <div className="nc-CartPage">
-      <Helmet>
-        <title>Shopping Cart || TruthStore Ecommerce</title>
-      </Helmet>
 
       <main className="container py-16 lg:pb-28 lg:pt-20 ">
         <div className="mb-12 sm:mb-16">
@@ -218,7 +234,7 @@ const CartPage = () => {
 
         <div className="flex flex-col lg:flex-row">
           <div className="w-full lg:w-[60%] xl:w-[55%] divide-y divide-slate-200 dark:divide-slate-700 ">
-            {cartProducts ? cartProducts.map(renderProduct) : "Opps! not products here yet. No worries, Add Some Products to your cart" }
+            {cartProducts ? cartProducts.map((item: ProductCart, idx: number) => renderProduct(item, idx)) : "Opps! not products here yet. No worries, Add Some Products to your cart" }
           </div>
           <div className="border-t lg:border-t-0 lg:border-l border-slate-200 dark:border-slate-700 my-10 lg:my-0 lg:mx-10 xl:mx-16 2xl:mx-20 flex-shrink-0"></div>
           <div className="flex-1">

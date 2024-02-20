@@ -39,7 +39,7 @@ export interface ProductCart {
   variantType?: "color" | "image";
   size?: string;
   allOfSizes?: string[];
-  status?: "New in" | "limited edition" | "Sold Out" | "50% Discount";
+  status?: string; //"New in" | "limited edition" | "Sold Out" | "50% Discount"
 }
 export interface Thumbnail {
   url: string;

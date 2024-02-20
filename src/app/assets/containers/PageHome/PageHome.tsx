@@ -15,7 +15,6 @@ import { useDisplayProductsQuery } from "@/app/redux/features/product/productApi
 //60 days return period
 //
 
-import Loading from "./loading"
 import SectionHero2 from "@/app/assets/components/SectionHero/SectionHero2";
 import SectionSliderLargeProduct from "@/app/assets/components/SectionSliderLargeProduct";
 import SectionSliderProductCard from "@/app/assets/components/SectionSliderProductCard";
@@ -70,7 +69,7 @@ function PageHome() {
 
       <div className="container relative space-y-24 mt-24 lg:space-y-32 lg:mt-32">
         {/* SECTION */}
-        {displayingProducts ? <Loading /> : <SectionSliderProductCard 
+        {displayingProducts ? "Loading..." : <SectionSliderProductCard 
           data={productData ? [ ...productsAdmin.slice(0, 5)] : undefined }
         />}
 

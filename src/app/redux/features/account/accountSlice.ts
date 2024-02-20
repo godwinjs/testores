@@ -1,4 +1,5 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import type { Slice } from "@reduxjs/toolkit"
 import { getServerSession } from "next-auth/next";
 import type { ProductCart } from "@/app/assets/data/data";
 
@@ -32,7 +33,7 @@ const initialState = {
 } as initialStateType;
 
 
-const accountSlice = createSlice({
+const accountSlice: Slice = createSlice({
     name: 'account',
     initialState: initialState,
     reducers: {
@@ -48,6 +49,19 @@ const accountSlice = createSlice({
                 //     cart: [ ...state.cart, action.payload]
                 // }
             }
+        },
+        removeFromCart: (state, action: PayloadAction<number>) => {
+            let index = action.payload;
+            if(state.cart) {
+                const cart = state.cart;
+                cart.splice(index, 1)
+
+                state.cart = cart;
+
+            }
+        },
+        removeCart: (state) => {
+            state.cart = null;
         },
         setImageData: (state, action: PayloadAction<imageData>) => {
             state.accountData = {
@@ -92,4 +106,4 @@ export const uploadImage = createAsyncThunk(
 )
 
 export default accountSlice.reducer;
-export const { addToCart, setImageData } = accountSlice.actions
+export const { addToCart, setImageData, removeFromCart, removeCart } = accountSlice.actions

@@ -13,7 +13,6 @@ import twitterSvg from "@/images/socials/_Twitter.svg";
 import googleSvg from "@/images/socials/_Google.svg";
 import Input from "@/app/assets/shared/Input/Input"; 
 import ButtonPrimary from "@/app/assets/shared/Button/ButtonPrimary";
-import Loading from "@/app/loading";
 import SetPageTitle from "@/app/assets/hooks/SetPageTitle";
 
 
@@ -102,7 +101,7 @@ const LoginPage: FC<PageLoginProps> = ({ className = "" }) => {
     }
   
   if(sessionStatus === 'loading'){
-    return <Loading />
+    return "Loading..."
   }
 
   return (

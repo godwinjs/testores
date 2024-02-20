@@ -33,7 +33,6 @@ import ModalViewAllReviews from "./ModalViewAllReviews";
 import NotifyAddTocart from "@/app/assets/components/NotifyAddToCart";
 import { cloudImage } from "../../utils/cloudImage";
 import { AdvancedImage } from "@cloudinary/react";
-import Loading from "@/app/loading";
 
 export interface ProductDetailPage2Props {
   className?: string;
@@ -585,7 +584,7 @@ const ProductDetailPage2: FC<ProductDetailPage2Props> = ({
         show={isOpenModalViewAllReviews}
         onCloseModalViewAllReviews={() => setIsOpenModalViewAllReviews(false)}
       />
-    </div> : <Loading />)
+    </div> : "Loading...")
   );
 };
 

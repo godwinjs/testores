@@ -11,6 +11,7 @@ export interface NcInputNumberProps {
   onChange?: (value: number) => void;
   label?: string;
   desc?: string;
+  id?: string;
 }
 
 const NcInputNumber: FC<NcInputNumberProps> = ({
@@ -21,6 +22,7 @@ const NcInputNumber: FC<NcInputNumberProps> = ({
   onChange,
   label,
   desc,
+  id,
 }) => {
   const [value, setValue] = useState(defaultValue);
 
@@ -60,7 +62,9 @@ const NcInputNumber: FC<NcInputNumberProps> = ({
 
   return (
     <div
+      id={id}
       className={`nc-NcInputNumber flex items-center justify-between space-x-5 ${className}`}
+      data-value={value}
     >
       {label && renderLabel()}
 
