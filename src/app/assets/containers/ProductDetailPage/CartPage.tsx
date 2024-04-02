@@ -6,9 +6,10 @@ import { Helmet } from "react-helmet";
 import Link from "next/link";
 import Image from "next/image";
 import { useSelector, useDispatch } from "react-redux";
+import { useRouter } from "next/navigation";
 
 import { RootState } from "@/app/redux/store";
-import { removeFromCart } from "@/app/redux/features/account/accountSlice";
+import { removeFromCart, updateCart } from "@/app/redux/features/account/accountSlice";
 
 import SetPageTitle from "../../hooks/SetPageTitle";
 import { addArray } from "../../utils/calc";
@@ -18,18 +19,26 @@ import { Product, ProductCart } from "@/app/assets/data/data";
 import ButtonPrimary from "@/app/assets/shared/Button/ButtonPrimary";
 
 const CartPage = () => {
-
-  const [ qtyVal, setQtyVal ] = React.useState(1)
   const cartProducts: any = useSelector((state: RootState) => state.account.cart);
   const dispatch = useDispatch()
+  const router = useRouter();
 
   SetPageTitle({ title: "Shopping Cart || TruthStore Ecommerce"})
 
-  React.useEffect(() => {
-  }, [qtyVal])
+  const handleQtyChange = (e: React.ChangeEvent<HTMLSelectElement>, index: number) => {
+    const product = { ...cartProducts[index] }
 
-  const handleQtyChange = (e: any) => {
-    setQtyVal(e.target.value)
+    product.quantity = +e.target.value;
+    
+    dispatch(updateCart([index, product]))
+  }
+
+  const handleQtyChange2 = (x: any, index: number) => {
+    const product = { ...cartProducts[index] }
+
+    product.quantity = +x;
+    
+    dispatch(updateCart([index, product]))
   }
 
   const renderStatusSoldout = () => {
@@ -51,10 +60,10 @@ const CartPage = () => {
   };
 
   const renderProduct = (item: ProductCart, index: number) => {
-    const { image, price, name, _id, status } : any = item;
-    const quantity = [];
+    const { image, price, name, _id, status, quantity } : any = item;
+    const qtyMult = [];
     for(let i = 1; i <= 100; i++){
-      quantity.push(i)
+      qtyMult.push(i)
     }
 
     return (
@@ -167,27 +176,27 @@ const CartPage = () => {
                   <select
                     name="qty"
                     id="qty"
-                    defaultValue={qtyVal}
-                    onChange={(e) => handleQtyChange(e)}
+                    defaultValue={cartProducts[index].quantity}
+                    onChange={(e) => handleQtyChange(e, index)}
                     className="form-select text-sm rounded-md py-1 border-slate-200 dark:border-slate-700 relative z-10 dark:bg-slate-800 "
                   >
-                    {quantity.map((item, idx) => {
+                    {qtyMult.map((item, idx) => {
                       return <option key={idx} value={idx + 1}>{item}</option>
                     })}
                   </select>
                   <Prices
                     contentClass="py-1 px-2 md:py-1.5 md:px-2.5 text-sm font-medium h-full"
-                    price={price}
+                    price={price * quantity}
                   />
                 </div>
               </div>
 
               <div className="hidden sm:block text-center relative">
-                <NcInputNumber id="nc_select" className="relative z-10" />
+                <NcInputNumber defaultValue={ cartProducts[index].quantity } id={index} onChange={(x) => handleQtyChange2(x, index)} className="relative z-10" />
               </div>
 
               <div className="hidden flex-1 sm:flex justify-end">
-                <Prices price={price} className="mt-0.5" />
+                <Prices price={price * quantity} className="mt-0.5" />
               </div>
             </div>
           </div>
@@ -244,27 +253,27 @@ const CartPage = () => {
                 <div className="flex justify-between pb-4">
                   <span>Subtotal</span>
                   <span className="font-semibold text-slate-900 dark:text-slate-200">
-                  $ {cartProducts ? addArray(cartProducts.map((i: any) => i.price) ) : 0.00}
+                    ₦ {cartProducts ? addArray(cartProducts.map((i: any) => i.price * i.quantity) ) : 0.00}
                   </span>
                 </div>
                 <div className="flex justify-between py-4">
                   <span>Shpping estimate</span>
                   <span className="font-semibold text-slate-900 dark:text-slate-200">
-                    $5.00
+                    ₦ 5.00
                   </span>
                 </div>
                 <div className="flex justify-between py-4">
                   <span>Tax estimate</span>
                   <span className="font-semibold text-slate-900 dark:text-slate-200">
-                    $24.90
+                    ₦ 24.90
                   </span>
                 </div>
                 <div className="flex justify-between font-semibold text-slate-900 dark:text-slate-200 text-base pt-4">
                   <span>Order total</span>
-                  <span>$276.00</span>
+                  <span>₦ {cartProducts ? addArray([ ...cartProducts.map((item: ProductCart, idx: number) => item.price * item.quantity ), 24.90, 5.00]) : "00.00" }</span>
                 </div>
               </div>
-              <ButtonPrimary className="mt-8 w-full">Checkout</ButtonPrimary>
+              <ButtonPrimary onClick={() => router.push("/checkout")} className="mt-8 w-full" >Checkout</ButtonPrimary>
               <div className="mt-5 text-sm text-slate-500 dark:text-slate-400 flex items-center justify-center">
                 <p className="block relative pl-5">
                   <svg

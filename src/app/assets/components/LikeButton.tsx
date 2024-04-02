@@ -1,22 +1,39 @@
 'use client';
 
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+
+import { addToCart } from "@/app/redux/features/account/accountSlice"
+
 
 export interface LikeButtonProps {
   className?: string;
   liked?: boolean;
+  product?: any;
 }
 
 const LikeButton: React.FC<LikeButtonProps> = ({
   className = "",
   liked = false,
+  product
 }) => {
+  const dispatch = useDispatch();
   const [isLiked, setIsLiked] = useState(liked);
+
+  const handleLiked = () => {
+    if(isLiked){
+      console.log("removed this product from wishlist", product._id)
+    }else{
+      console.log(product, "is liked and added to wishlist")
+      dispatch(addToCart(product))
+    }
+    // set/
+  }
 
   return (
     <button
       className={`w-9 h-9 flex items-center justify-center rounded-full bg-white dark:bg-slate-900 text-neutral-700 dark:text-slate-200 nc-shadow-lg ${className}`}
-      onClick={() => setIsLiked(!isLiked)}
+      onClick={() => {setIsLiked(!isLiked); handleLiked() }}
     >
       <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none">
         <path 

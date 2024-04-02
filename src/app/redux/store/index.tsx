@@ -43,11 +43,9 @@ const persistedReducer = persistCombineReducers(persistConfig, allReducers)
 export const store = configureStore({
   reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
-    // getDefaultMiddleware().concat(apiSlice.middleware, middlewareLogger),
     getDefaultMiddleware({
-      serializableCheck: {
-        ignoredActions: [FLUSH, REHYDRATE, PURGE, REGISTER, PERSIST]
-      }
+      immutableCheck: false,
+      serializableCheck: false,
     }).concat(apiSlice.middleware, middlewareLogger),
     devTools: true,
 });
@@ -58,3 +56,8 @@ export let persistor = persistStore(store);
 
 export type RootState = ReturnType<typeof store.getState>
 export type AppDispatch = typeof store.dispatch
+
+
+// serializableCheck: {
+//   ignoredActions: [FLUSH, REHYDRATE, PURGE, REGISTER, PERSIST],
+// }

@@ -4,16 +4,11 @@ import { useEffect, useState, useMemo, useCallback, Suspense } from "react";
 import SectionHowItWork from "@/app/assets/components/SectionHowItWork/SectionHowItWork";
 import BackgroundSection from "@/app/assets/components/BackgroundSection/BackgroundSection";
 import SectionPromo1 from "@/app/assets/components/SectionPromo1";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 import { RootState } from "@/app/redux/store";
 import { useDisplayProductsQuery } from "@/app/redux/features/product/productApi";
-
-//above 200k
-//24/7 customer service, always active
-//
-//60 days return period
-//
+import { setProducts } from "@/app/redux/features/product/productSlice";
 
 import SectionHero2 from "@/app/assets/components/SectionHero/SectionHero2";
 import SectionSliderLargeProduct from "@/app/assets/components/SectionSliderLargeProduct";
@@ -31,6 +26,7 @@ import ButtonSecondary from "@/app/assets/shared/Button/ButtonSecondary";
 import SetPageTitle from "../../hooks/SetPageTitle";
 
 function PageHome() {
+  const dispatch = useDispatch();
   const [pageData, setPageData] : any = useState(null);
   const products: any = useSelector((state: RootState) => state.products.products)
   const { data: productData, refetch, isLoading: displayingProducts } = useDisplayProductsQuery({
@@ -38,16 +34,11 @@ function PageHome() {
     limit: 0,
   });
   const productsAdmin = productData?.data || [];
-  // console.log(products)
   SetPageTitle({title: pageData?.main.title})
 
-  // const isUnmounting = useRef(null);
   useEffect(() => {
-      refetch()
-  }, [pageData, productData])
-
-  
-  // const [pageData, setPageData] : any = useState(null);
+    if(productData?.acknowledgement) dispatch(setProducts(productsAdmin))
+  }, [productData])
 
   const getPageData = useCallback(async () => {
     const res = await fetch('/pages/home.json')
@@ -70,7 +61,7 @@ function PageHome() {
       <div className="container relative space-y-24 mt-24 lg:space-y-32 lg:mt-32">
         {/* SECTION */}
         {displayingProducts ? "Loading..." : <SectionSliderProductCard 
-          data={productData ? [ ...productsAdmin.slice(0, 5)] : undefined }
+          data={productsAdmin.length > 0 ? [ ...productsAdmin.slice(0, 5)] : [ ...products.slice(0, 5)] }
         />}
 
         <div className="py-24 lg:py-32 border-t border-b border-slate-200 dark:border-slate-700">

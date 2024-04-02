@@ -13,6 +13,11 @@ import Image from "next/image"
 import {AdvancedImage} from '@cloudinary/react';
 import { cloudImage } from "../utils/cloudImage";
 
+import { useSelector, useDispatch } from "react-redux";
+
+import { RootState } from "@/app/redux/store";
+import { addToCart } from "@/app/redux/features/account/accountSlice";
+
 import IconDiscount from "./IconDiscount";
 import Prices from "./Prices";
 import NotifyAddTocart from "./NotifyAddToCart";
@@ -34,7 +39,10 @@ export interface ProductQuickViewProps {
 }
 
 const ProductQuickView: FC<ProductQuickViewProps> = ({ className = "", product }) => {
-  const { sizes, variants, status, allOfSizes, gallery, _id, price, thumbnail } = product;
+  const dispatch = useDispatch();
+  const cart: any = useSelector((state: RootState) => state.account.cart);
+
+  const { sizes, variants, status, allOfSizes, gallery, _id, price, thumbnail, description, title } = product;
   const LIST_IMAGES_DEMO = cloudImage([ thumbnail as Thumbnail , ...gallery as Thumbnail[]]);
   const thumbnailImage = cloudImage([thumbnail])[0];
 
@@ -43,19 +51,44 @@ const ProductQuickView: FC<ProductQuickViewProps> = ({ className = "", product }
   const [qualitySelected, setQualitySelected] = React.useState(1);
 
   const notifyAddTocart = () => {
-    toast.custom(
-      (t) => (
-        <NotifyAddTocart
-          productImage={thumbnailImage}
-          qualitySelected={qualitySelected}
-          show={t.visible}
-          sizeSelected={sizeSelected}
-          variantActive={variantActive}
-          product={product}
-        />
-      ),
-      { position: "top-right", id: "nc-product-notify", duration: 3000 }
-    );
+    let exist: boolean = false;
+    
+    function run() {
+      !exist && dispatch(addToCart({
+        _id,
+        title,
+        price,
+        description,
+        status,
+        image: thumbnail.url,
+        quantity: 1
+      }));
+
+      
+      toast.custom(
+        (t) => (
+          <NotifyAddTocart
+            productImage={thumbnailImage}
+            qualitySelected={qualitySelected}
+            show={t.visible}
+            sizeSelected={sizeSelected}
+            variantActive={variantActive}
+            product={product}
+            exist={exist}
+          />
+        ),
+        { position: "top-right", id: "nc-product-notify", duration: 3000 }
+      );
+    }
+    
+    cart.map((product: any, idx: number) => {
+      if(product._id === _id){
+        exist = true;
+      }
+      if(cart.length === idx + 1){
+        run()
+      }
+    })
   };
 
   const renderVariants = () => {

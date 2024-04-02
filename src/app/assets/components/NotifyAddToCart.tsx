@@ -5,6 +5,7 @@ import { Transition } from "@headlessui/react";
 import React, { FC } from "react";
 import { AdvancedImage } from "@cloudinary/react";
 import { CloudinaryImage } from "@cloudinary/url-gen/index";
+import { useRouter } from "next/navigation";
 
 import Prices from "./Prices";
 import { Product } from "../data/data";
@@ -16,6 +17,7 @@ interface Props {
   sizeSelected: string;
   qualitySelected: number;
   product: Product | null;
+  exist: boolean;
 }
 
 const NotifyAddTocart: FC<Props> = ({
@@ -24,9 +26,11 @@ const NotifyAddTocart: FC<Props> = ({
   variantActive,
   qualitySelected,
   sizeSelected,
-  product = null
+  product = null,
+  exist
 }) => {
   const { title, price, variants } = product || {};
+  const router = useRouter();
 
   const renderProductCartOnNotify = () => {
     return (
@@ -62,6 +66,7 @@ const NotifyAddTocart: FC<Props> = ({
               <button
                 type="button"
                 className="font-medium text-primary-6000 dark:text-primary-500 "
+                onClick={() => router.push("/cart")}
               >
                 View cart
               </button>
@@ -85,7 +90,7 @@ const NotifyAddTocart: FC<Props> = ({
       leaveTo="opacity-0 translate-x-20"
     >
       <p className="block text-base font-semibold leading-none">
-        Added to cart!
+        { exist ? "Product already exist in your cart" : "Added to cart!"}
       </p>
       <hr className=" border-slate-200 dark:border-slate-700 my-4" />
       {renderProductCartOnNotify()}

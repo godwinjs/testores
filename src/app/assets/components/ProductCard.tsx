@@ -4,7 +4,7 @@ import React, { FC } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowsPointingOutIcon } from "@heroicons/react/24/outline";
-import { StarIcon } from "@heroicons/react/20/solid";
+import { FaceSmileIcon, StarIcon } from "@heroicons/react/20/solid";
 import { Transition } from "@headlessui/react";
 import toast from "react-hot-toast";
 import { useSelector, useDispatch } from "react-redux";
@@ -38,7 +38,10 @@ const ProductCard: FC<ProductCardProps> = ({
 }) => {
   const dispatch = useDispatch();
   const router = useRouter();
-  const products: any = useSelector((state: RootState) => state.products.products);
+  // const products: any = useSelector((state: RootState) => state.products.products);
+  const cart: any = useSelector((state: RootState) => state.account.cart);
+  const wishlist: any = useSelector((state: RootState) => state.account.wishlist);
+
   const {
     _id,
     title,
@@ -54,6 +57,11 @@ const ProductCard: FC<ProductCardProps> = ({
 
   const [variantActive, setVariantActive] = React.useState(0);
   const [showModalQuickView, setShowModalQuickView] = React.useState(false);
+  let list: any = null;
+
+  React.useEffect(() => {
+
+  }, [wishlist])
 
   // 
   const cld = new Cloudinary({
@@ -64,39 +72,54 @@ const ProductCard: FC<ProductCardProps> = ({
   const cldImage = cld.image(thumbnail && (thumbnail?.public_id + '.png'));
 
   const notifyAddTocart = ({ size }: { size?: string }) => {
-    dispatch(addToCart({
-      _id,
-      title,
-      price,
-      description,
-      status,
-      image: thumbnail.url,
-    }));
-    toast.custom(
-      (t) => (
-        <Transition
-          appear
-          show={t.visible}
-          className="p-4 max-w-md w-full bg-white dark:bg-slate-800 shadow-lg rounded-2xl pointer-events-auto ring-1 ring-black/5 dark:ring-white/10 text-slate-900 dark:text-slate-200"
-          enter="transition-all duration-150"
-          enterFrom="opacity-0 translate-x-20"
-          enterTo="opacity-100 translate-x-0"
-          leave="transition-all duration-150"
-          leaveFrom="opacity-100 translate-x-0"
-          leaveTo="opacity-0 translate-x-20"
-        >
-          <p className="block text-base font-semibold leading-none">
-            Added to cart!
-          </p>
-          <div className="border-t border-slate-200 dark:border-slate-700 my-4" />
-          {renderProductCartOnNotify({ size })}
-        </Transition>
-      ),
-      { position: "top-right", id: "nc-product-notify", duration: 3000 }
-    );
+    let exist: boolean = false;
+    function run() {
+      !exist && dispatch(addToCart({
+        _id,
+        title,
+        price,
+        description,
+        status,
+        image: thumbnail.url,
+        quantity: 1
+      }));
+  
+      toast.custom(
+        (t) => (
+          <Transition
+            appear
+            show={t.visible}
+            className="p-4 max-w-md w-full bg-white dark:bg-slate-800 shadow-lg rounded-2xl pointer-events-auto ring-1 ring-black/5 dark:ring-white/10 text-slate-900 dark:text-slate-200"
+            enter="transition-all duration-150"
+            enterFrom="opacity-0 translate-x-20"
+            enterTo="opacity-100 translate-x-0"
+            leave="transition-all duration-150"
+            leaveFrom="opacity-100 translate-x-0"
+            leaveTo="opacity-0 translate-x-20"
+          >
+            <p className="block text-base font-semibold leading-none">
+              { exist ? "Product already exist in your cart" : "Added to cart!"}
+            </p>
+            <div className="border-t border-slate-200 dark:border-slate-700 my-4" />
+            {renderProductCartOnNotify({ size, exist })}
+          </Transition>
+        ),
+        { position: "top-right", id: "nc-product-notify", duration: 3000 }
+      );
+    }
+
+    cart.map((product: any, idx: number) => {
+      if(product._id === _id){
+        exist = true;
+      }
+      if(cart.length === idx + 1){
+        run()
+      }
+    })
+    
   };
 
-  const renderProductCartOnNotify = ({ size }: { size?: string }) => {
+  const renderProductCartOnNotify = ({ size, exist }: { size?: string; exist: boolean }) => {
 
     return (
       <div className="flex ">
@@ -281,8 +304,27 @@ const ProductCard: FC<ProductCardProps> = ({
           </Link>
 
           <ProductStatus status={status} />
-
-          <LikeButton liked={isLiked} className="absolute top-3 right-3 z-10" />
+            { wishlist ? wishlist.map((list: any, index: number) => {
+                if(list._id === _id ) {
+                  let prd: any = { ...list, type: "wishlist" }
+                  return <LikeButton 
+                            key={index}
+                            liked={true} 
+                            product={prd} 
+                            className="absolute top-3 right-3 z-10" />
+                }
+              }) : <LikeButton 
+                      liked={false} 
+                      product={{
+                        _id,
+                        title,
+                        price,
+                        description,
+                        status,
+                        image: thumbnail.url,
+                        type: "wishlist"
+                      }} 
+                      className="absolute top-3 right-3 z-10" />}
 
           {(sizes?.length > 0) ? renderSizeList() : renderGroupButtons()}
         </div>

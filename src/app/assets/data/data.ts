@@ -14,7 +14,7 @@ import productSport6 from "@/images/products/sport/sport-6.png";
 import productSport7 from "@/images/products/sport/sport-7.png";
 import productSport8 from "@/images/products/sport/sport-8.png";
 
-//
+// 
 
 export interface ProductVariant {
   _id: number;
@@ -32,6 +32,7 @@ export interface ProductVariant {
 export interface ProductCart {
   _id?: String;
   title: string;
+  quantity: number;
   price: number;
   image: string;
   description: string;
@@ -40,6 +41,7 @@ export interface ProductCart {
   size?: string;
   allOfSizes?: string[];
   status?: string; //"New in" | "limited edition" | "Sold Out" | "50% Discount"
+  type?: string;
 }
 export interface Thumbnail {
   url: string;

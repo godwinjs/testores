@@ -8,10 +8,10 @@ export interface NcInputNumberProps {
   defaultValue?: number;
   min?: number;
   max?: number;
-  onChange?: (value: number) => void;
+  onChange?: (value: number, index?: number) => void;
   label?: string;
   desc?: string;
-  id?: string;
+  id?: number;
 }
 
 const NcInputNumber: FC<NcInputNumberProps> = ({
@@ -36,7 +36,9 @@ const NcInputNumber: FC<NcInputNumberProps> = ({
       return state - 1;
     });
     onChange && onChange(value - 1);
+    // id !== undefined && cartUpd(id)
   };
+
   const handleClickIncrement = () => {
     if (max && max <= value) return;
     setValue((state) => {
@@ -62,7 +64,6 @@ const NcInputNumber: FC<NcInputNumberProps> = ({
 
   return (
     <div
-      id={id}
       className={`nc-NcInputNumber flex items-center justify-between space-x-5 ${className}`}
       data-value={value}
     >

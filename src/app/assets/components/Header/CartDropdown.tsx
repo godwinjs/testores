@@ -19,13 +19,16 @@ export default function CartDropdown() {
 
   const renderProduct = (item: Product, index: number, close: () => void) => {
     const { name, price, image } : any = item;
+
     return (
       <div key={index} className="flex py-5 last:pb-0">
         <div className="relative h-24 w-20 flex-shrink-0 overflow-hidden rounded-xl bg-slate-100">
           <Image
-            src={ProductImgs[image]}
+            src={image}
             alt={name}
             className="h-full w-full object-contain object-center"
+            width={0}
+            height={0}
           />
           <Link
             onClick={close}

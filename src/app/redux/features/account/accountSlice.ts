@@ -25,11 +25,13 @@ type accountDataType = {
 interface initialStateType {
     accountData: accountDataType | null;
     cart: ProductCart[] | null;
+    wishlist: any;
 }
 
 const initialState = {
     accountData: null,
-    cart: null
+    cart: null,
+    wishlist: null,
 } as initialStateType;
 
 
@@ -39,6 +41,16 @@ const accountSlice: Slice = createSlice({
     reducers: {
         addToCart: (state, action: PayloadAction<ProductCart>) => {
             let product = action.payload;
+            if(product.type === "wishlist"){
+            
+                if(!state.wishlist){
+                    state.wishlist = [product]
+                }else{
+                    state.wishlist.push(product)
+                }
+                return;
+            }
+            
             if(!state.cart){
                 state.cart = [product]
             }else{
@@ -50,6 +62,26 @@ const accountSlice: Slice = createSlice({
                 // }
             }
         },
+        updateCart: (state, action) => {
+            let index = action.payload[0];
+            let product = action.payload[1];
+
+            if(state.cart) {
+                const cart = state.cart;
+                cart.splice(index, 1, product)
+
+                state.cart = cart;
+            }
+            if(product.type === "wishlist"){
+
+                if(state.wishlist) {
+                    const wishlist = state.wishlist;
+                    wishlist.splice(index, 1, product)
+    
+                    state.wishlist = wishlist;
+                }
+            }
+        },
         removeFromCart: (state, action: PayloadAction<number>) => {
             let index = action.payload;
             if(state.cart) {
@@ -59,9 +91,22 @@ const accountSlice: Slice = createSlice({
                 state.cart = cart;
 
             }
+            
+            // if(product.type === "wishlist"){/////////////////////////////////////////
+            //     if(state.cart) {
+            //         const cart = state.cart;
+            //         cart.splice(index, 1)
+    
+            //         state.cart = cart;
+    
+            //     }
+            // }
         },
         removeCart: (state) => {
             state.cart = null;
+        },
+        setCart: (state, action: PayloadAction<ProductCart[]>) => {
+            state.cart = action.payload;
         },
         setImageData: (state, action: PayloadAction<imageData>) => {
             state.accountData = {
@@ -106,4 +151,4 @@ export const uploadImage = createAsyncThunk(
 )
 
 export default accountSlice.reducer;
-export const { addToCart, setImageData, removeFromCart, removeCart } = accountSlice.actions
+export const { addToCart, setImageData, removeFromCart, removeCart, updateCart, setCart } = accountSlice.actions

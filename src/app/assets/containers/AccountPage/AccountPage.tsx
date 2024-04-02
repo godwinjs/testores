@@ -10,7 +10,8 @@ import axios from "axios";
 
 import { AppDispatch, RootState } from "@/app/redux/store";
 import { setCredentials } from "@/app/redux/features/auth/authSlice";
-import { uploadImage, setImageData } from "@/app/redux/features/account/accountSlice";
+import { uploadImage, setImageData, setCart } from "@/app/redux/features/account/accountSlice";
+import { useUpdateUserMutation, useDisplayUserQuery, useSigninMutation } from "@/app/redux/features/auth/authApi";
 
 import Label from "@/app/assets/components/Label/Label";
 import ButtonPrimary from "@/app/assets/shared/Button/ButtonPrimary";
@@ -22,11 +23,25 @@ import CommonLayout from "./CommonLayout";
 
 export interface AccountPageProps { 
   className?: string;
+  user: {
+    address?: string;
+    dob?: string;
+    email?: string | null;
+    fullName?: string;
+    gender?: string;
+    id?: string;
+    image?: string | null;
+    joined?: string;
+    lastUpdate?: string;
+    phone?: string;
+    about?: string;
+  }
 }
 
-const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
-  const user: any = useSelector((state: RootState) => state.auth.userInfo);
-  const account: any = useSelector((state: RootState) => state.account.accountData); 
+const AccountPage: FC<AccountPageProps> = ({ className = "", user }) => {
+  
+  const account: any = useSelector((state: RootState) => state.auth.user); 
+  const cart: any = useSelector((state: RootState) => state.account.cart); 
   const [image, setImage] = useState(null);
   const [preview, setPreview]: any = useState(null);
   const [ error, setError ] = useState("");
@@ -40,6 +55,37 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
     }
   });
   const ProfilePicture = cld.image(account && (account.imageData?.url));
+
+  
+  const [signin, { isLoading: logging, isSuccess: logged }] =
+  useSigninMutation();
+  const [ updateUser, { isLoading: updatingUser }] = useUpdateUserMutation();
+  const { data: data, refetch, isLoading: fetchingUser } = useDisplayUserQuery(account._id);
+  let dbCart = data?.data?.cart;
+
+  useEffect(() => {
+    // refetch()
+    if(!dbCart){
+      return;
+    }
+    if(!(dbCart.length > 0)){
+      if(cart.length > 0 ){
+        let cartMap = cart.map((item: any) => {
+          return { _id: item._id, quantity: item.quantity }
+        })
+        updateUser({
+          uid: account._id,
+          userData: { cart: cartMap }
+        })
+      }
+    };
+
+    if(cart === null && dbCart.length > 0){
+      console.log("getting cart and persisting...", dbCart);
+      dispatch(setCart(dbCart))
+    }
+
+  }, [user])
  
   const fNameRef: any = useRef(null),
         emailRef: any = useRef(null),
@@ -47,6 +93,7 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
         adrsRef: any = useRef(null),
         phnRef: any = useRef(null),
         aboutRef: any = useRef(null);
+  // console.log(user)
 
   const isValidEmail = (email: string) => {
 
@@ -63,7 +110,7 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
     // }
 
     try{
-      if((typeof cldUrl) === 'string'){
+      if((typeof cldUrl) === 'string' && user){
         axios.post('/api/account/update', {
         fullName: fNameRef.current?.value,
         email: emailRef.current?.value,
@@ -71,7 +118,7 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
         address: adrsRef.current?.value,
         phone: phnRef.current?.value,
         gender: gender,
-        id: user.id,
+        // id: user.id,
         image: cldUrl,
         about: aboutRef.current?.value
       }).then((res) => {
@@ -180,7 +227,7 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
 
   return (
     <div className={`nc-AccountPage ${className}`} data-nc-id="AccountPage">
-      <CommonLayout>
+      <CommonLayout user={user}>
         <div className="space-y-10 sm:space-y-12">
           {/* HEADING */}
           <h2 className="text-2xl sm:text-3xl font-semibold">

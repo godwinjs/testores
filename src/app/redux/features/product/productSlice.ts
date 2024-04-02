@@ -17,15 +17,11 @@ const initialState = {
 
 
 const productSlice = createSlice({
-    name: 'account',
+    name: 'products',
     initialState: initialState,
     reducers: {
         setProducts: (state, action) => {
-            if(!state.products){
-                state.products = [action.payload]
-            }else{
-                state.products.push(action.payload)
-            }
+            state.products = action.payload
         }
     }
 })

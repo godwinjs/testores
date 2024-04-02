@@ -116,7 +116,8 @@ const authOptions: NextAuthOptions = {
                 session.user.phone = user.phone;
                 session.user.gender = user.gender;
                 session.user.address = user.address;
-                session.user.image = user.image
+                session.user.image = user.image;
+                session.user.about = user.about
             } catch (err: any){
                 throw new Error(err); 
             }

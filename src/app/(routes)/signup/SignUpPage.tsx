@@ -4,7 +4,9 @@ import { Helmet } from "react-helmet";
 import Link from "next/link";
 import Image from 'next/image';
 import { useRouter } from "next/navigation";
-import { signIn } from "next-auth/react";
+import { signIn } from "next-auth/react"; 
+
+import { useSignupMutation } from "@/app/redux/features/auth/authApi";
 
 import facebookSvg from "@/images/socials/_Facebook.svg";
 import twitterSvg from "@/images/socials/_Twitter.svg";
@@ -38,6 +40,10 @@ const loginSocials = [
 ];
 
 const SignUpPage: FC<PageSignUpProps> = ({ className = "" }) => {
+  // server side credentials
+  const [signup, { isLoading: registering, isSuccess: registered }] =
+  useSignupMutation();
+
   const [ error, setError ] = useState("");
   const router = useRouter();
 
@@ -74,6 +80,14 @@ const SignUpPage: FC<PageSignUpProps> = ({ className = "" }) => {
           email: email,
           password: password
         })
+      })
+
+      signup({
+        name: fullName,
+        email: email,
+        password: password,
+        confirmPassword: password,
+        phone: "+234xxxxxxxxx"
       })
   
       if(res.status === 400){

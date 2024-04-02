@@ -6,10 +6,22 @@ import { NavLink } from "@/app/assets/components/NavLink";
 
 export interface CommonLayoutProps {
   children?: React.ReactNode;
+  user?: {
+    address?: string;
+    dob?: string;
+    email?: string | null;
+    fullName?: string;
+    gender?: string;
+    id?: string;
+    image?: string | null;
+    joined?: string;
+    lastUpdate?: string;
+    phone?: string;
+    about?: string;
+  }
 }
 
-const CommonLayout: FC<CommonLayoutProps> = ({ children }) => {
-  const { data: session }: any = useSession();
+const CommonLayout: FC<CommonLayoutProps> = ({ children, user }) => {
 
   return (
     <div className="nc-CommonLayoutProps container">
@@ -19,9 +31,9 @@ const CommonLayout: FC<CommonLayoutProps> = ({ children }) => {
             <h2 className="text-3xl xl:text-4xl font-semibold">Account</h2>
             <span className="block mt-4 text-neutral-500 dark:text-neutral-400 text-base sm:text-lg">
               <span className="text-slate-900 dark:text-slate-200 font-semibold">
-              {session? session.user.fullName : "user's not logged in properly"}
+              {user ? user.fullName : "user's not logged in properly"}
               </span>{" "}
-                {session? session.user.email : "user's not logged in properly"} · Lagos, Nigeria
+                {user ? user.email : "user's not logged in properly"} · Lagos, Nigeria
             </span>
           </div>
           <hr className="mt-10 border-slate-200 dark:border-slate-700"></hr>

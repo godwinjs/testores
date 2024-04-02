@@ -30,10 +30,10 @@ const productApi = apiSlice.injectEndpoints({
         method: "GET",
       }),
       providesTags: ["Product"],
-      refetchOnReconnect: true,
-      keepUnusedDataFor: 1,
-      retries: 3, // Set the number of retry attempts
-      retryOnUnmountOrReconnect: true
+      // refetchOnReconnect: true,
+      // keepUnusedDataFor: 1,
+      // retries: 3, // Set the number of retry attempts
+      // retryOnUnmountOrReconnect: true
       // async onQueryStarted(_, {dispatch, queryFulfilled}){
       //   dispatch(apiSlice.internalActions.onOnline(refetchOnReconnect))
       // }

@@ -7,6 +7,7 @@ import { signIn, useSession } from "next-auth/react";
 import { useDispatch } from "react-redux";
 
 import { setCredentials } from "@/app/redux/features/auth/authSlice";
+import { useSigninMutation, useUpdateUserMutation } from "@/app/redux/features/auth/authApi";
 
 import facebookSvg from "@/images/socials/_Facebook.svg";
 import twitterSvg from "@/images/socials/_Twitter.svg";
@@ -14,7 +15,6 @@ import googleSvg from "@/images/socials/_Google.svg";
 import Input from "@/app/assets/shared/Input/Input"; 
 import ButtonPrimary from "@/app/assets/shared/Button/ButtonPrimary";
 import SetPageTitle from "@/app/assets/hooks/SetPageTitle";
-
 
 export interface PageLoginProps {
   className?: string;
@@ -45,7 +45,9 @@ const LoginPage: FC<PageLoginProps> = ({ className = "" }) => {
     const [ error, setError ] = useState("");
     const router = useRouter();
     const { data: session, status: sessionStatus } = useSession();
-    SetPageTitle({title: "Log In || TruthStore Commerce"})
+    SetPageTitle({title: "Log In || TruthStore Commerce"});
+    const [signin, { isLoading: logging, isSuccess: logged }] =
+      useSigninMutation();  
     // const session = useSession();
     // const dispatch = useDispatch();
 
@@ -80,24 +82,28 @@ const LoginPage: FC<PageLoginProps> = ({ className = "" }) => {
         setError("Password is invalid")
         return;
       }
-
         //   
         const res = await signIn("credentials", {
             redirect: false,
             email,
             password
         });
+        // console.log(res)
+        const authSign = await signin({email, password});
 
         if(res?.error){
             setError("Invalid Email or password");
             if(res?.url){
-              router.replace('/account')
+              // dispatch(setCredentials(session?.user));
             } 
         }else{
+          // SESSION OBJ NOT ACCESSIBLE AFTER SUCC LOGIN
             setError("")
+            if(res?.url){
+              router.replace('/account')
+            } 
 
         }
-
     }
   
   if(sessionStatus === 'loading'){

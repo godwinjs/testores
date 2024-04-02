@@ -11,17 +11,17 @@ import AccountPage from "@/app/assets/containers/AccountPage/AccountPage";
 
 export default function Account() {
     const { data: session } = useSession();
-    const user = useSelector((state: RootState) => state.auth.userInfo )
+    // const user = useSelector((state: RootState) => state.auth.userInfo )
 
 
     if(!session){
         redirect('/login')
     }
-    if(user === null){
+    if(session === null){
         return;
     }
 
-    return <AccountPage />
+    return <AccountPage user={session?.user} />
 }
 // import { getServerSession } from "next-auth/next"
 // import { authOptions } from "@/app/api/auth/[...nextauth]"
