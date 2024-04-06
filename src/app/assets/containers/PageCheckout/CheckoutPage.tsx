@@ -1,9 +1,10 @@
 "use client"
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useSelector, useDispatch } from "react-redux";
 import Image from "next/image"
+import { PaystackButton } from "react-paystack";
 
 import { RootState } from "@/app/redux/store"
 import { updateCart } from "@/app/redux/features/account/accountSlice";
@@ -21,7 +22,7 @@ import SetPageTitle from "../../hooks/SetPageTitle";
 
 const CheckoutPage = ({user}: any) => {
   SetPageTitle({title: "Checkout || Truthstore Ecommerce"})
-  
+
   const dispatch = useDispatch();
   const cart: any = useSelector((state: RootState) => state.account.cart)
   const [tabActive, setTabActive] = useState<
@@ -31,6 +32,34 @@ const CheckoutPage = ({user}: any) => {
   const [ cardName, setCardName ] = useState("");
   const [ expDate, setExpDate ] = useState("");
   const [ cvc, setCVC ] = useState("");
+
+  const orderTotal  = cart && (addArray(cart.map((i: any) => i.price * i.quantity) ) * 0.008) + (addArray(cart.map((i: any) => i.price * i.quantity) ) * 0.005) + ( addArray(cart.map((i: any) => i.price * i.quantity) ));
+  const email = user && user.email;
+  const fullName = user && user.fullName;
+  const phone = user && user.phone;
+
+
+  const componentProps = {
+    email,
+    amount: orderTotal * 100,
+    metadata: {
+      name: fullName,
+      phone,
+      "custom_fields": [
+        {
+          "display_name": "Invoice ID",
+          "variable_name": "Invoice ID",
+          "value": 209
+        },
+      ],
+    },
+    publicKey: `${process.env.NEXT_PUBLIC_PSTACK_PUB}`,
+    text: "Confirm order",
+    onSuccess: () =>
+      alert("Thanks for doing business with us! Come back soon!!"),
+    onClose: () => alert("Wait! Don't leave :("),
+  }
+
 
   const handleScrollToEl = (id: string) => {
     const element = document.getElementById(id);
@@ -331,11 +360,13 @@ const CheckoutPage = ({user}: any) => {
               <div className="flex justify-between font-semibold text-slate-900 dark:text-slate-200 text-base pt-4">
                 <span>Order total</span>
                 <span>
-                  ₦ {cart ? (addArray(cart.map((i: any) => i.price * i.quantity) ) * 0.008) + (addArray(cart.map((i: any) => i.price * i.quantity) ) * 0.005) + ( addArray(cart.map((i: any) => i.price * i.quantity) )) : 0.00}
+                  ₦ {orderTotal}
+                  {/* ₦ {cart ? (addArray(cart.map((i: any) => i.price * i.quantity) ) * 0.008) + (addArray(cart.map((i: any) => i.price * i.quantity) ) * 0.005) + ( addArray(cart.map((i: any) => i.price * i.quantity) )) : 0.00} */}
                 </span>
               </div>
             </div>
-            <ButtonPrimary onClick={() => handleSubmit()} className="mt-8 w-full">Confirm order</ButtonPrimary>
+            <PaystackButton className="ttnc-ButtonPrimary disabled:cursor-not-allowed disabled:bg-opacity-90 bg-slate-900 dark:bg-slate-100 hover:bg-slate-800 text-slate-50 dark:text-slate-800 shadow-xl mt-8 w-full rounded py-4" {...componentProps} />
+            
             <div className="mt-5 text-sm text-slate-500 dark:text-slate-400 flex items-center justify-center">
               <p className="block relative pl-5">
                 <svg

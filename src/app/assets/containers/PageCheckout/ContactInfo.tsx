@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 
 import Label from "@/app/assets/components/Label/Label";
-import ButtonPrimary from "@/app/assets/shared/Button/ButtonPrimary";
+import ButtonPrimary from "@/app/assets/shared/Button/ButtonPrimary"; 
 import ButtonSecondary from "@/app/assets/shared/Button/ButtonSecondary";
 import Checkbox from "@/app/assets/shared/Checkbox/Checkbox";
 import Input from "@/app/assets/shared/Input/Input";
@@ -14,6 +14,7 @@ interface Props {
 }
 
 const ContactInfo: FC<Props> = ({ isActive, onCloseActive, onOpenActive, user }) => {
+  
   const renderAccount = () => {
     return (
       <div className="border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden z-0">
