@@ -17,7 +17,7 @@ interface Props {
   sizeSelected: string;
   qualitySelected: number;
   product: Product | null;
-  exist: boolean;
+  exist?: boolean;
 }
 
 const NotifyAddTocart: FC<Props> = ({

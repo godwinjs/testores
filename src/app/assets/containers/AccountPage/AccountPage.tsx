@@ -85,7 +85,7 @@ const AccountPage: FC<AccountPageProps> = ({ className = "", user }) => {
       dispatch(setCart(dbCart))
     }
 
-  }, [user])
+  }, [user, cart, dbCart, dispatch, account._id, updateUser])
  
   const fNameRef: any = useRef(null),
         emailRef: any = useRef(null),
@@ -241,6 +241,7 @@ const AccountPage: FC<AccountPageProps> = ({ className = "", user }) => {
                   alt=""
                   cldImg={ProfilePicture}
                   className="w-32 h-32 rounded-full object-cover z-0"
+                  //@ts-ignore
                 />) ) : (preview ? <img src={preview} alt="preview" className="w-32 h-32 rounded-full object-cover z-0" /> : <div className="w-32 h-32 bg-black rounded-full object-cover z-0"></div>)}
                 
                 <div className="group-hover:visible lg:invisible absolute inset-0 bg-black bg-opacity-60 flex flex-col items-center justify-center text-neutral-50 cursor-pointer">

@@ -113,7 +113,7 @@ const BlogSingle = () => {
           It's probably important that images look okay here by default as well:
         </p>
         <figure>
-          <img
+          <Image
             src="https://images.unsplash.com/photo-1501493870936-9c2e41625521?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1045&amp;q=80"
             alt="nc blog"
             className="rounded-2xl"

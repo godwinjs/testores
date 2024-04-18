@@ -38,7 +38,7 @@ function PageHome() {
 
   useEffect(() => {
     if(productData?.acknowledgement) dispatch(setProducts(productsAdmin))
-  }, [productData])
+  }, [productData, dispatch, productsAdmin])
 
   const getPageData = useCallback(async () => {
     const res = await fetch('/pages/home.json')

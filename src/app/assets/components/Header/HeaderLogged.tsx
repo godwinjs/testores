@@ -58,7 +58,7 @@ const HeaderLogged: FC<HeaderLoggedProps> = () => {
    return () => { 
      window.removeEventListener('focus', makeApiCall)
    }
-  }, [session])
+  }, [session, product])
 
   return (
     <div className="nc-HeaderLogged sticky top-0 w-full z-40 ">
