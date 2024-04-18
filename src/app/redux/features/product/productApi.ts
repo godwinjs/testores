@@ -19,7 +19,7 @@ const productApi = apiSlice.injectEndpoints({
         method: "GET",
       }),
       providesTags: ["Product"],
-      refetchOnReconnect: true,
+      // refetchOnReconnect: true,
       // keepUnusedDataFor: 1,
     }),
 
@@ -59,7 +59,7 @@ const productApi = apiSlice.injectEndpoints({
     }),
 
   }),
-  overrideExisting: module.hot?.status() === "apply",
+  // overrideExisting: module.hot?.status() === "apply",
 });
 
 export const {
