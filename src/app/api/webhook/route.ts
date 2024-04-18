@@ -3,11 +3,12 @@ const crypto = require('crypto');
 
 const secret = process.env.PSTACK_SECRET as string;
 
-export const config = {
-    api: {
-        bodyParser: false
-    }
-}
+// https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config
+// export const config = {
+//     api: {
+//         bodyParser: false
+//     }
+// }
 
 export async function POST(req: NextRequest, res: NextResponse) {
     console.log('webhook listening....')
