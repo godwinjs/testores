@@ -36,17 +36,17 @@ function PageHome() {
   const productsAdmin = productData?.data || [];
   SetPageTitle({title: pageData?.main.title})
 
-  useEffect(() => {
-    if(productData?.acknowledgement) dispatch(setProducts(productsAdmin))
-  }, [productData, dispatch, productsAdmin])
-
   const getPageData = useCallback(async () => {
     const res = await fetch('/pages/home.json')
     const data  = await res.json();
     setPageData(data)
   }, [setPageData])
 
-  useMemo(() => getPageData(), [getPageData]);
+  useMemo(() => {
+    getPageData();
+    
+    if(productData?.acknowledgement) dispatch(setProducts(productsAdmin))
+  }, [getPageData, productData, dispatch, productsAdmin]);
 
   return (
     pageData && <div className="nc-PageHome relative overflow-hidden">

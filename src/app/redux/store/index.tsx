@@ -21,8 +21,8 @@ import counterReducer from "../features/counter/counterSlice";
 import accountReducer from "../features/account/accountSlice";
 import productReducer from "../features/product/productSlice";
 
-const isDev = process.env.NEXT_PUBLIC_NODE_ENV === "development"
-const middlewareLogger: any = !!isDev ? logger : [];
+// const isDev = process.env.NEXT_PUBLIC_NODE_ENV === "development"
+// const middlewareLogger: any = !!isDev ? logger : [];
 
 const persistConfig = {
   key: 'root',
@@ -46,7 +46,7 @@ export const store = configureStore({
     getDefaultMiddleware({
       immutableCheck: false,
       serializableCheck: false,
-    }).concat(apiSlice.middleware, middlewareLogger),
+    }).concat(apiSlice.middleware),
     devTools: true,
 });
 

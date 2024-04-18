@@ -97,13 +97,11 @@ export default async function RootLayout({
         <AuthProvider session={session}>
           <Providers>
               <Toaster />
-              {/* <Suspense fallback={<p>Loading........</p>}> */}
                 <NavigationEvents>
                   <><Header />
                   {children}
                   <Footer /></>
                 </NavigationEvents>
-              {/* </Suspense> */}
           </Providers>
         </AuthProvider>
       </body>
