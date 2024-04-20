@@ -5,7 +5,7 @@ import localFont from "next/font/local";
 import "rc-slider/assets/index.css";
 import { Toaster } from 'react-hot-toast';
 import { getServerSession } from "next-auth/next";
-import { Suspense } from 'react';
+// import { Suspense } from 'react';
 // import { useRouter } from 'next/router';
 
 import { NavigationEvents } from '@/app/assets/components/NavigationEvents';
