@@ -2,8 +2,6 @@
  
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { usePathname, useSearchParams } from 'next/navigation'
-
-import Loader from "@/app/assets/components/Loaders/DualCircleLoader"
  
 export function NavigationEvents({
   children,
@@ -20,7 +18,7 @@ export function NavigationEvents({
     // start:: prevent executing useEffect twice
     if (dataFetch.current) return;
     setHeight(window.innerHeight)
-  
+    console.log("document.readyState === 'complete'", document.readyState === 'complete')
     if (document.readyState === 'complete') {
        setLoading(false)
     }
@@ -34,6 +32,7 @@ export function NavigationEvents({
     dataFetch.current = true;
     // end:: prevent executing useEffect twice
   }, [pathname, searchParams, loading])
+  // <Loader height={height} size={150} />
  
-  return <>{loading ? <Loader height={height} size={150} /> : children }</>
+  return <>{loading ? "Loading..." : children }</>
 }
