@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useMemo, useCallback, Suspense } from "react";
+import { useEffect, useState, useMemo, useCallback } from "react";
 import SectionHowItWork from "@/app/assets/components/SectionHowItWork/SectionHowItWork";
 import BackgroundSection from "@/app/assets/components/BackgroundSection/BackgroundSection";
 import SectionPromo1 from "@/app/assets/components/SectionPromo1";
