@@ -20,18 +20,6 @@ export interface PageSignUpProps {
 
 const loginSocials = [
   {
-    name: "Continue with Facebook",
-    href: "#",
-    icon: facebookSvg,
-    provider: 'facebook'
-  },
-  {
-    name: "Continue with Twitter",
-    href: "#",
-    icon: twitterSvg,
-    provider: 'twitter'
-  },
-  {
     name: "Continue with Google",
     href: "#",
     icon: googleSvg,
@@ -120,12 +108,14 @@ const SignUpPage: FC<PageSignUpProps> = ({ className = "" }) => {
                 key={index}
                 onClick={async () => {
                   const res = await signIn(`${item.provider}`,{
-                  redirect: false
+                  redirect: false,
+                  type: "signup"
                   })
                   if(res?.error){
                     setError("Couldn't login user");
                     if(res?.url){
                       router.replace('/account')
+                      // instead goto /reg route that contains other client info.
                     } 
                 }
                 }}

@@ -1,7 +1,8 @@
 import NextAuth, { NextAuthOptions } from "next-auth";
 // import { getServerSession } from "next-auth/next";
 import { Account, User as AuthUser } from "next-auth";
-import GoogleProvider from "next-auth/providers/google"
+import GoogleProvider from "next-auth/providers/google";
+import FacebookProvider from "next-auth/providers/facebook";
 import CredentialProvider from "next-auth/providers/credentials";
 import bcrypt from 'bcryptjs';
 
@@ -43,7 +44,7 @@ const authOptions: NextAuthOptions = {
         }),
         GoogleProvider({
         clientId: process.env.GOOGLE_CLIENT_ID || '',
-        clientSecret: process.env.GOOGLE_CLIENT_SECRET || '',
+        clientSecret: process.env.GOOGLE_CLIENT_SECRET || '', 
         authorization: {
             params: {
               prompt: "consent",
@@ -54,7 +55,9 @@ const authOptions: NextAuthOptions = {
         }),
     ],
     callbacks: {
-        async signIn({user, account, profile, email, credentials }: any): Promise<boolean> {
+        async signIn({user, account, profile, email, credentials, metadata }: any): Promise<boolean> {
+            
+            console.log({"user": user, "account": account, "profile": profile, "email": email, "credentials": credentials, "metadata": metadata})
             
             await connect();
             // console.log({user: user, account: account, profile: profile, email: email, credentials: credentials})
@@ -69,7 +72,7 @@ const authOptions: NextAuthOptions = {
         
                 if(!(existingUser === null)){
                     console.log("User Exists")
-                    return true;//
+                    return true; //
                 }
                 const newUser = new User({
                     fullName: profile.name,
@@ -107,6 +110,7 @@ const authOptions: NextAuthOptions = {
             
             try {
                 user = await User.findOne({email: session.user.email});
+                console.log(session)
 
                 session.user.fullName = user.fullName;
                 session.user.joined = user.createdAt;

@@ -22,18 +22,6 @@ export interface PageLoginProps {
 
 const loginSocials = [
   {
-    name: "Continue with Facebook",
-    href: "#",
-    icon: facebookSvg,
-    provider: 'facebook'
-  },
-  {
-    name: "Continue with Twitter",
-    href: "#",
-    icon: twitterSvg,
-    provider: 'twitter'
-  },
-  {
     name: "Continue with Google",
     href: "#",
     icon: googleSvg,
@@ -99,6 +87,7 @@ const LoginPage: FC<PageLoginProps> = ({ className = "" }) => {
         }else{
           // SESSION OBJ NOT ACCESSIBLE AFTER SUCC LOGIN
             setError("")
+            
             if(res?.url){
               router.replace('/account')
             } 
@@ -124,7 +113,8 @@ const LoginPage: FC<PageLoginProps> = ({ className = "" }) => {
                 href={item.href}
                 onClick={async () => {
                   const res = await signIn(`${item.provider}`,{
-                  redirect: false
+                  redirect: false,
+                  type: "login"
                   })
                   if(res?.error){
                     setError("Couldn't login user");
