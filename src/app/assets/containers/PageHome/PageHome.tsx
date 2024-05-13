@@ -42,11 +42,11 @@ function PageHome() {
     setPageData(data)
   }, [setPageData])
 
-  // useMemo(() => {
-  //   getPageData();
+  useMemo(() => {
+    getPageData();
     
-  //   if(productData?.acknowledgement) dispatch(setProducts(productsAdmin))
-  // }, [getPageData, productData, dispatch, productsAdmin]);
+    // if(productData?.acknowledgement) dispatch(setProducts(productsAdmin))
+  }, [getPageData]);
 
   return (
     pageData && <div className="nc-PageHome relative overflow-hidden">
