@@ -18,7 +18,7 @@ export function NavigationEvents({
     // start:: prevent executing useEffect twice
     if (dataFetch.current) return;
     setHeight(window.innerHeight)
-    console.log("document.readyState === 'complete'", document.readyState === 'complete')
+    // console.log("document.readyState === 'complete'", document.readyState === 'complete')
     if (document.readyState === 'complete') {
        setLoading(false)
     }
@@ -34,5 +34,6 @@ export function NavigationEvents({
   }, [pathname, searchParams, loading])
   // <Loader height={height} size={150} />
  
-  return <>{loading ? "Loading..." : children }</>
+  // return <>{loading ? children : children }</>
+  return children;
 }
