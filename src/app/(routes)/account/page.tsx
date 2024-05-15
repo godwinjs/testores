@@ -1,17 +1,20 @@
 'use client'
 
 import { useDispatch, useSelector } from "react-redux";
-import { useSession } from "next-auth/react"
+import { useSession } from "next-auth/react" 
 import { redirect } from "next/navigation";
+import axios from "axios";
 
 import { setCredentials } from "@/app/redux/features/auth/authSlice";
 import { RootState } from "@/app/redux/store";
 
 import AccountPage from "@/app/assets/containers/AccountPage/AccountPage";
+import { useEffect } from "react";
 
 export default function Account() {
     const { data: session } = useSession();
-    // const user = useSelector((state: RootState) => state.auth.userInfo )
+    const dispatch = useDispatch();
+    const user = useSelector((state: RootState) => state.auth.user )
 
 
     if(!session){
@@ -20,8 +23,14 @@ export default function Account() {
     if(session === null){
         return;
     }
+    useEffect( () => {
+        if(!user) axios.post('/api/login/getUser', { email: session?.user.email}).then((res) => {
+            const userData = res.data.data;
+            dispatch(setCredentials(userData));
+        })
+    }, [session?.user])
 
-    return <AccountPage user={session?.user} />
+    return user && <AccountPage user={user} />
 }
 // import { getServerSession } from "next-auth/next"
 // import { authOptions } from "@/app/api/auth/[...nextauth]"

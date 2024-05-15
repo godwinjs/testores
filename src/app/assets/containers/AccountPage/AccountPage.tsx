@@ -29,8 +29,8 @@ export interface AccountPageProps {
     email?: string | null;
     fullName?: string;
     gender?: string;
-    id?: string;
-    image?: string | null;
+    _id?: string;
+    image: string;
     joined?: string;
     lastUpdate?: string;
     phone?: string;
@@ -40,7 +40,8 @@ export interface AccountPageProps {
 
 const AccountPage: FC<AccountPageProps> = ({ className = "", user }) => {
   
-  const account: any = useSelector((state: RootState) => state.auth.user); 
+  const account: any = useSelector((state: RootState) => state.account.accountData); 
+
   const cart: any = useSelector((state: RootState) => state.account.cart); 
   const [image, setImage] = useState(null);
   const [preview, setPreview]: any = useState(null);
@@ -54,13 +55,13 @@ const AccountPage: FC<AccountPageProps> = ({ className = "", user }) => {
       cloudName: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME
     }
   });
-  const ProfilePicture = cld.image(account && (account.imageData?.url));
+  const ProfilePicture = cld.image(account && account.imageData?.url);
 
   
   const [signin, { isLoading: logging, isSuccess: logged }] =
   useSigninMutation();
   const [ updateUser, { isLoading: updatingUser }] = useUpdateUserMutation();
-  const { data: data, refetch, isLoading: fetchingUser } = useDisplayUserQuery(account._id);
+  const { data: data, refetch, isLoading: fetchingUser } = useDisplayUserQuery(user._id);
   let dbCart = data?.data?.cart;
 
   useEffect(() => {
@@ -74,7 +75,7 @@ const AccountPage: FC<AccountPageProps> = ({ className = "", user }) => {
           return { _id: item._id, quantity: item.quantity }
         })
         updateUser({
-          uid: account._id,
+          uid: user._id,
           userData: { cart: cartMap }
         })
       }
@@ -85,7 +86,7 @@ const AccountPage: FC<AccountPageProps> = ({ className = "", user }) => {
       dispatch(setCart(dbCart))
     }
 
-  }, [user, cart, dbCart, dispatch, account._id, updateUser])
+  }, [user, cart, dbCart, dispatch, user._id, updateUser])
  
   const fNameRef: any = useRef(null),
         emailRef: any = useRef(null),
@@ -101,9 +102,12 @@ const AccountPage: FC<AccountPageProps> = ({ className = "", user }) => {
     return emailRegex.test(email);
   }
   const updateSubmit = async () => {
+    console.log("yppe")
     // e.preventDefault();
-     const cldUrl = await imageUpload();
-  
+     let cldUrl = user.image;
+     if(image){
+      cldUrl = await imageUpload();
+     }
     // if(!isValidEmail(email)){
     //   setError("Email is invalid")
     //   return;
@@ -118,12 +122,13 @@ const AccountPage: FC<AccountPageProps> = ({ className = "", user }) => {
         address: adrsRef.current?.value,
         phone: phnRef.current?.value,
         gender: gender,
-        // id: user.id,
+        // _id: user._id, //exists already
         image: cldUrl,
         about: aboutRef.current?.value
       }).then((res) => {
         dispatch(setCredentials(res.data.data))
         setDisabled(true);
+        handleResetClick()
       })}
 
     }catch (err) {
@@ -181,6 +186,7 @@ const AccountPage: FC<AccountPageProps> = ({ className = "", user }) => {
 
   }
   const imageUpload = async () => {
+
     dispatch(setImageData({
       url: undefined,
       loading: true,
@@ -223,7 +229,9 @@ const AccountPage: FC<AccountPageProps> = ({ className = "", user }) => {
   const handleResetClick = () => {
     setPreview(null);
     setImage(null);
+    dispatch(setImageData(null))
   };
+  console.log(account)
 
   return (
     <div className={`nc-AccountPage ${className}`} data-nc-id="AccountPage">
@@ -237,11 +245,11 @@ const AccountPage: FC<AccountPageProps> = ({ className = "", user }) => {
             <div className="flex-shrink-0 flex items-start">
               {/* AVATAR */}
               <div className="group relative rounded-full overflow-hidden flex">
-                {(account && !preview) ? ( (account.imageData?.loading || !account.imageData?.url ) ? <div className="w-32 h-32 bg-black rounded-full object-cover z-0"></div> : (account.imageData?.url && <AdvancedImage
+                {(account && !preview) ? ( ( account.imageData?.loading || !account.imageData?.url ) ? ( user.image !== "" ? <Image src={user.image} alt="google photo" width={100} height={100} className="w-32 h-32 bg-black rounded-full object-f z-0" /> : <div className="w-32 h-32 bg-black rounded-full object-cover z-0"></div>) : (account.imageData?.url && <AdvancedImage
                   alt=""
                   cldImg={ProfilePicture}
                   className="w-32 h-32 rounded-full object-cover z-0"
-                />) ) : (preview ? <img src={preview} alt="preview" className="w-32 h-32 rounded-full object-cover z-0" /> : <div className="w-32 h-32 bg-black rounded-full object-cover z-0"></div>)}
+                />) ) : (preview ? <img src={preview} alt="preview" className="w-32 h-32 rounded-full object-cover z-0" /> : ( user.image !== "" ? <Image src={user.image} alt="google photo" width={100} height={100} className="w-32 h-32 bg-black rounded-full object-f z-0" /> : <div className="w-32 h-32 bg-black rounded-full object-cover z-0"></div>) )}
                 
                 <div className="group-hover:visible lg:invisible absolute inset-0 bg-black bg-opacity-60 flex flex-col items-center justify-center text-neutral-50 cursor-pointer">
                   <svg
@@ -286,6 +294,7 @@ const AccountPage: FC<AccountPageProps> = ({ className = "", user }) => {
                   </span>
                   <Input
                     name="email"
+                    onChange={handleTextChange}
                     className="!rounded-l-none"
                     defaultValue={`${user?.email}`}
                     displayName="Email Input"
@@ -304,6 +313,7 @@ const AccountPage: FC<AccountPageProps> = ({ className = "", user }) => {
                   <Input
                     className="!rounded-l-none"
                     type="date"
+                    onChange={handleTextChange}
                     defaultValue={user?.dob}
                     displayName="DOB input"
                     ref={dobRef}
@@ -319,6 +329,7 @@ const AccountPage: FC<AccountPageProps> = ({ className = "", user }) => {
                   </span>
                   <Input
                     className="!rounded-l-none"
+                    onChange={handleTextChange}
                     defaultValue={user ? user.address : 'Nigeria'}
                     displayName="Address Input"
                     ref={adrsRef}
@@ -346,6 +357,7 @@ const AccountPage: FC<AccountPageProps> = ({ className = "", user }) => {
                   <Input
                     className="!rounded-l-none"
                     defaultValue={user?.phone}
+                    onChange={handleTextChange}
                     displayName="Phone input"
                     ref={phnRef}
                   />
@@ -354,7 +366,7 @@ const AccountPage: FC<AccountPageProps> = ({ className = "", user }) => {
               {/* ---- */}
               <div>
                 <Label>About you</Label>
-                <Textarea className="mt-1.5" defaultValue={user?.about} ref={aboutRef} />
+                <Textarea className="mt-1.5" onChange={handleTextChange} defaultValue={user?.about} ref={aboutRef} />
               </div>
               <div className="pt-2">
                 <ButtonPrimary disabled={disabled} onClick={updateSubmit}>Update account</ButtonPrimary>

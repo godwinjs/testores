@@ -3,7 +3,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 type initialStateType = {
-  userInfo: userInfoType | null;
+  userInfo: userInfoType | null; //if all good ? remove this
   user: any;
   isLoading: boolean;
 }
@@ -27,7 +27,7 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     setCredentials: (state, action: PayloadAction<userInfoType>) => {
-      state.userInfo = action.payload;
+      state.user = action.payload;
       // localStorage.setItem("userInfo", JSON.stringify(action.payload));
     },
     setUser: (state, action) => {
@@ -37,7 +37,7 @@ const authSlice = createSlice({
       state.isLoading = false;
     },
     logout: (state) => {
-      state.user = {};
+      state.user = null;
       state.userInfo = null;
       localStorage.removeItem("accessToken");
     },

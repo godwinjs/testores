@@ -8,8 +8,8 @@ import { signIn } from "next-auth/react";
 
 import { useSignupMutation } from "@/app/redux/features/auth/authApi";
 
-import facebookSvg from "@/images/socials/_Facebook.svg";
-import twitterSvg from "@/images/socials/_Twitter.svg";
+// import facebookSvg from "@/images/socials/_Facebook.svg";
+// import twitterSvg from "@/images/socials/_Twitter.svg";
 import googleSvg from "@/images/socials/_Google.svg";
 import Input from "@/app/assets/shared/Input/Input";
 import ButtonPrimary from "@/app/assets/shared/Button/ButtonPrimary";
@@ -57,18 +57,18 @@ const SignUpPage: FC<PageSignUpProps> = ({ className = "" }) => {
     }
   
     try {
-      const res = await fetch("/api/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      // const res = await fetch("/api/register", {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
   
-        },
-        body: JSON.stringify({
-          fullName: fullName,
-          email: email,
-          password: password
-        })
-      })
+      //   },
+      //   body: JSON.stringify({
+      //     fullName: fullName,
+      //     email: email,
+      //     password: password
+      //   })
+      // })
 
       signup({
         name: fullName,
@@ -78,14 +78,14 @@ const SignUpPage: FC<PageSignUpProps> = ({ className = "" }) => {
         phone: "+234xxxxxxxxx"
       })
   
-      if(res.status === 400){
-        setError("This email is already registered.")
-      }
-      if(res.status === 200){
-        // route to confirm email then login. for now its login
-        setError("")
-        router.push("/login");
-      }
+      // if(res.status === 400){
+      //   setError("This email is already registered.")
+      // }
+      // if(res.status === 200){
+      //   // route to confirm email then login. for now its login
+      //   setError("")
+      //   router.push("/login");
+      // }
     }catch (err){
       setError("Error, try again later");
       console.log(err)
@@ -108,8 +108,7 @@ const SignUpPage: FC<PageSignUpProps> = ({ className = "" }) => {
                 key={index}
                 onClick={async () => {
                   const res = await signIn(`${item.provider}`,{
-                  redirect: false,
-                  type: "signup"
+                  redirect: false
                   })
                   if(res?.error){
                     setError("Couldn't login user");

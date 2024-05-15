@@ -8,6 +8,7 @@ import bcrypt from 'bcryptjs';
 
 import User from '@/app/db/models/User';
 import connect from "@/app/db/utils/connect";
+import {store} from "@/app/redux/store/index"
 
 
 const authOptions: NextAuthOptions = {
@@ -77,7 +78,6 @@ const authOptions: NextAuthOptions = {
                 const newUser = new User({
                     fullName: profile.name,
                     email: user.email,
-                    password: '',
                     dob: '',
                     address: '',
                     phone: '',
@@ -110,18 +110,17 @@ const authOptions: NextAuthOptions = {
             
             try {
                 user = await User.findOne({email: session.user.email});
-                console.log(session)
 
-                session.user.fullName = user.fullName;
-                session.user.joined = user.createdAt;
-                session.user.lastUpdate = user.updatedAt;
-                session.user.id = user.id;
-                session.user.dob = user.dob;
-                session.user.phone = user.phone;
-                session.user.gender = user.gender;
-                session.user.address = user.address;
-                session.user.image = user.image;
-                session.user.about = user.about
+                // session.user.fullName = user.fullName;
+                // session.user.joined = user.createdAt;
+                // session.user.lastUpdate = user.updatedAt;
+                // session.user.id = user.id;
+                // session.user.dob = user.dob;
+                // session.user.phone = user.phone;
+                // session.user.gender = user.gender;
+                // session.user.address = user.address;
+                // session.user.image = user.image;
+                // session.user.about = user.about
             } catch (err: any){
                 throw new Error(err); 
             }
