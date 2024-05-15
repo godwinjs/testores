@@ -15,6 +15,13 @@ export default function Account() {
     const { data: session } = useSession();
     const dispatch = useDispatch();
     const user = useSelector((state: RootState) => state.auth.user )
+    
+    useEffect( () => {
+        if(!user) axios.post('/api/login/getUser', { email: session?.user.email}).then((res) => {
+            const userData = res.data.data;
+            dispatch(setCredentials(userData));
+        })
+    }, [session?.user])
 
 
     if(!session){
@@ -23,12 +30,6 @@ export default function Account() {
     if(session === null){
         return;
     }
-    useEffect( () => {
-        if(!user) axios.post('/api/login/getUser', { email: session?.user.email}).then((res) => {
-            const userData = res.data.data;
-            dispatch(setCredentials(userData));
-        })
-    }, [session?.user])
 
     return user && <AccountPage user={user} />
 }
