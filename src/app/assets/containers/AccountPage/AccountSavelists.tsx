@@ -37,7 +37,7 @@ const AccountSavelists: FC<AccountPageProps> = ({ className = "", user }) => {
 
   return (
     <div>
-      <CommonLayout user={user}>{renderSection1()}</CommonLayout>
+      <CommonLayout user={user}>{wishlist === null ? "Opps! no product liked yet. Like some products and check back" : renderSection1()}</CommonLayout>
     </div>
   );
 };
