@@ -1,4 +1,5 @@
 "use client";
+
 import { FC, useState, useRef, useEffect } from "react";
 import {AdvancedImage} from '@cloudinary/react';
 import {Cloudinary} from "@cloudinary/url-gen";
@@ -28,6 +29,7 @@ export interface AccountPageProps {
     dob?: string;
     email?: string | null;
     fullName?: string;
+    name?: string;
     gender?: string;
     _id?: string;
     image: string;
@@ -35,6 +37,7 @@ export interface AccountPageProps {
     lastUpdate?: string;
     phone?: string;
     about?: string;
+    avatar?: {url: string, public_id: string}
   }
 }
 
@@ -50,14 +53,17 @@ const AccountPage: FC<AccountPageProps> = ({ className = "", user }) => {
   const [ gender, setGender ] = useState("");
   const router = useRouter();
   const dispatch: AppDispatch = useDispatch();
+  
   const cld = new Cloudinary({
     cloud: {
       cloudName: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME
     }
   });
-  const ProfilePicture = cld.image(account && account.imageData?.url);
 
-  
+  // const ProfilePicture = cld.image(account && account.imageData?.url);
+  if(user.avatar) user = { ...user, image: user.avatar.url }
+  const ProfilePicture: any = cld.image(user && user.image);
+
   const [signin, { isLoading: logging, isSuccess: logged }] =
   useSigninMutation();
   const [ updateUser, { isLoading: updatingUser }] = useUpdateUserMutation();
@@ -69,7 +75,9 @@ const AccountPage: FC<AccountPageProps> = ({ className = "", user }) => {
     if(!dbCart){
       return;
     }
+
     if(!(dbCart.length > 0)){
+
       if(cart.length > 0 ){
         let cartMap = cart.map((item: any) => {
           return { _id: item._id, quantity: item.quantity }
@@ -82,7 +90,6 @@ const AccountPage: FC<AccountPageProps> = ({ className = "", user }) => {
     };
 
     if(cart === null && dbCart.length > 0){
-      console.log("getting cart and persisting...", dbCart);
       dispatch(setCart(dbCart))
     }
 
@@ -94,7 +101,6 @@ const AccountPage: FC<AccountPageProps> = ({ className = "", user }) => {
         adrsRef: any = useRef(null),
         phnRef: any = useRef(null),
         aboutRef: any = useRef(null);
-  // console.log(user)
 
   const isValidEmail = (email: string) => {
 
@@ -213,6 +219,7 @@ const AccountPage: FC<AccountPageProps> = ({ className = "", user }) => {
         }
       );
       const res = await response.json();
+      console.log(res)
       
       dispatch(setImageData({
         url: res.public_id,
@@ -231,7 +238,6 @@ const AccountPage: FC<AccountPageProps> = ({ className = "", user }) => {
     setImage(null);
     dispatch(setImageData(null))
   };
-  console.log(account)
 
   return (
     <div className={`nc-AccountPage ${className}`} data-nc-id="AccountPage">
@@ -245,11 +251,11 @@ const AccountPage: FC<AccountPageProps> = ({ className = "", user }) => {
             <div className="flex-shrink-0 flex items-start">
               {/* AVATAR */}
               <div className="group relative rounded-full overflow-hidden flex">
-                {(account && !preview) ? ( ( account.imageData?.loading || !account.imageData?.url ) ? ( user.image !== "" ? <Image src={user.image} alt="google photo" width={100} height={100} className="w-32 h-32 bg-black rounded-full object-f z-0" /> : <div className="w-32 h-32 bg-black rounded-full object-cover z-0"></div>) : (account.imageData?.url && <AdvancedImage
+                {(user && !preview) ? ( ( user.image.includes("https://") ) ? ( user.image !== "" ? <Image src={user.image} alt="google photo" width={100} height={100} className="w-32 h-32 bg-black rounded-full object-f z-0" /> : <div className="w-32 h-32 bg-black rounded-full object-cover z-0"></div>) : (ProfilePicture.publicID ? <AdvancedImage
                   alt=""
                   cldImg={ProfilePicture}
                   className="w-32 h-32 rounded-full object-cover z-0"
-                />) ) : (preview ? <img src={preview} alt="preview" className="w-32 h-32 rounded-full object-cover z-0" /> : ( user.image !== "" ? <Image src={user.image} alt="google photo" width={100} height={100} className="w-32 h-32 bg-black rounded-full object-f z-0" /> : <div className="w-32 h-32 bg-black rounded-full object-cover z-0"></div>) )}
+                /> : <div className="w-32 h-32 bg-black rounded-full object-cover z-0"></div>) ) : (preview ? <img src={preview} alt="preview" className="w-32 h-32 rounded-full object-cover z-0" /> : ( user.image !== "" ? <Image src={user.image} alt="google photo" width={100} height={100} className="w-32 h-32 bg-black rounded-full object-f z-0" /> : <div className="w-32 h-32 bg-black rounded-full object-cover z-0"></div>) ) }
                 
                 <div className="group-hover:visible lg:invisible absolute inset-0 bg-black bg-opacity-60 flex flex-col items-center justify-center text-neutral-50 cursor-pointer">
                   <svg
@@ -267,8 +273,8 @@ const AccountPage: FC<AccountPageProps> = ({ className = "", user }) => {
                       strokeLinejoin="round"
                     />
                   </svg>
-
-                  <span className="mt-1 text-xs">{account ? (!account.imageData?.url ? 'Upload Image' : 'Change Image') : null}</span>
+                  <span className="mt-1 text-xs">{user ? (!user.image ? 'Upload Image' : 'Change Image') : null}</span>
+                  {/* <span className="mt-1 text-xs">{account ? (!account.imageData?.url ? 'Upload Image' : 'Change Image') : null}</span> */}
                 </div>
                 <input
                   type="file"
@@ -280,7 +286,7 @@ const AccountPage: FC<AccountPageProps> = ({ className = "", user }) => {
             <div className="flex-grow mt-10 md:mt-0 md:pl-16 max-w-3xl space-y-6">
               <div>
                 <Label>Full name</Label>
-                <Input name="Fname" displayName="FName input" onChange={handleTextChange} className="mt-1.5" defaultValue={`${user?.fullName}`} ref={fNameRef} />
+                <Input name="Fname" displayName="FName input" onChange={handleTextChange} className="mt-1.5" defaultValue={`${user?.fullName || user?.name}`} ref={fNameRef} />
               </div>
 
               {/* ---- */}
@@ -380,3 +386,11 @@ const AccountPage: FC<AccountPageProps> = ({ className = "", user }) => {
 };
 
 export default AccountPage;
+
+/*
+                {(account && !preview) ? ( ( account.imageData?.loading || !account.imageData?.url ) ? ( user.image !== "" ? <Image src={user.image} alt="google photo" width={100} height={100} className="w-32 h-32 bg-black rounded-full object-f z-0" /> : <div className="w-32 h-32 bg-black rounded-full object-cover z-0"></div>) : (account.imageData?.url && <AdvancedImage
+                  alt=""
+                  cldImg={ProfilePicture}
+                  className="w-32 h-32 rounded-full object-cover z-0"
+                />) ) : (preview ? <img src={preview} alt="preview" className="w-32 h-32 rounded-full object-cover z-0" /> : ( user.image !== "" ? <Image src={user.image} alt="google photo" width={100} height={100} className="w-32 h-32 bg-black rounded-full object-f z-0" /> : <div className="w-32 h-32 bg-black rounded-full object-cover z-0"></div>) )}
+*/

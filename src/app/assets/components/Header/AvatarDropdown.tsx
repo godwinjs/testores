@@ -20,7 +20,7 @@ export default function AvatarDropdown() {
   const handleLogout = async () => {
     const data = await signOut({redirect: false, callbackUrl: "/"});
     let url = `/${data.url.split('/').slice(data.url.split('/').length - 1)[0]}`;
-    if(data) dispatch(logout());
+    dispatch(logout());
   }
 
   return (

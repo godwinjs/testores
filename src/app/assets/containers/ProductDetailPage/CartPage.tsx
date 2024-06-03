@@ -2,7 +2,6 @@
 
 import React from "react";
 import { NoSymbolIcon, CheckIcon } from "@heroicons/react/24/outline";
-import { Helmet } from "react-helmet";
 import Link from "next/link";
 import Image from "next/image";
 import { useSelector, useDispatch } from "react-redux";

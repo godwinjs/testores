@@ -5,7 +5,7 @@ import { useSession } from "next-auth/react"
 import { redirect } from "next/navigation";
 import axios from "axios";
 
-import { setCredentials } from "@/app/redux/features/auth/authSlice";
+import { logout, setCredentials } from "@/app/redux/features/auth/authSlice";
 import { RootState } from "@/app/redux/store";
 
 import AccountPage from "@/app/assets/containers/AccountPage/AccountPage";
@@ -15,24 +15,27 @@ export default function Account() {
     const { data: session } = useSession();
     const dispatch = useDispatch();
     const user = useSelector((state: RootState) => state.auth.user )
+    const loggedOut = useSelector((state: RootState) => state.auth.loggedOut )
     
     useEffect( () => {
-        if(!user) axios.post('/api/login/getUser', { email: session?.user.email}).then((res) => {
+        if(!user && !loggedOut ) axios.post('/api/login/getUser', { email: session?.user.email}).then((res) => {
             const userData = res.data.data;
             dispatch(setCredentials(userData));
         })
-    }, [session?.user])
+    }, [session?.user, user, dispatch])
 
 
     if(!session){
+        !loggedOut && dispatch(logout())
         redirect('/login')
     }
     if(session === null){
         return;
     }
 
-    return user && <AccountPage user={user} />
+    return user ? <AccountPage user={user} /> : "Error loading user"
 }
+
 // import { getServerSession } from "next-auth/next"
 // import { authOptions } from "@/app/api/auth/[...nextauth]"
 

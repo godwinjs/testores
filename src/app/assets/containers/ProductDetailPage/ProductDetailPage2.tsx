@@ -70,7 +70,7 @@ const ProductDetailPage2: FC<ProductDetailPage2Props> = ({
     setShowUi(true)
   }, [_id])
   
-  const LIST_IMAGES_DEMO = cloudImage([ ...gallery]);
+  const LIST_IMAGES_DEMO = (gallery.length > 0) ? cloudImage([ ...gallery]) : undefined;
   const cloudThumbnail = cloudImage([thumbnail]);
 
   const [variantActive, setVariantActive] = React.useState(0);
@@ -118,7 +118,7 @@ const ProductDetailPage2: FC<ProductDetailPage2Props> = ({
               }`}
             >
               <div className="absolute inset-0.5 rounded-full overflow-hidden z-0">
-                {cloudThumbnail && <AdvancedImage
+                {cloudThumbnail[0] && <AdvancedImage
                   cldImg={cloudThumbnail[0]}
                   alt=""
                   className="absolute w-full h-full object-cover"
@@ -471,11 +471,17 @@ const ProductDetailPage2: FC<ProductDetailPage2Props> = ({
                 onClick={() => handleOpenModal(0)}
               >
                 <div className="absolute inset-0">
-                  {cloudThumbnail && <AdvancedImage
+                  {LIST_IMAGES_DEMO ? <AdvancedImage
                     className="object-scale-down w-full h-full rounded-md sm:rounded-xl"
                     cldImg={LIST_IMAGES_DEMO[0]}
                     alt={title}
-                  />}
+                  /> : <AdvancedImage
+                  className="object-scale-down w-full h-full rounded-md sm:rounded-xl"
+                  cldImg={cloudThumbnail[0]}
+                  width={100}
+                  height={100}
+                  alt={title}
+                />}
                 </div>
                 <div className="absolute inset-0 bg-neutral-900 bg-opacity-20 opacity-0 hover:opacity-40 transition-opacity"></div>
               </div>
@@ -537,14 +543,14 @@ const ProductDetailPage2: FC<ProductDetailPage2Props> = ({
           </div>
         </header>
         {/* MODAL PHOTOS */}
-        <ModalPhotos
+        { LIST_IMAGES_DEMO && <ModalPhotos
           cloudImgs={LIST_IMAGES_DEMO}
           imgs={[""]}
           isOpen={isOpen}
           onClose={handleCloseModal}
           initFocus={openFocusIndex}
           uniqueClassName="nc-ProductDetailPage2__modalPhotos"
-        />
+        />}
       </>
 
       {/* MAIn */}

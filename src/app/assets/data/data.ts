@@ -54,6 +54,7 @@ export interface Product {
   description: string;
   thumbnail: Thumbnail;
   gallery: Thumbnail[];
+  image: string;
   price: number;
   tags: string[];
   variantType?: "color" | "image";
@@ -70,6 +71,7 @@ export interface Product {
 export const PRODUCTS: Product[] = [
   {
     _id: 'fakeprd65808ab22bbbbb97daa4bdd5',
+    image: "",
     title: "Ps5 Slim V2",
     description: "Version 2 PS5 slim",
     thumbnail: {

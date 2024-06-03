@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { Helmet } from "react-helmet";
+import { useDebounce } from "use-debounce";
 
 import { useDisplayProductsQuery } from "@/app/redux/features/product/productApi";
 import SetPageTitle from "@/app/assets/hooks/SetPageTitle";
@@ -12,19 +12,33 @@ import HeaderFilterSearchPage from "@/app/assets/components/HeaderFilterSearchPa
 import Input from "@/app/assets/shared/Input/Input";
 import ButtonCircle from "@/app/assets/shared/Button/ButtonCircle";
 import ProductCard from "@/app/assets/components/ProductCard";
+import { useRouter } from "next/navigation";
 
 export interface PageSearchProps {
   className?: string;
+  page: number
 }
 
-const PageSearch: FC<PageSearchProps> = ({ className = "" }) => {
+const PageSearch: FC<PageSearchProps> = ({ className = "", page }) => {
   SetPageTitle({title: "Search || TruthStore Ecommerce Template"});
-  
+  const [ searchText, setSearchText ] = React.useState('');
+  const [query] = useDebounce(searchText, 500);
+  const router = useRouter()
+
   const { data: productData, refetch } = useDisplayProductsQuery({
     page: 0,
     limit: 0,
+    query: query
   });
   const productsAdmin = productData?.data || [];
+
+  React.useEffect(() => {
+    // if(!query){
+    //   router.replace('/search')
+    // }else{
+    //   router.replace(`/search?=${query}`)
+    // }
+  }, [ query , router])
 
   return (
     <div className={`nc-PageSearch  ${className}`} data-nc-id="PageSearch">
@@ -49,6 +63,7 @@ const PageSearch: FC<PageSearchProps> = ({ className = "" }) => {
                 placeholder="Type your keywords"
                 sizeClass="pl-14 py-5 pr-5 md:pl-16"
                 rounded="rounded-full"
+                onChange={(e) => setSearchText(e.target.value)}
               />
               <ButtonCircle
                 className="absolute right-2.5 top-1/2 transform -translate-y-1/2"
@@ -100,7 +115,7 @@ const PageSearch: FC<PageSearchProps> = ({ className = "" }) => {
 
           {/* PAGINATION */}
           <div className="flex flex-col mt-12 lg:mt-16 space-y-5 sm:space-y-0 sm:space-x-3 sm:flex-row sm:justify-between sm:items-center">
-            <Pagination />
+            <Pagination page={page} />
             <ButtonPrimary loading={true}>Show me more</ButtonPrimary>
           </div>
         </main>

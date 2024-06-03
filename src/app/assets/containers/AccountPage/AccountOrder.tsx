@@ -1,12 +1,22 @@
+"use client"
+
+import { FC } from 'react';
 import Image from "next/image";
+import { useSelector } from "react-redux";
+
+import { RootState } from "@/app/redux/store";
 
 import Prices from "@/app/assets/components/Prices";
 import { PRODUCTS } from "@/app/assets/data/data";
 import ButtonSecondary from "@/app/assets/shared/Button/ButtonSecondary";
 import CommonLayout from "./CommonLayout";
+import type { AccountPageProps } from "./AccountPage";
 
-const AccountOrder = () => {
+const AccountOrder: FC<AccountPageProps> = ({ className = "", user }) => {
+  const cartProducts: any = useSelector((state: RootState) => state.account.cart);
+
   const renderProductItem = (product: any, index: number) => {
+    
     const { image, name } = product;
     return (
       <div key={index} className="flex py-4 sm:py-7 last:pb-0 first:pt-0">
@@ -14,6 +24,8 @@ const AccountOrder = () => {
           <Image
             src={image}
             alt={name}
+            width={0}
+            height={0}
             className="h-full w-full object-cover object-center"
           />
         </div>
@@ -75,7 +87,7 @@ const AccountOrder = () => {
           </div>
         </div>
         <div className="border-t border-slate-200 dark:border-slate-700 p-2 sm:p-8 divide-y divide-y-slate-200 dark:divide-slate-700">
-          {[PRODUCTS[0], PRODUCTS[1], PRODUCTS[2]].map(renderProductItem)}
+          {cartProducts.map(renderProductItem)}
         </div>
       </div>
     );
@@ -83,7 +95,7 @@ const AccountOrder = () => {
 
   return (
     <div>
-      <CommonLayout>
+      <CommonLayout user={user}>
         <div className="space-y-10 sm:space-y-12">
           {/* HEADING */}
           <h2 className="text-2xl sm:text-3xl font-semibold">Order History</h2>

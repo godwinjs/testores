@@ -42,10 +42,11 @@ const ProductCard: FC<ProductCardProps> = ({
   const cart: any = useSelector((state: RootState) => state.account.cart);
   const wishlist: any = useSelector((state: RootState) => state.account.wishlist);
 
-  const {
+  const { 
     _id,
     title,
     price,
+    image,
     description,
     allOfSizes,
     variants,
@@ -124,7 +125,7 @@ const ProductCard: FC<ProductCardProps> = ({
     return (
       <div className="flex ">
         <div className="h-24 w-20 flex-shrink-0 overflow-hidden rounded-xl bg-slate-100">
-          {<AdvancedImage alt={title} cldImg={cldImage} className="h-full w-full object-contain object-center" />}
+          {<AdvancedImage alt={title + "1"} cldImg={cldImage} className="h-full w-full object-contain object-center" />}
         </div>
 
         <div className="ml-4 flex flex-1 flex-col">
@@ -299,7 +300,8 @@ const ProductCard: FC<ProductCardProps> = ({
         <div className="relative flex-shrink-0 bg-slate-50 dark:bg-slate-300 rounded-3xl overflow-hidden z-1 group">
           <Link href={`/product-detail/${_id}`} className="block">
             <div className="flex aspect-w-11 aspect-h-12 w-full h-0">
-              {<AdvancedImage alt="" cldImg={cldImage} className="h-full w-full object-scale-down object-center" />}
+              {thumbnail ? <AdvancedImage alt={title + "2"} cldImg={cldImage} className="h-full w-full object-contain object-center" /> : <Image width={100} height={100} alt={title + "3"} src={image} className="h-full w-full object-contain object-center" />}
+      
             </div>
           </Link>
 

@@ -8,8 +8,6 @@ import bcrypt from 'bcryptjs';
 
 import User from '@/app/db/models/User';
 import connect from "@/app/db/utils/connect";
-import {store} from "@/app/redux/store/index"
-
 
 const authOptions: NextAuthOptions = {
     providers: [
@@ -21,12 +19,15 @@ const authOptions: NextAuthOptions = {
                 password: {label: "Password", type: "password"}
             },
             async authorize(credentials: any) {
-                await connect();
 
                 const { email, password } = credentials;
+                console.log({ email, password })
+                
+                await connect();
 
                 try {
                     const user: any = await User.findOne({email: email});
+                    console.log(user)
                     
                     if(user) {
                         const isPasswordCorrect = await bcrypt.compare(
@@ -131,4 +132,4 @@ const authOptions: NextAuthOptions = {
 }
 
 const handler = NextAuth(authOptions);
-export {handler as GET, handler as POST} 
+export {handler as GET, handler as POST}

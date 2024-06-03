@@ -1,13 +1,14 @@
 import Label from "@/app/assets/components/Label/Label";
-// import React from "react";
+import { FC } from "react";
 import ButtonPrimary from "@/app/assets/shared/Button/ButtonPrimary";
 import Input from "@/app/assets/shared/Input/Input";
 import CommonLayout from "./CommonLayout";
+import type { AccountPageProps } from "./AccountPage";
 
-const AccountPass = () => {
+const AccountPass: FC<AccountPageProps> = ({ className = "", user }) => {
   return (
     <div>
-      <CommonLayout>
+      <CommonLayout user={user}>
         <div className="space-y-10 sm:space-y-12">
           {/* HEADING */}
           <h2 className="text-2xl sm:text-3xl font-semibold">

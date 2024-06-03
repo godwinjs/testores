@@ -1,7 +1,12 @@
 "use client";
+
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useSession } from "next-auth/react"
 import { redirect } from "next/navigation";
 
+import { logout } from "@/app/redux/features/auth/authSlice";
+import { RootState } from "@/app/redux/store";
 
 import Billing from "@/app/assets/containers/AccountPage/AccountBilling";
 import SaveLists from "@/app/assets/containers/AccountPage/AccountSavelists";
@@ -12,24 +17,27 @@ import AccountPage from "@/app/assets/containers/AccountPage/AccountPage";
 
 export default function AccountPages({params}: { params: {url: string} }) {
     const { data: session } = useSession()
+    const dispatch = useDispatch();
+    const user = useSelector((state: RootState) => state.auth.user )
+    const loggedOut = useSelector((state: RootState) => state.auth.loggedOut )
+
+    useEffect( () => {
+    }, [user])
 
     if(!session){
+        !loggedOut && dispatch(logout())
         redirect('/login')
     }
 
     switch (params.url) {
         case "savelists":
-            return <SaveLists />
-            break;
+            return user ? <SaveLists user={user}/> : "Error Loading user data"
         case "my-order":
-            return <MyOrder />
-            break;
+            return user ? <MyOrder user={user}/> : "Error Loading user data"
         case "change-password":
-            return <ChangePassword />
-            break;
+            return user ? <ChangePassword user={user}/> : "Error Loading user data"
         case "billing":
-            return <Billing />
-            break;
+            return user ? <Billing user={user}/> : "Error Loading user data"
         default:
             redirect("/not-found")
             break;

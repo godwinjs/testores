@@ -1,15 +1,19 @@
 
 import { useSelector } from "react-redux";
+import { FC } from "react";
 
 import { RootState } from "@/app/redux/store";
 import ProductCard from "@/app/assets/components/ProductCard";
 import ButtonSecondary from "@/app/assets/shared/Button/ButtonSecondary";
 import CommonLayout from "./CommonLayout";
+import type { AccountPageProps } from "./AccountPage";
 
-const AccountSavelists = () => {
+const AccountSavelists: FC<AccountPageProps> = ({ className = "", user }) => {
+
   const wishlist: any = useSelector((state: RootState) => state.account.wishlist) 
-  
+
   const renderSection1 = () => {
+    
     return (
       <div className="space-y-10 sm:space-y-12">
         <div>
@@ -33,7 +37,7 @@ const AccountSavelists = () => {
 
   return (
     <div>
-      <CommonLayout>{renderSection1()}</CommonLayout>
+      <CommonLayout user={user}>{renderSection1()}</CommonLayout>
     </div>
   );
 };
