@@ -238,8 +238,9 @@ const AccountPage: FC<AccountPageProps> = ({ className = "", user }) => {
     setImage(null);
     dispatch(setImageData(null))
   };
+  console.log(user)
 
-  return (
+  return user && (
     <div className={`nc-AccountPage ${className}`} data-nc-id="AccountPage">
       <CommonLayout user={user}>
         <div className="space-y-10 sm:space-y-12">
