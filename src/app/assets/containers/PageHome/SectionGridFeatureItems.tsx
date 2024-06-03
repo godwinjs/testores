@@ -17,8 +17,8 @@ const SectionGridFeatureItems: FC<SectionGridFeatureItemsProps> = ({
   data = null,
 }) => {
   const { data: productData, refetch } = useDisplayProductsQuery({
-    page: 0,
-    limit: 0,
+    page: 1,
+    limit: 8,
   });
   const productsAdmin = productData?.data || [];
   data = productsAdmin;
@@ -34,7 +34,7 @@ const SectionGridFeatureItems: FC<SectionGridFeatureItemsProps> = ({
         ))}
       </div>
       <div className="flex mt-16 justify-center items-center">
-        <ButtonPrimary loading>Show me more</ButtonPrimary>
+        <ButtonPrimary loading={false}>Show me more</ButtonPrimary>
       </div>
     </div>
   );

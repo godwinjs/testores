@@ -96,9 +96,9 @@ function PageHome() {
         <SectionPromo3 />
 
         {/* SECTION */}
-        <SectionGridFeatureItems data={null} />
+        <div className="py-8"><SectionGridFeatureItems data={null} /></div>
 
-        <div className="relative mb-0 py-24 lg:py-32">
+        {/* <div className="relative mb-0 py-24 lg:py-32">
           <BackgroundSection />
           <div>
             <Heading rightDescText="From the TruthStore blog">
@@ -109,7 +109,7 @@ function PageHome() {
               <ButtonSecondary>Show all blog articles</ButtonSecondary>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

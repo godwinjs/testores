@@ -30,6 +30,7 @@ const PageSearch: FC<PageSearchProps> = ({ className = "", page }) => {
     limit: 0,
     query: query
   });
+  
   const productsAdmin = productData?.data || [];
 
   React.useEffect(() => {
