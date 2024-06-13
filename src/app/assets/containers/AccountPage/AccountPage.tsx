@@ -238,7 +238,7 @@ const AccountPage: FC<AccountPageProps> = ({ className = "", user }) => {
     setImage(null);
     dispatch(setImageData(null))
   };
-  console.log(user)
+  // console.log(user)
 
   return user && (
     <div className={`nc-AccountPage ${className}`} data-nc-id="AccountPage">

@@ -16,9 +16,9 @@ const MainNav2Logged: FC<MainNav2LoggedProps> = () => {
 
   React.useEffect(() => {
 
-    fetch("http://localhost:3000/api/webhook", {
-        method: "POST",
-    }).then(data => console.log(data.body))
+    // fetch("http://localhost:3000/api/webhook", {
+    //     method: "POST",
+    // }).then(data => console.log(data.body))
 }, [])
 
   const renderMagnifyingGlassIcon = () => {

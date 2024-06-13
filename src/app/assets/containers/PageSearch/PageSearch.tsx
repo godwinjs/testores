@@ -16,7 +16,7 @@ import { useRouter } from "next/navigation";
 
 export interface PageSearchProps {
   className?: string;
-  page: number
+  page: number;
 }
 
 const PageSearch: FC<PageSearchProps> = ({ className = "", page }) => {
@@ -32,6 +32,7 @@ const PageSearch: FC<PageSearchProps> = ({ className = "", page }) => {
   });
   
   const productsAdmin = productData?.data || [];
+  console.log(productsAdmin)
 
   React.useEffect(() => {
     // if(!query){

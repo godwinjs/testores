@@ -301,7 +301,6 @@ const ProductCard: FC<ProductCardProps> = ({
           <Link href={`/product-detail/${_id}`} className="block">
             <div className="flex aspect-w-11 aspect-h-12 w-full h-0">
               {thumbnail ? <AdvancedImage alt={title + "2"} cldImg={cldImage} className="h-full w-full object-contain object-center" /> : <Image width={100} height={100} alt={title + "3"} src={image} className="h-full w-full object-contain object-center" />}
-      
             </div>
           </Link>
 
@@ -314,6 +313,20 @@ const ProductCard: FC<ProductCardProps> = ({
                             liked={true} 
                             product={prd} 
                             className="absolute top-3 right-3 z-10" />
+                }else{
+                  return <LikeButton
+                  key={index} 
+                  liked={false} 
+                  product={{
+                    _id,
+                    title,
+                    price,
+                    description,
+                    status,
+                    image: thumbnail.url,
+                    type: "wishlist"
+                  }} 
+                  className="absolute top-3 right-3 z-10" />
                 }
               }) : <LikeButton 
                       liked={false} 
