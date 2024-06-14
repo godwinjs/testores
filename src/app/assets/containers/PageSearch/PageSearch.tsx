@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { useDebounce } from "use-debounce";
 
-import { useDisplayProductsQuery } from "@/app/redux/features/product/productApi";
+import { useDisplayProductsQuery, useSearchProductsQuery } from "@/app/redux/features/product/productApi";
 import SetPageTitle from "@/app/assets/hooks/SetPageTitle";
 
 import Pagination from "@/app/assets/shared/Pagination/Pagination";
@@ -30,6 +30,9 @@ const PageSearch: FC<PageSearchProps> = ({ className = "", page }) => {
     limit: 0,
     query: query
   });
+  // const { data: searchedData } = useSearchProductsQuery({
+  //   query: query
+  // });
   
   const productsAdmin = productData?.data || [];
   console.log(productsAdmin)

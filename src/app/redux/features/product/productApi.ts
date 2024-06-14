@@ -14,8 +14,19 @@ const productApi = apiSlice.injectEndpoints({
 
     // get all products
     displayProducts: builder.query({
-      query: ({ page, limit }) => ({
-        url: `api/product/all?page=${page}&limit=${limit}`,
+      query: ({ page, limit, query }) => ({
+        url: `api/product/all?page=${page}&limit=${limit}&query=${query}`,
+        method: "GET",
+      }),
+      providesTags: ["Product"],
+      // refetchOnReconnect: true,
+      // keepUnusedDataFor: 1,
+    }),
+
+    // get all products
+    searchProducts: builder.query({
+      query: ({ query }) => ({
+        url: `api/product/search?query=${query}`,
         method: "GET",
       }),
       providesTags: ["Product"],
@@ -68,4 +79,5 @@ export const {
   useDisplayProductQuery,
   useUpdateProductMutation,
   useRemoveProductMutation,
+  useSearchProductsQuery
 } = productApi;
