@@ -87,7 +87,7 @@ const AccountOrder: FC<AccountPageProps> = ({ className = "", user }) => {
           </div>
         </div>
         <div className="border-t border-slate-200 dark:border-slate-700 p-2 sm:p-8 divide-y divide-y-slate-200 dark:divide-slate-700">
-          {cartProducts.map(renderProductItem)}
+          {cartProducts ? cartProducts.map(renderProductItem) : "No items in cart"}
         </div>
       </div>
     );
@@ -99,7 +99,6 @@ const AccountOrder: FC<AccountPageProps> = ({ className = "", user }) => {
         <div className="space-y-10 sm:space-y-12">
           {/* HEADING */}
           <h2 className="text-2xl sm:text-3xl font-semibold">Order History</h2>
-          {renderOrder()}
           {renderOrder()}
         </div>
       </CommonLayout>

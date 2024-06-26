@@ -78,8 +78,8 @@ const AccountPage: FC<AccountPageProps> = ({ className = "", user }) => {
 
     if(!(dbCart.length > 0)){
 
-      if(cart.length > 0 ){
-        let cartMap = cart.map((item: any) => {
+      if(dbCart.length > 0 ){
+        let cartMap = dbCart.map((item: any) => {
           return { _id: item._id, quantity: item.quantity }
         })
         updateUser({

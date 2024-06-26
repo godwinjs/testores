@@ -10,6 +10,6 @@ import { Thumbnail } from "../data/data";
 
   export function cloudImage(arr: Thumbnail[]){
     let url: CloudinaryImage[] = arr.map((i) => cld.image(i.public_id + '.png'))
-    console.log(url)
+    // console.log(url)
     return url;
   }

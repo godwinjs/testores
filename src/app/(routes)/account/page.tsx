@@ -18,7 +18,7 @@ export default function Account() {
     const loggedOut = useSelector((state: RootState) => state.auth.loggedOut )
     
     useEffect( () => {
-        if(!user && !loggedOut ) axios.post('/api/login/getUser', { email: session?.user.email}).then((res) => {
+        if(!user && (!loggedOut || session?.user) ) axios.post('/api/login/getUser', { email: session?.user.email}).then((res) => {
             const userData = res.data.data;
             dispatch(setCredentials(userData));
         })

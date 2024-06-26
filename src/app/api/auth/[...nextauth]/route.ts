@@ -59,7 +59,7 @@ const authOptions: NextAuthOptions = {
     callbacks: {
         async signIn({user, account, profile, email, credentials, metadata }: any): Promise<boolean> {
             
-            console.log({"user": user, "account": account, "profile": profile, "email": email, "credentials": credentials, "metadata": metadata})
+            // console.log({"user": user, "account": account, "profile": profile, "email": email, "credentials": credentials, "metadata": metadata})
             
             await connect();
             // console.log({user: user, account: account, profile: profile, email: email, credentials: credentials})
@@ -74,7 +74,7 @@ const authOptions: NextAuthOptions = {
         
                 if(!(existingUser === null)){
                     console.log("User Exists")
-                    return true; //
+                    return existingUser; //
                 }
                 const newUser = new User({
                     fullName: profile.name,
@@ -111,6 +111,8 @@ const authOptions: NextAuthOptions = {
             
             try {
                 user = await User.findOne({email: session.user.email});
+                // console.log(user, "1111")
+                console.log(session, "1111")
 
                 // session.user.fullName = user.fullName;
                 // session.user.joined = user.createdAt;
