@@ -12,12 +12,15 @@ export interface SectionSliderLargeProductProps {
   className?: string;
   itemClassName?: string;
   cardStyle?: "style1" | "style2";
+  data?: any
 }
 
 const SectionSliderLargeProduct: FC<SectionSliderLargeProductProps> = ({
   className = "",
   cardStyle = "style2",
+  data
 }) => {
+  console.log(data)
   const id = useId();
   const UNIQUE_CLASS = "glidejs" + id.replace(/:/g, "_");
 
@@ -66,13 +69,14 @@ const SectionSliderLargeProduct: FC<SectionSliderLargeProductProps> = ({
         </Heading>
         <div className="glide__track" data-glide-el="track">
           <ul className="glide__slides">
-            {DEMO_LARGE_PRODUCTS.map((product, index) => (
+            {data.map((product: any, index: number) => (
               <li className={`glide__slide`} key={index}>
                 <MyCollectionCard
-                  name={product.name}
+                  name={product.title}
                   price={product.price}
-                  imgs={product.images}
-                  description={product.desc}
+                  imgs={product.gallery}
+                  description={product.description}
+                  img={product.thumbnail}
                 />
               </li>
             ))}

@@ -81,7 +81,7 @@ const ProductCard: FC<ProductCardProps> = ({
         price,
         description,
         status,
-        image: thumbnail.url,
+        image: thumbnail?.url,
         quantity: 1
       }));
   
@@ -323,7 +323,7 @@ const ProductCard: FC<ProductCardProps> = ({
                     price,
                     description,
                     status,
-                    image: thumbnail.url,
+                    image: thumbnail?.url,
                     type: "wishlist"
                   }} 
                   className="absolute top-3 right-3 z-10" />
@@ -336,7 +336,7 @@ const ProductCard: FC<ProductCardProps> = ({
                         price,
                         description,
                         status,
-                        image: thumbnail.url,
+                        image: thumbnail?.url,
                         type: "wishlist"
                       }} 
                       className="absolute top-3 right-3 z-10" />}
@@ -354,7 +354,7 @@ const ProductCard: FC<ProductCardProps> = ({
               {title}
             </h2>
             <p className={`text-sm text-slate-500 dark:text-slate-400 mt-1 `}>
-              {`${description.split(" ").splice(0, 10).join(" ")} ${description.split(" ").length > 3 ? '...' : ''}`}
+              {`${description?.split(" ").splice(0, 10).join(" ")} ${description?.split(" ").length > 3 ? '...' : ''}`}
               
             </p>
           </div>

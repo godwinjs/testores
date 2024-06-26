@@ -46,6 +46,8 @@ const SectionSliderProductCard: FC<SectionSliderProductCardProps> = ({
   data,
   // data = PRODUCTS.filter((_, i) => i < 8 && i > 2),
 }) => {
+  
+  // data && data.filter((_, i) => _ && _ )
   const sliderRef = useRef(null);
   const id = useId();
   const UNIQUE_CLASS = "glidejs" + id.replace(/:/g, "_");

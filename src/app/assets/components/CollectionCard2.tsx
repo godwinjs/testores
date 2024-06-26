@@ -8,18 +8,26 @@ import Prices from "./Prices";
 import { productImgs } from "@/app/assets/contains/fakedata";
 import imgType from '@/images/products/1.png'
 
+interface image {
+  url: string,
+  public_id: string,
+  _id: string
+}
+
 export interface CollectionCard2Props {
   className?: string;
-  imgs?: string[] | typeof imgType[];
+  imgs?: image[];
   name?: string;
   price?: number;
   description?: string;
+  img?: image
 }
 
 const CollectionCard2: FC<CollectionCard2Props> = ({
   className,
-  imgs = [productImgs[9], productImgs[10], productImgs[11], productImgs[8]],
+  imgs = [{url: ''}],
   name = "Product Name",
+  img = {url: ''},
   description = "Product Description",
   price,
 }) => {
@@ -29,32 +37,24 @@ const CollectionCard2: FC<CollectionCard2Props> = ({
         <div className="aspect-w-8 aspect-h-5 bg-neutral-100 rounded-2xl overflow-hidden">
           <Image
             className="object-contain w-full h-full rounded-2xl"
-            src={imgs[0]}
+            src={img.url}
             alt={'large prd img'}
+            width={100}
+            height={100}
           />
         </div>
         <div className="grid grid-cols-3 gap-2.5 mt-2.5">
-          <div className="w-full h-24 sm:h-28">
-          <Image
-            className="object-cover w-full h-full rounded-2xl"
-            src={imgs[1]}
-            alt={'large prd img 1'}
-          />
-          </div>
-          <div className="w-full h-24 sm:h-28">
-            <Image
-              className="object-cover w-full h-full rounded-2xl"
-              src={imgs[2]}
-              alt={'large prd img 2'}
-            />
-          </div>
-          <div className="w-full h-24 sm:h-28">
-            <Image
-              className="object-cover w-full h-full rounded-2xl"
-              src={imgs[3]}
-              alt={'large prd img 3'}
-            />
-          </div>
+          {imgs.map((item, i) => {
+            return <div className="w-full h-24 sm:h-28" key={i}>
+              <Image
+                className="object-cover w-full h-full rounded-2xl"
+                src={item.url}
+                alt={'large prd img 1'}
+                width={100}
+                height={100}
+              />
+            </div>
+          })}
         </div>
       </div>
 
