@@ -18,7 +18,7 @@ const AccountSavelists: FC<AccountPageProps> = ({ className = "", user }) => {
       <div className="space-y-10 sm:space-y-12">
         <div>
           <h2 className="text-2xl sm:text-3xl font-semibold">
-            List of saved products
+            Saved products
           </h2>
         </div>
 
@@ -29,7 +29,7 @@ const AccountSavelists: FC<AccountPageProps> = ({ className = "", user }) => {
           ))}
         </div>
         <div className="flex !mt-20 justify-center items-center">
-          <ButtonSecondary loading>Show me more</ButtonSecondary>
+          {wishlist.length > 5 ? <ButtonSecondary loading={false}>Show me more</ButtonSecondary> : null }
         </div>
       </div>
     );

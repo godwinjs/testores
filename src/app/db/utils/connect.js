@@ -1,8 +1,6 @@
 import mongoose from "mongoose";
 // const cloudinary = require('cloudinary');
 
-
-
 const connect = async () => { 
     if(mongoose.connections[0].readyState) return;
 

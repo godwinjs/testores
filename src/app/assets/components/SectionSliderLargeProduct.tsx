@@ -20,7 +20,8 @@ const SectionSliderLargeProduct: FC<SectionSliderLargeProductProps> = ({
   cardStyle = "style2",
   data
 }) => {
-  console.log(data)
+  // console.log(data)
+
   const id = useId();
   const UNIQUE_CLASS = "glidejs" + id.replace(/:/g, "_");
 
@@ -69,7 +70,7 @@ const SectionSliderLargeProduct: FC<SectionSliderLargeProductProps> = ({
         </Heading>
         <div className="glide__track" data-glide-el="track">
           <ul className="glide__slides">
-            {data.map((product: any, index: number) => (
+            {data && data.map((product: any, index: number) => (
               <li className={`glide__slide`} key={index}>
                 <MyCollectionCard
                   name={product.title}

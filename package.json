@@ -33,7 +33,8 @@
     "redux": "^4.2.1",
     "redux-logger": "^3.0.6",
     "redux-persist": "^6.0.0",
-    "use-debounce": "^10.0.1"
+    "use-debounce": "^10.0.1",
+    "validator": "^13.12.0"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.6",
@@ -43,6 +44,7 @@
     "@types/react-dom": "^18",
     "@types/react-helmet": "^6.1.9",
     "@types/redux-logger": "^3.0.12",
+    "@types/validator": "^13.12.0",
     "autoprefixer": "^10.0.1",
     "eslint": "^8",
     "eslint-config-next": "14.0.1",

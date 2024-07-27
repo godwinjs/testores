@@ -77,14 +77,16 @@ const authOptions: NextAuthOptions = {
                     return existingUser; //
                 }
                 const newUser = new User({
-                    fullName: profile.name,
+                    name: profile.name,
                     email: user.email,
+                    // password: '@Googl3Signin',
                     dob: '',
                     address: '',
                     phone: '',
-                    gender: '',
-                    image: profile.picture,
-                    roles: '',
+                    authProvider: 'google',
+                    // gender: '',
+                    avatar: { url: profile.picture },
+                    // role: '',
                     about: '',
                 })
                 try{

@@ -32,7 +32,7 @@ const DataWarning = ({ title }: { title: string }) => {
             </h3>
           </div>
           <div className="mt-2 mb-4 text-sm">
-            All you need to add some {title} to show.
+            All you need to add some {title} or contact the technical team.
           </div>
           <div className="flex">
             <button

@@ -15,7 +15,7 @@ const productApi = apiSlice.injectEndpoints({
     // get all products
     displayProducts: builder.query({
       query: ({ page, limit, query }) => ({
-        url: `api/product/all?page=${page}&limit=${limit}&query=${query}`,
+        url: `api/product/all?page=${page}&limit=${limit}`,
         method: "GET",
       }),
       providesTags: ["Product"],

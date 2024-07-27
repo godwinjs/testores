@@ -32,6 +32,7 @@ function PageHome() {
   const { data: productData, refetch, isLoading: displayingProducts } = useDisplayProductsQuery({
     page: 0,
     limit: 0,
+    query: ''
   });
   const productsAdmin = productData?.data || [];
   SetPageTitle({title: pageData?.main.title})
@@ -61,7 +62,7 @@ function PageHome() {
       <div className="container relative space-y-24 mt-24 lg:space-y-32 lg:mt-32">
         {/* SECTION */}
         {displayingProducts ? "Loading..." : <SectionSliderProductCard 
-          data={productsAdmin.length > 0 ? [ ...productsAdmin.slice(0, 5)] : [ ...products.slice(0, 5)]}
+          data={productsAdmin.length > 0 ? [ ...productsAdmin.slice(0, 5)] : undefined }
         />}
 
         <div className="py-24 lg:py-32 border-t border-b border-slate-200 dark:border-slate-700">
