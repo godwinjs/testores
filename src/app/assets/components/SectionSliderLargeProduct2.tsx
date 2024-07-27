@@ -29,6 +29,7 @@ export interface SectionSliderLargeProduct2Props {
   className?: string;
   itemClassName?: string;
   cardStyle?: "style1" | "style2";
+  data?: any;
 }
 
 export const DEMO_LARGE_PRODUCTS = [
@@ -57,7 +58,8 @@ export const DEMO_LARGE_PRODUCTS = [
 
 const SectionSliderLargeProduct2: FC<SectionSliderLargeProduct2Props> = ({
   className = "",
-  cardStyle = "style1",
+  cardStyle = "style2",
+  data
 }) => {
   const [tabActive, setTabActive] = React.useState("Last 24 hours");
   const id = useId();
@@ -171,13 +173,17 @@ const SectionSliderLargeProduct2: FC<SectionSliderLargeProduct2Props> = ({
       <div className={`${UNIQUE_CLASS} relative`}>
         <div className="glide__track" data-glide-el="track">
           <ul className="glide__slides">
-            {DEMO_LARGE_PRODUCTS.map((item, index) => {
-              return (
-                <li key={item.id} className={`glide__slide`}>
-                  <MyCollectionCard imgs={item.images} />
-                </li>
-              );
-            })}
+            {data && data.map((product: any, index: number) => (
+              <li className={`glide__slide`} key={index}>
+                <MyCollectionCard
+                  name={product.title}
+                  price={product.price}
+                  imgs={product.gallery}
+                  description={product.description}
+                  img={product.thumbnail}
+                />
+              </li>
+            ))}
 
             <li className={`glide__slide   `}>
               <Link href={"/page-search"} className="block relative group">
