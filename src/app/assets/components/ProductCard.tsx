@@ -34,7 +34,7 @@ export interface ProductCardProps {
 const ProductCard: FC<ProductCardProps> = ({
   className = "",
   data = PRODUCTS[0],
-  isLiked,
+  isLiked = false,
 }) => {
   const dispatch = useDispatch();
   const router = useRouter();
@@ -58,11 +58,6 @@ const ProductCard: FC<ProductCardProps> = ({
 
   const [variantActive, setVariantActive] = React.useState(0);
   const [showModalQuickView, setShowModalQuickView] = React.useState(false);
-  let list: any = null;
-
-  React.useEffect(() => {
-
-  }, [wishlist])
 
   // 
   const cld = new Cloudinary({
@@ -305,41 +300,20 @@ const ProductCard: FC<ProductCardProps> = ({
           </Link>
 
           <ProductStatus status={status} />
-            { wishlist ? wishlist.map((list: any, index: number) => {
-                if(list._id === _id ) {
-                  let prd: any = { ...list, type: "wishlist" }
-                  return <LikeButton 
-                            key={index}
-                            liked={true} 
-                            product={prd} 
-                            className="absolute top-3 right-3 z-10" />
-                }else{
-                  return <LikeButton
-                  key={index} 
-                  liked={false} 
-                  product={{
-                    _id,
-                    title,
-                    price,
-                    description,
-                    status,
-                    image: thumbnail?.url,
-                    type: "wishlist"
-                  }} 
-                  className="absolute top-3 right-3 z-10" />
-                }
-              }) : <LikeButton 
-                      liked={false} 
-                      product={{
-                        _id,
-                        title,
-                        price,
-                        description,
-                        status,
-                        image: thumbnail?.url,
-                        type: "wishlist"
-                      }} 
-                      className="absolute top-3 right-3 z-10" />}
+          
+              <LikeButton 
+                product={ {
+                  _id,
+                  title,
+                  price,
+                  description,
+                  status,
+                  image: thumbnail?.url,
+                  type: "wishlist"
+                } }
+                wishlist={wishlist}
+                className="absolute top-3 right-3 z-10" />
+              
 
           {(sizes?.length > 0) ? renderSizeList() : renderGroupButtons()}
         </div>

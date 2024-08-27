@@ -41,15 +41,6 @@ const accountSlice: Slice = createSlice({
     reducers: {
         addToCart: (state, action: PayloadAction<ProductCart>) => {
             let product = action.payload;
-            if(product.type === "wishlist"){
-            
-                if(!state.wishlist){
-                    state.wishlist = [product]
-                }else{
-                    state.wishlist.push(product)
-                }
-                return;
-            }
             
             if(!state.cart){
                 state.cart = [product]
@@ -60,6 +51,15 @@ const accountSlice: Slice = createSlice({
                 //     ...state,
                 //     cart: [ ...state.cart, action.payload]
                 // }
+            }
+        },
+        addToWishlist: (state, action: PayloadAction<ProductCart>) => {
+            let product = action.payload;
+            
+            if(!state.wishlist){
+                state.wishlist = [product]
+            }else{
+                state.wishlist.push(product)
             }
         },
         updateCart: (state, action) => {
@@ -102,8 +102,22 @@ const accountSlice: Slice = createSlice({
             //     }
             // }
         },
+        removeFromWishlist: (state, action: PayloadAction<any>) => {
+            let product = action.payload;
+
+            if(state.wishlist) {
+                const wishlist = state.wishlist;
+                wishlist.splice(product.idx, 1)
+
+                state.wishlist = wishlist;
+
+            }
+        },
         removeCart: (state) => {
             state.cart = null;
+        },
+        removeWishlist: (state) => {
+            state.wishlist = null;
         },
         setCart: (state, action: PayloadAction<ProductCart[]>) => {
             state.cart = action.payload;
@@ -151,4 +165,4 @@ export const uploadImage = createAsyncThunk(
 )
 
 export default accountSlice.reducer;
-export const { addToCart, setImageData, removeFromCart, removeCart, updateCart, setCart } = accountSlice.actions
+export const { addToCart, setImageData, removeFromCart, removeCart, updateCart, setCart, removeFromWishlist, addToWishlist, removeWishlist } = accountSlice.actions

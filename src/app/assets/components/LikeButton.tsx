@@ -1,33 +1,49 @@
 'use client';
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
-import { addToCart } from "@/app/redux/features/account/accountSlice"
+import { addToWishlist, removeFromWishlist, removeWishlist } from "@/app/redux/features/account/accountSlice"
 
 
 export interface LikeButtonProps {
-  className?: string;
+  className?: String;
   liked?: boolean;
-  product?: any;
+  wishlist?: any;
+  productId?: String;
+  product: any;
 }
 
 const LikeButton: React.FC<LikeButtonProps> = ({
   className = "",
   liked = false,
+  wishlist,
   product
 }) => {
   const dispatch = useDispatch();
+
+  wishlist.some((list: any) => {
+    if( list._id === product._id){
+      liked = true;
+      return true;
+    }
+    return false;
+  })
+
   const [isLiked, setIsLiked] = useState(liked);
+
+  
 
   const handleLiked = () => {
     if(isLiked){
       console.log("removed this product from wishlist", product._id)
+      dispatch(removeFromWishlist(product))
+      // dispatch(removeWishlist({}))
     }else{
       console.log(product, "is liked and added to wishlist")
-      dispatch(addToCart(product))
+      dispatch(addToWishlist(product))
     }
-    // set/
+    // set
   }
 
   return (

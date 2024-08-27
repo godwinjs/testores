@@ -19,7 +19,7 @@ const AccountSavelists = () => {
         </div>
 
         <div className="grid grid-cols-1 gap-6 md:gap-8 sm:grid-cols-2 lg:grid-cols-3 ">
-          {wishlist.map((list: any, index: number) => (
+          {wishlist && wishlist.map((list: any, index: number) => (
             <ProductCard key={index} data={list} />
           ))}
         </div>
