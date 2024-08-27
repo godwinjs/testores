@@ -258,18 +258,18 @@ const CartPage = () => {
                 <div className="flex justify-between py-4">
                   <span>Shpping estimate</span>
                   <span className="font-semibold text-slate-900 dark:text-slate-200">
-                    ₦ 5.00
+                    ₦ 0.00
                   </span>
                 </div>
                 <div className="flex justify-between py-4">
                   <span>Tax estimate</span>
                   <span className="font-semibold text-slate-900 dark:text-slate-200">
-                    ₦ 24.90
+                    ₦ 0.00
                   </span>
                 </div>
                 <div className="flex justify-between font-semibold text-slate-900 dark:text-slate-200 text-base pt-4">
                   <span>Order total</span>
-                  <span>₦ {cartProducts ? addArray([ ...cartProducts.map((item: ProductCart, idx: number) => item.price * item.quantity ), 24.90, 5.00]) : "00.00" }</span>
+                  <span>₦ {cartProducts ? addArray([ ...cartProducts.map((item: ProductCart, idx: number) => item.price * item.quantity ), 0.00, 0.00]) : "00.00" }</span>
                 </div>
               </div>
               <ButtonPrimary onClick={() => router.push("/checkout")} className="mt-8 w-full" >Checkout</ButtonPrimary>
