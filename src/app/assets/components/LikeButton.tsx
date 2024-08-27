@@ -11,7 +11,7 @@ export interface LikeButtonProps {
   liked?: boolean;
   wishlist?: any;
   productId?: String;
-  product: any;
+  product?: any;
 }
 
 const LikeButton: React.FC<LikeButtonProps> = ({
