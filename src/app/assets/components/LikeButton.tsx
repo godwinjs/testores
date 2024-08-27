@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
-import { addToWishlist, removeFromWishlist, removeWishlist } from "@/app/redux/features/account/accountSlice"
+import { addToWishlist, removeFromWishlist } from "@/app/redux/features/account/accountSlice"
 
 
 export interface LikeButtonProps {
