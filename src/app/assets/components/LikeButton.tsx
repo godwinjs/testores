@@ -22,7 +22,7 @@ const LikeButton: React.FC<LikeButtonProps> = ({
 }) => {
   const dispatch = useDispatch();
 
-  wishlist.some((list: any) => {
+   wishlist && wishlist.some((list: any) => {
     if( list._id === product._id){
       liked = true;
       return true;
