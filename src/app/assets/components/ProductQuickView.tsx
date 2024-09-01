@@ -28,11 +28,6 @@ import { Product, Thumbnail } from "@/app/assets/data/data";
 import ButtonPrimary from "@/app/assets/shared/Button/ButtonPrimary";
 import LikeButton from "./LikeButton";
 
-
-import detail1JPG from "@/images/products/1.png";
-import detail2JPG from "@/images/products/1.png";
-import detail3JPG from "@/images/products/1.png";
-
 export interface ProductQuickViewProps {
   className?: string;
   product: Product;
@@ -80,8 +75,11 @@ const ProductQuickView: FC<ProductQuickViewProps> = ({ className = "", product }
         { position: "top-right", id: "nc-product-notify", duration: 3000 }
       );
     }
+    if(cart === null) {
+      run();
+    }
     
-    cart.map((product: any, idx: number) => {
+    cart && cart.map((product: any, idx: number) => {
       if(product._id === _id){
         exist = true;
       }

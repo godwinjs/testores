@@ -68,9 +68,12 @@ const ProductCard: FC<ProductCardProps> = ({
   const cldImage = cld.image(thumbnail && (thumbnail?.public_id + '.png'));
 
   const notifyAddTocart = ({ size }: { size?: string }) => {
-    let exist: boolean = false;
+    console.log(cart)
+
+    let notExist: boolean = true;
     function run() {
-      !exist && dispatch(addToCart({
+
+      notExist && dispatch(addToCart({
         _id,
         title,
         price,
@@ -94,19 +97,23 @@ const ProductCard: FC<ProductCardProps> = ({
             leaveTo="opacity-0 translate-x-20"
           >
             <p className="block text-base font-semibold leading-none">
-              { exist ? "Product already exist in your cart" : "Added to cart!"}
+              { !notExist ? "Product already exist in your cart" : "Added to cart!"}
             </p>
             <div className="border-t border-slate-200 dark:border-slate-700 my-4" />
-            {renderProductCartOnNotify({ size, exist })}
+            {renderProductCartOnNotify({ size })}
           </Transition>
         ),
         { position: "top-right", id: "nc-product-notify", duration: 3000 }
       );
     }
 
-    cart.map((product: any, idx: number) => {
+    if(cart === null) {
+      run();
+    }
+
+    cart && cart.map((product: any, idx: number) => {
       if(product._id === _id){
-        exist = true;
+        notExist = false;
       }
       if(cart.length === idx + 1){
         run()
@@ -115,7 +122,7 @@ const ProductCard: FC<ProductCardProps> = ({
     
   };
 
-  const renderProductCartOnNotify = ({ size, exist }: { size?: string; exist: boolean }) => {
+  const renderProductCartOnNotify = ({ size }: { size?: string; }) => {
 
     return (
       <div className="flex ">
@@ -356,3 +363,4 @@ const ProductCard: FC<ProductCardProps> = ({
 };
 
 export default ProductCard;
+
