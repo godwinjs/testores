@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import { Helmet } from "react-helmet";
+import axios from "axios";
 
 import SocialsList from "@/app/assets/shared/SocialsList/SocialsList";
 import Label from "@/app/assets/components/Label/Label";
@@ -35,6 +36,18 @@ const PageContact: FC<PageContactProps> = ({ className = "" }) => {
 
   const sendMail = (e: any) => {
     console.log(form)
+    axios({
+      method: "POST",
+      url:"/api/mail",
+      data:  form
+    }).then((response)=>{
+      if (response.data.status === 'success') {
+        alert("Message Sent.");
+        setForm({})
+      } else if (response.data.status === 'fail') {
+        alert("Message failed to send.")
+      }
+    })
   }
 
 
