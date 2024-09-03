@@ -8,6 +8,7 @@ import Textarea from "@/app/assets/shared/TextArea/TextArea";
 import ButtonPrimary from "@/app/assets/shared/Button/ButtonPrimary";
 import BackgroundSection from "@/app/assets/components/BackgroundSection/BackgroundSection";
 import SectionPromo1 from "@/app/assets/components/SectionPromo1";
+import {useForm} from "@/app/assets/hooks/useForm";
 
 export interface PageContactProps {
   className?: string;
@@ -28,7 +29,16 @@ const info = [
   },
 ];
 
+
 const PageContact: FC<PageContactProps> = ({ className = "" }) => {
+  const [ form, setForm ] = useForm({email:"", message:"", name:"" })
+
+  const sendMail = (e: any) => {
+    console.log(form)
+  }
+
+
+
   return (
     <div
       className={`nc-PageContact overflow-hidden ${className}`}
@@ -62,15 +72,18 @@ const PageContact: FC<PageContactProps> = ({ className = "" }) => {
               </div>
             </div>
             <div>
-              <form className="grid grid-cols-1 gap-6" action="#" method="post">
+              <form className="grid grid-cols-1 gap-6" onSubmit={sendMail} method="post">
                 <label className="block">
                   <Label>Full name</Label>
 
                   <Input
                     displayName="FnameInput"
                     placeholder="Example Doe"
+                    name="name"
                     type="text"
                     className="mt-1"
+                    value={form.name}
+                    onChange={setForm}
                   />
                 </label>
                 <label className="block">
@@ -79,14 +92,17 @@ const PageContact: FC<PageContactProps> = ({ className = "" }) => {
                   <Input
                     displayName="EmailInput"
                     type="email"
+                    name="email"
                     placeholder="example@example.com"
                     className="mt-1"
+                    value={form.email}
+                    onChange={setForm}
                   />
                 </label>
                 <label className="block">
                   <Label>Message</Label>
 
-                  <Textarea className="mt-1" rows={6} />
+                  <Textarea name="message" value={form.message} onChange={setForm}className="mt-1" rows={6} />
                 </label>
                 <div>
                   <ButtonPrimary type="submit">Send Message</ButtonPrimary>
