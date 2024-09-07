@@ -7,7 +7,7 @@ export const POST = async (request: any) => {
 
     let transport = {
         host: 'smtp.gmail.com', // mail provider smtp
-        port: 587,
+        port: 465, //465 ssl 587 tls
         auth: {
         user: process.env.EMAIL,
         pass: process.env.PASS
