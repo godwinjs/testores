@@ -26,7 +26,7 @@ export const POST = async (request: any) => {
 
       let content = `<html>
                         <head>
-                        <title>${email} is contacting you</title>
+                        <title>${name} is contacting you</title>
                         </head>
                         <body style=\"background-color:#fafafa;\">
                             <div style=\"padding:20px;\">
@@ -41,16 +41,17 @@ export const POST = async (request: any) => {
 
         let mail = {
             from: name,
-            to: 'godwinikechukwu.dev@gmail.com',  // Email add to recieve mail
+            to: 'truthempirestores@gmail.com, rachealonyi.dev@gmail.com',  // Email add to recieve mail
             subject: 'New Message from TruthStore Contact Form',
-            text: content
+            html: content
             }
 
         transporter.sendMail(mail, (err, data) => {
+            console.log({"ERROR": err})
                 if (err) {
                     return NextResponse.json({message: "message not sent, there was an error", data: { status: "fail"}}, { status: 200});
                 } else {
-                    return NextResponse.json({message: "message sent succesfully", data: { status: "success", data}}, { status: 200});
+                    return NextResponse.json({message: "message sent succesfully", data: { status: "success", data: data}}, { status: 200});
                 }
             })
     //   
