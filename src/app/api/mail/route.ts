@@ -41,7 +41,7 @@ export const POST = async (request: any) => {
 
         let mail = {
             from: name,
-            to: 'ogbodogodwin.dev@gmail.com',  // Email add to recieve mail
+            to: 'godwinikechukwu.dev@gmail.com',  // Email add to recieve mail
             subject: 'New Message from TruthStore Contact Form',
             text: content
             }
