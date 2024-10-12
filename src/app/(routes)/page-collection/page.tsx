@@ -1,6 +1,8 @@
 'use client'
 
 import PageCollection2 from "@/app/assets/containers/PageCollection2"
+import PageCollection from "@/app/assets/containers/PageCollection"
+import BlogPage from "@/app/assets/containers/BlogPage/BlogPage"
 
 // import { RootState } from "@/app/redux/store";
 // import { useSelector, useDispatch } from "react-redux";

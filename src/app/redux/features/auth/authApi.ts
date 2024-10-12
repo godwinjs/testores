@@ -1,5 +1,8 @@
 import apiSlice from "../api/apiSlice";
 import { setUser } from "./authSlice";
+import { v4 as uuidv4 } from "uuid";
+
+const verificationToken = uuidv4();
 
 const authApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -8,7 +11,7 @@ const authApi = apiSlice.injectEndpoints({
       query: (data) => ({
         url: "api/user/sign-up",
         method: "POST",
-        body: data,
+        body: { ...data, verificationToken},
       }),
       invalidatesTags: ["User"],
     }), 

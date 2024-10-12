@@ -1,6 +1,6 @@
 import React, { FC } from "react";
-import { Helmet } from "react-helmet";
 
+import SetPageTitle from "../../hooks/SetPageTitle";
 import rightImg from "@/images/hero/hero-right1.png";
 import SectionFounder from "./SectionFounder";
 import SectionStatistic from "./SectionStatistic";
@@ -15,14 +15,13 @@ export interface PageAboutProps {
 }
 
 const PageAbout: FC<PageAboutProps> = ({ className = "" }) => {
+  SetPageTitle({title: "About || Truthstores"})
+
   return (
     <div
       className={`nc-PageAbout overflow-hidden relative ${className}`}
       data-nc-id="PageAbout"
     >
-      <Helmet>
-        <title>About || Ciscryp React Template</title>
-      </Helmet>
 
       {/* ======== BG GLASS ======== */}
       <BgGlassmorphism />
@@ -32,18 +31,18 @@ const PageAbout: FC<PageAboutProps> = ({ className = "" }) => {
           rightImg={rightImg}
           heading="👋 About Us."
           btnText=""
-          subHeading="We’re impartial and independent, and every day we create distinctive, world-class programmes and content which inform, educate and entertain millions of people in the around the world."
+          subHeading={`Your ultimate gaming Shop🛒 & Stop😎: PS, Xbox, Nintendo, \nVR, accessories & more. \n\nWe’re impartial and independent, and every day we \nprovide distinctive, world-class products and content \nwhich inform, educate and entertain millions of people \naround the world.`}
         />
 
-        <SectionFounder />
-        <div className="relative py-16">
-          <BackgroundSection />
+        {/* <SectionFounder /> */}
+        {/* <div className="relative py-16"> */}
+          {/* <BackgroundSection /> */}
           {/* <SectionClientSay /> */}
-        </div>
+        {/* </div> */}
 
-        <SectionStatistic />
+        <SectionStatistic className="relative py-16" />
 
-        <SectionPromo3 />
+        <SectionPromo3 className="relative py-24" />
       </div>
     </div>
   );

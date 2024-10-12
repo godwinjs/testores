@@ -107,8 +107,8 @@ const AccountPage: FC<AccountPageProps> = ({ className = "", user }) => {
     const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0+9]+\.[A-Z]{2,}$/i;
     return emailRegex.test(email);
   }
+
   const updateSubmit = async () => {
-    console.log("yppe")
     // e.preventDefault();
      let cldUrl = user.image;
      if(image){
@@ -256,7 +256,7 @@ const AccountPage: FC<AccountPageProps> = ({ className = "", user }) => {
                   alt=""
                   cldImg={ProfilePicture}
                   className="w-32 h-32 rounded-full object-cover z-0"
-                /> : <div className="w-32 h-32 bg-black rounded-full object-cover z-0"></div>) ) : (preview ? <img src={preview} alt="preview" className="w-32 h-32 rounded-full object-cover z-0" /> : ( user.image !== "" ? <Image src={user.image} alt="google photo" width={100} height={100} className="w-32 h-32 bg-black rounded-full object-f z-0" /> : <div className="w-32 h-32 bg-black rounded-full object-cover z-0"></div>) ) }
+                /> : <div className="w-32 h-32 bg-black rounded-full object-cover z-0"></div>) ) : (preview ? /*<img*/<img src={preview} alt="preview" className="w-32 h-32 rounded-full object-cover z-0" /> : ( user.image !== "" ? <Image src={user.image} alt="google photo" width={100} height={100} className="w-32 h-32 bg-black rounded-full object-f z-0" /> : <div className="w-32 h-32 bg-black rounded-full object-cover z-0"></div>) ) }
                 
                 <div className="group-hover:visible lg:invisible absolute inset-0 bg-black bg-opacity-60 flex flex-col items-center justify-center text-neutral-50 cursor-pointer">
                   <svg

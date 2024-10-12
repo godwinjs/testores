@@ -10,11 +10,11 @@ const MEGAMENU_DEMO: NavItemType[] = [
     name: "Games & Consoles",
     children: [
       { id: ncNanoId(), href: "/gameconsoles/xbox", name: "XBOX" },
-      { id: ncNanoId(), href: "/_clothing/ps", name: "PlayStations" },
-      { id: ncNanoId(), href: "/_clothing/gameboy", name: "Game Boy" },
-      { id: ncNanoId(), href: "/_clothing/psp", name: "PSP" },
-      { id: ncNanoId(), href: "/_clothing/gamingpcs", name: "Gaming PCs" },
-      { id: ncNanoId(), href: "/_clothing/simulators", name: "Simulators" },
+      { id: ncNanoId(), href: "/gameconsoles/ps", name: "PlayStations" },
+      { id: ncNanoId(), href: "/gameconsoles/gameboy", name: "Game Boy" },
+      { id: ncNanoId(), href: "/gameconsoles/psp", name: "PSP" },
+      { id: ncNanoId(), href: "/gameconsoles/gamingpcs", name: "Gaming PCs" },
+      { id: ncNanoId(), href: "/gameconsoles/simulators", name: "Simulators" },
     ],
   },
   {
@@ -111,8 +111,8 @@ export const MEGAMENU_TEMPLATES: NavItemType[] = [
     ],
   },
 ];
+/*
 
-const OTHER_PAGE_CHILD: NavItemType[] = [
   {
     id: ncNanoId(),
     href: "/",
@@ -144,6 +144,8 @@ const OTHER_PAGE_CHILD: NavItemType[] = [
       },
     ],
   },
+*/
+const OTHER_PAGE_CHILD: NavItemType[] = [
   {
     id: ncNanoId(),
     href: "/cart",
@@ -156,7 +158,7 @@ const OTHER_PAGE_CHILD: NavItemType[] = [
   },
   {
     id: ncNanoId(),
-    href: "/page-search",
+    href: "/search",
     name: "Search Page",
   },
   {
@@ -197,6 +199,11 @@ const OTHER_PAGE_CHILD: NavItemType[] = [
       },
     ],
   },
+];
+
+/*
+
+
   {
     id: ncNanoId(),
     href: "/blog",
@@ -215,7 +222,8 @@ const OTHER_PAGE_CHILD: NavItemType[] = [
       },
     ],
   },
-];
+
+*/
 
 export const NAVIGATION_DEMO_2: NavItemType[] = [
   {

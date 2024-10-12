@@ -4,12 +4,15 @@ import { Helmet } from "react-helmet";
 import Link from "next/link";
 import Image from 'next/image';
 import { useRouter } from "next/navigation";
-import { signIn } from "next-auth/react"; 
+import { signIn } from "next-auth/react";
+import axios from "axios"; 
+import { CheckCircleIcon } from "@heroicons/react/24/solid"
 
 import { useSignupMutation } from "@/app/redux/features/auth/authApi";
 
 // import facebookSvg from "@/images/socials/_Facebook.svg";
 // import twitterSvg from "@/images/socials/_Twitter.svg";
+import { errNotify } from "@/app/assets/utils/functionsUI";
 import googleSvg from "@/images/socials/_Google.svg";
 import Input from "@/app/assets/shared/Input/Input";
 import ButtonPrimary from "@/app/assets/shared/Button/ButtonPrimary";
@@ -31,6 +34,7 @@ const SignUpPage: FC<PageSignUpProps> = ({ className = "" }) => {
   // server side credentials
   const [signup, { isLoading: registering, isSuccess: registered }] =
   useSignupMutation();
+  const [ emailSent, setEmailSent ] = React.useState(false)
 
   const [ error, setError ] = useState("");
   const router = useRouter();
@@ -40,6 +44,7 @@ const SignUpPage: FC<PageSignUpProps> = ({ className = "" }) => {
     const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0+9]+\.[A-Z]{2,}$/i;
     return emailRegex.test(email);
   }
+
   const handleSubmit = async (e: any) => {
     e.preventDefault();
   
@@ -48,11 +53,11 @@ const SignUpPage: FC<PageSignUpProps> = ({ className = "" }) => {
     const password = e.target[2].value;
   
     if(!isValidEmail(email)){
-      setError("Email is invalid")
+      errNotify(["Signup input error", "Email is invalid", "warning"])
       return;
     }
     if(!password || password.length < 8){
-      setError("Password is invalid")
+      errNotify(["Signup input error", "Password should be equal to or longer than 8 characters", "warning"])
       return;
     }
   
@@ -70,13 +75,39 @@ const SignUpPage: FC<PageSignUpProps> = ({ className = "" }) => {
       //   })
       // })
 
-      signup({
+      let {data: data}: any = await signup({
         name: fullName,
         email: email,
         password: password,
         confirmPassword: password,
-        phone: "+234xxxxxxxxx"
+        phone: "+234xxxxxxxxx",
+        authProvider: 'local'
       })
+
+      if(!data?.acknowledgement) {
+        let errMsg: any = data.description.split(":");
+        errMsg = [ errMsg[0], errMsg[errMsg.length - 1]]
+        errNotify(["Signup "+ errMsg[0], errMsg[1], "error"])
+      }else {
+        if(data.data.message === "Exists"){
+          errNotify([data.data.message, data.data.description , "warning"])
+        }else{
+          errNotify(["User created ", "Successful user signup" , "success"])
+          // console.log(registered)
+          await axios.post("/api/mail", { 
+            from: data.data.name,
+            to: data.data.email,
+            subject: `Truthstore verification link`,
+            text: 'Click this link to verify your email:',
+            link: `${process.env.NEXT_PUBLIC_BASE_URL}/verify_email?token=${data.data.verificationToken}`
+          }).then((response) => {
+              setEmailSent(true)
+          }).catch(err => {
+            console.log("there was an error sending verification email" + err)
+          })
+
+        }
+      }
   
       // if(res.status === 400){
       //   setError("This email is already registered.")
@@ -86,21 +117,30 @@ const SignUpPage: FC<PageSignUpProps> = ({ className = "" }) => {
       //   setError("")
       //   router.push("/login");
       // }
-    }catch (err){
-      setError("Error, try again later");
+    } catch (err){
       console.log(err)
-    }
+    } 
   }
+  const renderContent = () => {
 
-  return (
-    <div className={`nc-PageSignUp  ${className}`} data-nc-id="PageSignUp">
-      <Helmet>
-        <title>Sign up || TruthStore Commerce</title>
-      </Helmet>
-      <div className="container mb-24 lg:mb-32">
-        <h2 className="my-20 flex items-center text-3xl leading-[115%] md:text-5xl md:leading-[115%] font-semibold text-neutral-900 dark:text-neutral-100 justify-center">
-          Sign Up
-        </h2>
+    if(emailSent){
+      return (
+        
+        <div className="bg-transparent flex items-center justify-center">
+        <div className="bg-white p-8 rounded-lg shadow-md max-w-lg text-center">
+          <div className="flex justify-center mb-4">
+            <CheckCircleIcon className="h-16 w-16 text-green-500" />
+          </div>
+          <h1 className="text-2xl font-bold text-gray-800 mb-2">Verification Link Sent!</h1>
+          <p className="text-gray-600 mb-6">
+            Thank you for creating an account. Please check your mail box for verification link to proceed.
+          </p>
+        </div>
+      </div>
+      )
+      
+    }else {
+      return (
         <div className="max-w-md mx-auto space-y-6 ">
           <div className="grid gap-3">
             {loginSocials.map((item, index) => (
@@ -187,6 +227,24 @@ const SignUpPage: FC<PageSignUpProps> = ({ className = "" }) => {
             </Link>
           </span>
         </div>
+      )
+    }
+  }
+
+  React.useEffect(() => {
+  }, [])
+
+  return (
+    <div className={`nc-PageSignUp  ${className}`} data-nc-id="PageSignUp">
+      <Helmet>
+        <title>Sign up || TruthStore Commerce</title>
+      </Helmet>
+      <div className="container mb-24 lg:mb-32">
+        <h2 className="my-20 flex items-center text-3xl leading-[115%] md:text-5xl md:leading-[115%] font-semibold text-neutral-900 dark:text-neutral-100 justify-center">
+          Sign Up
+        </h2>
+
+        {renderContent()}
       </div>
     </div>
   );

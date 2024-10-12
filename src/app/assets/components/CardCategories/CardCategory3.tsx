@@ -32,7 +32,7 @@ const CardCategory3: FC<CardCategory3Props> = ({
       data-nc-id="CardCategory3"
     >
       <div
-        className={`relative w-full aspect-w-16 aspect-h-11 sm:aspect-h-9 h-0 rounded-2xl overflow-hidden group ${color}`}
+        className={`relative w-full aspect-w-16 aspect-h-11 sm:aspect-h-9 h-0 rounded-2xl overflow-hidden group ${color} dark:bg-slate-800`}
       >
         <div className="absolute inset-5 sm:inset-8">
           <Image

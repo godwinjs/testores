@@ -9,12 +9,14 @@ import TabFilters from "@/app/assets/components/TabFilters";
 
 export interface HeaderFilterSearchPageProps {
   className?: string;
+  query?: string;
 }
 
 const HeaderFilterSearchPage: FC<HeaderFilterSearchPageProps> = ({
   className = "mb-12",
+  query
 }) => {
-  const [isOpen, setIsOpen] = React.useState(true);
+  const [isOpen, setIsOpen] = React.useState(false);
   const [tabActive, setTabActive] = React.useState("All items");
 
   return (
@@ -24,7 +26,7 @@ const HeaderFilterSearchPage: FC<HeaderFilterSearchPageProps> = ({
           className="sm:space-x-2"
           containerClassName="relative flex w-full overflow-x-auto text-sm md:text-base hiddenScrollbar"
         >
-          {["All items", "Women", "Man", "Games", "Kids"].map(
+          {["All items", "Games", "Kids"].map(
             (item, index) => (
               <NavItem
                 key={index}
@@ -96,7 +98,7 @@ const HeaderFilterSearchPage: FC<HeaderFilterSearchPageProps> = ({
         leaveTo="opacity-0"
       >
         <div className="w-full border-b border-neutral-200/70 dark:border-neutral-700 my-8"></div>
-        <TabFilters />
+        <TabFilters query={query} />
       </Transition>
     </div>
   );

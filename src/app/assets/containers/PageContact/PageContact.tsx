@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import { Helmet } from "react-helmet";
 import axios from "axios";
 
@@ -33,22 +33,38 @@ const info = [
 
 const PageContact: FC<PageContactProps> = ({ className = "" }) => {
   const [ form, setForm ] = useForm({email:"", message:"", name:"" })
+  const [ sendingMail, setSendingMail ] = useState(false);
 
   const sendMail = (e: any) => {
-    console.log(form)
-    axios({
-      method: "POST",
-      url:"/api/mail",
-      data:  form
-    }).then((response)=>{
-      if (response.data.status === 'success') {
-        alert("Message Sent.");
-        setForm({})
-      } else if (response.data.status === 'fail') {
-        alert("Message failed to send.")
-      }
+    e.preventDefault();
+    // console.log(form)
+    setSendingMail((prevValue) => !prevValue);
+
+    axios.post("/api/mail", { 
+        ...form, 
+        to: 'rachealonyi.dev@gmail.com, truthempirestores@gmail.com, contact@truthstores.com',
+        subject: 'New Message from TruthStore Contact Form',
+      }).then((response) => {
+        console.log(response)
+        setSendingMail(false);
+    }).catch(err => {
+      console.log("there was an error sending email", err)
+      setSendingMail(false);
     })
+
+    // try {
+      
+    // } catch (err) {
+    //   console.log("Api call Error: ", err)
+    // } finally {
+    //   setSendingMail(false);
+    // }
+
   }
+
+  // React.useEffect(() => {
+  //   console.log(sendingMail)
+  // }, [sendingMail])
 
 
 
@@ -85,7 +101,7 @@ const PageContact: FC<PageContactProps> = ({ className = "" }) => {
               </div>
             </div>
             <div>
-              <form className="grid grid-cols-1 gap-6" onSubmit={sendMail} method="post">
+              <form className="grid grid-cols-1 gap-6" onSubmit={(e) => sendMail(e)} method="post">
                 <label className="block">
                   <Label>Full name</Label>
 
@@ -118,7 +134,7 @@ const PageContact: FC<PageContactProps> = ({ className = "" }) => {
                   <Textarea name="message" value={form.message} onChange={setForm}className="mt-1" rows={6} />
                 </label>
                 <div>
-                  <ButtonPrimary type="submit">Send Message</ButtonPrimary>
+                  <ButtonPrimary type="submit" loading={sendingMail}>Send Message</ButtonPrimary>
                 </div>
               </form>
             </div>

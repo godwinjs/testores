@@ -1,8 +1,12 @@
 'use client';
-import React, { Fragment, useState } from "react";
+import React, { FC, Fragment, useState } from "react";
 import { Dialog, Popover, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import Slider from "rc-slider";
+import { useDebounce } from "use-debounce";
+
+import { useAppDispatch } from "@/app/redux/store/hook";
+import { fetchProducts } from "@/app/redux/features/product/productSlice";
 
 import ButtonPrimary from "@/app/assets/shared/Button/ButtonPrimary";
 import ButtonThird from "@/app/assets/shared/Button/ButtonThird";
@@ -10,6 +14,10 @@ import ButtonClose from "@/app/assets/shared/ButtonClose/ButtonClose";
 import Checkbox from "@/app/assets/shared/Checkbox/Checkbox";
 import Radio from "@/app/assets/shared/Radio/Radio";
 import MySwitch from "./MySwitch";
+
+interface TabFilterProps {
+  query?: string;
+}
 
 // DEMO DATA
 const DATA_categories = [
@@ -60,21 +68,28 @@ const DATA_sortOrderRadios = [
   { name: "Most Popular", id: "Most-Popular" },
   { name: "Best Rating", id: "Best-Rating" },
   { name: "Newest", id: "Newest" },
-  { name: "Price Low - Hight", id: "Price-low-hight" },
-  { name: "Price Hight - Low", id: "Price-hight-low" },
+  { name: "Price Low - High", id: "Price-low-high" },
+  { name: "Price High - Low", id: "Price-high-low" },
 ];
 
-const PRICE_RANGE = [1, 500];
+const PRICE_RANGE = [1, 5000000];
 //
-const TabFilters = () => {
+const TabFilters: FC<TabFilterProps> = ({query}) => {
   const [isOpenMoreFilter, setisOpenMoreFilter] = useState(false);
+  const dispatch = useAppDispatch();
   //
+
   const [isOnSale, setIsIsOnSale] = useState(true);
-  const [rangePrices, setRangePrices] = useState([100, 500]);
+  const [rangePrices, setRangePrices] = useState([1, 5000000]);
   const [categoriesState, setCategoriesState] = useState<string[]>([]);
   const [colorsState, setColorsState] = useState<string[]>([]);
   const [sizesState, setSizesState] = useState<string[]>([]);
   const [sortOrderStates, setSortOrderStates] = useState<string>("");
+  const [ queryObj ] = useDebounce({ query, filters: { price: rangePrices } }, 2000)
+
+  // React.useEffect(() => {
+  //   dispatch( fetchProducts(queryObj) )
+  // }, [ dispatch, queryObj])
 
   //
   const closeModalMoreFilter = () => setisOpenMoreFilter(false);
@@ -615,6 +630,15 @@ const TabFilters = () => {
 
   // OK
   const renderTabsPriceRage = () => {
+    const check = rangePrices[1].toString().length;
+
+    const priceMaxArr = rangePrices[1].toString().split('');
+    const priceMaxM = check > 6 && priceMaxArr[0], 
+        priceMaxT = check > 6 && "," + priceMaxArr[1] + priceMaxArr[2] + priceMaxArr[3], 
+        priceMaxTens = check > 6 && "," + priceMaxArr[4] + priceMaxArr[5] + priceMaxArr[6];
+
+    const priceMaxArrM = [priceMaxM, priceMaxT, priceMaxTens].join('');
+
     return (
       <Popover className="relative">
         {({ open, close }) => (
@@ -650,8 +674,7 @@ const TabFilters = () => {
                   strokeLinejoin="round"
                 />
               </svg>
-
-              <span className="ml-2 min-w-[90px]">{`${rangePrices[0]}$ - ${rangePrices[1]}$`}</span>
+              <span className="ml-2 min-w-[90px]">{`₦${rangePrices[0]}k - ₦${rangePrices[1].toString().length > 6 ? priceMaxArrM : rangePrices[1]}`}</span>
               {rangePrices[0] === PRICE_RANGE[0] &&
               rangePrices[1] === PRICE_RANGE[1] ? null : (
                 <span onClick={() => setRangePrices(PRICE_RANGE)}>
@@ -680,8 +703,9 @@ const TabFilters = () => {
                         step={1}
                         defaultValue={[rangePrices[0], rangePrices[1]]}
                         allowCross={false}
-                        onChange={(_input: number | number[]) =>
-                          setRangePrices(_input as number[])
+                        onChange={(_input: number | number[]) => {
+                          setRangePrices(_input as number[]);
+                        }
                         }
                       />
                     </div>
@@ -696,7 +720,7 @@ const TabFilters = () => {
                         </label>
                         <div className="mt-1 relative rounded-md">
                           <span className="absolute inset-y-0 right-4 flex items-center pointer-events-none text-neutral-500 sm:text-sm">
-                            $
+                          ₦
                           </span>
                           <input
                             type="text"
@@ -717,7 +741,7 @@ const TabFilters = () => {
                         </label>
                         <div className="mt-1 relative rounded-md">
                           <span className="absolute inset-y-0 right-4 flex items-center pointer-events-none text-neutral-500 sm:text-sm">
-                            $
+                          ₦
                           </span>
                           <input
                             type="text"
@@ -742,7 +766,10 @@ const TabFilters = () => {
                       Clear
                     </ButtonThird>
                     <ButtonPrimary
-                      onClick={close}
+                      onClick={() => {
+                        dispatch( fetchProducts(queryObj) );
+                        close() }
+                      }
                       sizeClass="px-4 py-2 sm:px-5"
                     >
                       Apply

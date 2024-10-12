@@ -46,7 +46,7 @@ export const store = configureStore({
     getDefaultMiddleware({
       immutableCheck: false,
       serializableCheck: false,
-    }).concat(apiSlice.middleware, logger),
+    }).concat(apiSlice.middleware, logger), // ,logger
     devTools: true,
 });
 

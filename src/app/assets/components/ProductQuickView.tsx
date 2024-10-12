@@ -75,7 +75,7 @@ const ProductQuickView: FC<ProductQuickViewProps> = ({ className = "", product }
         { position: "top-right", id: "nc-product-notify", duration: 3000 }
       );
     }
-    if(cart === null) {
+    if(cart === null || cart.lenght <= 0) {
       run();
     }
     
@@ -348,7 +348,7 @@ const ProductQuickView: FC<ProductQuickViewProps> = ({ className = "", product }
             {/* STATUS */}
             {renderStatus()}
             {/* META FAVORITES */}
-            <LikeButton className="absolute right-3 top-3 " />
+            <LikeButton product={product} className="absolute right-3 top-3 " />
           </div>
           <div className="hidden lg:grid grid-cols-2 gap-3 mt-3 sm:gap-6 sm:mt-6 xl:gap-5 xl:mt-5">
             {LIST_IMAGES_DEMO && LIST_IMAGES_DEMO.map((item, index) => {

@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import { setCredentials, login } from "@/app/redux/features/auth/authSlice";
 import { useSigninMutation, useUpdateUserMutation } from "@/app/redux/features/auth/authApi";
 
+import { errNotify } from "@/app/assets/utils/functionsUI";
 import facebookSvg from "@/images/socials/_Facebook.svg";
 import twitterSvg from "@/images/socials/_Twitter.svg";
 import googleSvg from "@/images/socials/_Google.svg";
@@ -49,6 +50,7 @@ const LoginPage: FC<PageLoginProps> = ({ className = "" }) => {
         //   dispatch(setCredentials(session.data.user));
         //     router.replace("/account")
         // }
+
     }, [sessionStatus, router])
   
     const isValidEmail = (email: string) => {
@@ -64,11 +66,11 @@ const LoginPage: FC<PageLoginProps> = ({ className = "" }) => {
       const password = e.target[1].value;
     
       if(!isValidEmail(email)){
-        setError("Email is invalid")
+        errNotify(["Login input error", "Email is invalid", "warning"])
         return;
       }
       if(!password || password.length < 8){
-        setError("Password is invalid")
+        errNotify(["Login input error", "Password should be equal to or longer than 8 characters", "warning"])
         return;
       }
         //   
@@ -168,7 +170,6 @@ const LoginPage: FC<PageLoginProps> = ({ className = "" }) => {
               </span>
               <Input type="password" displayName="signin input2" className="mt-1" required />
             </label>
-            <p className="text-red-600 text-[16px] mb-4">{error && error}</p>
             <ButtonPrimary type="submit">Continue</ButtonPrimary>
           </form>
 

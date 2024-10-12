@@ -34,13 +34,11 @@ export interface ProductCardProps {
 const ProductCard: FC<ProductCardProps> = ({
   className = "",
   data = PRODUCTS[0],
-  isLiked = false,
 }) => {
   const dispatch = useDispatch();
   const router = useRouter();
   // const products: any = useSelector((state: RootState) => state.products.products);
   const cart: any = useSelector((state: RootState) => state.account.cart);
-  const wishlist: any = useSelector((state: RootState) => state.account.wishlist);
 
   const { 
     _id,
@@ -65,7 +63,7 @@ const ProductCard: FC<ProductCardProps> = ({
       cloudName: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME
     }
   });
-  const cldImage = cld.image(thumbnail && (thumbnail?.public_id + '.png'));
+  const cldImage = cld.image(thumbnail && (thumbnail?.public_id + '.png')); 
 
   const notifyAddTocart = ({ size }: { size?: string }) => {
     console.log(cart)
@@ -107,7 +105,7 @@ const ProductCard: FC<ProductCardProps> = ({
       );
     }
 
-    if(cart === null) {
+    if(cart === null || cart.length <= 0) {
       run();
     }
 
@@ -299,16 +297,16 @@ const ProductCard: FC<ProductCardProps> = ({
       >
         <Link href={`/product-detail/${_id}`} className="absolute inset-0"></Link>
 
-        <div className="relative flex-shrink-0 bg-slate-50 dark:bg-slate-300 rounded-3xl overflow-hidden z-1 group">
+        <div className="relative flex-shrink-0 bg-slate-50 dark:bg-slate-800 rounded-3xl overflow-hidden z-1 group" >
           <Link href={`/product-detail/${_id}`} className="block">
             <div className="flex aspect-w-11 aspect-h-12 w-full h-0">
-              {thumbnail ? <AdvancedImage alt={title + "2"} cldImg={cldImage} className="h-full w-full object-contain object-center" /> : <Image width={100} height={100} alt={title + "3"} src={image} className="h-full w-full object-contain object-center" />}
+              {thumbnail ? <AdvancedImage alt={title + "2"} cldImg={cldImage} className=" h-full md:blur-sm w-full md:scale-125 group-hover:filter-none group-hover:scale-100 object-cover object-center transition-all duration-450" /> : <Image width={100} height={100} alt={title + "3"} src={image} className="h-full md:blur-sm w-full md:scale-125 group-hover:filter-none group-hover:scale-100 object-cover object-center transition-all duration-450" />}
             </div>
           </Link>
 
           <ProductStatus status={status} />
           
-              <LikeButton 
+              <LikeButton
                 product={ {
                   _id,
                   title,
@@ -318,7 +316,6 @@ const ProductCard: FC<ProductCardProps> = ({
                   image: thumbnail?.url,
                   type: "wishlist"
                 } }
-                wishlist={wishlist}
                 className="absolute top-3 right-3 z-10" />
               
 

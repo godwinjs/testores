@@ -1,5 +1,7 @@
 import bcrypt from "bcryptjs";
 import { NextResponse } from "next/server";
+import { v4 as uuidv4 } from "uuid"
+import axios from "axios"
 
 import User from "@/app/db/models/User";
 import connect from "@/app/db/utils/connect";
@@ -7,6 +9,7 @@ import { isPasswordValid } from "@/app/assets/utils/calc";
 
 export const POST = async (request: any) => {
     const { fullName, email, password } = await request.json();
+    const verificationToken: string = uuidv4()
 
     // td: add password comparison later
     // td: also make the response dynamically tailored to the password issue
@@ -29,6 +32,7 @@ export const POST = async (request: any) => {
         email: email,
         password: hashedPassword,
         authProvider: 'local',
+        verificationToken,
         // dob: '',
         // address: '',
         // phone: '',
@@ -39,7 +43,19 @@ export const POST = async (request: any) => {
  
     try {
         // console.log([fullName, email, hashedPassword])
-        await newUser.save();
+
+        await axios.post("/api/mail", { 
+            from: fullName,
+            to: email,
+            subject: `Truthstore verification code:${verificationToken}`,
+            text: `Click this link to verify your email: ${process.env.NEXT_PUBLIC_BASE_URL}/verify_email?token=${verificationToken}`
+          }).then((response) => {
+              console.log(response)
+          }).catch(err => {
+            return new NextResponse("there was an error sending verification email" + err, {status: 404})
+          })
+          
+          await newUser.save();
         return new NextResponse("User registered", {status: 200})
     } catch (err: any) {
         return new NextResponse(err, {status: 500})

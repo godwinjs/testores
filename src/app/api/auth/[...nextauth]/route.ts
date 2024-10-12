@@ -1,4 +1,5 @@
 import NextAuth, { NextAuthOptions } from "next-auth";
+import { NextResponse } from "next/server";
 // import { getServerSession } from "next-auth/next";
 import { Account, User as AuthUser } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
@@ -61,43 +62,54 @@ const authOptions: NextAuthOptions = {
             
             // console.log({"user": user, "account": account, "profile": profile, "email": email, "credentials": credentials, "metadata": metadata})
             
-            await connect();
-            // console.log({user: user, account: account, profile: profile, email: email, credentials: credentials})
-            if(account?.provider == "credentials"){
-                return true;
-            }
-            //http://localhost:3000/api/auth/signin?callbackUrl=http%3A%2F%2Flocalhost%3A3000%2Flogin this  really LOL :)
-            if(account?.provider == "google"){
-                // profile.email_verified: boolean = true //.given_name//.family_name
-                // profile.locale: string = 'en'
-                const existingUser: any = await User.findOne({email: user.email});
-        
-                if(!(existingUser === null)){
-                    console.log("User Exists")
-                    return existingUser; //
-                }
-                const newUser = new User({
-                    name: profile.name,
-                    email: user.email,
-                    // password: '@Googl3Signin',
-                    dob: '',
-                    address: '',
-                    phone: '',
-                    authProvider: 'google',
-                    // gender: '',
-                    avatar: { url: profile.picture },
-                    // role: '',
-                    about: '',
-                })
-                try{
-                    await newUser.save();
+            try {
+                await connect();
+                // console.log({user: user, account: account, profile: profile, email: email, credentials: credentials})
+                if(account?.provider == "credentials"){
                     return true;
+                }
+                //http://localhost:3000/api/auth/signin?callbackUrl=http%3A%2F%2Flocalhost%3A3000%2F login this really LOL :)
+                if(account?.provider == "google"){
     
-                }catch(err){
-                    console.log("Error saving user", err)
-                    return false;
+                    // profile.email_verified: boolean = true //.given_name//.family_name
+                    // profile.locale: string = 'en'
+                    const existingUser: any = await User.findOne({email: user.email});
+            
+                    if(!(existingUser === null)){
+                        console.log("User Exists")
+                        return existingUser; //
+                    }
+                    const newUser = new User({
+                        name: profile.name,
+                        email: user.email,
+                        isVerified: true,
+                        // password: '@Googl3Signin',
+                        dob: '',
+                        address: '',
+                        phone: '',
+                        authProvider: 'google',
+                        // gender: '',
+                        avatar: { url: profile.picture },
+                        // role: '',
+                        about: '',
+                    })
+                    try{
+                          
+                        await newUser.save();
+    
+                        return true;
+        
+                    }catch(err){
+                        console.log("Error saving user", err)
+                        return false;
+                    }
+    
                 }
 
+            }catch (err) {
+                console.log(err)
+                const targetUrl = new URL('/login', process.env.NEXT_PUBLIC_BASE_URL);
+                return Boolean(NextResponse.redirect(targetUrl));
             }
             return true;
         },
@@ -111,24 +123,24 @@ const authOptions: NextAuthOptions = {
         async session({ session, token, user}: any) {
             session.accessToken = token.accessToken;
             
-            try {
-                user = await User.findOne({email: session.user.email});
-                // console.log(user, "1111")
-                console.log(session, "1111")
+            // try {
+            //     user = await User.findOne({email: session.user.email});
+            //     console.log(user, "2222")
+            //     console.log(session, "1111")
 
-                // session.user.fullName = user.fullName;
-                // session.user.joined = user.createdAt;
-                // session.user.lastUpdate = user.updatedAt;
-                // session.user.id = user.id;
-                // session.user.dob = user.dob;
-                // session.user.phone = user.phone;
-                // session.user.gender = user.gender;
-                // session.user.address = user.address;
-                // session.user.image = user.image;
-                // session.user.about = user.about
-            } catch (err: any){
-                throw new Error(err); 
-            }
+            //     session.user.fullName = user.fullName;
+            //     session.user.joined = user.createdAt;
+            //     session.user.lastUpdate = user.updatedAt;
+            //     session.user.id = user.id;
+            //     session.user.dob = user.dob;
+            //     session.user.phone = user.phone;
+            //     session.user.gender = user.gender;
+            //     session.user.address = user.address;
+            //     session.user.image = user.image;
+            //     session.user.about = user.about
+            // } catch (err: any){
+            //     throw new Error(err); 
+            // }
             
             return session
         },

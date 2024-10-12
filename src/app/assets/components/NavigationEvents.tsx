@@ -13,6 +13,7 @@ export function NavigationEvents({
   const dataFetch = useRef(false)
   const pathname = usePathname()
   const searchParams = useSearchParams()
+  const url = `${pathname}`
  
   useLayoutEffect(() => {
     // start:: prevent executing useEffect twice
@@ -23,17 +24,13 @@ export function NavigationEvents({
        setLoading(false)
     }
 
-    // ?${searchParams}
-    const url = `${pathname}`
-    console.log(url)
-    // You can now use the current URL
-    // ...
-
     dataFetch.current = true;
-    // end:: prevent executing useEffect twice
   }, [pathname, searchParams, loading])
-  // <Loader height={height} size={150} />
+  
+  // console.log('url: ', url, 'loading: ', loading)
+  // <Loader height={height} size={150} /> 
  
   // return <>{loading ? children : children }</>
-  return children;
+
+  return children; //header/chidren/footer //use a global loading state for page UI!!!!!!!!!!!!!!!!!!!!!!!
 }

@@ -4,9 +4,9 @@ import { XMarkIcon } from "@heroicons/react/24/outline";
 
 import Logo from "@/app/assets/shared/Logo/Logo";
 import MenuBar from "@/app/assets/shared/MenuBar/MenuBar";
-import AvatarDropdown from "./AvatarDropdown";
-import Navigation from "@/app/assets/shared/Navigation/Navigation";
-import CartDropdown from "./CartDropdown";
+import AvatarDropdown from "@/app/assets/components/Header/AvatarDropdown";
+import Navigation from "@/app/assets/shared/Navigation/Navigation"; // navigation menus and items
+import CartDropdown from "@/app/assets/components/Header/CartDropdown";
 
 export interface MainNav2LoggedProps {}
 
@@ -76,8 +76,8 @@ const MainNav2Logged: FC<MainNav2LoggedProps> = () => {
 
   const renderContent = () => {
     return (
-      <div className="h-20 flex justify-between">
-        <div className="flex items-center lg:hidden flex-1">
+      <div className=" h-20 flex justify-between ">
+        <div className=" flex items-center lg:hidden flex-1">
           <MenuBar />
         </div>
 

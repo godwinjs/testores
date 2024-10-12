@@ -49,7 +49,7 @@ const SectionPromo3: FC<SectionPromo3Props> = ({ className = "lg:pt-10" }) => {
             <li className="flex items-center space-x-4">
               <Badge color="red" name="03" />
               <span className="font-medium text-neutral-700 dark:text-neutral-300">
-                Premium magazines
+                Premium offers
               </span>
             </li>
           </ul>
@@ -72,6 +72,7 @@ const SectionPromo3: FC<SectionPromo3Props> = ({ className = "lg:pt-10" }) => {
         </div>
         <div className="relative block lg:absolute lg:right-0 lg:bottom-0 mt-10 lg:mt-0 max-w-lg lg:max-w-[calc(50%-40px)]">
           <Image
+            className="object-scale-down"
             alt="right img"
             src={rightImgDemo}
           />

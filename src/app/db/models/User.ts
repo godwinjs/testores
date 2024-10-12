@@ -4,7 +4,15 @@ const { ObjectId } = mongoose.Schema.Types;
 const { Schema } = mongoose; 
 
 const userSchema = new Schema(
-    {
+    {    
+        // next auth providers as needed
+        authProvider: {
+          type: String,
+          enum: ['local', 'google'], 
+          required: true
+        },
+        isVerified: { type: Boolean, default: false },
+        verificationToken: { type: String },
         // for user full name
         name: {
           type: String,
@@ -42,7 +50,7 @@ const userSchema = new Schema(
                 "Password should contain minimum 1 => uppercase, lowercase, number and symbol",
             },
             minLength: [8, "Password should be at least 8 characters"],
-            maxLength: [20, "Password should be at most 20 characters"],
+            maxLength: [80, "Password should be at most 20 characters"],
           },
     
         // for user confirm password
@@ -104,7 +112,7 @@ const userSchema = new Schema(
           default: "active",
         },
     
-        // for user address
+        // for user address 
         address: {
           type: String,
           required: false,
@@ -133,6 +141,65 @@ const userSchema = new Schema(
               type: Date,
               default: Date.now,
             },
+          },
+        ],
+        
+        // for orders
+        orders: [
+          {
+            orderID: {
+              type: String,
+              required: [true, "Please, provide order ID"],
+              trim: true,
+            },
+            products: [
+              {
+                description: {
+                  type: String,
+                  required: [true, "Please, provide product description"],
+                  trim: true,
+                },
+                image: {
+                  type: String,
+                  required: [true, "Please, provide product image"],
+                  trim: true,
+                },
+                status: {
+                  type: String,
+                  required: [true, "Please, provide product status"],
+                  trim: true,
+                },
+                price: {
+                  type: Number,
+                  required: [true, "Please, provide product price"],
+                  trim: true,
+                },
+                title: {
+                  type: String,
+                  required: [true, "Please, provide product title"],
+                  trim: true,
+                },
+                _id: {
+                  type: String,
+                  required: [true, "Please, provide product ID"],
+                  trim: true,
+                },
+                quantity: {
+                  type: Number,
+                  min: [1, "Quantity won't be less than 1"],
+                }
+              },
+            ],
+            status: {
+              type: String,
+              required: [true, "Please, provide order status"],
+              trim: true,
+            },
+            orderDate: {
+              type: String,
+              required: [true, "Please, provide order date"],
+              trim: true,
+            }
           },
         ],
     

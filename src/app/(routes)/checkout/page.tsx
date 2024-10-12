@@ -1,6 +1,6 @@
-"use client"
+'use client'
 
-import { useSession } from "next-auth/react"
+import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 
 import CheckoutPage from "@/app/assets/containers/PageCheckout/CheckoutPage";
@@ -16,4 +16,4 @@ export default function Checkout(){
         return;
     }
     return <CheckoutPage user={session?.user} />
-}
+} 

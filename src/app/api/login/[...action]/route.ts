@@ -6,6 +6,7 @@ import { findByEmail } from "@/app/db/services/user.service";
 export const POST = async (req: NextRequest, { params }: { params: { action: [string] }}) => {
     const data = await req.json();
     const route: string = params.action[0];
+    console.log(route, data)
 
     // await saveProducts(data);
     let user;

@@ -97,11 +97,13 @@ export default async function RootLayout({
         <AuthProvider session={session}>
           <Providers>
               <Toaster />
-                <NavigationEvents>
-                  <><Header />
-                  {children}
-                  <Footer /></>
-                </NavigationEvents>
+                <div className="bg-white text-base dark:bg-slate-900 text-slate-900 dark:text-slate-200">
+                  <NavigationEvents>
+                    <Header />
+                    {children}
+                    <Footer />
+                  </NavigationEvents>
+                </div>
           </Providers>
         </AuthProvider>
       </body>

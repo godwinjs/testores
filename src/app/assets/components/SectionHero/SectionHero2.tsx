@@ -36,6 +36,9 @@ const Images = {
 let TIME_OUT: NodeJS.Timeout | null = null;
 
 const SectionHero2: FC<SectionHero2Props> = ({ className = "", data }) => {
+  // Use a defualt existing image if no image data is provided for the slides, but if some is provided
+  // substitute it for the placeholder images, and when its greater than the paceholder image add it to the slides DATA array.
+  
   const DATA: Hero2DataType[] = [
     {
       image: data[0].cloudImage ? data[0].cloudImage : Images["imageRightPng2"],
@@ -179,7 +182,7 @@ const SectionHero2: FC<SectionHero2Props> = ({ className = "", data }) => {
         />
 
         {/* BG */}
-        <div className="absolute inset-0 bg-[#E3FFE6]">
+        <div className="absolute inset-0 bg-[#E3FFE6] dark:bg-slate-800">
           {/* <div className="absolute inset-0 bg-[#F7F0EA]"> */}
           <Image
             className="absolute w-full h-full object-contain"

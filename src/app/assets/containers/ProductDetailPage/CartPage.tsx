@@ -225,7 +225,7 @@ const CartPage = () => {
           <h2 className="block text-2xl sm:text-3xl lg:text-4xl font-semibold ">
             Shopping Cart
           </h2>
-          <div className="block mt-3 sm:mt-5 text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-400">
+          {/* <div className="block mt-3 sm:mt-5 text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-400">
             <Link href={"/homepage"} className="">
               Homepage
             </Link>
@@ -235,7 +235,7 @@ const CartPage = () => {
             </Link>
             <span className="text-xs mx-1 sm:mx-1.5">/</span>
             <span className="underline">Shopping Cart</span>
-          </div>
+          </div> */}
         </div>
 
         <hr className="border-slate-200 dark:border-slate-700 my-10 xl:my-12" />

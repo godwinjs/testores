@@ -30,7 +30,7 @@ const SectionHero: FC<SectionHeroProps> = ({
             {heading}
           </h2>
           <span className="block text-base xl:text-lg text-neutral-6000 dark:text-neutral-400">
-            {subHeading}
+            <pre>{subHeading}</pre>
           </span>
           {!!btnText && <ButtonPrimary href="/login">{btnText}</ButtonPrimary>}
         </div>

@@ -11,7 +11,7 @@ const AccountSavelists = () => {
 
   const renderSection1 = () => {
     return (
-      <div className="space-y-10 sm:space-y-12 my-8">
+      <div className="mx-[8rem] space-y-10 sm:space-y-12 my-8">
         <div>
           <h2 className="text-center text-2xl sm:text-3xl font-semibold mt-4">
             List of saved products
@@ -24,7 +24,7 @@ const AccountSavelists = () => {
           ))}
         </div>
         <div className="flex !mt-20 justify-center items-center">
-          <ButtonSecondary loading>Show me more</ButtonSecondary>
+          <ButtonSecondary loading={false}>Show me more</ButtonSecondary>
         </div>
       </div>
     );

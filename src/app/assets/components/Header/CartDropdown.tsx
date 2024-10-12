@@ -4,9 +4,10 @@ import { Fragment } from "react";
 import { Popover, Transition } from "@headlessui/react";
 import Link from "next/link";
 import Image from "next/image";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 import { RootState } from "@/app/redux/store";
+import { removeFromCart } from "@/app/redux/features/account/accountSlice";
 
 import { addArray } from "../../utils/calc";
 import Prices from "@/app/assets/components/Prices";
@@ -16,6 +17,7 @@ import ButtonSecondary from "@/app/assets/shared/Button/ButtonSecondary";
 
 export default function CartDropdown() {
   const cartProducts: any = useSelector((state: RootState) => state.account.cart);
+  const dispatch = useDispatch();
 
   const renderProduct = (item: Product, index: number, close: () => void) => {
     const { name, price, image } : any = item;
@@ -60,6 +62,7 @@ export default function CartDropdown() {
 
             <div className="flex">
               <button
+                onClick={() => { dispatch(removeFromCart(index))}}
                 type="button"
                 className="font-medium text-primary-6000 dark:text-primary-500 "
               >
@@ -82,7 +85,7 @@ export default function CartDropdown() {
                  group w-10 h-10 sm:w-12 sm:h-12 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full inline-flex items-center justify-center focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 relative`}
           >
             <div className="w-3.5 h-3.5 flex items-center justify-center bg-primary-500 absolute top-1.5 right-1.5 rounded-full text-[10px] leading-none text-white font-medium">
-              <span className="mt-[1px]">3</span>
+              <span className="mt-[1px]">{cartProducts?.length || 0}</span>
             </div>
             <svg
               className="w-6 h-6"

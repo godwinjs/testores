@@ -67,7 +67,7 @@ export default function AvatarDropdown() {
                   <div className="relative grid grid-cols-1 gap-6 bg-white dark:bg-neutral-800 py-7 px-6">
                   { !session ? null : (
                     <><div className="flex items-center space-x-3">
-                      <Avatar imgUrl={avatarImgs[7]} sizeClass="w-12 h-12" />
+                      <Avatar imgUrl={session.user?.image} sizeClass="w-12 h-12" />
                       <div className="flex-grow">
                         <h4 className="font-semibold">{session.user?.fullName}</h4>
                         <p className="text-xs mt-0.5">{session.user?.email}</p>
@@ -113,7 +113,7 @@ export default function AvatarDropdown() {
 
                     {/* ------------------ 2 --------------------- */}
                     <Link
-                      href={"/checkout"}
+                      href={"/account/my-order"}
                       className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
                       onClick={() => close()}
                     >

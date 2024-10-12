@@ -5,9 +5,13 @@ import Link from "next/link";
 import { useSelector, useDispatch } from "react-redux";
 import Image from "next/image"
 import { PaystackButton } from "react-paystack";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
+import { Transition } from "@headlessui/react";
 
 import { RootState } from "@/app/redux/store"
-import { updateCart } from "@/app/redux/features/account/accountSlice";
+import { removeCart, updateCart, addToOrder, postOrders } from "@/app/redux/features/account/accountSlice";
+import { useAppDispatch } from "@/app/redux/store/hook";
 
 import { addArray } from "@/app/assets/utils/calc";
 import Label from "@/app/assets/components/Label/Label";
@@ -23,7 +27,8 @@ import SetPageTitle from "../../hooks/SetPageTitle";
 const CheckoutPage = ({user}: any) => {
   SetPageTitle({title: "Checkout || Truthstore Ecommerce"})
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
+  const router = useRouter();
   const cart: any = useSelector((state: RootState) => state.account.cart)
   const [tabActive, setTabActive] = useState<
     "ContactInfo" | "ShippingAddress" | "PaymentMethod"
@@ -32,10 +37,10 @@ const CheckoutPage = ({user}: any) => {
   const [ cardName, setCardName ] = useState("");
   const [ expDate, setExpDate ] = useState("");
   const [ cvc, setCVC ] = useState("");
-
+  
   const orderTotal  = cart && (addArray(cart.map((i: any) => i.price * i.quantity) ) * 0.008) + (addArray(cart.map((i: any) => i.price * i.quantity) ) * 0.005) + ( addArray(cart.map((i: any) => i.price * i.quantity) ));
   const email = user && user.email;
-  const fullName = user && user.fullName;
+  const fullName = user && user.name;
   const phone = user && user.phone;
 
 
@@ -55,10 +60,121 @@ const CheckoutPage = ({user}: any) => {
     },
     publicKey: `${process.env.NEXT_PUBLIC_PSTACK_PUB}`,
     text: "Confirm order",
-    onSuccess: () =>
-      alert("Thanks for doing business with us! Come back soon!!"),
-    onClose: () => alert("Wait! Don't leave :("),
+    onSuccess: (data: any) => {
+
+      if(data.status === "success") {
+        let date = new Date().toString().split(" ").slice(0, 5).join(" ");
+        // save cart to my order
+        dispatch(addToOrder({ orderID: data.reference, products: cart, status: "Pending", orderDate: date}))
+
+        toast.custom(
+        (t) => (
+          <Transition
+            appear
+            show={t.visible}
+            className="p-4 max-w-md w-full bg-white dark:bg-slate-800 shadow-lg rounded-2xl pointer-events-auto ring-1 ring-black/5 dark:ring-white/10 text-slate-900 dark:text-slate-200"
+            enter="transition-all duration-150"
+            enterFrom="opacity-0 translate-x-20"
+            enterTo="opacity-100 translate-x-0"
+            leave="transition-all duration-150"
+            leaveFrom="opacity-100 translate-x-0"
+            leaveTo="opacity-0 translate-x-20"
+          >
+            <p className="block text-base font-semibold leading-none">
+              {/* { !notExist ? msg : msg } */}
+              {"Thanks for doing business with us! Come back soon!!"}
+            </p>
+            <div className="border-t border-slate-200 dark:border-slate-700 my-4" />
+            
+            <div className="flex ">
+  
+              <div className="ml-4 flex flex-1 flex-col">
+                <div>
+                  <div className="flex justify-between ">
+                    <div>
+                      <h3 className="text-base font-medium ">{data.reference}</h3>
+                    </div>
+                    {/* <Prices price={price} className="mt-0.5" /> */}
+                  </div>
+                </div>
+                <div className="flex flex-1 items-end justify-between text-sm">
+  
+                  <div className="flex">
+                    <button
+                      type="button"
+                      className="font-medium text-primary-6000 dark:text-primary-500 "
+                      onClick={() => router.push('/account/my-order')}
+                    >
+                      View Order
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Transition>
+        ))
+        // admin should see user order
+        dispatch(postOrders())
+
+        // remove all cart
+        dispatch(removeCart(null))
+
+      }else {
+        toast.custom(
+        (t) => (
+          <Transition
+            appear
+            show={t.visible}
+            className="p-4 max-w-md w-full bg-white dark:bg-slate-800 shadow-lg rounded-2xl pointer-events-auto ring-1 ring-black/5 dark:ring-white/10 text-slate-900 dark:text-slate-200"
+            enter="transition-all duration-150"
+            enterFrom="opacity-0 translate-x-20"
+            enterTo="opacity-100 translate-x-0"
+            leave="transition-all duration-150"
+            leaveFrom="opacity-100 translate-x-0"
+            leaveTo="opacity-0 translate-x-20"
+          >
+            <p className="block text-base font-semibold leading-none">
+              {/* { !notExist ? msg : msg } */}
+              {"Opps! there was an issue with your payment."}
+            </p>
+            <div className="border-t border-slate-200 dark:border-slate-700 my-4" />
+            
+            <div className="flex ">
+  
+              <div className="ml-4 flex flex-1 flex-col">
+                <div>
+                  <div className="flex justify-between ">
+                    <div>
+                      <h3 className="text-base font-medium ">{"Payment Unsuccessful"}</h3>
+                    </div>
+                    {/* <Prices price={price} className="mt-0.5" /> */}
+                  </div>
+                </div>
+                <div className="flex flex-1 items-end justify-between text-sm">
+  
+                  <div className="flex">
+                    <button
+                      type="button"
+                      className="font-medium text-primary-6000 dark:text-primary-500 "
+                      onClick={() => router.push('/contact')}
+                    >
+                      Contact customer care
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Transition>
+        ))
+
+      }
+    },
+    onClose: (data: any) => { 
+      alert("About to cancel payment..") 
+      console.log(data)
+    },
   }
+  
 
 
   const handleScrollToEl = (id: string) => {
@@ -318,11 +434,7 @@ const CheckoutPage = ({user}: any) => {
           </div>
         </div>
 
-        <div className="flex flex-col lg:flex-row">
-          <div className="flex-1">{renderLeft()}</div>
-
-          <div className="flex-shrink-0 border-t lg:border-t-0 lg:border-l border-slate-200 dark:border-slate-700 my-10 lg:my-0 lg:mx-10 xl:lg:mx-14 2xl:mx-16 "></div>
-
+        <div className="flex flex-col lg:flex-row">          
           <div className="w-full lg:w-[36%] ">
             <h3 className="text-lg font-semibold">Order summary</h3>
             <div className="mt-8 divide-y divide-slate-200/70 dark:divide-slate-700 ">
@@ -334,7 +446,7 @@ const CheckoutPage = ({user}: any) => {
                 <Label className="text-sm">Discount code</Label>
                 <div className="flex mt-1.5">
                   <Input displayName="DiscountCode" sizeClass="h-10 px-4 py-3" className="flex-1" />
-                  <button className="text-neutral-700 dark:text-neutral-200 border border-neutral-200 dark:border-neutral-700 hover:bg-neutral-100 rounded-2xl px-4 ml-3 font-medium text-sm bg-neutral-200/70 dark:bg-neutral-700 dark:hover:bg-neutral-800 w-24 flex justify-center items-center transition-colors">
+                  <button onClick={() => console.log('dispatch(postOrders())')} className="text-neutral-700 dark:text-neutral-200 border border-neutral-200 dark:border-neutral-700 hover:bg-neutral-100 rounded-2xl px-4 ml-3 font-medium text-sm bg-neutral-200/70 dark:bg-neutral-700 dark:hover:bg-neutral-800 w-24 flex justify-center items-center transition-colors">
                     Apply
                   </button>
                 </div>
@@ -422,6 +534,10 @@ const CheckoutPage = ({user}: any) => {
               </p>
             </div>
           </div>
+
+          <div className="flex-shrink-0 border-t lg:border-t-0 lg:border-l border-slate-200 dark:border-slate-700 my-10 lg:my-0 lg:mx-10 xl:lg:mx-14 2xl:mx-16 "></div>
+
+          <div className="flex-1">{renderLeft()}</div>
         </div>
       </main>
     </div>

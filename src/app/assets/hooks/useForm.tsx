@@ -1,5 +1,4 @@
 import React from 'react';
-
 export const useForm = (initialState: any = {}) => {
     const [ formValues, setFormValues ] = React.useState(initialState)
 

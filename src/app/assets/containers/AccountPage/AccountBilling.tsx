@@ -13,7 +13,7 @@ const AccountBilling: FC<AccountPageProps> = ({ className = "", user }) => {
             Payments & payouts
           </h2>
           <div className="max-w-2xl prose prose-slate dark:prose-invert">
-            <span className="">
+            {/* <span className="">
               When you receive a payment for a order, we call that payment to
               you a "payout." Our secure payment system supports several payout
               methods, which can be set up below. Go to FAQ.
@@ -24,7 +24,7 @@ const AccountBilling: FC<AccountPageProps> = ({ className = "", user }) => {
               for the funds to appear in your account depends on your payout
               method.{` `}
               <a href="##">Learn more</a>
-            </span>
+            </span> */}
             <div className="pt-10">
               <ButtonPrimary>Add payout mothod</ButtonPrimary>
             </div>

@@ -20,9 +20,9 @@ export default function Account() {
     useEffect( () => {
         if(!user && (!loggedOut || session?.user) ) axios.post('/api/login/getUser', { email: session?.user.email}).then((res) => {
             const userData = res.data.data;
-            dispatch(setCredentials(userData));
+            dispatch(setCredentials({...userData, image: session?.user.image}));
         })
-    }, [session?.user, user, dispatch])
+    }, [session?.user, user, dispatch, loggedOut]) //added loggedOut
 
 
     if(!session){

@@ -2,14 +2,21 @@ import mongoose from "mongoose";
 // const cloudinary = require('cloudinary');
 
 const connect = async () => { 
+    mongoose.set('debug', true);
+
     if(mongoose.connections[0].readyState) return;
+    const MONGO_URL: string = process.env.MONGO_URL || "";
+
+    if (!MONGO_URL || MONGO_URL === "") {
+        throw new Error('Please define the MONGODB_URI environment variable');
+      }
 
     try {
-        await mongoose.connect(process.env.MONGO_URL)
+        await mongoose.connect(MONGO_URL)
         console.log("mongoose connection establised") 
         return true;
     } catch(error) {
-        throw new Error("Error Connecting to mongoose")
+        throw new Error("Error Connecting to mongoose db")
     }
 
     // try {

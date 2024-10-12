@@ -1,7 +1,10 @@
-import React, { FC } from "react";
+import React, { ChangeEvent, FC } from "react";
 import { useDebounce } from "use-debounce";
 
+import { useAppDispatch, useAppSelector } from "@/app/redux/store/hook";
+import { RootState } from "@/app/redux/store";
 import { useDisplayProductsQuery, useSearchProductsQuery } from "@/app/redux/features/product/productApi";
+import { fetchProducts } from "@/app/redux/features/product/productSlice";
 import SetPageTitle from "@/app/assets/hooks/SetPageTitle";
 
 import Pagination from "@/app/assets/shared/Pagination/Pagination";
@@ -21,29 +24,32 @@ export interface PageSearchProps {
 
 const PageSearch: FC<PageSearchProps> = ({ className = "", page }) => {
   SetPageTitle({title: "Search || TruthStore Ecommerce Template"});
+  const dispatch = useAppDispatch();
+
   const [ searchText, setSearchText ] = React.useState('');
-  const [query] = useDebounce(searchText, 500);
+  const [query] = useDebounce(searchText, 1000);
   const router = useRouter()
+  const { product, loading, error } = useAppSelector((state: RootState) => state.products);
+  // const product: any = undefined, loading = true, error = false;
 
-  const { data: productData, refetch } = useDisplayProductsQuery({
-    page: 0,
-    limit: 0,
-    query: query
-  });
-  // const { data: searchedData } = useSearchProductsQuery({
-  //   query: query
-  // });
-  
-  const productsAdmin = productData?.data || [];
-  console.log(productsAdmin)
-
+  console.log(product)
   React.useEffect(() => {
-    // if(!query){
-    //   router.replace('/search')
-    // }else{
-    //   router.replace(`/search?=${query}`)
-    // }
-  }, [ query , router])
+    dispatch(fetchProducts({query}))
+  }, [dispatch, query])
+
+  const handleSearch = (e: any/*: ChangeEvent<HTMLInputElement>*/) => {
+    e.preventDefault();
+    setSearchText(e.target.value)
+    // dispatch(fetchProducts({query }))
+  }
+
+  // filters: {
+  //   price: [ 20000, 550000],
+  //   categories: [""],
+  //   colors: [],
+  //   sizes: [],
+  //   onSale: true
+  // }
 
   return (
     <div className={`nc-PageSearch  ${className}`} data-nc-id="PageSearch">
@@ -68,13 +74,14 @@ const PageSearch: FC<PageSearchProps> = ({ className = "", page }) => {
                 placeholder="Type your keywords"
                 sizeClass="pl-14 py-5 pr-5 md:pl-16"
                 rounded="rounded-full"
-                onChange={(e) => setSearchText(e.target.value)}
+                onChange={(e) => handleSearch(e)}
               />
               <ButtonCircle
                 className="absolute right-2.5 top-1/2 transform -translate-y-1/2"
                 size=" w-11 h-11"
                 type="submit"
                 title="search away"
+                onClick={(e) => handleSearch(e)}
               >
                 <i className="las la-arrow-right text-xl"></i>
               </ButtonCircle>
@@ -109,26 +116,27 @@ const PageSearch: FC<PageSearchProps> = ({ className = "", page }) => {
       <div className="container py-16 lg:pb-28 lg:pt-20 space-y-16 lg:space-y-28">
         <main>
           {/* FILTER */}
-          <HeaderFilterSearchPage />
+          <HeaderFilterSearchPage query={query} />
 
           {/* LOOP ITEMS */}
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-8 gap-y-10 mt-8 lg:mt-10">
-            {productsAdmin.map((item : any, index : number) => (
+            {( loading ? <p>Loading...</p> : product && product.slice(0, 8).map((item : any, index : number) => (
               <ProductCard data={item} key={index} />
-            ))}
+            )))}
           </div>
 
           {/* PAGINATION */}
-          <div className="flex flex-col mt-12 lg:mt-16 space-y-5 sm:space-y-0 sm:space-x-3 sm:flex-row sm:justify-between sm:items-center">
-            <Pagination page={page} />
-            <ButtonPrimary loading={true}>Show me more</ButtonPrimary>
+          <div className="grid justify-items-center  mt-12 lg:mt-16 ">
+          {/* <div className="flex flex-col mt-12 lg:mt-16 space-y-5 sm:space-y-0 sm:space-x-3 sm:flex-row sm:justify-between sm:items-center"> */}
+            {/* <Pagination page={page} /> */}
+            <ButtonPrimary loading={loading}>Show me more</ButtonPrimary>
           </div>
         </main>
 
         {/* === SECTION 5 === */}
-        <hr className="border-slate-200 dark:border-slate-700" />
+        {/* <hr className="border-slate-200 dark:border-slate-700" />
         <SectionSliderCollections />
-        <hr className="border-slate-200 dark:border-slate-700" />
+        <hr className="border-slate-200 dark:border-slate-700" /> */}
 
         {/* SUBCRIBES */}
         <SectionPromo1 />

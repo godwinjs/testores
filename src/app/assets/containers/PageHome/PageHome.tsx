@@ -31,8 +31,7 @@ function PageHome() {
   const products: any = useSelector((state: RootState) => state.products.products)
   const { data: productData, refetch, isLoading: displayingProducts } = useDisplayProductsQuery({
     page: 0,
-    limit: 0,
-    query: ''
+    limit: 0
   });
   const productsAdmin = productData?.data || [];
   SetPageTitle({title: pageData?.main.title})
@@ -45,9 +44,9 @@ function PageHome() {
 
   useMemo(() => {
     getPageData();
-    
     // if(productData?.acknowledgement) dispatch(setProducts(productsAdmin))
   }, [getPageData]);
+  console.log(productsAdmin)
 
   return (
     pageData && <div className="nc-PageHome relative overflow-hidden">
