@@ -31,8 +31,8 @@ const CheckoutPage = ({user}: any) => {
   const router = useRouter();
   const cart: any = useSelector((state: RootState) => state.account.cart)
   const [tabActive, setTabActive] = useState<
-    "ContactInfo" | "ShippingAddress" | "PaymentMethod"
-  >("ShippingAddress");
+    "ContactInfo" | "ShippingAddress" | "PaymentMethod" | ""
+  >("");
   const [ cardNumb, setCardNumb ] = useState("");
   const [ cardName, setCardName ] = useState("");
   const [ expDate, setExpDate ] = useState("");
@@ -199,7 +199,8 @@ const CheckoutPage = ({user}: any) => {
         setCVC(e.target.value)
         break;
     }
-  } 
+  }
+
   const handleSubmit = () => {
     console.log([cardName, cardNumb, expDate, cvc])
     fetch("/pay/checkout").then(a => console.log(a))
