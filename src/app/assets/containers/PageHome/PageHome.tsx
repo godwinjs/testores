@@ -61,7 +61,7 @@ function PageHome() {
       <div className="container relative space-y-24 mt-24 lg:space-y-32 lg:mt-32">
         {/* SECTION */}
         {displayingProducts ? "Loading..." : <SectionSliderProductCard 
-          data={productsAdmin.length > 0 ? [ ...productsAdmin.slice(0, 5)] : undefined }
+          data={productsAdmin.length > 0 && productsAdmin.slice(0, 5) }
         />}
 
         <div className="py-24 lg:py-32 border-t border-b border-slate-200 dark:border-slate-700">
@@ -80,14 +80,14 @@ function PageHome() {
         <SectionSliderProductCard
           heading="Best Sellers"
           subHeading="Best sellers of the month"
-          data={productsAdmin ? [ ...productsAdmin.filter((prd: any) => prd.bestSeller && prd )] : undefined }
+          data={productsAdmin && productsAdmin.filter((prd: any) => prd.bestSeller && prd ) }
         />
 
         {/*  */}
         <SectionPromo2 />
 
         {/* SECTION 3 */}
-        <SectionSliderLargeProduct data={productsAdmin.length > 0 &&  [ ...productsAdmin.filter((prd: any) => prd.expertChoice && prd )] } cardStyle="style2" />
+        <SectionSliderLargeProduct data={productsAdmin.length > 0 &&  productsAdmin.filter((prd: any) => prd.expertChoice && prd ) } cardStyle="style2" />
 
         {/*  */}
         <SectionSliderCategories />
