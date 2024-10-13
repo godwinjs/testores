@@ -6,7 +6,7 @@ import Glide from "@glidejs/glide";
 import Heading from "./Heading/Heading";
 import CollectionCard from "./CollectionCard";
 import CollectionCard2 from "./CollectionCard2";
-import { DEMO_LARGE_PRODUCTS } from "./SectionSliderLargeProduct2";
+// import { DEMO_LARGE_PRODUCTS } from "./SectionSliderLargeProduct2";
 
 export interface SectionSliderLargeProductProps {
   className?: string;
@@ -78,12 +78,13 @@ const SectionSliderLargeProduct: FC<SectionSliderLargeProductProps> = ({
                   imgs={product.gallery}
                   description={product.description}
                   img={product.thumbnail}
+                  id={product._id}
                 />
               </li>
             ))}
 
             <li className={`glide__slide   `}>
-              <Link href={"/page-search"} className="block relative group">
+              <Link href={"/search"} className="block relative group">
                 <div className="relative rounded-2xl overflow-hidden h-[410px]">
                   <div className="h-[410px] bg-black/5 dark:bg-neutral-800"></div>
                   <div className="absolute inset-y-6 inset-x-10  flex flex-col items-center justify-center">
