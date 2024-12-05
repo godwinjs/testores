@@ -7,7 +7,7 @@ export const useForm = (initialState: any = {}) => {
         (e: any) => {
             setFormValues( {
                 ...formValues,
-                [e.target.name]: e.target.value
+                [e.target.name]: e.target.type === "checkbox" ? e.target.checked : e.target.value //use switch for other cases
             })
         }
     ]
