@@ -45,7 +45,7 @@ export default function AccountPages({params}: { params: {url: string} }) {
     
 }
 
-// 'use client'
+
 // import { RootState } from "../redux/store";
 // import { useSelector, useDispatch } from "react-redux";
 // import { increment, decrement, increamentByAmount } from "../redux/features/counter/counterSlice";
