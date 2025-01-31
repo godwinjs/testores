@@ -22,11 +22,11 @@ const info = [
   },
   {
     title: "💌 EMAIL",
-    desc: "contact@truthstores.com",
+    desc: "rachealonyi.dev@gmail.com",
   },
   {
     title: "☎ PHONE",
-    desc: "+23480-3456-7890",
+    desc: "+23481-0302-3419",
   },
 ];
 
