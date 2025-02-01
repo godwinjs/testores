@@ -13,7 +13,7 @@ interface EmailData {
 
 export const POST = async (request: any, res: any) => {
       res.setHeader("Access-Control-Allow-Origin", "https://godwinfolio.vercel.app");
-      res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+      res.setHeader("Access-Control-Allow-Methods", "GET, POST");
       res.setHeader("Access-Control-Allow-Headers", "Content-Type");
     
     const { email, message, name, to, subject, text, link } = await request.json(); // add subject
