@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+// import { NextApiRequest, NextApiResponse } from "next";
 import nodemailer from 'nodemailer';
 import * as amqp from 'amqplib';
 
@@ -10,7 +11,11 @@ interface EmailData {
     text: string;
 }
 
-export const POST = async (request: any) => {
+export const POST = async (request: any, res: any) => {
+      res.setHeader("Access-Control-Allow-Origin", "https://your-allowed-domain.com");
+      res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+      res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+    
     const { email, message, name, to, subject, text, link } = await request.json(); // add subject
     // console.log({ email, message, name, to, subject, text, link })
 
